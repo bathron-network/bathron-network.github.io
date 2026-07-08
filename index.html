@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BATHRON — A settlement kernel for Bitcoin</title>
+<meta name="description" content="The consensus keeps the accounts, Bitcoin provides the facts via SPV, and an open market of Settlement Providers delivers BTC for fees.">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<meta property="og:title" content="BATHRON — A settlement kernel for Bitcoin">
+<meta property="og:description" content="Burn-only issuance, live covenants, Bitcoin facts verified in consensus, private cash. Experimental — public testnet coming.">
+<meta property="og:image" content="https://bathron.org/img/og.png">
+<meta property="og:url" content="https://bathron.org">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root{
+    --bg:#050608; --panel:#0C0F14; --line:#1C222C;
+    --ink:#E8EBF0; --muted:#8A919C; --gold:#D9A441; --blue:#4A78A8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);
+       font:16px/1.65 ui-sans-serif,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+       -webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px}
+
+  /* ---- hero ---- */
+  .hero{min-height:88vh;display:flex;flex-direction:column;align-items:center;
+        justify-content:center;text-align:center;padding:64px 0 48px}
+  .hero img.emblem{width:min(340px,70vw);height:auto}
+  .hero img.word{width:min(360px,78vw);height:auto;margin-top:8px}
+  .tagline{margin:26px 0 0;font-size:clamp(17px,2.6vw,21px);color:var(--muted);
+           letter-spacing:.04em}
+  .pitch{margin:22px auto 0;max-width:58ch;color:var(--ink);font-size:clamp(15px,2.2vw,17px)}
+  .pitch b{color:var(--gold);font-weight:600}
+  .cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;justify-content:center}
+  .btn{display:inline-block;padding:13px 26px;border:1px solid var(--line);border-radius:8px;
+       text-decoration:none;font-weight:600;font-size:15px;letter-spacing:.02em;
+       transition:border-color .15s,color .15s}
+  .btn:hover{border-color:var(--gold);color:var(--gold)}
+  .btn.primary{border-color:#2A3441;background:var(--panel)}
+
+  /* ---- facts ---- */
+  .facts{padding:24px 0 8px}
+  .eyebrow{font-size:12px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;
+           text-align:center;margin:0 0 28px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:680px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+        padding:24px 26px}
+  .card h3{margin:0 0 8px;font-size:16px;letter-spacing:.01em}
+  .card p{margin:0;color:var(--muted);font-size:14.5px}
+
+  /* ---- loop ---- */
+  .loop{margin:64px 0 0;text-align:center}
+  .loop .diagram{display:inline-block;background:var(--panel);border:1px solid var(--line);
+        border-radius:12px;padding:22px 28px;overflow-x:auto;max-width:100%}
+  .loop .diagram code{font-size:clamp(11px,2vw,14px);color:var(--muted);white-space:nowrap}
+  .loop .diagram code b{color:var(--gold);font-weight:600}
+  .loop p{color:var(--muted);font-size:14px;max-width:62ch;margin:16px auto 0}
+
+  /* ---- status / footer ---- */
+  .status{margin:72px 0 0;padding:20px 26px;border:1px solid var(--line);
+          border-left:3px solid var(--blue);border-radius:0 10px 10px 0}
+  .status p{margin:0;color:var(--muted);font-size:14.5px}
+  .status b{color:var(--ink)}
+  footer{margin:64px 0 0;padding:28px 0 40px;border-top:1px solid var(--line);
+         display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+         color:var(--muted);font-size:13.5px}
+  footer a{color:var(--muted);text-decoration:none}
+  footer a:hover{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <img class="emblem" src="/img/emblem.png" alt="BATHRON emblem" width="560" height="360">
+    <img class="word" src="/img/wordmark.png" alt="BATHRON" width="540" height="89">
+    <p class="tagline">A settlement kernel for Bitcoin.</p>
+    <p class="pitch">The consensus keeps the accounts. <b>Bitcoin provides the facts</b>,
+    verified by SPV. An open market of Settlement Providers delivers BTC for fees.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/AdonisPhusis/BATHRON">GitHub</a>
+      <a class="btn" href="mailto:contact@bathron.org">Contact</a>
+    </div>
+  </div>
+
+  <div class="facts">
+    <p class="eyebrow">What runs here — today, on a live network</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Burn-only issuance</h3>
+        <p>No premine, no block reward, no issuer. Every unit is Bitcoin provably
+        destroyed — 1 burned sat = 1 sat, verified by SPV in consensus.</p>
+      </div>
+      <div class="card">
+        <h3>The programmability Bitcoin refuses</h3>
+        <p>CTV, CSFS, OP_CAT, CSV and recursive covenants — running for real,
+        not debated on a mailing list.</p>
+      </div>
+      <div class="card">
+        <h3>Bitcoin facts in consensus</h3>
+        <p>Contracts settle against real Bitcoin transactions: a payment confirmed
+        on Bitcoin unlocks funds here. No oracle, no federation, no custodian.</p>
+      </div>
+      <div class="card">
+        <h3>Private cash</h3>
+        <p>Shielded payments (Sapling) between entry and exit — final in about a
+        minute, invisible in between.</p>
+      </div>
+    </div>
+
+    <div class="loop">
+      <div class="diagram">
+        <code>BTC ─ burn ▸ <b>private payments</b> ▸ Settlement Provider ─ BTC</code>
+      </div>
+      <p>Bitcoin sees two transactions. BATHRON executes an entire economy in between —
+      and settles it back to native BTC through an open market of providers.</p>
+    </div>
+
+    <div class="status">
+      <p><b>Status: experimental.</b> A private testnet is running the full loop today.
+      Public testnet, documentation and a bug bounty are next — if you build on Bitcoin
+      and want early access, write to us.</p>
+    </div>
+  </div>
+
+  <footer>
+    <span>BATHRON — <a href="mailto:contact@bathron.org">contact@bathron.org</a></span>
+    <span class="mono">no premine · no reward · no token sale</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
