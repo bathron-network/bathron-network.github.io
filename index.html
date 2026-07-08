@@ -47,6 +47,9 @@
   .btn:hover{border-color:var(--gold);color:var(--gold)}
   .btn.primary{border-color:#2A3441;background:var(--panel)}
 
+  .vision{text-align:center;color:var(--muted);font-size:clamp(16px,2.4vw,19px);
+          line-height:1.6;margin:0 0 72px}
+
   /* ---- three ideas ---- */
   .idea{max-width:56ch;margin:0 auto;text-align:center}
   .idea + .idea{margin-top:64px}
@@ -56,9 +59,10 @@
 
   /* ---- built ---- */
   .built{text-align:center}
+  .built p.lead{margin:0 0 22px;font-size:clamp(18px,2.8vw,23px);font-weight:600;
+                letter-spacing:-.01em;color:var(--ink)}
   .built p.list{margin:0;color:var(--ink);font-size:16px;line-height:2}
   .built p.list span{color:#3A414D;padding:0 10px}
-  .built p.note{margin:14px 0 0;color:var(--muted);font-size:14.5px}
 
   /* ---- status ---- */
   .status{text-align:center;color:var(--muted);font-size:16px}
@@ -87,7 +91,7 @@
     BATHRON executes everything in&nbsp;between.</p>
 
     <div class="loopline">
-      <code>BTC ─ burn ▸ <b>private settlement</b> ▸ open market ─ native BTC</code>
+      <code>BTC ─ burn ▸ <b>private settlement</b> ▸ Settlement Providers ─ native BTC</code>
     </div>
 
     <div class="cta">
@@ -98,42 +102,41 @@
 
   <!-- ================= THREE IDEAS ================= -->
   <section>
+    <p class="vision">Bitcoin proved digital ownership.<br>BATHRON explores digital settlement.</p>
     <div class="idea">
       <h2>Consensus keeps the accounts.</h2>
-      <p>A shared settlement state, maintained by consensus rules.
-      Transfers are private. Finality takes about a minute.</p>
+      <p>A shared settlement state. Private transfers.
+      Finality in about a minute.</p>
     </div>
     <div class="idea">
       <h2>Bitcoin provides the facts.</h2>
-      <p>Entry is a Bitcoin burn, proven by SPV. Contracts verify real Bitcoin
-      transactions. <b>One burned sat is one settled sat.</b>
+      <p>Every unit originates from a Bitcoin burn, verified by SPV inside
+      consensus. Contracts verify real Bitcoin transactions.
       No oracle. No federation. No token.</p>
     </div>
     <div class="idea">
       <h2>Markets provide the liquidity.</h2>
-      <p>Exit is an open market of <b>Settlement Providers</b>, delivering
-      native BTC for fees. The protocol never sells anything.</p>
+      <p>Native BTC is provided by an open market of <b>Settlement Providers</b>
+      competing on fees. The protocol never sells anything.</p>
     </div>
   </section>
 
   <!-- ================= WHAT CAN BE BUILT ================= -->
   <section class="built">
+    <p class="lead">Programs written against a shared settlement state.</p>
     <p class="list">Payments <span>·</span> Escrow <span>·</span> Vaults
     <span>·</span> DvP <span>·</span> OTC <span>·</span> Inheritance
     <span>·</span> Hedging <span>·</span> Settlement Providers</p>
-    <p class="note">Programs written against a shared settlement state.</p>
   </section>
 
   <!-- ================= STATUS ================= -->
   <section class="status">
-    <p><b>Experimental.</b> A private testnet runs the full loop today.
-    Public testnet is next — <a href="mailto:contact@bathron.org">write to us</a>
-    for early access.</p>
+    <p><b>Experimental.</b><br>Private testnet running.<br>Public testnet next.</p>
   </section>
 
   <footer>
     <span>BATHRON — <a href="mailto:contact@bathron.org">contact@bathron.org</a></span>
-    <span class="mono">no premine · no reward · no token sale</span>
+    <span class="mono">1 burned sat = 1 settled sat · no premine · no token sale</span>
   </footer>
 
 </div>
