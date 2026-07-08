@@ -14,78 +14,57 @@
 <style>
   :root{
     --bg:#050608; --panel:#0C0F14; --line:#1C222C;
-    --ink:#E8EBF0; --muted:#8A919C; --gold:#D9A441; --blue:#4A78A8;
+    --ink:#E8EBF0; --muted:#8A919C; --gold:#D9A441;
   }
   *{box-sizing:border-box}
   html,body{margin:0}
   body{background:var(--bg);color:var(--ink);
-       font:16px/1.65 ui-sans-serif,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+       font:16px/1.7 ui-sans-serif,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
        -webkit-font-smoothing:antialiased}
   a{color:inherit}
   .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
-  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
-  section{margin:104px 0 0}
-  .eyebrow{font:600 12px/1 ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.22em;
-           color:var(--gold);text-transform:uppercase;text-align:center;margin:0 0 30px}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+  section{margin:96px 0 0}
 
   /* ---- hero ---- */
   .hero{min-height:96vh;display:flex;flex-direction:column;align-items:center;
         justify-content:center;text-align:center;padding:48px 0 16px}
-  .hero img.emblem{width:min(250px,58vw);height:auto}
-  .hero img.word{width:min(310px,72vw);height:auto;margin-top:4px}
-  .tagline{margin:20px 0 0;font-size:clamp(16px,2.4vw,20px);color:var(--muted);
+  .hero img.emblem{width:min(230px,55vw);height:auto}
+  .hero img.word{width:min(300px,70vw);height:auto;margin-top:4px}
+  .tagline{margin:22px 0 0;font-size:clamp(16px,2.4vw,20px);color:var(--muted);
            letter-spacing:.04em}
-  .founding{margin:24px auto 0;max-width:36ch;font-size:clamp(16px,2.6vw,21px);
-            line-height:1.5;font-weight:500;color:var(--muted);text-wrap:balance}
-  .founding em{font-style:normal;color:var(--ink)}
-  .loopline{margin:30px auto 0;background:var(--panel);border:1px solid var(--line);
+  .memorable{margin:34px auto 0;max-width:26ch;font-size:clamp(22px,4.2vw,34px);
+             line-height:1.35;font-weight:700;letter-spacing:-.015em;text-wrap:balance}
+  .memorable b{color:var(--gold)}
+  .loopline{margin:34px auto 0;background:var(--panel);border:1px solid var(--line);
             border-radius:12px;padding:16px 24px;overflow-x:auto;max-width:100%}
   .loopline code{font-size:clamp(11px,2vw,14px);color:var(--muted);white-space:nowrap}
   .loopline code b{color:var(--ink);font-weight:600}
-  .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;justify-content:center}
+  .cta{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;justify-content:center}
   .btn{display:inline-block;padding:13px 26px;border:1px solid var(--line);border-radius:8px;
-       text-decoration:none;font-weight:600;font-size:15px;letter-spacing:.02em;
+       text-decoration:none;font-weight:600;font-size:15px;
        transition:border-color .15s,color .15s}
   .btn:hover{border-color:var(--gold);color:var(--gold)}
   .btn.primary{border-color:#2A3441;background:var(--panel)}
 
-  /* ---- giant statement ---- */
-  .giant{text-align:center}
-  .giant p{margin:0 auto;max-width:24ch;font-size:clamp(28px,6vw,52px);line-height:1.25;
-           font-weight:700;letter-spacing:-.02em;text-wrap:balance}
-  .giant p b{color:var(--gold)}
-
   /* ---- three ideas ---- */
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media (max-width:760px){.grid3{grid-template-columns:1fr}}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;
-        padding:24px 26px}
-  .card h3{margin:0 0 8px;font-size:16px;letter-spacing:.01em}
-  .card p{margin:0;color:var(--muted);font-size:14.5px}
-  .card p b{color:var(--ink);font-weight:600}
+  .idea{max-width:56ch;margin:0 auto;text-align:center}
+  .idea + .idea{margin-top:64px}
+  .idea h2{margin:0 0 10px;font-size:clamp(19px,3vw,24px);letter-spacing:-.01em}
+  .idea p{margin:0;color:var(--muted);font-size:16px}
+  .idea p b{color:var(--ink);font-weight:600}
 
   /* ---- built ---- */
-  .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-  .chip{border:1px solid var(--line);border-radius:999px;padding:10px 18px;
-        font-size:14px;color:var(--ink);background:var(--panel)}
-  .chips-note{text-align:center;color:var(--muted);font-size:13.5px;margin:16px auto 0;
-              max-width:52ch}
-
-  /* ---- closing ---- */
-  .closing{text-align:center}
-  .closing p.big{margin:0;font-size:clamp(24px,4.6vw,38px);font-weight:700;
-                 letter-spacing:-.015em}
-  .closing p.sub{margin:14px 0 0;color:var(--muted);font-size:15px}
-  .closing a{color:var(--gold);text-decoration:none}
+  .built{text-align:center}
+  .built p.list{margin:0;color:var(--ink);font-size:16px;line-height:2}
+  .built p.list span{color:#3A414D;padding:0 10px}
+  .built p.note{margin:14px 0 0;color:var(--muted);font-size:14.5px}
 
   /* ---- status ---- */
-  .status-box{background:var(--panel);border:1px solid var(--line);border-radius:12px;
-              padding:24px 30px;max-width:460px;margin:0 auto}
-  .status-box ul{list-style:none;margin:0;padding:0;font-size:15px}
-  .status-box li{padding:6px 0;color:var(--ink)}
-  .status-box li::before{content:"✓";color:var(--gold);font-weight:700;margin-right:12px}
-  .status-box li.next{color:var(--muted)}
-  .status-box li.next::before{content:"→";color:var(--blue)}
+  .status{text-align:center;color:var(--muted);font-size:16px}
+  .status p{margin:0 auto;max-width:44ch}
+  .status b{color:var(--ink)}
+  .status a{color:var(--gold);text-decoration:none}
 
   footer{margin:96px 0 0;padding:28px 0 40px;border-top:1px solid var(--line);
          display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
@@ -104,11 +83,11 @@
     <img class="word" src="/img/wordmark.png" alt="BATHRON" width="540" height="89">
     <p class="tagline">A settlement kernel for Bitcoin.</p>
 
-    <p class="founding">Consensus keeps the accounts. <em>Bitcoin provides the facts.</em>
-    Markets provide the liquidity.</p>
+    <p class="memorable">Bitcoin sees <b>two transactions</b>.<br>
+    BATHRON executes everything in&nbsp;between.</p>
 
     <div class="loopline">
-      <code>BTC ─ burn ▸ <b>private settlement</b> ▸ Settlement Providers ─ native BTC</code>
+      <code>BTC ─ burn ▸ <b>private settlement</b> ▸ open market ─ native BTC</code>
     </div>
 
     <div class="cta">
@@ -117,69 +96,39 @@
     </div>
   </div>
 
-  <!-- ================= GIANT ================= -->
-  <section class="giant">
-    <p>Bitcoin sees <b>two transactions</b>.<br>BATHRON executes everything in between.</p>
-  </section>
-
   <!-- ================= THREE IDEAS ================= -->
   <section>
-    <div class="grid3">
-      <div class="card">
-        <h3>Bitcoin is the truth</h3>
-        <p>Real Bitcoin headers. Real Bitcoin transactions. Verified by
-        <b>SPV inside consensus</b> — no oracle, no federation, no bridge.</p>
-      </div>
-      <div class="card">
-        <h3>Institutions become software</h3>
-        <p>Escrow, DvP, vaults, payments, OTC — built from <b>consensus rules</b>
-        instead of trusted intermediaries.</p>
-      </div>
-      <div class="card">
-        <h3>Bitcoin remains the money</h3>
-        <p>No premine. No treasury. No token. <b>1 burned sat = 1 settled sat</b>,
-        enforced by consensus.</p>
-      </div>
+    <div class="idea">
+      <h2>Consensus keeps the accounts.</h2>
+      <p>A shared settlement state, maintained by consensus rules.
+      Transfers are private. Finality takes about a minute.</p>
+    </div>
+    <div class="idea">
+      <h2>Bitcoin provides the facts.</h2>
+      <p>Entry is a Bitcoin burn, proven by SPV. Contracts verify real Bitcoin
+      transactions. <b>One burned sat is one settled sat.</b>
+      No oracle. No federation. No token.</p>
+    </div>
+    <div class="idea">
+      <h2>Markets provide the liquidity.</h2>
+      <p>Exit is an open market of <b>Settlement Providers</b>, delivering
+      native BTC for fees. The protocol never sells anything.</p>
     </div>
   </section>
 
   <!-- ================= WHAT CAN BE BUILT ================= -->
-  <section>
-    <p class="eyebrow">What can be built</p>
-    <div class="chips">
-      <span class="chip">Payments</span>
-      <span class="chip">Vaults</span>
-      <span class="chip">OTC</span>
-      <span class="chip">Escrow</span>
-      <span class="chip">DvP</span>
-      <span class="chip">Inheritance</span>
-      <span class="chip">Miner hedging</span>
-      <span class="chip">Settlement Providers</span>
-    </div>
-    <p class="chips-note">Some run today as demos. The rest are programs waiting
-    to be written.</p>
-  </section>
-
-  <!-- ================= CLOSING ================= -->
-  <section class="closing">
-    <p class="big">Build institutions on Bitcoin.</p>
-    <p class="sub">Public testnet, documentation and bug bounty are next —
-    <a href="mailto:contact@bathron.org">write to us</a> for early access.</p>
+  <section class="built">
+    <p class="list">Payments <span>·</span> Escrow <span>·</span> Vaults
+    <span>·</span> DvP <span>·</span> OTC <span>·</span> Inheritance
+    <span>·</span> Hedging <span>·</span> Settlement Providers</p>
+    <p class="note">Programs written against a shared settlement state.</p>
   </section>
 
   <!-- ================= STATUS ================= -->
-  <section>
-    <p class="eyebrow">Status — experimental</p>
-    <div class="status-box">
-      <ul>
-        <li>Consensus running</li>
-        <li>Bitcoin SPV</li>
-        <li>Burn-only issuance</li>
-        <li>Shielded transfers</li>
-        <li>Recursive covenants</li>
-        <li class="next">Public testnet</li>
-      </ul>
-    </div>
+  <section class="status">
+    <p><b>Experimental.</b> A private testnet runs the full loop today.
+    Public testnet is next — <a href="mailto:contact@bathron.org">write to us</a>
+    for early access.</p>
   </section>
 
   <footer>
