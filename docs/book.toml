@@ -1,0 +1,20 @@
+[book]
+title = "BATHRON Documentation"
+authors = ["BATHRON"]
+language = "en"
+src = "src"
+
+[output.html]
+site-url = "/docs/"
+default-theme = "navy"
+preferred-dark-theme = "navy"
+additional-css = ["theme/bathron.css"]
+git-repository-url = "https://github.com/bathron-network"
+no-section-label = true
+
+[output.html.fold]
+enable = true
+level = 1
+
+[output.html.search]
+limit-results = 15
