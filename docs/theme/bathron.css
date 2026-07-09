@@ -1,0 +1,102 @@
+/* BATHRON docs — same palette as bathron.org */
+
+.navy {
+  --bg: #050608;
+  --fg: #E8EBF0;
+
+  --sidebar-bg: #0C0F14;
+  --sidebar-fg: #8A919C;
+  --sidebar-non-existant: #3A414D;
+  --sidebar-active: #D9A441;
+  --sidebar-spacer: #1C222C;
+
+  --scrollbar: #1C222C;
+
+  --icons: #8A919C;
+  --icons-hover: #D9A441;
+
+  --links: #D9A441;
+
+  --inline-code-color: #E8EBF0;
+
+  --theme-popup-bg: #0C0F14;
+  --theme-popup-border: #1C222C;
+  --theme-hover: #12161D;
+
+  --quote-bg: #0C0F14;
+  --quote-border: #1C222C;
+
+  --table-border-color: #1C222C;
+  --table-header-bg: #0C0F14;
+  --table-alternate-bg: #080A0E;
+
+  --searchbar-border-color: #1C222C;
+  --searchbar-bg: #0C0F14;
+  --searchbar-fg: #E8EBF0;
+  --searchbar-shadow-color: transparent;
+  --searchresults-header-fg: #8A919C;
+  --searchresults-border-color: #1C222C;
+  --searchresults-li-bg: #0C0F14;
+  --search-mark-bg: #D9A441;
+
+  --color-scheme: dark;
+}
+
+/* one visual identity — hide the theme picker */
+#theme-toggle { display: none; }
+
+/* typography closer to the home page */
+.navy .content {
+  font-size: 16px;
+  line-height: 1.7;
+}
+.navy .content h1 {
+  letter-spacing: -.015em;
+  font-weight: 700;
+}
+.navy .content h2 {
+  letter-spacing: -.01em;
+  margin-top: 2.2em;
+  padding-bottom: .3em;
+  border-bottom: 1px solid #1C222C;
+}
+.navy .content a { text-decoration: none; }
+.navy .content a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.navy .content pre {
+  background: #0C0F14 !important;
+  border: 1px solid #1C222C;
+  border-radius: 8px;
+}
+.navy .content pre > .hljs { background: transparent !important; }
+.navy .content :not(pre) > code {
+  background: #12161D;
+  border-radius: 4px;
+  padding: .1em .35em;
+}
+
+.navy .content blockquote {
+  border-radius: 0 8px 8px 0;
+}
+
+.navy .content table { border-collapse: collapse; }
+.navy .content table th {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #8A919C;
+}
+
+/* part titles in the sidebar — gold, mono, like the home eyebrows */
+.navy .chapter li.part-title {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #D9A441;
+  margin-top: 1.4em;
+}
+
+/* inline SVG diagrams */
+.content svg { max-width: 100%; height: auto; }
