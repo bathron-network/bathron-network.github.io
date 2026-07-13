@@ -3,7 +3,7 @@
 | Parameter | Value |
 |---|---|
 | Block interval | 60 seconds |
-| Producer selection | deterministic pseudo-random over masternodes, per block, with fallback slots |
+| Producer selection | deterministic pseudo-random over operator nodes, per block, with fallback slots |
 | Finality committee | per-operator ECVRF sortition, redrawn every block |
 | Finality threshold | `⌈2/3 · min(E, N)⌉` — `N` = operators at the block, `E` = committee cap (128) |
 | Quorum floor | 4 distinct operators minimum to finalize |

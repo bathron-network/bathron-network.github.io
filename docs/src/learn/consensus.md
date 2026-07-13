@@ -7,9 +7,16 @@ Two separate layers, deliberately kept apart:
 | **Production** | who makes the next block | liveness |
 | **Finality** | when is a block irreversible | safety |
 
-## Validator selection
+## Operator selection
 
-Validators are **masternodes** backed by collateral in burned BTC — Sybil resistance is an up-front, real-world cost. One operator can run several masternodes but counts **once**: the unit of consensus is the operator key, not the machine.
+Validators are **Settlement Operators** — burn-backed network identities. Their
+collateral is burned BTC, so Sybil resistance is an up-front, real-world cost paid
+before a single block is signed. One operator can run several nodes but counts
+**once**: the unit of consensus is the operator key, not the machine.
+
+> *Naming note:* in the node's RPC surface and source these identities keep their
+> lineage name, **masternode** (`protx`, `getactivemnstatus`). The public model —
+> what an operator *is* — is the Settlement Operator. → [Settlement Providers](settlement-providers.md)
 
 ## Block production
 
@@ -37,3 +44,14 @@ There is none. `block_reward = 0`, no treasury, no premine. The coinbase pays ex
 
 - **ECDSA on secp256k1 only.** No BLS, no aggregated signatures — explicit signatures are simpler to audit at these committee sizes.
 - **No slashing.** Deliberate: a slashing bug can destroy honest operators' funds. Deterrence is the burned-BTC collateral (paid up front) plus proof-of-service bans (loss of future fees).
+
+## Threat model, honestly
+
+The network is **permissioned today** — the launcher runs the operators, so no
+adversary holds a fraction of them, and the system is sound as-is. Opening the
+operator set is a different threat model, and the guarantee that matters most survives
+it: because finality sits *on top of* full validation, a captured committee could at
+worst stall or re-order **unfinalized** settlement — it can never mint value or break
+the invariants. Making the open-network transition safe (finality-participation
+liveness, value-at-risk bounds, committee sizing, the external VRF audit) is the
+[roadmap](../roadmap.md)'s open-network hardening track — named work, not hidden risk.
