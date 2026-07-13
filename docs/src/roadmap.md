@@ -120,19 +120,20 @@ what makes adaptive corruption hard. The levers below turn "bounded" into "price
 
 ### The work
 
-- **Finality-participation liveness — the flagship consensus chantier.**
-  Today an operator's liveness is inferred from *block production*, which only samples
-  each operator once every N blocks — a dead operator can go unnoticed for roughly 3·N
-  blocks (minutes at small N, hours at large N). The target is to key proof-of-service
-  on **finality participation** instead: every operator is expected to sign every
-  block, so a dead one misses *everything* and is caught in a handful of blocks
-  regardless of N. The difficulty is that "who signed block H−1" is gossip, not
-  consensus — different nodes see different views, and banning on a disputed view would
-  fork the operator set. The fix makes the evidence **deterministic**: the producer of
-  block H embeds the signature bitmap it observed for H−1, and punishment requires that
-  omission be confirmed by several independent producers (so a producer cannot quietly
-  censor a rival). A genuine consensus change, designed *before* opening — not patched
-  after.
+- **Operator liveness — studied, and deliberately left in consensus as-is.**
+  An operator's liveness is inferred from *block production*: a missed, deterministically
+  scheduled slot is chain-evident, so eviction rests on evidence every node computes
+  identically. It samples each operator about once every N blocks, so a silent failure is
+  noticed in roughly 3·N blocks. We investigated replacing this with a
+  *finality-participation* signal (detect a dead operator in a handful of blocks) and
+  **set it aside**: under the private-VRF committee, "did not sign" is indistinguishable
+  from "was not selected," and anchoring a participation view would feed a gossip,
+  fork-dependent signal into a consensus parameter — which our eligibility invariant
+  forbids. Production-based eviction turns out to be the censorship-optimal choice its
+  slower latency is the price of, not a defect. **So the consensus signal stays as it is,
+  and the fast "is this operator up right now?" question moves to the market/reputation
+  layer — the indexers, wallets and applications that already choose operators — where it
+  belongs and carries no consensus risk.**
 
 - **Bounding value-at-risk per finality window.** Because settlement is only reversible
   until it finalizes (~1 minute), the value actually at risk in a worst-case committee
