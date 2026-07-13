@@ -29,4 +29,4 @@ BATHRON is infrastructure. Applications are built on top of it.
 - **Build** — the [SDK](build/sdk.md) and [RPC API](build/api.md) for developers.
 - **Reference** — the details: [transaction types](reference/transaction-types.md), [opcodes](reference/opcodes.md), [invariants](reference/invariants.md).
 
-> **Status: experimental.** A private testnet is running; a public testnet is next. Consensus additions are frozen before any mainnet.
+> **Status: experimental.** A private testnet is running the full, frozen consensus surface; a public testnet is next. The path — and the honest open-network work before any mainnet — is on the **[Roadmap](roadmap.md)**.

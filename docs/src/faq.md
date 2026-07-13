@@ -30,7 +30,7 @@ Yes — that is the intended path, and there is no whitelist. The reference impl
 
 ## Can I run a validator?
 
-Yes. Validators are masternodes backed by burned-BTC collateral. On the current private testnet the operator set is closed; it opens progressively with the public testnet. → [Consensus](learn/consensus.md)
+Yes. Validators are **Settlement Operators** — burn-backed identities (a masternode in the RPC surface), their collateral being destroyed Bitcoin. On the current private testnet the operator set is closed; it opens progressively with the public testnet, under the safeguards on the [roadmap](roadmap.md). → [Consensus](learn/consensus.md)
 
 ## Is it experimental?
 
