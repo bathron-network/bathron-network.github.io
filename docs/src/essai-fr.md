@@ -1,8 +1,7 @@
 # Comprendre BATHRON — un essai calme (français)
 
-> *This page is a long-form essay in French — a calm, spoken-style explanation of how
-> BATHRON works, what is real today, what is a design goal, and what remains an open
-> market question. An English version may follow.*
+> *Version française de l'essai — English version: [Understanding BATHRON — a calm
+> essay](essay.md).*
 
 Ce texte est prévu pour être lu lentement, à voix haute si l'on veut. Il explique le
 mécanisme économique et technique de BATHRON tel qu'il est envisagé aujourd'hui — en
