@@ -45,3 +45,4 @@
 
 [FAQ](faq.md)
 [Roadmap](roadmap.md)
+[Comprendre BATHRON — essai (FR)](essai-fr.md)
