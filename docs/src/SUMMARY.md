@@ -45,4 +45,5 @@
 
 [FAQ](faq.md)
 [Roadmap](roadmap.md)
+[Understanding BATHRON — essay](essay.md)
 [Comprendre BATHRON — essai (FR)](essai-fr.md)

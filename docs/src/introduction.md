@@ -28,6 +28,6 @@ BATHRON is infrastructure. Applications are built on top of it.
 - **Learn** — how the pieces fit together, starting with the [architecture](learn/architecture.md). No code.
 - **Build** — the [SDK](build/sdk.md) and [RPC API](build/api.md) for developers.
 - **Reference** — the details: [transaction types](reference/transaction-types.md), [opcodes](reference/opcodes.md), [invariants](reference/invariants.md).
-- 🇫🇷 **[Comprendre BATHRON — essai](essai-fr.md)** — a calm, long-form explanation in French: what exists in code, what is a design goal, and what remains an open market question.
+- **[Understanding BATHRON — a calm essay](essay.md)** — a long-form explanation of the whole mechanism: what exists in code, what is a design goal, and what remains an open market question. Aussi disponible [en français](essai-fr.md).
 
 > **Status: experimental.** A private testnet is running the full, frozen consensus surface; a public testnet is next. The path — and the honest open-network work before any mainnet — is on the **[Roadmap](roadmap.md)**.
