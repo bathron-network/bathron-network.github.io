@@ -1,6 +1,6 @@
 # Summary
 
-[Introduction](introduction.md)
+[What is BATHRON?](introduction.md)
 
 # Getting Started
 
@@ -15,15 +15,15 @@
 - [Consensus](learn/consensus.md)
 - [Bitcoin integration](learn/bitcoin-integration.md)
 - [Clearing and Liquidity Providers](learn/settlement-providers.md)
-- [Privacy](learn/privacy.md)
-- [Applications](learn/applications.md)
+- [Confidential settlement state](learn/privacy.md)
+- [Application hypotheses](learn/applications.md)
   - [Conditional BTC settlement](learn/applications/payments.md)
-  - [Escrow](learn/applications/escrow.md)
+  - [Conditional escrow](learn/applications/escrow.md)
   - [Delivery versus payment](learn/applications/dvp.md)
   - [Provider inventory controls](learn/applications/vaults.md)
   - [OTC settlement](learn/applications/otc.md)
   - [Miner hedging](learn/applications/miner-hedging.md)
-  - [Stable value](learn/applications/stable-value.md)
+  - [Fixed-term value position](learn/applications/stable-value.md)
 
 # Build
 
@@ -38,11 +38,11 @@
 - [Script & opcodes](reference/opcodes.md)
 - [SPV verification](reference/spv.md)
 - [Consensus parameters](reference/consensus-parameters.md)
-- [Monetary invariants](reference/invariants.md)
+- [Accounting invariants](reference/invariants.md)
 
 ---
 
 [FAQ](faq.md)
 [Roadmap](roadmap.md)
-[Understanding BATHRON — essay](essay.md)
-[Comprendre BATHRON — essai (FR)](essai-fr.md)
+[Understanding BATHRON — a calm essay](essay.md)
+[Comprendre BATHRON — un essai calme (français)](essai-fr.md)

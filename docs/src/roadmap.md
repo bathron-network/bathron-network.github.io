@@ -39,7 +39,7 @@ freezes is exactly what runs.
 
 **What "close to mainnet" means here.** The private testnet is deliberately built to
 differ from mainnet in as few ways as possible: same block rules, same invariants,
-same finality math, same burn-backed issuance. The differences that remain are the
+same finality math, same M0-origin rule based on verified BTC destruction. The differences that remain are the
 ones that *must* differ — the Bitcoin network it reads (Signet vs mainnet), the
 genesis message, and the address identity bytes. Everything else is the launch code.
 
@@ -95,7 +95,7 @@ First, the guarantee that holds in every phase and underpins everything below:
 > **The finality committee cannot touch the money.** Finality decides *ordering*,
 > never issuance. Every node fully validates every block, so a quorum — even a fully
 > captured one — cannot mint a unit, break the [monetary invariants](reference/invariants.md),
-> or confirm an invalid transaction. All value is burned Bitcoin, verified by SPV.
+> or confirm an invalid transaction. M0 origin remains constrained by verified BTC destruction.
 
 So the open-network question is never "can someone steal the money" — the invariants
 answer that. It is narrower and honest: **can someone disrupt or reorder *settlement*
@@ -185,7 +185,7 @@ them matters as much as listing the work:
 - **No protocol rewards or ranking for operators.** The protocol publishes *facts*
   about operators (uptime, age, blocks, service history) and never says one is better —
   [applications choose](learn/settlement-providers.md), the market decides.
-- **No new monetary policy.** One burned satoshi, one unit, forever. There is no
+- **No changeable origin rule.** One verified destroyed satoshi permits one M0 unit. There is no
   mechanism to change that, and there will not be one.
 - **No feature sprawl.** The substrate is meant to stay small and *finished*. What
   should grow is what's built on it, not the kernel.
