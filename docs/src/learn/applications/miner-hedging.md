@@ -23,6 +23,9 @@ Every difficulty derivative elsewhere trusts someone to *report* difficulty. On 
 
 ## The honest caveat
 
-Difficulty is hedgeable oracle-free because Bitcoin publishes it. A full *hashprice* hedge also involves the BTC price — which is not an on-chain fact and needs a signed input (`CSFS`), with the trust that implies. The difficulty leg is the trustless core.
+Difficulty can be verified without a price oracle because Bitcoin publishes it. This still relies
+on BATHRON's Bitcoin-header validation, its operator-finality assumptions and the software used
+by the parties. A full *hashprice* hedge also involves the BTC price—which is not an on-chain fact
+and needs a signed input (`CSFS`), with the additional trust that implies.
 
 **Primitives:** in-consensus Bitcoin headers · difficulty introspection · covenants · `CSFS` (price leg only)

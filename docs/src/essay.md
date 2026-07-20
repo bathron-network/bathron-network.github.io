@@ -123,7 +123,7 @@ Think of a cloakroom. You hand in a coat; you receive a numbered ticket. The coa
 in the wardrobe, the ticket circulates, and a strict rule binds them: as many tickets as
 coats.
 
-**M0 is the coat**: the base money, born from burns. When you want to use it for
+**M0 is the coat**: the base accounting state, created from verified burns. When you want to use it for
 settlement, you place it in a vault — kept not by a company, but by the chain's common
 rule, the one every node enforces together.
 

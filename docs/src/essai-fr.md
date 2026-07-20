@@ -134,7 +134,7 @@ Pensez à un vestiaire. Vous déposez un manteau ; on vous remet un ticket. Le m
 dans la penderie, le ticket circule, et une règle stricte les relie : autant de tickets
 que de manteaux.
 
-**M0, c'est le manteau** : la monnaie de base, née des burns. Quand on veut s'en servir
+**M0, c'est le manteau** : l'état comptable de base, créé à partir de burns vérifiés. Quand on veut s'en servir
 pour du règlement, on la dépose dans un coffre — tenu non par une entreprise, mais par la
 règle commune de la chaîne, celle que tous les nœuds font respecter ensemble.
 

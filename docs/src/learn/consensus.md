@@ -9,8 +9,8 @@ Two separate layers, deliberately kept apart:
 
 ## Operator selection
 
-Validators are **Settlement Operators** — burn-backed network identities. Their
-collateral is burned BTC, so Sybil resistance is an up-front, real-world cost paid
+Validators are **Settlement Operators**—network identities collateralised with M0. Because M0
+can originate only from verified BTC destruction, Sybil resistance has an up-front acquisition cost paid
 before a single block is signed. One operator can run several nodes but counts
 **once**: the unit of consensus is the operator key, not the machine.
 
@@ -37,9 +37,11 @@ Finality sits **on top of** full block validation, never instead of it. Every no
 
 Bitcoin Script, extended with the covenant opcodes Bitcoin has debated for a decade — templates, introspection, oracle signatures, Bitcoin-fact verification. → [Script & opcodes](../reference/opcodes.md)
 
-## Issuance
+## Block subsidy and internal-unit origin
 
-There is none. `block_reward = 0`, no treasury, no premine. The coinbase pays exactly the block's fees — the fee-only security regime Bitcoin reaches around 2140, running today. All value originates from verified BTC burns.
+There is no block subsidy: `block_reward = 0`, no treasury and no premine. Coinbase pays exactly
+the block's fees. Separately, M0 can be created only from verified BTC destructions under A5.
+That creation path is not a reward or discretionary issuance.
 
 ## Design choices
 
