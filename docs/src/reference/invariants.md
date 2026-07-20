@@ -1,36 +1,40 @@
-# Monetary invariants
+# Accounting invariants
 
-The money is protected by consensus rules, not by whoever signs blocks. Two invariants are checked at every block; a block that violates either is invalid everywhere, whatever signatures it carries.
+Two consensus rules constrain the internal units. They establish provenance and conservation;
+they do not establish an external market price or a redemption promise.
 
-## The internal units
-
-Users send and hold satoshis; internally there are two forms:
-
-```text
-BTC ──(burn: irreversible, SPV-proven)──▶ M0            base unit
-M0  ──(lock, 1:1, free)──▶ M1  ──(unlock, 1:1, free)──▶ M0    settlement receipt
-```
-
-`M0` is the base unit; `M1` is a receipt for vaulted `M0`, used by the settlement machinery. A user never touches either — they are implementation details of one thing: **satoshis backed by burned Bitcoin**.
-
-## Invariant A5 — provenance
+## Internal units
 
 ```text
-M0_total == BTC provably burned
+BTC --irreversible, SPV-proven destruction--> M0
+M0 ----------------lock 1:1-----------------> M1
+M1 ----------------unlock 1:1---------------> M0
 ```
 
-Every unit in existence corresponds to satoshis destroyed on Bitcoin, verified by SPV. No premine, no reward, no issuer — no exceptions, including genesis.
+M0 is the base accounting unit. M1 is created when M0 is vaulted and is used as programmable
+settlement state by CPs and LPs in the target architecture.
 
-## Invariant A6 — parity
+## A5 — provenance
+
+```text
+M0_total == BTC provably destroyed
+```
+
+Every M0 unit originates from a verified destruction. There is no premine, block reward, issuer or
+genesis exception. Because the BTC is destroyed rather than reserved, M0 is not redeemable for it.
+
+## A6 — internal accounting equality
 
 ```text
 M0_vaulted == M1_supply
 ```
 
-Every receipt is backed by exactly one vaulted unit at all times. Lock and unlock are free and 1:1 in both directions, so no premium or discount can open: parity is enforced by arbitrage and checked by consensus.
+Lock and unlock are protocol operations at 1:1. This prevents creation of unvaulted M1. It does
+not prevent a market discount: external liquidity for M1 can be absent and its realizable value
+can be zero.
 
-## Why this matters
+## Security consequence
 
-The finality quorum orders transactions; it has **no authority over the money**. A hypothetically malicious quorum could delay or reorder settlement — it could not mint a unit, break parity, or confirm an invalid transaction, because every node fully validates every block against these invariants. The supply is structurally beyond the reach of the signers.
-
-A hard cap completes the picture: the supply can never exceed what Bitcoin's own schedule allows to be burned.
+A finality quorum orders transactions but cannot create M0 without a valid burn claim or create M1
+without vaulted M0. This limits consensus authority over supply; it does not remove application,
+liquidity, software or legal risk.

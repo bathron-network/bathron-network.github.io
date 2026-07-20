@@ -1,16 +1,17 @@
-# Applications
+# Application hypotheses
 
-These pages show **ideas, not code**. Each application is a composition of the same few primitives — covenants, timelocks, oracle signatures, proven Bitcoin facts, private transfers — enforced by consensus rather than operated by anyone.
+These are possible compositions of the protocol primitives, not shipped products or promises.
 
-| Application | Built from |
+| Application | Conditional settlement being tested |
 |---|---|
-| [Payments](applications/payments.md) | private transfers, ~1 min finality |
-| [Escrow](applications/escrow.md) | proven Bitcoin fact releases a covenant |
-| [Delivery versus payment](applications/dvp.md) | atomic two-leg settlement |
-| [Vaults](applications/vaults.md) | covenant templates + timelocks |
-| [OTC settlement](applications/otc.md) | quotes + atomic swaps, privately |
-| [Inheritance](applications/inheritance.md) | timeouts + oracle signatures |
-| [Miner hedging](applications/miner-hedging.md) | Bitcoin difficulty read in consensus |
-| [Stable value](applications/stable-value.md) | covenant positions, never a minted currency |
+| [Delivery versus payment](applications/dvp.md) | release one leg only when delivery is proven |
+| [Escrow](applications/escrow.md) | execute or refund under explicit conditions and timeouts |
+| [OTC settlement](applications/otc.md) | coordinate quoted bilateral legs |
+| [Conditional BTC settlement](applications/payments.md) | add a verifiable condition to a BTC payment |
+| [Provider inventory controls](applications/vaults.md) | constrain CP/LP treasury movement |
+| [Miner hedging](applications/miner-hedging.md) | settle against Bitcoin difficulty facts |
+| [Fixed-term value position](applications/stable-value.md) | bilateral outcome using an explicit oracle |
 
-One discipline governs all of them: **the protocol ships primitives, builders ship applications.** One working application justifies the whole network.
+Ordinary payments and personal wealth storage are not the thesis. The acceptance test is whether
+a CP can deliver useful conditional settlement in the client's familiar assets and fund the
+service through disclosed fees and spreads.

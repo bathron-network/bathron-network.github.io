@@ -1,37 +1,59 @@
 # FAQ
 
-## Why burn Bitcoin?
+## What problem is BATHRON trying to solve?
 
-Because it is the only way to back a unit with Bitcoin **trustlessly**. A bridge needs custodians; a federation needs trust; a burn needs neither — it is irreversible, verifiable by SPV, and requires no one's permission or honesty. One burned satoshi backs one unit, forever, with no issuer to default.
+Conditional Bitcoin settlement: coordinating a Bitcoin payment with another payment, delivery,
+deadline or verifiable event without giving one intermediary unrestricted custody of the funds.
 
-## Why not Ethereum?
+## Is BATHRON a coin offered to users?
 
-Bridged BTC on Ethereum is custodial (a wrapper someone can freeze or lose), there is no base-layer privacy, and you price everything through a volatile gas token. BATHRON's unit *is* the satoshi, backing is burned BTC with no bridge, and private cash is built in.
+No. There is no token sale, premine, treasury, block reward or promised yield. The target client
+sends and receives familiar external assets. M0 and M1 are internal accounting states used by
+professional providers, and their market value is neither guaranteed nor promoted.
 
-## Why not Liquid?
+## Who provides the service?
 
-Liquid is a **federation**: a fixed set of functionaries custodies the peg and can censor. BATHRON has no federation — Bitcoin facts are verified by SPV inside consensus, and the return to native BTC is an open market, not a multisig.
+A **Clearing Provider (CP)** gives the client a quote and orchestrates the settlement paths. One
+or more **Liquidity Providers (LPs)** supply inventory and pair-specific prices. **Settlement
+Operators** run consensus and finality; they do not set commercial prices.
 
-## Why no token?
+## Why is an internal settlement asset necessary?
 
-Because nothing needs one. Fees are paid in satoshis, security is funded by fees (`block_reward = 0`), there is no treasury and no premine. A token would add a speculation layer and a conflict of interest — and remove nothing.
+BATHRON can verify Bitcoin facts but cannot command Bitcoin to spend. Its contracts therefore
+need internal state they can lock and release when a condition is satisfied. M1 carries that
+programmable state; M0 accounts for its origin.
 
-## Why Settlement Providers?
+## Why destroy Bitcoin?
 
-Because the protocol cannot move native BTC — nobody can, trustlessly, from another chain. So the design refuses to fake it: native liquidity comes from an open market of providers competing on fees, settling atomically, custodying nothing. → [Settlement Providers](learn/settlement-providers.md)
+Verified destruction is the only route by which M0 can be created. It avoids a custodian holding
+a redemption reserve, but it is irreversible: the BTC is gone. This is a professional inventory
+cost, not a guarantee that M0 or M1 can later be sold for BTC.
 
-## Why private?
+## Is M1 pegged to Bitcoin?
 
-Settlement is commercially unusable if competitors can read your counterparties, sizes and treasury. Privacy here is a **property of good settlement**, not an ideology — amounts are shielded; the monetary invariants stay publicly verifiable.
+No. Consensus enforces only the internal M0↔M1 accounting equality. It does not guarantee an
+external price, redemption or liquidity. A provider's realizable value can be heavily discounted
+and can fall to zero.
 
-## Can I become a Settlement Provider?
+## Is settlement atomic and risk-free today?
 
-Yes — that is the intended path, and there is no whitelist. The reference implementation publishes with the public testnet; [contact us](mailto:contact@bathron.org) to be early.
+No general guarantee is claimed. Individual HTLC and covenant components have run on the
+testnet, but the complete state machine, reorganisation handling and timelock ordering still need
+formal specification and external review.
 
-## Can I run a validator?
+## Why confidentiality?
 
-Yes. Validators are **Settlement Operators** — burn-backed identities (a masternode in the RPC surface), their collateral being destroyed Bitcoin. On the current private testnet the operator set is closed; it opens progressively with the public testnet, under the safeguards on the [roadmap](roadmap.md). → [Consensus](learn/consensus.md)
+Commercial settlement can expose counterparties, sizes and treasury flows. Sapling can hide
+amounts and linkage in the internal leg while consensus still checks conservation. Confidentiality
+is a service property, not a retail “private cash” proposition.
 
-## Is it experimental?
+## Is this CLS for crypto?
 
-**Yes.** Private testnet running, public testnet next, no mainnet. The consensus surface is frozen before any mainnet, and external audits gate the launch. We would rather under-promise here and let the running system speak.
+No. Payment-versus-payment is a useful functional analogy, but BATHRON has no central-bank
+accounts, regulated settlement membership, equivalent legal finality or systemic track record.
+
+## What exists today?
+
+An experimental testnet with covenant execution, Bitcoin proofs checked in consensus,
+confidential internal transfers, paired HTLC demonstrations and fast finality. There is no
+mainnet, external safety certification, sustained multi-provider liquidity or proven demand.

@@ -1,43 +1,41 @@
-# Settlement Providers
+# Clearing and Liquidity Providers
 
-Ten seconds of mechanism first:
+Three roles must not be confused:
+
+| Role | Responsibility | Main risk |
+|---|---|---|
+| **Settlement Operator** | consensus and finality | operational and consensus participation |
+| **Clearing Provider (CP)** | client quote, orchestration, timeouts and SLA | execution and service risk |
+| **Liquidity Provider (LP)** | inventory and price for a pair | capital, market and liquidity risk |
+
+A company may perform several roles, but the protocol does not require that they be bundled.
+
+## Target flow
 
 ```text
-        Alice                          Settlement Provider
-          │                                     │
-          │  wants native BTC                   │  quotes a price
-          │                                     │
-          ▼                                     ▼
-          ────────────  the swap  ───────────────
-          │                                     │
-   Alice pays on the                   SP pays native BTC
-   settlement state                    on Bitcoin
-          │                                     │
-          └────────── one shared secret ────────┘
-                 claiming either leg reveals it —
-                 both legs settle, or neither does
+client assets -> quoted commitments -> CP orchestration -> conditional settlement -> recipient assets
+                                      |
+                                LP inventory/price
+                                      |
+                           BATHRON internal state
 ```
 
-No custody, no credit, no counterparty risk: an unfinished swap refunds, it does not lose money.
+The client should see amount, deadline, fees and refund path in familiar assets. M0 and M1 remain
+inside the provider workflow.
 
-## Who are Settlement Providers?
+## How providers are paid
 
-Market makers. Anyone holding native BTC who wants to earn a spread can quote prices for moving value between Bitcoin and the settlement state. There is no license, no whitelist, no protocol-blessed operator.
+The CP charges explicit service fees. LPs quote spreads that compensate inventory acquisition,
+liquidity, capital and operating costs. Competition may compress prices, but the protocol does
+not guarantee liquidity or a price near par.
 
-## Why do they exist?
+The Bitcoin-destruction route is one way an LP can acquire internal inventory. Because it is
+irreversible, the provider must recover that cost through real service revenue. Expected token
+appreciation is not a business model.
 
-Because the protocol refuses to do their job. BATHRON can *read* and *consume* Bitcoin but cannot *move* it — so native BTC liquidity must come from someone who has it. Making that someone an **open, competing market** (rather than a federation, a bridge, or the protocol itself) is a design decision: liquidity is an economic problem, and markets solve economic problems.
+## Current status
 
-## How do they earn fees?
-
-The spread between their quoted price and par. Competition between SPs compresses it. The protocol takes nothing.
-
-## Liquidity and inventory
-
-An SP manages two inventories — native BTC on one side, settlement-state value on the other — and rebalances via burns (in) and its own swaps (out). Pricing that inventory is the SP's actual craft; the protocol guarantees only that settlement is atomic.
-
-## API and reference implementation
-
-A reference SP — quoting service, swap API, dashboard — runs on the private testnet and will be published with the public testnet. The API surface is small: publish quotes, accept a swap, settle the legs.
-
-Want to run one? [Contact us](mailto:contact@bathron.org).
+Quoting and LP software exist as testnet prototypes. A generally safe client flow is still a
+design target pending a formal cross-chain specification, reorganisation analysis and external
+review. Until then, claims such as “no counterparty risk” or “both legs always settle” are not
+supported.

@@ -1,21 +1,24 @@
-# Privacy
+# Confidential settlement state
 
-BATHRON has **private cash at the base layer**: shielded transfers using the Sapling protocol (zero-knowledge proofs), not a mixer bolted on top.
+Privacy is not the product. It is a property needed when settlement participants should not
+publish counterparties, amounts and inventory to competitors.
 
-## What is private
+BATHRON uses Sapling proofs for confidential internal transfers.
 
-- **Amounts and balances** of shielded funds.
-- **Linkage**: a shield → unshield hop breaks the on-chain connection between sender and recipient. In the flagship swap, the intermediate value crosses this private hop — so the two Bitcoin transactions at the edges cannot be linked through the middle.
+## What can be hidden
 
-## What is public
+- amounts and balances in the shielded pool;
+- linkage across a shielded transfer.
 
-- The **total supply** and the monetary invariants — privacy never hides whether the money is sound. Consensus verifies that shielded operations conserve value; it just doesn't see who holds what.
-- Settlement transactions (locks, burns, header proofs) are transparent by design: they are the auditable skeleton of the system.
+## What remains verifiable
 
-## What we do not claim
+- consensus verifies conservation without learning the hidden amounts;
+- burns, locks and Bitcoin-header proofs remain transparent where auditability requires it;
+- the M0 and M1 accounting invariants remain public.
 
-BATHRON does not compete with Monero on anonymity-set size, and privacy is not the product — **non-custodial settlement is**. Privacy is what makes settlement commercially usable: no business wants its counterparties, volumes and treasury readable by competitors.
+Shielding does not make the entire cross-chain workflow anonymous. Bitcoin edge transactions,
+timing, network metadata and application behaviour may still reveal information. BATHRON does not
+claim Monero's anonymity set or a complete privacy guarantee.
 
-## For builders
-
-Shielded funds are ordinary funds: receive to a shielded address, send with a shielded transaction ([wallet](../build/wallet.md)). Applications can route value through the shielded pool wherever confidentiality matters, and settle transparently where auditability matters.
+In the target service, CPs and LPs use the confidential state as back-office infrastructure. A
+retail client is not asked to acquire or manage “private cash.”

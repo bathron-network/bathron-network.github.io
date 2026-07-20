@@ -1,25 +1,24 @@
-# Run a Settlement Provider
+# Run provider prototypes
 
-A Settlement Provider (SP) sells **native BTC liquidity** to users of the settlement state, competing on fees in an open market. The protocol never sells anything — SPs do. If you understand market making, you understand the role. Details: [Settlement Providers](../learn/settlement-providers.md).
+The testnet separates two commercial responsibilities:
 
-## What an SP operates
+- a **Clearing Provider (CP)** exposes quotes and orchestrates execution and timeout paths;
+- a **Liquidity Provider (LP)** holds inventory and prices a pair.
+
+One operator can run both prototypes, but production architecture may aggregate several LPs.
 
 | Component | Purpose |
 |---|---|
-| A BATHRON full node | validate the chain, hold inventory, settle |
-| A Bitcoin wallet | the BTC side of quotes |
-| The SP service | publish quotes, serve the swap API, manage inventory |
+| BATHRON full node | validate and settle internal state |
+| Bitcoin wallet | fund quoted external legs |
+| CP service | quotes, workflow state and SLA |
+| LP service | inventory, pair pricing and risk limits |
 
-## The lifecycle of a quote
+The current software demonstrates quoting and individual settlement components. It must not yet be
+represented as a generally atomic or risk-free client service: reorganisation handling, timelock
+ordering and all failure transitions require a formal specification and external review.
 
-1. You publish a price for BTC ⇄ settlement-state value.
-2. A user takes the quote.
-3. The trustless machinery does the rest: the user's Bitcoin payment is **proven inside consensus** (SPV), a covenant releases the counter-payment, and the return leg settles as an atomic swap. You never custody user funds — and users never custody yours.
+Provider revenue is explicit fees and spread. Provider risk includes irreversible inventory
+acquisition, liquidity, pricing, operations and software failure.
 
-Your earnings are the spread. Your risk is inventory and pricing — not counterparty default: an unfinished swap refunds, it does not lose money.
-
-## Reference implementation
-
-A reference SP implementation (quoting service, swap API, dashboard) is running on the private testnet and will be published with the public testnet.
-
-Interested in running one? [Contact us](mailto:contact@bathron.org).
+Interested in evaluating the economics? [Contact us](mailto:contact@bathron.org).
