@@ -18,6 +18,8 @@ You mostly don't have to — the chain does it. Your program states *which* Bitc
 
 Start from the patterns in [Applications](../learn/applications.md) — each lists its primitives. The core trick is `CTV`: commit to the *template* of the spending transaction, and the covenant forces where funds go next. Recursion (a covenant that re-creates itself) comes from output introspection.
 
-## How do I talk to a Settlement Provider?
+## How do I talk to a Clearing Provider?
 
-SPs expose a small HTTP API: fetch quotes, accept a swap, follow settlement. The reference SP implementation and its API documentation are published with the public testnet. → [Settlement Providers](../learn/settlement-providers.md)
+CP prototypes expose a small HTTP API: fetch quotes, accept a workflow and follow settlement.
+Pair-specific prices and inventory may come from one or more LPs. The interfaces remain
+experimental and publish with the public testnet. → [Clearing and Liquidity Providers](../learn/settlement-providers.md)

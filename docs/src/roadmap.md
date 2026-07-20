@@ -161,7 +161,7 @@ what makes adaptive corruption hard. The levers below turn "bounded" into "price
   external audit is a hard, non-negotiable gate** before real value.
 
 - **Separating the producer and the provider.** An operator that both produces blocks
-  and competes as a Settlement Provider could, in principle, order or delay a
+  and also competes as a Clearing or Liquidity Provider could, in principle, order or delay a
   competitor's settlement (an MEV-like edge). The roles are kept **protocol-separable**
   even though they are business-combinable — an open-network design item, not a
   permissioned-launch one.

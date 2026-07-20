@@ -1,24 +1,25 @@
-# Escrow
+# Conditional escrow
 
-Escrow without an escrow agent: the funds are locked under a covenant, and **the release condition is a fact, not a decision**.
+The target is an escrow-like BTC service without giving an agent unrestricted custody.
+
+A CP quotes an execution path and a timeout path in the client's familiar assets. LP inventory
+funds the conditional internal leg. A proven event can release the settlement; if it does not
+occur, the external commitment must follow the specified refund path.
 
 ```text
-  Buyer locks funds ──▶ covenant coffer
-                            │
-        condition met?      │        timeout?
-   (proven Bitcoin payment, │   (CSV timelock)
-    oracle signature, ...)  │
-            │               │            │
-            ▼               │            ▼
-     pays the seller ◀──────┴──────▶ refunds the buyer
+client BTC commitment -> quoted condition
+                             | condition proven
+                             v
+                    CP/LP internal covenant -> recipient leg
+                             |
+                             +-- timeout -> client refund path
 ```
 
-## How it works
+Possible conditions include a confirmed Bitcoin payment (`TX_CONFIRMED`) or a designated
+signature (`CSFS`). CTV can constrain internal outputs and CSV can enforce a timeout.
 
-1. The buyer locks funds under a script with two paths.
-2. **Release path** — proof that the agreed condition happened: a specific Bitcoin payment confirmed (`TX_CONFIRMED`), or a designated third party's signature over an agreed message (`CSFS`). A covenant template (`CTV`) *forces* the payout to the seller — the buyer cannot redirect it.
-3. **Refund path** — a relative timelock (`CSV`) returns the funds if the condition never occurs.
+“No agent can take the principal” remains a design target, not a current general guarantee. It
+depends on the complete two-chain state machine, timelock ordering, reorganisation handling and
+wallet verification being formally specified and reviewed.
 
-No agent holds the money. The "escrow service" is a script that every node enforces.
-
-**Primitives:** `TX_CONFIRMED` · `CTV` · `CSV` · `CSFS`
+**Primitives:** TX_CONFIRMED · CTV · CSV · CSFS

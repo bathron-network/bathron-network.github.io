@@ -16,7 +16,8 @@ before a single block is signed. One operator can run several nodes but counts
 
 > *Naming note:* in the node's RPC surface and source these identities keep their
 > lineage name, **masternode** (`protx`, `getactivemnstatus`). The public model —
-> what an operator *is* — is the Settlement Operator. → [Settlement Providers](settlement-providers.md)
+> what an operator *is*—is the Settlement Operator. Commercial CP/LP roles are separate.
+> → [Clearing and Liquidity Providers](settlement-providers.md)
 
 ## Block production
 

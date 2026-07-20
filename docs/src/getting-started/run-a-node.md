@@ -1,6 +1,10 @@
 # Run a node
 
-> The network currently runs as a **private testnet**. You can build and run the node today; published peers, genesis and a faucet ship with the **public testnet** — the next milestone. [Contact us](mailto:contact@bathron.org) if you want early access.
+> The network currently runs as a **private testnet**. You can build and run the node today;
+> published peers, genesis and a distribution faucet ship with the **public testnet**—the next
+> milestone. The faucet distributes units originating from prior testnet-BTC burns; it has no
+> mint key and cannot bypass the accounting invariants. [Contact us](mailto:contact@bathron.org)
+> if you want early access.
 
 ## Build from source
 
