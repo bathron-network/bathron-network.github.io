@@ -80,10 +80,13 @@ que quelqu'un le tient.
 
 ---
 
-## 3. Brûler pour entrer
+## 3. Pourquoi le règlement exige un état interne
 
-L'idée fondatrice de BATHRON tient en une phrase : pour entrer dans le système, on ne
-confie pas ses bitcoins — on les détruit.
+L'idée fondatrice de BATHRON est le règlement conditionnel sans dépositaire commun. La
+chaîne peut vérifier des faits Bitcoin, mais elle ne peut pas commander une dépense
+Bitcoin. Les contrats ont donc besoin d'un état interne qu'ils peuvent verrouiller et
+libérer. Le mécanisme choisi pour acquérir cet état est sévère : un professionnel ne
+confie pas ses bitcoins à une réserve — il les détruit.
 
 Détruire a un sens technique précis. Il est possible d'envoyer des bitcoins vers une
 condition de dépense conçue pour qu'ils soient définitivement irrécupérables. Pas une clé
@@ -91,11 +94,11 @@ perdue : une absence de clé, démontrable. Ce geste s'appelle un *burn*, et il 
 pour toujours dans le registre public de Bitcoin.
 
 En face, sur la chaîne BATHRON, chaque satoshi prouvé brûlé fait naître exactement un
-satoshi de monnaie nouvelle. Un pour un. Et cette naissance n'est pas décidée par un
+satoshi d'unité comptable M0. Un pour un. Et cette création n'est pas décidée par un
 guichet : la chaîne BATHRON vérifie elle-même, dans ses propres règles de consensus, que
 le burn a eu lieu sur Bitcoin. **Ceci existe dans le code aujourd'hui et fonctionne sur le
 réseau de test** : il n'y a eu aucune distribution initiale aux fondateurs, il n'existe
-aucune récompense de bloc, et l'unique voie de création monétaire est la destruction
+aucune récompense de bloc, et l'unique voie de création de M0 est la destruction
 prouvée de bitcoin.
 
 Ce que le burn supprime, c'est exactement la faiblesse des ponts : la réserve récupérable.
@@ -103,9 +106,10 @@ Plus de coffre à piller, plus de fédération à contraindre, plus de déposita
 plus de sortie à autoriser. Il n'y a rien à saisir, parce qu'il n'y a plus rien.
 
 Ce que le burn fige, c'est l'autre face : **le chemin est à sens unique**. Aucun mécanisme,
-nulle part dans le protocole, ne retransforme la monnaie de BATHRON en bitcoins. Celui qui
-brûle échange une certitude contre un pari : que la monnaie reçue vaudra quelque chose
-parce que d'autres voudront s'en servir. Si le réseau échoue, ce capital est perdu.
+nulle part dans le protocole, ne retransforme les unités internes en bitcoins. Celui qui
+brûle acquiert un inventaire professionnel sans sortie protocolaire. Sa valeur externe
+réalisable dépend de la liquidité future et peut être nulle. Si le réseau échoue, ce
+capital est perdu.
 
 Et disons ce qui reste à croire, puisque ce texte s'y est engagé : la lecture des burns
 repose sur l'hypothèse que la majorité de la puissance de calcul de Bitcoin est honnête ;
@@ -170,19 +174,19 @@ Mais si le client ne brûle rien et ne détient rien — qui fait tourner la cou
 
 ---
 
-## 6. Le Settlement Provider : celui qui porte le risque
+## 6. Clearing Provider et Liquidity Provider : qui porte le risque
 
-Le personnage central de l'économie s'appelle le **Settlement Provider** — le fournisseur
-de règlement. Il faut d'emblée le distinguer d'un intermédiaire de garde : un prestataire
-custodial *reçoit* l'argent du client et met à jour sa base de données ; le Settlement
-Provider, dans le modèle visé, *route* un flux encadré par contrat, sans jamais recevoir
+Le personnage tourné vers le client est le **Clearing Provider (CP)**. Il faut d'emblée
+le distinguer d'un intermédiaire de garde : un prestataire
+custodial *reçoit* l'argent du client et met à jour sa base de données ; le CP, dans le
+modèle visé, *route* un flux encadré par contrat, sans jamais recevoir
 l'argent du client comme un dépôt libre. Il apporte la liquidité ; il ne doit pas avoir de
 pouvoir arbitraire sur le résultat.
 
-Pour exercer, il tient deux inventaires. D'un côté des bitcoins, pour payer rapidement les
-clients qui doivent en recevoir. De l'autre du M1, pour faire fonctionner les contrats en
-coulisse — et pour constituer ce stock, c'est *lui* qui brûle des bitcoins. Sa mise de
-fonds, son droit d'entrée dans le métier.
+Le CP peut financer son propre inventaire ou agréger un ou plusieurs **Liquidity
+Providers (LP)**. Les LP détiennent du bitcoin d'un côté et du M1 de l'autre. Pour
+constituer le stock M1, un LP peut brûler des bitcoins. Ce coût d'acquisition irréversible
+appartient au professionnel, pas au client.
 
 Ses revenus, dans le modèle : un écart entre prix d'entrée et de sortie — un *spread* —,
 et des frais sur les services conditionnels que le paiement simple ne sait pas rendre. Le
@@ -213,7 +217,7 @@ d'être payé. Le plus vieux blocage du commerce.
 Déroulons la version BATHRON — en gardant à l'esprit que ce parcours *complet* est un
 objectif de design : les briques existent, l'assemblage n'est pas encore un produit.
 
-**Le devis.** Alice s'adresse au service d'un Settlement Provider. On lui affiche en
+**Le devis.** Alice s'adresse au service d'un CP. On lui affiche en
 clair : montant à envoyer, montant que Bob recevra, condition de libération, date limite,
 frais — et la garantie recherchée : remboursement automatique si rien ne s'est passé à
 l'échéance.
@@ -288,7 +292,7 @@ promesse, pas un fait — et nous nous l'interdisons tant que ce travail n'est p
 
 ## 9. L'économie du premier entrant
 
-Une question décide de beaucoup : le premier Settlement Provider, qui sera-t-il ?
+Une question décide de beaucoup : le premier Clearing Provider, qui sera-t-il ?
 
 Mettons-nous à la place d'un teneur de marché neutre et rationnel. Il posera trois
 questions. Combien ça rapporte ? — des spreads et des frais sur un volume qui n'existe pas
@@ -329,7 +333,7 @@ invariants comptables tiennent quoi qu'il arrive, c'est dans le code. Un sabotag
 visible, réversible par un redémarrage du réseau de test ; assumé pour la phase
 d'expérimentation, à durcir avant tout réseau définitif.
 
-**Aucun Settlement Provider réel.** Personne n'a brûlé de bitcoins pour ouvrir boutique.
+**Aucun Clearing Provider réel.** Personne n'a ouvert de service réel de règlement conditionnel.
 Aucune transaction de client réel n'a été routée. L'économie décrite plus haut est une
 architecture qui attend son premier habitant.
 
@@ -397,9 +401,9 @@ s'il est proche de zéro, aucune élégance technique n'y changera rien.
 
 Résumons, une dernière fois, dans les trois registres.
 
-**Ce qui existe.** Une chaîne fonctionne, sur un réseau de test public. Elle crée sa
-monnaie exclusivement par destruction prouvée de bitcoins — sans prémine, sans récompense
-de bloc, un satoshi pour un satoshi. Elle vérifie elle-même, dans ses règles, l'état de
+**Ce qui existe.** Une chaîne fonctionne, sur un réseau de test public. Elle crée M0
+exclusivement par destruction prouvée de bitcoins — sans prémine, sans récompense de bloc,
+une unité par satoshi détruit. Elle vérifie elle-même, dans ses règles, l'état de
 Bitcoin. Elle maintient un coffre et des reçus à parité stricte, vérifiée à chaque bloc.
 Et elle fait tourner une famille de contrats aux chemins scellés que Bitcoin, à ce jour,
 refuse d'activer. Tout cela est vérifiable par quiconque veut regarder.

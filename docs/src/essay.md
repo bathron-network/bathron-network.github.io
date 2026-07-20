@@ -73,10 +73,12 @@ bitcoin still exists, and somebody holds it.
 
 ---
 
-## 3. Burning to enter
+## 3. Why settlement needs internal state
 
-BATHRON's founding idea fits in one sentence: to enter the system, you do not hand over
-your bitcoin — you destroy it.
+BATHRON's founding idea is conditional settlement without a common custodian. Its chain
+can verify Bitcoin facts but cannot command Bitcoin to spend. Contracts therefore need
+internal state they can lock and release. The chosen acquisition mechanism for that state
+is severe: a professional does not hand bitcoin to a reserve — they destroy it.
 
 Destroying has a precise technical meaning. It is possible to send bitcoin to a spending
 condition designed to make it definitively unrecoverable. Not a lost key: a demonstrable
@@ -84,20 +86,20 @@ absence of any key. This act is called a *burn*, and it is recorded forever in B
 public ledger.
 
 On the other side, on the BATHRON chain, every satoshi proven burned brings into existence
-exactly one satoshi of new money. One for one. And this issuance is not decided by any
+exactly one M0 accounting unit. One for one. And this creation is not decided by any
 counter clerk: the BATHRON chain verifies for itself, inside its own consensus rules, that
 the burn happened on Bitcoin. **This exists in code today and runs on the test network**:
 there was no initial allocation to founders, there is no block reward, and the only path
-of monetary creation is the proven destruction of bitcoin.
+of M0 creation is the proven destruction of bitcoin.
 
 What the burn removes is exactly the weakness of bridges: the recoverable reserve. No
 vault to raid, no federation to compel, no custodian to subpoena, no exit to authorize.
 There is nothing to seize, because there is nothing left.
 
 What the burn freezes is the other side of the coin: **the path is one-way**. No
-mechanism, anywhere in the protocol, turns BATHRON's money back into bitcoin. Whoever
-burns exchanges a certainty for a bet: that the money received will be worth something
-because others will want to use it. If the network fails, that capital is lost.
+mechanism, anywhere in the protocol, turns the internal units back into bitcoin. Whoever
+burns acquires professional inventory with no protocol exit. Its realizable external value
+depends on future liquidity and can be zero. If the network fails, that capital is lost.
 
 And let us say what remains to be trusted, since this text committed to doing so: reading
 the burns rests on the assumption that the majority of Bitcoin's hashpower is honest; the
@@ -160,17 +162,17 @@ But if the client burns nothing and holds nothing — who runs the backstage?
 
 ---
 
-## 6. The Settlement Provider: the one who carries the risk
+## 6. Clearing and liquidity providers: who carries the risk
 
-The central character of the economy is the **Settlement Provider**. They must immediately
+The client-facing character is the **Clearing Provider (CP)**. They must immediately
 be distinguished from a custodial intermediary: a custodial payment processor *receives*
-the client's money and updates its database; the Settlement Provider, in the intended
+the client's money and updates its database; the CP, in the intended
 model, *routes* a contract-bounded flow, without ever receiving the client's money as a
 free deposit. They supply liquidity; they must have no arbitrary power over the outcome.
 
-To operate, they keep two inventories. On one side, bitcoin, to pay out quickly to clients
-who must receive it. On the other, M1, to run the contracts backstage — and to build that
-stock, it is *they* who burn bitcoin. Their stake, their cost of entry into the trade.
+The CP may finance its own inventory or aggregate one or more **Liquidity Providers (LPs)**.
+LPs keep bitcoin on one side and M1 on the other. To build M1 inventory, an LP may burn
+bitcoin. That irreversible acquisition cost belongs to the professional, not the client.
 
 Their revenue, in the model: a gap between entry and exit prices — a *spread* — and fees
 on the conditional services that a simple payment cannot render. The spread also serves as
@@ -200,7 +202,7 @@ being paid. The oldest deadlock in commerce.
 Let us walk through the BATHRON version — keeping in mind that this *complete* journey is
 a design goal: the bricks exist, the assembly is not yet a product.
 
-**The quote.** Alice goes to a Settlement Provider's service. She is shown, in plain
+**The quote.** Alice goes to a CP's service. She is shown, in plain
 terms: amount to send, amount Bob will receive, release condition, deadline, fees — and
 the guarantee being sought: automatic refund if nothing has happened by expiry.
 
@@ -271,7 +273,7 @@ ourselves from saying it until that work is done.
 
 ## 9. The economics of the first entrant
 
-One question decides a great deal: the first Settlement Provider — who will it be?
+One question decides a great deal: the first Clearing Provider — who will it be?
 
 Put yourself in the shoes of a neutral, rational market maker. They will ask three
 questions. How much does it earn? — spreads and fees on a volume that does not yet exist.
@@ -312,7 +314,7 @@ matter what; that is in the code. Visible sabotage, reversible by restarting the
 network; accepted for the experimentation phase, to be hardened before any definitive
 network.
 
-**No real Settlement Provider.** Nobody has burned bitcoin to open shop. No real client
+**No real Clearing Provider.** Nobody has opened a real conditional-settlement service. No real client
 transaction has ever been routed. The economy described above is an architecture awaiting
 its first inhabitant.
 
@@ -380,8 +382,8 @@ elegance will change anything.
 
 Let us summarize, one last time, in the three registers.
 
-**What exists.** A chain runs, on a public test network. It creates its money exclusively
-through proven destruction of bitcoin — no premine, no block reward, one satoshi for one
+**What exists.** A chain runs, on a public test network. It creates M0 exclusively
+through proven destruction of bitcoin — no premine, no block reward, one unit per destroyed
 satoshi. It verifies Bitcoin's state for itself, inside its rules. It maintains a vault
 and receipts at strict parity, checked at every block. And it runs a family of
 sealed-path contracts that Bitcoin, to date, declines to activate. All of it verifiable by
