@@ -49,7 +49,7 @@ issue, a clean launch genesis rehearsed.
 ## Next — Public testnet
 
 The network opens. Published genesis and peers, a public block explorer, the
-**Settlement Provider reference implementation**, the SDK, and runnable examples.
+**Clearing and Liquidity Provider prototypes**, the SDK, and runnable examples.
 
 The goal of this phase is a single, unglamorous thing: **the first builders shipping
 on the substrate.** Everything else serves that. Disposable-genesis resets remain
@@ -68,7 +68,8 @@ and the external audits returned.
 **Gated, not scheduled.** The hard prerequisites are real and named below. Mainnet
 carries real value, so it also carries the one rule that never bends: **genesis
 itself is SPV-verified like every block after it** — no special case, no bypass, no
-premine. The first coin on mainnet is a burned Bitcoin, proven, exactly like the
+premine. Any first internal unit on mainnet would have to originate from a verified Bitcoin
+destruction, exactly like the
 millionth.
 
 The mechanical launch steps — mine and pin the mainnet genesis with a recency proof,

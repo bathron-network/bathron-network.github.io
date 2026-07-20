@@ -1,46 +1,43 @@
 # Architecture
 
-The whole system is one vertical flow:
+The system begins with a settlement problem, not with the burn:
 
 ```text
-        Bitcoin
-           │
-           ▼
-         Burn
-           │
-           ▼
-  Shared settlement state
-           │
-           ▼
-      Applications
-           │
-           ▼
-  Settlement Providers
-           │
-           ▼
-     Native Bitcoin
+client assets -> quoted conditions -> programmable internal state -> recipient assets or timeout
+                         |                       |
+                  CP orchestration        LP inventory
 ```
 
-## Bitcoin
+## External settlement legs
 
-The source of truth. BATHRON carries the Bitcoin header chain **inside its own consensus**: every node validates Bitcoin proof-of-work and chainwork, and scripts can verify Merkle proofs against it. No oracle reports Bitcoin facts — the chain checks them itself. → [Bitcoin integration](bitcoin-integration.md)
+Clients use assets familiar to them, initially BTC. BATHRON can verify Bitcoin headers and Merkle
+proofs in consensus, but it cannot command Bitcoin to spend. Each application must therefore
+define the execution and refund paths of both external legs.
 
-## Burn
+## Why internal state is required
 
-The only way value enters. Bitcoin is sent to a provably unspendable output; after enough confirmations, an SPV proof of that burn mints the same amount on BATHRON, satoshi for satoshi. Irreversible, verifiable by everyone, with no issuer. → [Monetary invariants](../reference/invariants.md)
+Covenants and timelocks need an asset the BATHRON consensus can lock and release. M1 carries that
+programmable settlement state. M0 records the one-way origin of the inventory from verified BTC
+destruction.
 
-## Shared settlement state
+```text
+BTC --irreversible, SPV-proven destruction--> M0 --lock 1:1--> M1
+```
 
-The kernel itself: one state, maintained by consensus, that all applications read and write. Deterministic block production every 60 seconds, BFT finality in about a minute, shielded transfers for privacy. → [Consensus](consensus.md), [Privacy](privacy.md)
+The BTC is not held for redemption. The internal 1:1 accounting rule does not guarantee an
+external price for M1.
 
-## Applications
+## Service and consensus roles
 
-Covenants written against the settlement state: payments, escrow, DvP, vaults, OTC. They are scripts enforced by every node — not services run by anyone. → [Applications](applications.md)
+- **Clearing Providers** quote and orchestrate client flows.
+- **Liquidity Providers** bear inventory and pricing risk.
+- **Settlement Operators** maintain block production and finality.
 
-## Settlement Providers
+The protocol supplies verification and execution primitives. It does not guarantee liquidity,
+select a provider or certify the safety of an application.
 
-The exit to native BTC. An open market of providers quotes prices and supplies Bitcoin liquidity, competing on fees. The protocol never custodies and never sells. → [Settlement Providers](settlement-providers.md)
+## Application layer
 
-## Native Bitcoin
-
-Where users end up. Bitcoin sees two transactions — one in, one out. BATHRON executes everything in between.
+Escrow, DvP, OTC and other workflows compose Bitcoin proofs, covenants, HTLCs, timelocks and
+confidential internal transfers. The full client-protection state machine remains an application
+responsibility and must be specified and reviewed separately.

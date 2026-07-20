@@ -32,4 +32,7 @@ Scripts can also read Bitcoin's difficulty, timestamps and accumulated work from
 
 ## What the link is — and is not
 
-The link is **one-directional and honest**. BATHRON can *read* Bitcoin (headers, proofs) and *consume* Bitcoin (burns, irreversible). It cannot move native BTC or trigger a Bitcoin transaction. The only fully-trustless direction is BTC → BATHRON; the return to native BTC goes through an open market of [Settlement Providers](settlement-providers.md), atomically. BATHRON settles *against* Bitcoin; it does not command it.
+The link is **one-directional**. BATHRON can read Bitcoin facts and verify irreversible burns; it
+cannot move native BTC or trigger a Bitcoin transaction. A return leg therefore requires a CP,
+LP inventory and an explicit Bitcoin-side contract. Individual HTLC components have been tested,
+but general atomicity is not claimed before the full state machine is specified and reviewed.

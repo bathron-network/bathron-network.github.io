@@ -1,28 +1,14 @@
-# Stable value
+# Fixed-term value position
 
-The discipline first: **BATHRON will never mint a stablecoin.** No global debt, no protocol-issued dollar, no peg to defend. What the primitives allow is different — and sounder: **stability as a position, between two consenting parties.**
+BATHRON does not mint a stablecoin. A possible application is a bilateral, fixed-term contract
+whose payout depends on a signed reference price.
 
-```text
-  party A (wants dollar stability)     party B (wants BTC exposure)
-              │                                   │
-              └────── both lock sats in a covenant ──────┘
-                               │
-                               ▼
-              at expiry, a signed price (CSFS)
-              splits the pot so that A receives
-              the dollar value of A's deposit
-```
+A professional counterparty quotes the contract, prices the risk and commits collateral. At
+expiry, a CSFS-verified price signature selects the covenant payout. The other participant sees
+the quoted payoff and fees, not an invitation to acquire leveraged network exposure.
 
-## How it works
+This design introduces real oracle, counterparty, liquidity and model risk. Collateralisation and
+expiry limit some risks but do not remove them. No implementation should be described as stable
+until its payout rules, oracle failure modes and liquidation assumptions have been reviewed.
 
-A discreet-log-contract-style covenant: two parties lock satoshis; at expiry, a published price signature determines the split. Party A gets dollar-stable value; party B gets leveraged BTC exposure. The "stablecoin" is a **contract outcome**, collateralized in full, expiring on schedule.
-
-## Why not a minted dollar?
-
-Minted stablecoins concentrate three risks the design refuses: an issuer (custody), a peg (bank-run dynamics), and a global liability (everyone depends on one balance sheet). A position has none — its risk is bilateral, priced, and expires.
-
-## The honest caveat
-
-The price is not an on-chain fact; the oracle signature (`CSFS`) is a real trust assumption, mitigated — not removed — by choosing and diversifying signers.
-
-**Primitives:** covenants · `CSFS` · `CSV`/`CLTV` expiry · shielded balances
+**Primitives:** covenants · CSFS · CSV/CLTV · confidential internal balances
