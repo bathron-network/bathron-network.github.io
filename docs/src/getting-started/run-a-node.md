@@ -1,10 +1,28 @@
 # Run a node
 
-> The network currently runs as a **private testnet**. You can build and run the node today;
-> published peers, genesis and a distribution faucet ship with the **public testnet**—the next
-> milestone. The faucet distributes units originating from prior testnet-BTC burns; it has no
-> mint key and cannot bypass the accounting invariants. [Contact us](mailto:contact@bathron.org)
-> if you want early access.
+> The **public testnet is live**. A published seed node and a fixed genesis are available, and a
+> fresh node can join with only the seed address — no RPC access and no operator address are
+> needed. There is no mainnet. This is experimental software with a disposable-genesis testnet.
+
+## Join the public testnet
+
+| Fact | Value |
+|---|---|
+| Genesis (block 0) | `0d241620b8beb492fd21bd8a92295260a4afa1b82e1bd816d18323cc3c98ea71` |
+| Public seed | `57.131.33.151:27171` |
+
+```bash
+mkdir -p ~/.bathron
+printf 'testnet=1\n[test]\naddnode=57.131.33.151\n' > ~/.bathron/bathron.conf
+bathrond -testnet -daemon
+bathron-cli -testnet getblockhash 0
+# expected:
+# 0d241620b8beb492fd21bd8a92295260a4afa1b82e1bd816d18323cc3c98ea71
+bathron-cli -testnet getblockcount   # syncs to the network tip
+```
+
+RPC is loopback-only by default. Operator addresses are deliberately not published; the seed
+above is the only endpoint needed to join.
 
 ## Build from source
 
@@ -32,7 +50,8 @@ This produces two binaries:
 bathrond -testnet -daemon
 ```
 
-The node stores its data in `~/.bathron/`. Configuration goes in `~/.bathron/bathron.conf` (peers, RPC credentials).
+The node stores its data in `~/.bathron/`. Configuration goes in `~/.bathron/bathron.conf` (peers, RPC credentials). Pre-built binaries for tagged releases are published on the
+[bathron-core releases page](https://github.com/bathron-network/bathron-core/releases).
 
 ## Verify
 

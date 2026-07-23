@@ -140,6 +140,13 @@ global administrator switch. A node with the option disabled still accepts a val
 block containing a destruction claim produced elsewhere. Pausing new claims across
 the network would therefore require coordinated producer behaviour.
 
+## Reporting a vulnerability
+
+Report suspected security issues privately to **security@bathron.org**. Please do not open a
+public issue for an unpatched vulnerability. Include enough detail to reproduce; the inbox is
+monitored and coordinated disclosure is preferred. The full policy ships as `SECURITY.md` in the
+[bathron-core repository](https://github.com/bathron-network/bathron-core/blob/main/SECURITY.md).
+
 ## Comparison with Bitcoin
 
 Bitcoin and BATHRON close different attack surfaces with different assumptions.

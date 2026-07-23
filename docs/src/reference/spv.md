@@ -24,3 +24,23 @@ A Bitcoin transaction is proven with a **Merkle branch** to a block header in th
 | **Scripts** (`TX_CONFIRMED` via `OP_BTCSTATEVERIFY`) | any covenant can require proof of a Bitcoin payment |
 
 The same rules serve both — there is no privileged path and no bypass, including at genesis: the very first mint was SPV-verified like every one since.
+
+## Burn format (BCS v1.0)
+
+A Bitcoin burn that BATHRON can mint from is a standard Bitcoin transaction with two required outputs:
+
+```text
+OP_RETURN   BATHRON|01|<NET>|<DEST_HASH160>   (29 bytes: "BATHRON" magic + version + network + P2PKH dest hash160)
+value out   P2WSH(OP_FALSE)                    (provably unspendable — the BTC is destroyed)
+```
+
+`P2WSH(OP_FALSE)` commits to `SHA256(0x00) = 6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d`; the script can never be satisfied, so the coins are gone. The `OP_RETURN` names the BATHRON destination that receives the minted M0. A burn is unique by `(btc_txid, vout)`; duplicates are rejected.
+
+## Maturity and genesis constants
+
+| Constant | Testnet | Mainnet | Meaning |
+|---|---|---|---|
+| `K_BTC_CONFS` | 6 | 24 | Bitcoin confirmations required before a burn is claimable |
+| `K_FINALITY` | 20 | 100 | BATHRON blocks after the claim before the mint is eligible |
+
+Genesis is the same path, not a special case: block 0 is an empty coinbase, block 1 is the first `TX_MINT_M0BTC` (SPV-verified exactly like every later mint), and masternode registrations follow. No burn is ever hardcoded — every minted satoshi traces to a verified Bitcoin destruction.
