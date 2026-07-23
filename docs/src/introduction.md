@@ -22,6 +22,8 @@ not yet formally specified or externally reviewed. There is no mainnet and no pr
 ## Where to go next
 
 - **[Architecture](learn/architecture.md)** — how the pieces fit together.
+- **[Security model](learn/security-model.md)** — what consensus protects, what a finality
+  threshold can disrupt, and what remains unproven.
 - **[Clearing and liquidity providers](learn/settlement-providers.md)** — who supplies the service
   and who bears inventory risk.
 - **[Delivery versus payment](learn/applications/dvp.md)** — the clearest target workflow.
