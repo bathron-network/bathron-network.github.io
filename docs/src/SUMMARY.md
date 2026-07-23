@@ -12,6 +12,7 @@
 # Learn
 
 - [Architecture](learn/architecture.md)
+- [Security model](learn/security-model.md)
 - [Consensus](learn/consensus.md)
 - [Bitcoin integration](learn/bitcoin-integration.md)
 - [Clearing and Liquidity Providers](learn/settlement-providers.md)

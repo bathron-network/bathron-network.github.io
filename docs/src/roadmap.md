@@ -81,12 +81,11 @@ research-shaped prerequisites are the hardening track.
 
 ## Open-network hardening
 
-This is the honest core of the roadmap. Today's network is **permissioned**: the
-maintainer runs the operators, so there is no adversary holding a fraction of them,
-and the system is sound for that phase. Opening the operator set to untrusted parties
-is a different threat model — and these are the items that close the gap. **None of
-them is a bug in the running system;** each is a prerequisite for *removing the
-permission*.
+This is the honest core of the roadmap. The current public-testnet operator set is
+**project-controlled**. That does not demonstrate Byzantine resistance under open
+admission, and it does not remove software, key-compromise or correlated
+infrastructure risk. Opening the operator set to independent parties is a different
+threat model; the items below are prerequisites for that transition.
 
 ### The one thing that never changes
 
@@ -97,9 +96,9 @@ First, the guarantee that holds in every phase and underpins everything below:
 > captured one — cannot mint a unit, break the [monetary invariants](reference/invariants.md),
 > or confirm an invalid transaction. M0 origin remains constrained by verified BTC destruction.
 
-So the open-network question is never "can someone steal the money" — the invariants
-answer that. It is narrower and honest: **can someone disrupt or reorder *settlement*
-before it finalizes.** That is what the items below bound.
+The invariants answer whether an invalid monetary state can be accepted by an honest
+full node. The separate open-network question is whether a threshold can censor,
+stall or create divergent finalized views. That is what the items below bound.
 
 ### The attack surface, stated plainly
 

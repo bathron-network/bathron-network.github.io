@@ -46,15 +46,20 @@ That creation path is not a reward or discretionary issuance.
 ## Design choices
 
 - **ECDSA on secp256k1 only.** No BLS, no aggregated signatures — explicit signatures are simpler to audit at these committee sizes.
-- **No slashing.** Deliberate: a slashing bug can destroy honest operators' funds. Deterrence is the burned-BTC collateral (paid up front) plus proof-of-service bans (loss of future fees).
+- **No slashing.** The registered collateral is M0, which may be acquired from a
+  third party; the operator need not have destroyed Bitcoin itself. A proof-of-service
+  ban removes the identity from the active set but does not confiscate that M0.
+  Possible future fee or service revenue remains an unproven commercial hypothesis.
 
 ## Threat model, honestly
 
-The network is **permissioned today** — the launcher runs the operators, so no
-adversary holds a fraction of them, and the system is sound as-is. Opening the
-operator set is a different threat model, and the guarantee that matters most survives
-it: because finality sits *on top of* full validation, a captured committee could at
-worst stall or re-order **unfinalized** settlement — it can never mint value or break
-the invariants. Making the open-network transition safe (finality-participation
-liveness, value-at-risk bounds, committee sizing, the external VRF audit) is the
-[roadmap](../roadmap.md)'s open-network hardening track — named work, not hidden risk.
+The current public-testnet operator set is **project-controlled**. This does not
+demonstrate Byzantine resistance under open admission, and it does not remove
+software bugs, key compromise or correlated infrastructure failures.
+
+Because finality sits *on top of* full validation, a captured threshold cannot mint
+value or break the monetary invariants. It can nevertheless censor an operation,
+stall finality or create divergent finalized views across a partition. Making the
+open-network transition safe (finality-participation liveness, value-at-risk bounds,
+committee sizing and the external VRF audit) is the [roadmap](../roadmap.md)'s
+open-network hardening track. See the complete [security model](security-model.md).
