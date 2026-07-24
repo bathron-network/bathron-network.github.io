@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://bathron.org/</loc></url>
+  <url><loc>https://bathron.org/docs/</loc></url>
+  <url><loc>https://bathron.org/docs/introduction.html</loc></url>
+  <url><loc>https://bathron.org/docs/getting-started/run-a-node.html</loc></url>
+  <url><loc>https://bathron.org/docs/getting-started/run-a-wallet.html</loc></url>
+  <url><loc>https://bathron.org/docs/getting-started/run-a-settlement-provider.html</loc></url>
+  <url><loc>https://bathron.org/docs/getting-started/first-application.html</loc></url>
+  <url><loc>https://bathron.org/docs/learn/architecture.html</loc></url>
+  <url><loc>https://bathron.org/docs/learn/security-model.html</loc></url>
+  <url><loc>https://bathron.org/docs/learn/consensus.html</loc></url>
+  <url><loc>https://bathron.org/docs/learn/bitcoin-integration.html</loc></url>
+  <url><loc>https://bathron.org/docs/learn/settlement-providers.html</loc></url>
+  <url><loc>https://bathron.org/docs/learn/privacy.html</loc></url>
+  <url><loc>https://bathron.org/docs/learn/applications.html</loc></url>
+  <url><loc>https://bathron.org/docs/learn/applications/payments.html</loc></url>
+  <url><loc>https://bathron.org/docs/learn/applications/escrow.html</loc></url>
+  <url><loc>https://bathron.org/docs/learn/applications/dvp.html</loc></url>
+  <url><loc>https://bathron.org/docs/learn/applications/vaults.html</loc></url>
+  <url><loc>https://bathron.org/docs/learn/applications/otc.html</loc></url>
+  <url><loc>https://bathron.org/docs/learn/applications/miner-hedging.html</loc></url>
+  <url><loc>https://bathron.org/docs/learn/applications/stable-value.html</loc></url>
+  <url><loc>https://bathron.org/docs/build/sdk.html</loc></url>
+  <url><loc>https://bathron.org/docs/build/wallet.html</loc></url>
+  <url><loc>https://bathron.org/docs/build/api.html</loc></url>
+  <url><loc>https://bathron.org/docs/build/examples.html</loc></url>
+  <url><loc>https://bathron.org/docs/reference/transaction-types.html</loc></url>
+  <url><loc>https://bathron.org/docs/reference/opcodes.html</loc></url>
+  <url><loc>https://bathron.org/docs/reference/spv.html</loc></url>
+  <url><loc>https://bathron.org/docs/reference/consensus-parameters.html</loc></url>
+  <url><loc>https://bathron.org/docs/reference/invariants.html</loc></url>
+  <url><loc>https://bathron.org/docs/faq.html</loc></url>
+  <url><loc>https://bathron.org/docs/roadmap.html</loc></url>
+  <url><loc>https://bathron.org/docs/essay.html</loc></url>
+  <url><loc>https://bathron.org/docs/essai-fr.html</loc></url>
+</urlset>
