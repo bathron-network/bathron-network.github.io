@@ -6,15 +6,15 @@ including the parts that are hard.
 
 <svg viewBox="0 0 660 132" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three gated phases: private testnet, public testnet, mainnet">
   <line x1="70" y1="46" x2="590" y2="46" stroke="#1C222C" stroke-width="2"/>
-  <line x1="70" y1="46" x2="210" y2="46" stroke="#D9A441" stroke-width="2" opacity=".55"/>
+  <line x1="70" y1="46" x2="330" y2="46" stroke="#D9A441" stroke-width="2" opacity=".55"/>
   <g font-family="ui-monospace,Menlo,monospace">
-    <circle cx="70" cy="46" r="9" fill="#D9A441"/>
-    <circle cx="330" cy="46" r="8" fill="#0C0F14" stroke="#3A4150" stroke-width="2"/>
+    <circle cx="70" cy="46" r="8" fill="#3A4150"/>
+    <circle cx="330" cy="46" r="9" fill="#D9A441"/>
     <circle cx="590" cy="46" r="8" fill="#0C0F14" stroke="#3A4150" stroke-width="2"/>
     <text x="70" y="24" text-anchor="middle" fill="#E8EBF0" font-size="12" font-weight="600">Private testnet</text>
-    <text x="70" y="74" text-anchor="middle" fill="#8A919C" font-size="11">now · frozen surface</text>
+    <text x="70" y="74" text-anchor="middle" fill="#8A919C" font-size="11">done · surface proven</text>
     <text x="330" y="24" text-anchor="middle" fill="#E8EBF0" font-size="12" font-weight="600">Public testnet</text>
-    <text x="330" y="74" text-anchor="middle" fill="#8A919C" font-size="11">next · first builders</text>
+    <text x="330" y="74" text-anchor="middle" fill="#8A919C" font-size="11">now · first builders</text>
     <text x="590" y="24" text-anchor="middle" fill="#E8EBF0" font-size="12" font-weight="600">Mainnet</text>
     <text x="590" y="74" text-anchor="middle" fill="#8A919C" font-size="11">gated · audits + economics</text>
     <text x="200" y="106" text-anchor="middle" fill="#5B626E" font-size="10">gate: it works, live</text>
@@ -24,32 +24,31 @@ including the parts that are hard.
 
 ---
 
-## Now — Private testnet
+## Done — Private testnet
 
-A multi-node network runs the **entire consensus surface** live: VRF finality, the
+A multi-node network ran the **entire consensus surface** live: VRF finality, the
 in-consensus Bitcoin header chain, burn → mint, the covenant opcodes, shielded
 transfers, and the flagship flow end-to-end — a real Bitcoin payment releasing a
 covenant, and an atomic BTC-out swap.
 
-The consensus surface is **frozen**. Work at this stage is not new features — it is
-proof: every primitive exercised on-chain (accept *and* reject paths), adversarial
-red-teaming, fuzzing the money chokepoints, and the tooling that makes a launch
-repeatable. The codebase has been driven to *zero legacy and zero dead code*, so what
-freezes is exactly what runs.
+The consensus surface was **frozen** during this phase. The work was not new
+features — it was proof: every primitive exercised on-chain (accept *and* reject
+paths), adversarial red-teaming, fuzzing the money chokepoints, and the tooling that
+makes a launch repeatable. The codebase was driven to *zero legacy and zero dead
+code*, so what froze is exactly what runs.
 
-**What "close to mainnet" means here.** The private testnet is deliberately built to
-differ from mainnet in as few ways as possible: same block rules, same invariants,
-same finality math, same M0-origin rule based on verified BTC destruction. The differences that remain are the
-ones that *must* differ — the Bitcoin network it reads (Signet vs mainnet), the
-genesis message, and the address identity bytes. Everything else is the launch code.
+**Its gate was passed:** the full surface proven live, no open monetary or safety
+issue, a clean launch genesis rehearsed — which is why the next phase exists.
 
-**Gate to the next phase:** the full surface proven live, no open monetary or safety
-issue, a clean launch genesis rehearsed.
+## Now — Public testnet
 
-## Next — Public testnet
-
-The network opens. Published genesis and peers, a public block explorer, the
-**Clearing and Liquidity Provider prototypes**, the SDK, and runnable examples.
+**This is the current phase.** The network is open: published genesis and peers, a
+public block explorer, the **Clearing and Liquidity Provider prototypes**, the SDK,
+and runnable examples. The public testnet is deliberately built to differ from
+mainnet in as few ways as possible: same block rules, same invariants, same finality
+math, same M0-origin rule based on verified BTC destruction. The differences that
+remain are the ones that *must* differ — the Bitcoin network it reads (Signet vs
+mainnet), the genesis message, and the address identity bytes.
 
 The goal of this phase is a single, unglamorous thing: **the first builders shipping
 on the substrate.** Everything else serves that. Disposable-genesis resets remain
@@ -65,7 +64,7 @@ and the external audits returned.
 
 ## Then — Mainnet
 
-**Gated, not scheduled.** The hard prerequisites are real and named below. Mainnet
+**Gated, not scheduled — and not planned for any date.** The hard prerequisites are real and named below. Mainnet
 carries real value, so it also carries the one rule that never bends: **genesis
 itself is SPV-verified like every block after it** — no special case, no bypass, no
 premine. Any first internal unit on mainnet would have to originate from a verified Bitcoin
@@ -108,11 +107,13 @@ With an open operator set and a Byzantine fraction *f*:
   advancing until enough honest operators sign again. The chain keeps producing blocks
   (production has its own fallback); it is *irreversibility* that waits. Nothing is
   lost, nothing is forged — settlement simply isn't final yet.
-- **Safety.** Only an adversary controlling **≥ the finality threshold** could sign two
-  conflicting histories (equivocate) within a finality window — and even then the money
-  is safe, so the damage is bounded to *re-ordering unfinalized settlement*. The
-  chain-level guard already rejects any block that would rewrite an *already-finalized*
-  height, from any fork, regardless of chainwork.
+- **Safety.** Only an adversary controlling **≥ the finality threshold across distinct
+  eligible operator identities** could sign conflicting histories within a finality
+  window. The money cannot be forged either way — but such an adversary *can* censor
+  settlement, stall finality, and present **divergent finalized views** to different
+  parts of the network. Each honest node's chain-level guard rejects any block that
+  would rewrite a height *it* has finalized, from any fork, regardless of chainwork;
+  reconciling divergent views across nodes is an operational event, not an automatic one.
 
 The committee draw is **non-grindable**: a per-block ECVRF over each operator's *secret*
 key, so an attacker cannot predict or steer which operators will be drawn — which is
@@ -148,10 +149,14 @@ what makes adaptive corruption hard. The levers below turn "bounded" into "price
   a security-budget decision — large enough that a random draw statistically yields an
   honest supermajority against an adversary approaching ⅓.
 
-- **Collateral economics.** Each operator identity is bought by **burning real Bitcoin**
-  up front — a Sybil cost paid in advance, not a refundable stake. Pricing it so that
-  acquiring ≥ the finality threshold costs more than flows through a finality window is
-  the economic half of the safety argument, decided at opening.
+- **Collateral economics.** The chain of costs is explicit: **BTC destruction is what
+  creates M0; registering an operator identity requires locking M0 collateral** — M0
+  the operator may equally have acquired from a third party rather than burned for.
+  The finality threshold is counted over **distinct eligible identities**, so the
+  Sybil question is the price of that lock: setting it so that acquiring ≥ the
+  threshold of identities costs more than flows through a finality window is the
+  economic half of the safety argument, decided at opening. Operating a node carries
+  **no guaranteed commercial revenue** — fees are market-driven.
 
 - **External cryptographic audit of the VRF module.** Finality has a single path — the
   ECVRF sortition — so its implementation is the hardest mainnet gate. An internal audit
@@ -167,10 +172,12 @@ what makes adaptive corruption hard. The levers below turn "bounded" into "price
 
 ### No slashing — a deliberate choice, restated
 
-Deterrence is the **up-front burned-BTC collateral** plus **proof-of-service bans**
-(loss of future fees), never confiscation. A slashing bug can destroy honest operators'
-funds — a catastrophic, irreversible failure mode seen on other chains — and it buys
-little the burn cost and bans don't already provide. This will not be reconsidered.
+Deterrence is the **up-front cost of acquiring and locking M0 collateral** plus
+**proof-of-service bans** (loss of eligibility to produce — an opportunity cost, since
+no revenue is guaranteed in the first place), never confiscation. A slashing bug can
+destroy honest operators' funds — a catastrophic, irreversible failure mode seen on
+other chains — and it buys little the up-front cost and bans don't already provide.
+This will not be reconsidered.
 
 ---
 

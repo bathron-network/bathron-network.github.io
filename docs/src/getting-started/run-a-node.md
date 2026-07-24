@@ -63,3 +63,14 @@ bathron-cli -testnet getbtcheadersstatus  # in-consensus Bitcoin header chain
 ```
 
 A healthy node produces a new block every 60 seconds network-wide, finalizes with lag 0, and tracks the Bitcoin header chain inside consensus.
+
+> **During the initial sync, a scary-looking finality status is normal.** While the
+> node is still downloading blocks, `getfinalitystatus` can report
+> `last_finalized_height: 0` and `status: "critical"`. Finality certificates are
+> received *live*: the node catches up on blocks first, then finalizes the current
+> tip as soon as the first live certificate arrives. Nothing is wrong with the
+> network — the node simply hasn't heard a certificate yet.
+>
+> Consider the node healthy only once **all** of the following hold: the tip matches
+> the network height, a new block has been received, a finality certificate has been
+> observed, and `finality_lag` is back to `0`.

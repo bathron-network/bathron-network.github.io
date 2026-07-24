@@ -43,4 +43,4 @@ value out   P2WSH(OP_FALSE)                    (provably unspendable — the BTC
 | `K_BTC_CONFS` | 6 | 24 | Bitcoin confirmations required before a burn is claimable |
 | `K_FINALITY` | 20 | 100 | BATHRON blocks after the claim before the mint is eligible |
 
-Genesis is the same path, not a special case: block 0 is an empty coinbase, block 1 is the first `TX_MINT_M0BTC` (SPV-verified exactly like every later mint), and masternode registrations follow. No burn is ever hardcoded — every minted satoshi traces to a verified Bitcoin destruction.
+Genesis is the same path, not a special case: block 0 is an empty coinbase, block 1 is the first `TX_MINT_M0BTC` (SPV-verified exactly like every later mint), and operator registrations follow. No burn is ever hardcoded — every minted satoshi traces to a verified Bitcoin destruction.

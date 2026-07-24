@@ -85,6 +85,7 @@
 
   <!-- ================= HERO ================= -->
   <div class="hero">
+    <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">BATHRON — a settlement kernel for Bitcoin</h1>
     <img class="emblem" src="/img/emblem.png" alt="BATHRON emblem" width="560" height="360">
     <img class="word" src="/img/wordmark.png" alt="BATHRON" width="540" height="89">
     <p class="tagline">A settlement kernel for Bitcoin.</p>
@@ -93,7 +94,7 @@
     <p class="memorable">Bitcoin sees <b>two transactions</b>.<br>
     BATHRON executes everything in&nbsp;between.</p>
 
-    <div class="space" aria-label="A shared private settlement state, anchored by two Bitcoin transactions">
+    <div class="space" aria-label="A programmable settlement state with confidential internal transfers, anchored by two Bitcoin transactions">
       <svg viewBox="0 0 640 158" xmlns="http://www.w3.org/2000/svg" role="img">
         <!-- the settlement space -->
         <rect x="80" y="8" width="480" height="80" rx="14"
@@ -101,9 +102,9 @@
         <text x="320" y="32" text-anchor="middle" fill="#D9A441" letter-spacing="3"
               font-family="ui-monospace,Menlo,monospace" font-size="12" font-weight="600">BATHRON</text>
         <text x="320" y="54" text-anchor="middle" fill="#E8EBF0"
-              font-family="ui-monospace,Menlo,monospace" font-size="14">shared private settlement state</text>
+              font-family="ui-monospace,Menlo,monospace" font-size="14">programmable settlement state</text>
         <text x="320" y="76" text-anchor="middle" fill="#8A919C"
-              font-family="ui-monospace,Menlo,monospace" font-size="13">Payments · Vaults · Escrow · OTC · DvP</text>
+              font-family="ui-monospace,Menlo,monospace" font-size="13">confidential transfers · Payments · Escrow · DvP</text>
         <!-- the Bitcoin rail underneath -->
         <line x1="42" y1="120" x2="598" y2="120" stroke="#D9A441" stroke-width="2" opacity=".55"/>
         <rect x="16" y="108" width="24" height="24" rx="6" fill="#D9A441"/>
@@ -116,7 +117,8 @@
     </div>
 
     <div class="cta">
-      <a class="btn primary" href="/docs/">Documentation</a>
+      <a class="btn primary" href="/docs/getting-started/run-a-node.html">Join the public testnet</a>
+      <a class="btn" href="/docs/">Documentation</a>
       <a class="btn" href="https://github.com/bathron-network">GitHub</a>
       <a class="btn" href="mailto:contact@bathron.org">Contact</a>
     </div>
@@ -133,25 +135,26 @@
     <div class="idea">
       <h2>Bitcoin provides the facts.</h2>
       <p>Contracts verify Bitcoin transactions through SPV inside consensus.
-      No oracle. No federation. No token.</p>
+      No oracle. No federation. No token sale, premine or promised yield.</p>
     </div>
     <div class="idea">
       <h2>Markets provide the liquidity.</h2>
-      <p>Native BTC is provided by an open market of <b>Settlement Providers</b>
-      competing on fees. The protocol never sells anything.</p>
+      <p>Native BTC is provided by an open market of <b>Clearing and Liquidity
+      Providers</b> competing on fees, on top of consensus run by <b>Settlement
+      Operators</b>. The protocol never sells anything.</p>
     </div>
   </section>
 
 
   <!-- ================= STATUS ================= -->
   <section class="status">
-    <p><b>Experimental.</b><br>Private testnet running.<br>Public testnet next.</p>
+    <p><b>Experimental.</b><br>Public testnet live.<br>No mainnet.</p>
     <p class="build">Looking to build on BATHRON? <a href="mailto:contact@bathron.org">Contact us</a>.</p>
   </section>
 
   <footer>
     <span>BATHRON — <a href="mailto:contact@bathron.org">contact@bathron.org</a></span>
-    <span class="mono" style="text-align:right">Every circulating unit originates from provably burned Bitcoin.<br>No premine · No token · No block rewards</span>
+    <span class="mono" style="text-align:right">M0 creation requires verified Bitcoin destruction; M1 is created by locking M0 1:1;<br>destroyed BTC is not held or redeemable.<br>No token sale · No premine · No promised yield · No block rewards</span>
   </footer>
 
 </div>
