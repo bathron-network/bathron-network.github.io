@@ -5,7 +5,7 @@ Beyond standard transactions, the settlement state is maintained by a small set 
 | Type | ID | Purpose |
 |---|---|---|
 | `NORMAL` | 0 | standard payment — transparent or shielded (Sapling) |
-| `PROREG` | 1 | register a masternode (burned-BTC collateral) |
+| `PROREG` | 1 | register an operator identity using locked M0 collateral (M0 the operator may have acquired from a third party) |
 | `TX_LOCK` | 20 | vault M0, issue a 1:1 M1 receipt |
 | `TX_UNLOCK` | 21 | redeem a receipt, release the vaulted M0 |
 | `TX_TRANSFER_M1` | 22 | transfer a receipt between parties |
