@@ -1,0 +1,16 @@
+BATHRON website and documentation — license status
+==================================================
+
+Copyright (c) 2026 the BATHRON project (contact@bathron.org).
+
+- Prose content of the website and documentation (docs/src, index.html):
+  all rights reserved for now. A permissive content license may be adopted
+  later by an explicit project decision; nothing in this repository should
+  be taken as granting content-reuse rights in the meantime.
+- Code snippets embedded in the documentation (build commands, configuration
+  examples): provided for direct use with the BATHRON software, under the
+  same terms as that software (MIT — see bathron-core/COPYING).
+- Third-party assets retain their own licenses.
+
+This file exists to make the licensing status EXPLICIT rather than absent;
+it deliberately grants nothing beyond snippet use.
