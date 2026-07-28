@@ -31,3 +31,7 @@ not yet formally specified or externally reviewed. There is no mainnet and no pr
 - **[Build](build/sdk.md)** and **[Reference](reference/transaction-types.md)** — developer and
   protocol details.
 - **[Roadmap](roadmap.md)** — what remains before any mainnet claim.
+
+A live view of the public testnet (chain height, finality, operators) is
+available at the [testnet explorer](https://explorer.bathron.org/) — an
+observational service, distinct from the network's bootstrap seed.
