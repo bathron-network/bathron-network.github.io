@@ -74,3 +74,10 @@ A healthy node produces a new block every 60 seconds network-wide, finalizes wit
 > Consider the node healthy only once **all** of the following hold: the tip matches
 > the network height, a new block has been received, a finality certificate has been
 > observed, and `finality_lag` is back to `0`.
+
+## See the network live
+
+After your node has synchronized, you can compare its public chain height and
+finality status with the [testnet explorer](https://explorer.bathron.org/).
+The explorer is an observational service, not a bootstrap peer or an RPC
+endpoint.
