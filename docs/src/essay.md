@@ -1,5 +1,14 @@
 # Understanding BATHRON — a calm essay
 
+> **Archived (July 2026).** This essay was written for an earlier framing of the site, in which
+> M1 was described as a back-office unit and the client-facing product as conditional BTC
+> settlement served by providers. The mechanisms it describes are unchanged and still accurate;
+> the *positioning* has since moved to what [Start here](start-here.md) describes: an open
+> settlement protocol where anyone can create a market without permission. Read it as a long,
+> careful walk through the same machine from an older angle. Where it says a client "never sees
+> M1", read: *end users settle in the assets they already hold; market builders and providers
+> settle in M1.*
+
 > *Version française : [Comprendre BATHRON — essai](essai-fr.md).*
 
 This text is meant to be read slowly — aloud, if you like. It explains the economic and

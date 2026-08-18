@@ -1,5 +1,11 @@
 # Run a node
 
+Running your own node is how you take part in a market without trusting anyone's word for it:
+your node validates every block, every settlement and every Bitcoin fact carried into
+consensus, and it needs no permission from anyone to join. A market builder, a provider or a
+plain user who runs a node verifies every settlement themselves — nobody has to be asked, and
+nobody can be asked to look away.
+
 > The **public testnet is live**. A published seed node and a fixed genesis are available, and a
 > fresh node can join with only the seed address — no RPC access and no operator address are
 > needed. There is no mainnet. This is experimental software with a disposable-genesis testnet.
@@ -8,8 +14,9 @@
 
 | Fact | Value |
 |---|---|
-| Genesis (block 0) | `0d241620b8beb492fd21bd8a92295260a4afa1b82e1bd816d18323cc3c98ea71` |
+| Genesis (block 0) | `691b0a7e8cb0e7ee159ef7a4fa10d9c6ddb2d5282e5bac7447846459ff54c730` |
 | Public seed | `57.131.33.151:27171` |
+| Bitcoin source read by consensus | Bitcoin **testnet4** |
 
 ```bash
 mkdir -p ~/.bathron
@@ -17,7 +24,7 @@ printf 'testnet=1\n[test]\naddnode=57.131.33.151\n' > ~/.bathron/bathron.conf
 bathrond -testnet -daemon
 bathron-cli -testnet getblockhash 0
 # expected:
-# 0d241620b8beb492fd21bd8a92295260a4afa1b82e1bd816d18323cc3c98ea71
+# 691b0a7e8cb0e7ee159ef7a4fa10d9c6ddb2d5282e5bac7447846459ff54c730
 bathron-cli -testnet getblockcount   # syncs to the network tip
 ```
 
@@ -50,7 +57,8 @@ This produces two binaries:
 bathrond -testnet -daemon
 ```
 
-The node stores its data in `~/.bathron/`. Configuration goes in `~/.bathron/bathron.conf` (peers, RPC credentials). Pre-built binaries for tagged releases are published on the
+The node stores its data in `~/.bathron/`. Configuration goes in `~/.bathron/bathron.conf`
+(peers, RPC credentials). Pre-built binaries for tagged releases are published on the
 [bathron-core releases page](https://github.com/bathron-network/bathron-core/releases).
 
 ## Verify
@@ -59,10 +67,11 @@ The node stores its data in `~/.bathron/`. Configuration goes in `~/.bathron/bat
 bathron-cli -testnet getblockcount        # chain height
 bathron-cli -testnet getstate             # global settlement state + invariants
 bathron-cli -testnet getfinalitystatus    # finality lag (healthy = 0)
-bathron-cli -testnet getbtcheadersstatus  # in-consensus Bitcoin header chain
+bathron-cli -testnet getbtcheadersstatus  # in-consensus Bitcoin (testnet4) header chain
 ```
 
-A healthy node produces a new block every 60 seconds network-wide, finalizes with lag 0, and tracks the Bitcoin header chain inside consensus.
+A healthy node produces a new block every 60 seconds network-wide, finalizes with lag 0, and
+tracks the Bitcoin testnet4 header chain inside consensus.
 
 > **During the initial sync, a scary-looking finality status is normal.** While the
 > node is still downloading blocks, `getfinalitystatus` can report
@@ -81,3 +90,6 @@ After your node has synchronized, you can compare its public chain height and
 finality status with the [testnet explorer](https://explorer.bathron.org/).
 The explorer is an observational service, not a bootstrap peer or an RPC
 endpoint.
+
+**See also:** [Run a wallet](run-a-wallet.md) · [Production and finality](../consensus/production-and-finality.md) ·
+[Status & claims](../consensus/status-and-claims.md)
