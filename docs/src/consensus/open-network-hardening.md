@@ -25,26 +25,44 @@ finalized views. That is what the items below bound.
 
 ## The attack surface, stated plainly
 
+Four quantities must be kept apart, because the arithmetic below depends on which one is meant:
+
+| Quantity | Meaning |
+|---|---|
+| **N** — eligible set | distinct Operator identities registered and eligible at a given block |
+| **n** — committee | the identities actually drawn for that block's finality: `n = N` while `N ≤ E`; a VRF sample of about `E` when `N > E` (`E` = committee cap, currently 128) |
+| **q** — quorum | signatures needed for a certificate: `q = ⌈2/3 · n⌉` |
+| **2q − n** — intersection | the minimum number of signers two *different* certificates for the same height must share |
+
 With an open Operator set and a Byzantine fraction *f*:
 
-- **Liveness.** If roughly ⌈N/3⌉ Operators go silent, finality *stalls* — it stops advancing
-  until enough honest Operators sign again. The chain keeps producing blocks (production has
-  its own fallback); it is *irreversibility* that waits. Nothing is lost, nothing is forged —
-  settlement simply isn't final yet.
-- **Safety.** With a threshold `q = ⌈2/3·n⌉`, two conflicting finality certificates must share
-  at least `2q − n` signers — **about a third of the committee, not two thirds**. So an adversary
-  holding roughly ⌈N/3⌉ distinct identities *and* a network split can present **divergent
-  finalized views** to different parts of the network; at the full threshold it controls
-  ordering outright. (Example: `n = 4`, `q = 3` — certificates `{A,B,C}` and `{A,B,D}` need only
-  two equivocating identities.) The money cannot be forged in either case — such an adversary
-  can censor settlement, stall finality and equivocate, never mint. Each honest node's
-  chain-level guard rejects any block that would rewrite a height *it* has finalized, from any
-  fork, regardless of chainwork; reconciling divergent views across nodes is an operational
-  event, not an automatic one.
+- **Liveness.** If more than `n − q` committee members — roughly a third — go silent, finality
+  *stalls*: it stops advancing until enough honest Operators sign again. The chain keeps producing
+  blocks (production has its own fallback); it is *irreversibility* that waits. Nothing is lost,
+  nothing is forged — settlement simply isn't final yet.
+- **Safety.** Two conflicting finality certificates must share at least `2q − n` signers — **about
+  a third of the committee, not two thirds** — and those shared signers are, by construction,
+  equivocating. So an adversary holding roughly a third of the committee's identities *and* a
+  network split can present **divergent finalized views** to different parts of the network; at
+  the full quorum it controls ordering (and censorship) outright. The money cannot be forged in
+  either case — such an adversary can censor settlement, stall finality and equivocate, never
+  mint. Each honest node's chain-level guard rejects any block that would rewrite a height *it*
+  has finalized, from any fork, regardless of chainwork; reconciling divergent views across nodes
+  is an operational event, not an automatic one.
 
-Put together: **liveness and safety both degrade at about one third of the identities; full
+Worked examples (`q = ⌈2n/3⌉`, minimum equivocators `= 2q − n`):
+
+| committee `n` | quorum `q` | stall needs (`n − q + 1`) | two conflicting certificates need |
+|---|---|---|---|
+| 4 | 3 | 2 silent | **2** equivocators — `{A,B,C}` and `{A,B,D}` |
+| 8 | 6 | 3 silent | **4** equivocators |
+| 128 (cap) | 86 | 43 silent | 44 equivocators |
+
+Put together: **liveness and safety both degrade at about one third of the *committee*; full
 control of ordering needs two thirds.** The economic sizing below is against the one-third
-figure, not the threshold.
+figure, never against the quorum. When `N > E`, the relevant count is the committee actually
+drawn, not the whole eligible set: an adversary's share of the committee is a random variable
+around its share of `N`, which is exactly what committee sizing (below) is about.
 
 The committee draw is **non-grindable**: a per-block ECVRF over each Operator's *secret* key, so
 an attacker cannot predict or steer which Operators will be drawn — which is what makes adaptive
@@ -55,20 +73,26 @@ corruption hard. The levers below turn "bounded" into "priced out."
 - **Bounding value-at-risk until detection and halt.** Because the money cannot be forged, what a
   captured committee can damage is *ordering* — and only for as long as the capture lasts and
   applications keep accepting its finality. The bound to aim for is therefore the **cumulative
-  value exposed between the start of a capture and the moment settlement halts** (divergent
-  views become detectable, wallets and applications stop accepting), not merely the throughput
-  of one ~1-minute window: a persistent coalition can attack successive heights, and "more
+  value exposed between the start of a capture and the end of operational recovery** —
+  detection of divergent views, wallets and applications halting acceptance, and the
+  out-of-band reconciliation that follows — not merely the throughput of one ~1-minute window: a persistent coalition can attack successive heights, and "more
   confirmations" does not help if the same compromised identities finalize every block. The
   levers that do work are a cap on value settled per window (so the exposure per unit of
   detection time is bounded), a **larger committee** for high-value settlement (a statistical
-  gain, chosen by the Operators or the application), and fast out-of-band detection of divergent
-  finality. This turns a catastrophic tail into a capped, priced one — provided the halt is
+  gain — it lowers the probability that a random draw hands the adversary a third, under the
+  explicit assumptions that the adversary's identities are a minority of the eligible set and
+  that the draw is unbiased; it does nothing against a majority), and fast out-of-band detection
+  of divergent finality. This turns a catastrophic tail into a capped, priced one — provided the halt is
   real, which is an application-layer obligation as much as a consensus one.
 
 - **Committee sizing.** The threshold auto-scales as `⌈2/3 · min(E, N)⌉`, so no constant needs
   retuning as Operators join. Setting the committee cap *E* for an open network is a
   security-budget decision — large enough that a random draw statistically yields an honest
-  supermajority against an adversary approaching ⅓.
+  supermajority against an adversary approaching ⅓ *of the eligible set*. Under the explicit
+  assumptions above (minority adversary, unbiased draw), the probability that a committee of
+  size `E` contains ≥ ⌈E/3⌉ adversarial identities falls exponentially in `E`; a larger cap buys
+  resistance, it does not buy certainty, and it changes nothing about the `2q − n` arithmetic
+  inside a given committee.
 
 - **Collateral economics.** The chain of costs is explicit: **BTC destruction is what creates
   M0; registering an Operator identity requires locking M0 collateral** — M0 the Operator may
