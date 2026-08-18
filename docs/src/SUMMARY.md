@@ -62,6 +62,7 @@
 - [Accounting invariants](reference/invariants.md)
 - [Patterns for providers](reference/patterns-for-providers.md)
 - [Glossary](reference/glossary.md)
+- [Documentation policy](reference/documentation-policy.md)
 
 ---
 
