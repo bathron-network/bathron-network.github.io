@@ -25,44 +25,67 @@ finalized views. That is what the items below bound.
 
 ## The attack surface, stated plainly
 
-Four quantities must be kept apart, because the arithmetic below depends on which one is meant:
+Four quantities must be kept apart, because the arithmetic below depends on which one is meant.
+The definitions follow the implementation (`HuActiveFinalityThreshold`, `IsVrfSelected` in
+`src/state/quorum.cpp`), not a textbook:
 
 | Quantity | Meaning |
 |---|---|
-| **N** — eligible set | distinct Operator identities registered and eligible at a given block |
-| **n** — committee | the identities actually drawn for that block's finality: `n = N` while `N ≤ E`; a VRF sample of about `E` when `N > E` (`E` = committee cap, currently 128) |
-| **q** — quorum | signatures needed for a certificate: `q = ⌈2/3 · n⌉` |
-| **2q − n** — intersection | the minimum number of signers two *different* certificates for the same height must share |
+| **N** — eligible set | distinct Operator identities eligible at a given block |
+| **E** — committee cap | a fixed parameter (128 on mainnet and testnet) |
+| **q** — quorum | signatures needed for a finality certificate: **`q = ⌈2/3 · min(E, N)⌉`** — computed from the *eligible* count, never from how many were actually drawn |
+| **m** — drawn committee | who may sign that block: while `N ≤ E`, **everyone** (`m = N`, deterministic); when `N > E`, each Operator is drawn with probability `E/N`, so `m` is a random variable with mean `E` |
+| **2q − m** — intersection | the minimum number of signers two *different* certificates for the same height must share |
 
-With an open Operator set and a Byzantine fraction *f*:
+Below the Sybil floor (`nHuQuorumSize` = 4 distinct Operators, mainnet and testnet alike) the
+threshold is *unreachable*: a network with fewer eligible Operators keeps producing blocks and
+never finalizes.
 
-- **Liveness.** If more than `n − q` committee members — roughly a third — go silent, finality
-  *stalls*: it stops advancing until enough honest Operators sign again. The chain keeps producing
-  blocks (production has its own fallback); it is *irreversibility* that waits. Nothing is lost,
-  nothing is forged — settlement simply isn't final yet.
-- **Safety.** Two conflicting finality certificates must share at least `2q − n` signers — **about
-  a third of the committee, not two thirds** — and those shared signers are, by construction,
-  equivocating. So an adversary holding roughly a third of the committee's identities *and* a
-  network split can present **divergent finalized views** to different parts of the network; at
-  the full quorum it controls ordering (and censorship) outright. The money cannot be forged in
-  either case — such an adversary can censor settlement, stall finality and equivocate, never
-  mint. Each honest node's chain-level guard rejects any block that would rewrite a height *it*
-  has finalized, from any fork, regardless of chainwork; reconciling divergent views across nodes
-  is an operational event, not an automatic one.
+### Regime 1 — everyone signs (`N ≤ E`; every deployment up to 128 Operators)
 
-Worked examples (`q = ⌈2n/3⌉`, minimum equivocators `= 2q − n`):
+Here `m = N` exactly and `q = ⌈2N/3⌉`, so the arithmetic is exact:
 
-| committee `n` | quorum `q` | stall needs (`n − q + 1`) | two conflicting certificates need |
+- **Liveness.** If more than `N − q` Operators — roughly a third — go silent, finality *stalls*:
+  it stops advancing until enough honest Operators sign again. The chain keeps producing blocks
+  (production has its own fallback); it is *irreversibility* that waits. Nothing is lost, nothing
+  is forged — settlement simply isn't final yet.
+- **Safety.** Two conflicting certificates must share at least `2q − N` signers — **about a third,
+  not two thirds** — and those shared signers are, by construction, equivocating. So an adversary
+  holding roughly a third of the identities *and* a network split can present **divergent
+  finalized views** to different parts of the network; at the full quorum it controls ordering
+  (and censorship) outright. The money cannot be forged in either case — such an adversary can
+  censor settlement, stall finality and equivocate, never mint. Each honest node's chain-level
+  guard rejects any block that would rewrite a height *it* has finalized, from any fork,
+  regardless of chainwork; reconciling divergent views across nodes is an operational event, not
+  an automatic one.
+
+Worked examples (`q = ⌈2N/3⌉`, minimum equivocators `= 2q − N`):
+
+| eligible `N` (= drawn) | quorum `q` | stall needs (`N − q + 1` silent) | two conflicting certificates need |
 |---|---|---|---|
-| 4 | 3 | 2 silent | **2** equivocators — `{A,B,C}` and `{A,B,D}` |
-| 8 | 6 | 3 silent | **4** equivocators |
-| 128 (cap) | 86 | 43 silent | 44 equivocators |
+| 4 (the floor) | 3 | 2 | **2** equivocators — `{A,B,C}` and `{A,B,D}` |
+| 8 | 6 | 3 | **4** equivocators |
+| 128 (= E, still everyone) | 86 | 43 | 44 equivocators |
 
-Put together: **liveness and safety both degrade at about one third of the *committee*; full
+Put together: **liveness and safety both degrade at about one third of the identities; full
 control of ordering needs two thirds.** The economic sizing below is against the one-third
-figure, never against the quorum. When `N > E`, the relevant count is the committee actually
-drawn, not the whole eligible set: an adversary's share of the committee is a random variable
-around its share of `N`, which is exactly what committee sizing (below) is about.
+figure, never against the quorum.
+
+### Regime 2 — sampling (`N > E`; not reached by any network to date)
+
+The quorum stays fixed at `q = ⌈2E/3⌉` (86 at `E = 128`) while the drawn committee `m` varies
+around `E` from block to block. Consequences that the exact arithmetic above no longer captures:
+
+- the intersection of two certificates is `2q − m`, so the number of equivocators needed
+  **shrinks when the draw is large** (`m = 128 → 44`; `m = 140 → 32`) and grows when it is small;
+- liveness needs `q` live signers among the `m` drawn — a small draw makes a stall more likely,
+  and a draw below `q` cannot finalize that block at all;
+- an adversary's share of the drawn committee is a random variable around its share of `N`,
+  which is what committee sizing (below) is about.
+
+How this regime should be bounded — whether the quorum should track the realised draw, and what
+the fallback is when a draw is too small — is an **open design point**, not a documented property.
+The examples above are stated only for regime 1. → [Status & claims](status-and-claims.md)
 
 The committee draw is **non-grindable**: a per-block ECVRF over each Operator's *secret* key, so
 an attacker cannot predict or steer which Operators will be drawn — which is what makes adaptive
@@ -91,8 +114,8 @@ corruption hard. The levers below turn "bounded" into "priced out."
   supermajority against an adversary approaching ⅓ *of the eligible set*. Under the explicit
   assumptions above (minority adversary, unbiased draw), the probability that a committee of
   size `E` contains ≥ ⌈E/3⌉ adversarial identities falls exponentially in `E`; a larger cap buys
-  resistance, it does not buy certainty, and it changes nothing about the `2q − n` arithmetic
-  inside a given committee.
+  resistance, it does not buy certainty, and in the sampling regime it interacts with the
+  `2q − m` intersection described above (open design point).
 
 - **Collateral economics.** The chain of costs is explicit: **BTC destruction is what creates
   M0; registering an Operator identity requires locking M0 collateral** — M0 the Operator may
