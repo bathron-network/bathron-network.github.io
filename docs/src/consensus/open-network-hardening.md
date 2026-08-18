@@ -35,7 +35,7 @@ The definitions follow the implementation (`HuActiveFinalityThreshold`, `IsVrfSe
 | **E** — committee cap | a fixed parameter (128 on mainnet and testnet) |
 | **q** — quorum | signatures needed for a finality certificate: **`q = ⌈2/3 · min(E, N)⌉`** — computed from the *eligible* count, never from how many were actually drawn |
 | **m** — drawn committee | who may sign that block: while `N ≤ E`, **everyone** (`m = N`, deterministic); when `N > E`, each Operator is drawn with probability `E/N`, so `m` is a random variable with mean `E` |
-| **2q − m** — intersection | the minimum number of signers two *different* certificates for the same height must share |
+| **max(0, 2q − m)** — intersection | the minimum number of signers two *different* certificates for the same height must share (pigeonhole over the `m` who may sign) |
 
 Below the Sybil floor (`nHuQuorumSize` = 4 distinct Operators, mainnet and testnet alike) the
 threshold is *unreachable*: a network with fewer eligible Operators keeps producing blocks and
@@ -76,10 +76,12 @@ figure, never against the quorum.
 The quorum stays fixed at `q = ⌈2E/3⌉` (86 at `E = 128`) while the drawn committee `m` varies
 around `E` from block to block. Consequences that the exact arithmetic above no longer captures:
 
-- the intersection of two certificates is `2q − m`, so the number of equivocators needed
-  **shrinks when the draw is large** (`m = 128 → 44`; `m = 140 → 32`) and grows when it is small;
-- liveness needs `q` live signers among the `m` drawn — a small draw makes a stall more likely,
-  and a draw below `q` cannot finalize that block at all;
+- the intersection of two certificates is `max(0, 2q − m)`, so the number of equivocators needed
+  **shrinks when the draw is large** (`m = 128 → 44`; `m = 140 → 32`) — an **oversized** draw
+  with `m ≥ 2q` (172 at `E = 128`; astronomically unlikely but not excluded by the rules) would
+  in principle allow two disjoint certificates with no equivocator at all;
+- liveness needs `q` live signers among the `m` drawn — an **undersized** draw makes a stall more
+  likely, and a draw with `m < q` cannot finalize that block at all (no re-draw is defined);
 - an adversary's share of the drawn committee is a random variable around its share of `N`,
   which is what committee sizing (below) is about.
 

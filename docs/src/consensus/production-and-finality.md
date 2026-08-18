@@ -40,7 +40,7 @@ function (ECVRF)**. Each selected Operator publishes a VRF proof with its signat
 verifies the draw. The committee input is public, but the output depends on each Operator's
 secret key — so nobody, including the block producer, can predict or grind the committee.
 
-The threshold is `⌈2/3 · min(E, N)⌉` where `N` is the Operator count and `E` a fixed committee
+The threshold is `⌈2/3 · min(E, N)⌉` where `N` is the eligible Operator count at the block and `E` a fixed committee
 cap — the same rule scales from a handful of Operators to hundreds without retuning. One round
 of signatures, **~1 minute** to irreversibility. Once final, a block cannot be reorganised —
 finality overrides the longest chain, whatever the chainwork.
