@@ -38,7 +38,7 @@ exists and somebody holds it.
 
 BATHRON's choice is radical and has a cost: **the bitcoin is destroyed, verifiably, and never
 held.** There is no keeper — and therefore no reserve and no redemption. What brings native BTC
-back is not a vault but a market: providers holding inventory on both sides, paired atomically.
+back is not a vault but a market: providers holding inventory on both sides, paired with linked hashlocked legs.
 That is the trade-off you sign. It is stated plainly on
 [Bitcoin is the final asset](../bitcoin/final-asset.md).
 
