@@ -27,7 +27,7 @@ floor or any external price. There is no token sale, premine, treasury, block re
 No, and no. Consensus enforces the internal 1:1 between M0 and M1. It does not enforce, and the
 protocol never promises, an external price. The destroyed bitcoin is gone — there is no reserve and
 no redemption desk. What makes native BTC available again is the market: providers holding
-inventory on both sides, paired atomically. → [Bitcoin is the final asset](bitcoin/final-asset.md)
+inventory on both sides, paired with linked hashlocked legs. → [Bitcoin is the final asset](bitcoin/final-asset.md)
 
 ## Why destroy bitcoin at all?
 
