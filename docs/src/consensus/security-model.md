@@ -94,9 +94,9 @@ demonstrated Sybil price.
 
 The finality threshold counts **distinct eligible identities**, not an aggregate amount of
 collateral. An attacker needs enough M0 to register enough separate identities: about a third
-of the committee to stall finality or — combined with a network split — to sign conflicting
-certificates (two `⌈2/3·n⌉` quorums always share at least `2q − n` signers), and the full
-threshold to control ordering outright. See [Open-network hardening](open-network-hardening.md).
+of the eligible set to stall finality or — combined with a network split — to sign conflicting
+certificates (with `q = ⌈2/3·min(E,N)⌉` and everyone signing while `N ≤ E`, two certificates
+always share at least `2q − N` signers), and the full quorum to control ordering outright. See [Open-network hardening](open-network-hardening.md).
 
 ## Design choices
 

@@ -90,6 +90,13 @@ Demonstrated on testnet:
   components have been tested, but general atomicity is not claimed before the full state
   machine is specified and reviewed.
 
+## Open design points (not defects, not features)
+
+- **Sampling regime of finality (`N > E`).** The quorum is `⌈2/3·min(E,N)⌉` and stays fixed
+  when more than `E` Operators are eligible, while the VRF-drawn committee size varies around
+  `E`. Whether the quorum should track the realised draw, and the fallback when a draw is too
+  small, are undecided; no network has reached this regime. → [Open-network hardening](open-network-hardening.md)
+
 ## Claims we do not make
 
 You will not read on this site that:

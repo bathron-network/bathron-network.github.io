@@ -6,7 +6,7 @@
 | Producer selection | deterministic pseudo-random over operator nodes, per block, with fallback slots |
 | Finality committee | per-operator ECVRF sortition, redrawn every block |
 | Finality threshold | `⌈2/3 · min(E, N)⌉` — `N` = operators at the block, `E` = committee cap (128) |
-| Quorum floor | 4 distinct operators minimum to finalize |
+| Quorum floor | 4 distinct operators minimum to finalize (`nHuQuorumSize`, mainnet and testnet); below it the threshold is unreachable and blocks are never final |
 | Finality latency | ~1 minute (one signature round) |
 | Counting unit | the **operator key** — N masternodes under one operator = 1 vote |
 | Signatures | ECDSA / secp256k1 (finality and blocks); RedJubjub inside Sapling |
