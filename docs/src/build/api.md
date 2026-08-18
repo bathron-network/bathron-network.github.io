@@ -8,7 +8,7 @@ The node speaks Bitcoin-style JSON-RPC. Familiar calls (`getblockcount`, `getraw
 |---|---|
 | `getstate` | global settlement state + live check of the monetary invariants |
 | `getfinalitystatus` | finality height, lag, average delay |
-| `getactivemnstatus` | this node's masternode status |
+| `getactivemnstatus` | this node's Operator status (the RPC keeps the lineage name) |
 
 ## Bitcoin integration
 
@@ -35,3 +35,5 @@ The node speaks Bitcoin-style JSON-RPC. Familiar calls (`getblockcount`, `getraw
 | `shieldsendmany` | shielded payment |
 
 Full per-command help is available from the node itself: `bathron-cli help <command>`.
+
+**See also:** [Run a wallet](../operate/run-a-wallet.md) · [Transaction types](../reference/transaction-types.md)

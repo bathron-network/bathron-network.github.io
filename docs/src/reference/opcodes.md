@@ -19,4 +19,4 @@ The script engine is Bitcoin Script plus the programmability Bitcoin has debated
 
 ## The composition rule
 
-Every application in [Learn → Applications](../learn/applications.md) is a composition of this table — nothing else. If a use case can't be expressed here, the answer is a better composition, not a new opcode: the surface is frozen before mainnet.
+Every application in [Settlement patterns](../markets/patterns.md) is a composition of this table — nothing else. If a use case can't be expressed here, the answer is a better composition, not a new opcode: the surface is frozen before mainnet.
