@@ -1,6 +1,6 @@
 # SPV verification
 
-How BATHRON sees Bitcoin without an oracle — the machinery behind [Bitcoin integration](../learn/bitcoin-integration.md).
+How BATHRON sees Bitcoin without an oracle — the machinery behind [Bitcoin facts inside consensus](../bitcoin/facts-in-consensus.md).
 
 ## The header database
 

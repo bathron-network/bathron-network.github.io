@@ -1,49 +1,71 @@
 # Summary
 
-[What is BATHRON?](introduction.md)
+[Start here — BATHRON in five minutes](start-here.md)
 
-# Getting Started
+# I. The problem
 
-- [Run a node](getting-started/run-a-node.md)
-- [Run a wallet](getting-started/run-a-wallet.md)
-- [Run provider prototypes](getting-started/run-a-settlement-provider.md)
-- [Build your first application](getting-started/first-application.md)
+- [Markets need permission today](problem/markets-need-permission.md)
+- [What Bitcoin does, and where it stops](problem/what-bitcoin-does.md)
+- [Why not an exchange, a bridge, or a stablecoin](problem/why-not-alternatives.md)
 
-# Learn
+# II. What BATHRON provides
 
-- [Architecture](learn/architecture.md)
-- [Security model](learn/security-model.md)
-- [Consensus](learn/consensus.md)
-- [Bitcoin integration](learn/bitcoin-integration.md)
-- [Clearing and Liquidity Providers](learn/settlement-providers.md)
-- [Confidential settlement state](learn/privacy.md)
-- [Application hypotheses](learn/applications.md)
-  - [Conditional BTC settlement](learn/applications/payments.md)
-  - [Conditional escrow](learn/applications/escrow.md)
-  - [Delivery versus payment](learn/applications/dvp.md)
-  - [Provider inventory controls](learn/applications/vaults.md)
-  - [OTC settlement](learn/applications/otc.md)
-  - [Miner hedging](learn/applications/miner-hedging.md)
-  - [Fixed-term value position](learn/applications/stable-value.md)
+- [The settlement unit: M1](provides/settlement-unit-m1.md)
+- [Settlement guarantees: what consensus enforces](provides/settlement-guarantees.md)
+- [The infrastructure: what you can build on](provides/infrastructure.md)
+- [What BATHRON deliberately does not do](provides/what-it-does-not-do.md)
 
-# Build
+# III. Markets on BATHRON
 
+- [How a market appears](markets/how-a-market-appears.md)
+- [Quotes live off-chain, settlement on-chain](markets/quotes-off-chain.md)
+- [Roles: Operators, Settlement Providers, users](markets/roles.md)
+- [Native BTC ⇄ M1: the atomic pair](markets/native-btc-pair.md)
+- [Pairing any asset against M1](markets/pairing-any-asset.md)
+- [Settlement patterns](markets/patterns.md)
+  - [Delivery-versus-payment and OTC](markets/patterns/dvp-otc.md)
+  - [Conditional escrow](markets/patterns/escrow.md)
+  - [Hedging on Bitcoin facts](markets/patterns/hedging.md)
+  - [Fixed-term value positions](markets/patterns/fixed-term-value.md)
+- [Confidential settlement](markets/confidential-settlement.md)
+
+# IV. Bitcoin at the center
+
+- [Bitcoin is the final asset](bitcoin/final-asset.md)
+- [From destroyed BTC to M1](bitcoin/from-btc-to-m1.md)
+- [Bitcoin facts inside consensus](bitcoin/facts-in-consensus.md)
+
+# V. The consensus — and why it is minimal
+
+- [Why the consensus is frozen](consensus/why-frozen.md)
+- [Production and finality](consensus/production-and-finality.md)
+- [Security model](consensus/security-model.md)
+- [Open-network hardening](consensus/open-network-hardening.md)
+- [Status & claims](consensus/status-and-claims.md)
+
+# VI. Build & operate
+
+- [Run a node](operate/run-a-node.md)
+- [Run a wallet](operate/run-a-wallet.md)
+- [Create your first market](operate/create-your-first-market.md)
+- [Build your first application](operate/first-application.md)
 - [SDK](build/sdk.md)
-- [Wallet](build/wallet.md)
 - [RPC API](build/api.md)
 - [Examples](build/examples.md)
 
-# Reference
+# VII. Reference
 
 - [Transaction types](reference/transaction-types.md)
 - [Script & opcodes](reference/opcodes.md)
 - [SPV verification](reference/spv.md)
 - [Consensus parameters](reference/consensus-parameters.md)
 - [Accounting invariants](reference/invariants.md)
+- [Patterns for providers](reference/patterns-for-providers.md)
+- [Glossary](reference/glossary.md)
+- [Documentation policy](reference/documentation-policy.md)
 
 ---
 
 [FAQ](faq.md)
-[Roadmap](roadmap.md)
-[Understanding BATHRON — a calm essay](essay.md)
-[Comprendre BATHRON — un essai calme (français)](essai-fr.md)
+[Long read: the essay (archived, 2026-07)](essay.md)
+[Lecture longue : l'essai (archivé, 2026-07)](essai-fr.md)

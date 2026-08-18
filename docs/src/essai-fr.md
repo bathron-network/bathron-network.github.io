@@ -1,4 +1,13 @@
-# Comprendre BATHRON — un essai calme (français)
+# Comprendre BATHRON — un essai calme
+
+> **Archivé (juillet 2026).** Cet essai a été écrit pour un cadrage antérieur du site, où M1 était
+> décrit comme une unité de back-office et le produit comme un règlement BTC conditionnel servi
+> par des prestataires. Les mécanismes décrits sont inchangés et restent exacts ; le
+> *positionnement* a évolué vers ce que décrit [Start here](start-here.md) : un protocole de
+> règlement ouvert où n'importe qui peut créer un marché sans permission. À lire comme une
+> longue promenade dans la même machine, sous un angle plus ancien. Là où il dit que le client
+> « ne voit jamais M1 », lire : *les utilisateurs finaux règlent dans les actifs qu'ils
+> détiennent déjà ; les bâtisseurs de marchés et les prestataires règlent en M1.*
 
 > *Version française de l'essai — English version: [Understanding BATHRON — a calm
 > essay](essay.md).*

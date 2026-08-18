@@ -5,8 +5,8 @@
 | Block interval | 60 seconds |
 | Producer selection | deterministic pseudo-random over operator nodes, per block, with fallback slots |
 | Finality committee | per-operator ECVRF sortition, redrawn every block |
-| Finality threshold | `⌈2/3 · min(E, N)⌉` — `N` = operators at the block, `E` = committee cap (128) |
-| Quorum floor | 4 distinct operators minimum to finalize |
+| Finality threshold | `⌈2/3 · min(E, N)⌉` — `N` = operators at the block, `E` = expected committee size (128; a target, not a hard cap) |
+| Quorum floor | 4 distinct operators minimum to finalize (`nHuQuorumSize`, mainnet and testnet); below it the threshold is unreachable and blocks are never final |
 | Finality latency | ~1 minute (one signature round) |
 | Counting unit | the **operator key** — N masternodes under one operator = 1 vote |
 | Signatures | ECDSA / secp256k1 (finality and blocks); RedJubjub inside Sapling |
@@ -15,7 +15,7 @@
 | Treasury | none |
 | Unit of account | the satoshi |
 | Supply source | verified Bitcoin burns only |
-| Slashing | none — deliberate ([why](../learn/consensus.md#design-choices)) |
+| Slashing | none — deliberate ([why](../consensus/security-model.md#design-choices)) |
 
 ## Reading the table
 
