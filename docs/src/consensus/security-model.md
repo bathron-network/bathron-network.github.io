@@ -45,7 +45,7 @@ The finality threshold is:
 ceil(2/3 × min(E, N))
 ```
 
-where `N` is the number of eligible, distinct Operators and `E` is the committee cap. One
+where `N` is the number of eligible, distinct Operators and `E` is the expected committee size (a target, not a hard cap: in the sampling regime the drawn size varies around it). One
 Operator identity has one vote.
 
 Safety and liveness rely on the applicable committee remaining below the Byzantine threshold.

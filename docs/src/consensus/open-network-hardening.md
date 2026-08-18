@@ -32,7 +32,7 @@ The definitions follow the implementation (`HuActiveFinalityThreshold`, `IsVrfSe
 | Quantity | Meaning |
 |---|---|
 | **N** — eligible set | distinct Operator identities eligible at a given block |
-| **E** — committee cap | a fixed parameter (128 on mainnet and testnet) |
+| **E** — expected committee size | a fixed parameter (128 on mainnet and testnet). It is a *target*, not a hard cap: when `N > E` the realised size varies around it and can exceed it |
 | **q** — quorum | signatures needed for a finality certificate: **`q = ⌈2/3 · min(E, N)⌉`** — computed from the *eligible* count, never from how many were actually drawn |
 | **m** — drawn committee | who may sign that block: while `N ≤ E`, **everyone** (`m = N`, deterministic); when `N > E`, each Operator is drawn with probability `E/N`, so `m` is a random variable with mean `E` |
 | **max(0, 2q − m)** — intersection | the minimum number of signers two *different* certificates for the same height must share (pigeonhole over the `m` who may sign) |
@@ -111,7 +111,7 @@ corruption hard. The levers below turn "bounded" into "priced out."
   real, which is an application-layer obligation as much as a consensus one.
 
 - **Committee sizing.** The threshold auto-scales as `⌈2/3 · min(E, N)⌉`, so no constant needs
-  retuning as Operators join. Setting the committee cap *E* for an open network is a
+  retuning as Operators join. Setting the expected committee size *E* for an open network is a
   security-budget decision — large enough that a random draw statistically yields an honest
   supermajority against an adversary approaching ⅓ *of the eligible set*. Under the explicit
   assumptions above (minority adversary, unbiased draw), the probability that a committee of

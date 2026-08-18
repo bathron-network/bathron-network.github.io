@@ -22,7 +22,6 @@ GitHub Actions builds `docs/` and deploys it to GitHub Pages on every push to `m
 
 ## Related repositories
 
-- Node, build files and short README: <https://github.com/bathron-network/bathron-core>
 - Public node source and implementation reference: [`bathron-network/bathron-core`](https://github.com/bathron-network/bathron-core) — public releases are produced through a controlled export process
 
 One notion has one canonical page here; other pages link to it rather than duplicating text.

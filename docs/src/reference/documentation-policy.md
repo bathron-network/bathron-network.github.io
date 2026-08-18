@@ -7,7 +7,7 @@ One canonical source, one status page, and a rule for what wins when texts disag
 | What | Canonical location |
 |---|---|
 | **Public documentation** — positioning, economics, markets, Bitcoin integration, consensus, security model, status | this site: `bathron-network/bathron-network.github.io`, directory `docs/src/` (rendered at <https://bathron.org/docs/>) |
-| **Implementation** — what the software actually does | the code and tests of the repository concerned: [`bathron-core`](https://github.com/bathron-network/bathron-core) (node, consensus, RPC, prototypes under `contrib/`), [`bathron-explorer`](https://github.com/bathron-network/bathron-explorer) |
+| **Implementation** — what the software actually does | the code and tests of the repository concerned: [`bathron-core`](https://github.com/bathron-network/bathron-core) (node, consensus, RPC, prototypes under `contrib/`), [`bathron-explorer`](https://github.com/bathron-network/bathron-explorer). `bathron-core` is populated by a **controlled export**: each publication is a flat commit carrying a `.PROVENANCE.txt` (source commit id, exporter version, tree hash) that lets an authorised reviewer reproduce the tree byte for byte. The development repository behind the export is not part of the public record and is not named in public documentation; `bathron-core` is the public reference of the implementation. |
 | **Public status** — what runs, what is not proven, what is never claimed | [Status & claims](../consensus/status-and-claims.md) |
 | **Editorial rules** — vocabulary, the two-halves permissionless sentence, forbidden claims | `docs/STYLE.md` in the site repository (not rendered) |
 
