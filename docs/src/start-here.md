@@ -37,13 +37,14 @@ Everything else is yours.** → [What BATHRON does not do](provides/what-it-does
 ```text
 1. someone brings inventory        (BTC, PIVX, DOGE, LTC… — and M1)
 2. publishes signed quotes         (off-chain, on any relay — nobody approves them)
-3. a counterparty settles          (on BATHRON: the only thing consensus does)
+3. a counterparty settles          (M1 leg on BATHRON; an external leg on its own chain, linked)
 4. anyone else joins the same pair (more inventory, tighter spreads — no permission asked)
 ```
 
-Native BTC ⇄ M1 is paired atomically with hashlocks on both chains. Any other chain that supports
-hashlocks and timelocks can be paired the same way — a capability of the primitives, not a
-shipped product. → [How a market appears](markets/how-a-market-appears.md)
+Native BTC ⇄ M1 is paired with hashlocked legs on both chains sharing one preimage — the
+components have been demonstrated on testnet; a generally atomic client flow is not yet claimed.
+Any other chain that supports hashlocks and timelocks can be paired the same way — a capability
+of the primitives, not a shipped product. → [How a market appears](markets/how-a-market-appears.md)
 
 ## Who is who
 

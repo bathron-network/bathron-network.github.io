@@ -17,8 +17,9 @@ That is a capability of the primitives; no pair other than BTC/M1 has been teste
 
 No. M1 is the settlement unit — the working capital of whoever runs a market. End users settle in
 the assets they already hold; market builders and providers settle in M1. Because anyone can create
-M1 at parity by destroying bitcoin, its price cannot durably exceed that parity: there is nothing to
-speculate up. There is no token sale, premine, treasury, block reward or promised yield.
+M1 by destroying bitcoin, destruction is a permanent reference supply route that tends to limit
+any premium when it is accessible — there is nothing to speculate up — and nothing guarantees a
+floor or any external price. There is no token sale, premine, treasury, block reward or promised yield.
 → [The settlement unit](provides/settlement-unit-m1.md)
 
 ## Is M1 pegged to Bitcoin? Is it "backed by Bitcoin"?
