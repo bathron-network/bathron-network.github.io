@@ -31,13 +31,20 @@ With an open Operator set and a Byzantine fraction *f*:
   until enough honest Operators sign again. The chain keeps producing blocks (production has
   its own fallback); it is *irreversibility* that waits. Nothing is lost, nothing is forged —
   settlement simply isn't final yet.
-- **Safety.** Only an adversary controlling **≥ the finality threshold across distinct eligible
-  Operator identities** could sign conflicting histories within a finality window. The money
-  cannot be forged either way — but such an adversary *can* censor settlement, stall finality,
-  and present **divergent finalized views** to different parts of the network. Each honest
-  node's chain-level guard rejects any block that would rewrite a height *it* has finalized,
-  from any fork, regardless of chainwork; reconciling divergent views across nodes is an
-  operational event, not an automatic one.
+- **Safety.** With a threshold `q = ⌈2/3·n⌉`, two conflicting finality certificates must share
+  at least `2q − n` signers — **about a third of the committee, not two thirds**. So an adversary
+  holding roughly ⌈N/3⌉ distinct identities *and* a network split can present **divergent
+  finalized views** to different parts of the network; at the full threshold it controls
+  ordering outright. (Example: `n = 4`, `q = 3` — certificates `{A,B,C}` and `{A,B,D}` need only
+  two equivocating identities.) The money cannot be forged in either case — such an adversary
+  can censor settlement, stall finality and equivocate, never mint. Each honest node's
+  chain-level guard rejects any block that would rewrite a height *it* has finalized, from any
+  fork, regardless of chainwork; reconciling divergent views across nodes is an operational
+  event, not an automatic one.
+
+Put together: **liveness and safety both degrade at about one third of the identities; full
+control of ordering needs two thirds.** The economic sizing below is against the one-third
+figure, not the threshold.
 
 The committee draw is **non-grindable**: a per-block ECVRF over each Operator's *secret* key, so
 an attacker cannot predict or steer which Operators will be drawn — which is what makes adaptive
@@ -45,13 +52,18 @@ corruption hard. The levers below turn "bounded" into "priced out."
 
 ## The work
 
-- **Bounding value-at-risk per finality window.** Because settlement is only reversible until
-  it finalizes (~1 minute), the value actually at risk in a worst-case committee capture is the
-  value that settles *within one window*. Bounding that — and letting high-value settlement
-  **require stronger-than-default finality** (a larger committee or more confirmations, chosen
-  by the Operators or the application) — turns a catastrophic tail into a capped, priced one.
-  It is the strongest lever, and nearly free: because the money can't be forged, the only thing
-  left to bound is timing.
+- **Bounding value-at-risk until detection and halt.** Because the money cannot be forged, what a
+  captured committee can damage is *ordering* — and only for as long as the capture lasts and
+  applications keep accepting its finality. The bound to aim for is therefore the **cumulative
+  value exposed between the start of a capture and the moment settlement halts** (divergent
+  views become detectable, wallets and applications stop accepting), not merely the throughput
+  of one ~1-minute window: a persistent coalition can attack successive heights, and "more
+  confirmations" does not help if the same compromised identities finalize every block. The
+  levers that do work are a cap on value settled per window (so the exposure per unit of
+  detection time is bounded), a **larger committee** for high-value settlement (a statistical
+  gain, chosen by the Operators or the application), and fast out-of-band detection of divergent
+  finality. This turns a catastrophic tail into a capped, priced one — provided the halt is
+  real, which is an application-layer obligation as much as a consensus one.
 
 - **Committee sizing.** The threshold auto-scales as `⌈2/3 · min(E, N)⌉`, so no constant needs
   retuning as Operators join. Setting the committee cap *E* for an open network is a
@@ -60,10 +72,12 @@ corruption hard. The levers below turn "bounded" into "priced out."
 
 - **Collateral economics.** The chain of costs is explicit: **BTC destruction is what creates
   M0; registering an Operator identity requires locking M0 collateral** — M0 the Operator may
-  equally have acquired from a third party rather than burned for. The finality threshold is
-  counted over **distinct eligible identities**, so the Sybil question is the price of that
-  lock: setting it so that acquiring ≥ the threshold of identities costs more than flows
-  through a finality window is the economic half of the safety argument, decided at opening.
+  equally have acquired from a third party rather than burned for. Finality is counted over
+  **distinct eligible identities**, so the Sybil question is the price of that lock — sized
+  against the **one-third figure** above (enough identities to stall or, with a split, to
+  equivocate), not against the full threshold: acquiring that many identities must cost more
+  than the value exposed until a capture is detected and settlement halts. This is the economic
+  half of the safety argument, decided at opening.
   Operating a node carries **no guaranteed commercial revenue** — fees are market-driven.
 
 - **External cryptographic audit of the VRF module.** Finality has a single path — the ECVRF

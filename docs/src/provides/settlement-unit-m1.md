@@ -54,13 +54,15 @@ working capital of whoever runs a market.
 - **Not pegged.** Consensus enforces the internal 1:1 between M0 and M1. It does not enforce, and
   the protocol never promises, an external price against BTC. The destroyed bitcoin is gone; there
   is no reserve and no redemption desk. What makes native BTC available again is the market —
-  providers holding inventory on both sides, paired atomically
+  providers holding inventory on both sides, paired with linked hashlocked legs
   (→ [Native BTC ⇄ M1](../markets/native-btc-pair.md)).
-- **Not an investment.** Because anyone can create M1 at parity by destroying bitcoin, its price
-  can never durably exceed that parity: there is nothing to speculate up. What gives it a floor is
-  demand for settlement — inventory, collateral, working capital — and that demand is exactly what
-  the markets built on top must create. The protocol guarantees the unit's integrity, never its
-  value.
+- **Not an investment.** Anyone can create M1 by destroying bitcoin, so destruction is a
+  permanent *reference supply route*: when it is accessible, it tends to limit any premium over
+  the cost of creation — there is nothing to speculate up. It is not a hard ceiling (arbitrage
+  has fees, confirmation delay, inclusion risk and illiquidity), and there is **no floor**:
+  demand for settlement — inventory, collateral, working capital — is what markets built on top
+  must create, and it guarantees no price. The protocol guarantees the unit's integrity, never
+  its value.
 
 The realizable value of M1 for a professional depends on available liquidity and can be heavily
 discounted; see [Status & claims](../consensus/status-and-claims.md) for what is and is not

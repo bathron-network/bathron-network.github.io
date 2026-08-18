@@ -93,8 +93,10 @@ The current floor is a launch parameter expressed as 0.01 BTC-equivalent. It is 
 demonstrated Sybil price.
 
 The finality threshold counts **distinct eligible identities**, not an aggregate amount of
-collateral. An attacker would need enough M0 to register enough separate identities to reach
-the applicable threshold.
+collateral. An attacker needs enough M0 to register enough separate identities: about a third
+of the committee to stall finality or — combined with a network split — to sign conflicting
+certificates (two `⌈2/3·n⌉` quorums always share at least `2q − n` signers), and the full
+threshold to control ordering outright. See [Open-network hardening](open-network-hardening.md).
 
 ## Design choices
 

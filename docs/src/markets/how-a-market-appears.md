@@ -27,10 +27,11 @@ it is recovered through spreads and fees, never through appreciation.
 off-chain — a relay, an HTTP endpoint, a message bus. The consensus never sees a quote and never
 needs to. → [Quotes live off-chain](quotes-off-chain.md)
 
-**Step 3 — settlement.** A taker accepts a quote. If the pair is BTC/M1, two hashlocked legs
-settle atomically across the two chains; if the other asset lives on a chain with hashlocks and
-timelocks, the same pattern applies; if it is an M1-denominated position (a hedge, an escrow),
-a covenant settles it. This is the only step consensus performs, and it performs it identically
+**Step 3 — settlement.** A taker accepts a quote. If the pair is BTC/M1, the M1 leg settles on
+BATHRON and the BTC leg on Bitcoin, the two linked by one hashlock so that claiming either
+reveals what unlocks the other; if the other asset lives on a chain with hashlocks and timelocks,
+the same pattern applies; if it is an M1-denominated position (a hedge, an escrow), a covenant
+settles it. The BATHRON leg is the only step consensus performs, and it performs it identically
 for every market.
 
 **Step 4 — others join.** Nothing about the pair is registered, so nothing needs to be joined

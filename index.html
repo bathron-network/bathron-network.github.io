@@ -191,11 +191,11 @@
     <div class="steps">
       <div><p class="n">1</p><h3>Bring inventory</h3><p>The asset to pair, and M1.</p></div>
       <div><p class="n">2</p><h3>Publish quotes</h3><p>Signed, off-chain, on any relay. The consensus never sees them.</p></div>
-      <div><p class="n">3</p><h3>Settle</h3><p>A counterparty accepts. Both legs settle on BATHRON — the only on-chain step.</p></div>
+      <div><p class="n">3</p><h3>Settle</h3><p>A counterparty accepts. The M1 leg settles on BATHRON; an external-asset leg settles on its native chain under linked conditions.</p></div>
       <div><p class="n">4</p><h3>Others join</h3><p>Another provider quotes the same pair, tighter or deeper. No invitation needed.</p></div>
     </div>
     <p class="pairs">BTC/M1<span>·</span>PIVX/M1<span>·</span>DOGE/M1<span>·</span>LTC/M1<span>·</span>any/M1</p>
-    <p class="fine">Native BTC ⇄ M1 is paired atomically with hashlocks on both chains — demonstrated on testnet. Any chain that supports hashlocks and timelocks can be paired the same way: a capability of the primitives, not a shipped product.</p>
+    <p class="fine">Native BTC ⇄ M1 is paired with hashlocked legs on both chains sharing one preimage — the components are demonstrated on testnet; a generally atomic client flow is not yet claimed. Any chain that supports hashlocks and timelocks can be paired the same way: a capability of the primitives, not a shipped product.</p>
     <p class="lead" style="margin-top:22px"><a href="/docs/markets/how-a-market-appears.html" style="color:var(--gold)">How a market appears →</a></p>
   </section>
 
