@@ -15,7 +15,7 @@ An application on BATHRON is not a smart contract in the EVM sense. It is a **co
 - One path: proof that the Bitcoin transaction is buried under the in-consensus header chain (`TX_CONFIRMED`) + a `CTV` template that **forces** the payout to Bob.
 - Other path: a `CSV` relative timelock returning funds to you.
 
-This one pattern — *a proven Bitcoin fact releases a covenant* — is the engine under [escrow](../learn/applications/escrow.md), [DvP](../learn/applications/dvp.md) and [OTC settlement](../learn/applications/otc.md).
+This one pattern — *a proven Bitcoin fact releases a covenant* — is the engine under [escrow](../markets/patterns/escrow.md), [DvP](../markets/patterns/dvp-otc.md) and [OTC settlement](../markets/patterns/dvp-otc.md#otc-dvp-with-shielded-size).
 
 ## Tooling
 

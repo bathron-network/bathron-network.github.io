@@ -15,7 +15,7 @@
 | Treasury | none |
 | Unit of account | the satoshi |
 | Supply source | verified Bitcoin burns only |
-| Slashing | none — deliberate ([why](../learn/consensus.md#design-choices)) |
+| Slashing | none — deliberate ([why](../consensus/security-model.md#design-choices)) |
 
 ## Reading the table
 

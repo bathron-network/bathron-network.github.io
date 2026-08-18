@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BATHRON — A settlement kernel for Bitcoin</title>
-<meta name="description" content="Programs written against a shared settlement state. Bitcoin remains the source of truth.">
+<title>BATHRON — Create a market. No permission required.</title>
+<meta name="description" content="An open settlement protocol. Markets belong to whoever builds them. Bitcoin remains the final asset.">
 <link rel="icon" type="image/png" href="/img/favicon.png">
-<meta property="og:title" content="BATHRON — A settlement kernel for Bitcoin">
-<meta property="og:description" content="Bitcoin sees two transactions. BATHRON executes everything in between.">
+<meta property="og:title" content="BATHRON — Create a market. No permission required.">
+<meta property="og:description" content="An open settlement protocol. Markets belong to whoever builds them. Bitcoin remains the final asset.">
 <meta property="og:image" content="https://bathron.org/img/og.png">
 <meta property="og:url" content="https://bathron.org">
 <meta name="twitter:card" content="summary_large_image">
 <style>
   :root{
     --bg:#050608; --panel:#0C0F14; --line:#1C222C;
-    --ink:#E8EBF0; --muted:#8A919C; --gold:#D9A441;
+    --ink:#E8EBF0; --muted:#8A919C; --gold:#D9A441; --dim:#3A414D;
   }
   *{box-sizing:border-box}
   html,body{margin:0}
@@ -27,50 +27,81 @@
   section{margin:96px 0 0}
   .eyebrow{font:600 12px/1 ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.22em;
            color:var(--gold);text-transform:uppercase;text-align:center;margin:0 0 26px}
+  h2{margin:0 0 14px;font-size:clamp(20px,3vw,26px);letter-spacing:-.01em;text-align:center;text-wrap:balance}
+  p.lead{margin:0 auto;max-width:58ch;text-align:center;color:var(--muted)}
+  p.lead b{color:var(--ink);font-weight:600}
 
   /* ---- hero ---- */
-  .hero{min-height:96vh;display:flex;flex-direction:column;align-items:center;
+  .hero{min-height:92vh;display:flex;flex-direction:column;align-items:center;
         justify-content:center;text-align:center;padding:48px 0 16px}
-  .hero img.emblem{width:min(220px,52vw);height:auto}
-  .hero img.word{width:min(290px,68vw);height:auto;margin-top:4px}
-  .tagline{margin:22px 0 0;font-size:clamp(16px,2.4vw,20px);color:var(--muted);
-           letter-spacing:.04em}
-  .kernelsub{margin:10px 0 0;font-size:clamp(14px,2vw,16px);color:var(--muted)}
-  .memorable{margin:34px auto 0;max-width:26ch;font-size:clamp(25px,5vw,40px);
-             line-height:1.3;font-weight:700;letter-spacing:-.015em;text-wrap:balance}
+  .hero img.emblem{width:min(200px,48vw);height:auto}
+  .hero img.word{width:min(270px,64vw);height:auto;margin-top:4px}
+  .memorable{margin:34px auto 0;max-width:22ch;font-size:clamp(28px,5.4vw,44px);
+             line-height:1.2;font-weight:700;letter-spacing:-.015em;text-wrap:balance}
   .memorable b{color:var(--gold)}
-  .space{margin:36px auto 0;width:100%;max-width:620px}
-  .space svg{display:block;width:100%;height:auto}
-  .cta{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;justify-content:center}
+  .tagline{margin:22px auto 0;max-width:52ch;font-size:clamp(16px,2.4vw,19px);color:var(--muted);line-height:1.6}
+  .tagline b{color:var(--ink);font-weight:600}
+  .cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;justify-content:center}
   .btn{display:inline-block;padding:13px 26px;border:1px solid var(--line);border-radius:8px;
-       text-decoration:none;font-weight:600;font-size:15px;
-       transition:border-color .15s,color .15s}
+       text-decoration:none;font-weight:600;font-size:15px;transition:border-color .15s,color .15s}
   .btn:hover{border-color:var(--gold);color:var(--gold)}
   .btn.primary{border-color:#2A3441;background:var(--panel)}
 
-  .vision{text-align:center;color:var(--muted);font-size:clamp(16px,2.4vw,19px);
-          line-height:1.6;margin:0 0 72px}
-  .vision b{color:var(--ink);font-weight:600}
+  /* ---- problem ---- */
+  .problem p{margin:0 auto;max-width:56ch;text-align:center;color:var(--muted);font-size:17px}
+  .problem p + p{margin-top:14px}
+  .problem p b{color:var(--ink);font-weight:600}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:34px auto 0;max-width:640px}
+  .compare div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 18px 16px}
+  .compare .k{font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+  .compare .flow{font-family:ui-monospace,Menlo,monospace;font-size:13.5px;line-height:1.8;margin:0;color:var(--ink)}
+  .compare .flow span{color:var(--gold)}
+  .compare .note{margin:10px 0 0;font-size:13px;color:var(--muted)}
+  @media (max-width:560px){.compare{grid-template-columns:1fr}}
 
-  /* ---- three ideas ---- */
-  .idea{max-width:56ch;margin:0 auto;text-align:center}
-  .idea + .idea{margin-top:64px}
-  .idea h2{margin:0 0 10px;font-size:clamp(19px,3vw,24px);letter-spacing:-.01em}
-  .idea p{margin:0;color:var(--muted);font-size:16px}
-  .idea p b{color:var(--ink);font-weight:600}
+  /* ---- provides / does not ---- */
+  .three{display:grid;gap:14px;margin-top:30px}
+  .three div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+  .three h3{margin:0 0 6px;font-size:17px}
+  .three p{margin:0;color:var(--muted);font-size:15px}
+  .not{margin:30px auto 0;max-width:640px;border:1px solid var(--gold);border-radius:10px;padding:22px 24px;text-align:center}
+  .not p.list{margin:0;font-size:16.5px;line-height:1.9;color:var(--ink)}
+  .not p.list span{color:var(--dim);padding:0 8px}
+  .not p.tail{margin:14px 0 0;color:var(--muted);font-size:15px}
+  .not p.tail b{color:var(--gold);font-weight:600}
 
-  /* ---- built ---- */
-  .built{text-align:center}
-  .built p.list{margin:0;color:var(--ink);font-size:16px;line-height:2}
-  .built p.list span{color:#3A414D;padding:0 10px}
+  /* ---- steps ---- */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:30px 0 0}
+  .steps div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 14px}
+  .steps .n{font:600 12px/1 ui-monospace,Menlo,monospace;color:var(--gold);letter-spacing:.14em;margin:0 0 8px}
+  .steps h3{margin:0 0 6px;font-size:15px}
+  .steps p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55}
+  @media (max-width:640px){.steps{grid-template-columns:1fr 1fr}}
+  .pairs{margin:22px auto 0;text-align:center;font-family:ui-monospace,Menlo,monospace;font-size:14px;color:var(--ink)}
+  .pairs span{color:var(--dim);padding:0 8px}
+  .fine{margin:12px auto 0;max-width:60ch;text-align:center;color:var(--muted);font-size:13.5px}
+
+  /* ---- bitcoin ---- */
+  .space{margin:30px auto 0;width:100%;max-width:620px}
+  .space svg{display:block;width:100%;height:auto}
+  .btc-lines{margin:26px auto 0;max-width:56ch;color:var(--muted);text-align:center;font-size:15.5px}
+  .btc-lines p{margin:0 0 8px}
+  .btc-lines b{color:var(--ink);font-weight:600}
+
+  /* ---- roles ---- */
+  .roles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+  .roles div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 16px}
+  .roles h3{margin:0 0 6px;font-size:15.5px}
+  .roles p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55}
+  @media (max-width:640px){.roles{grid-template-columns:1fr}}
 
   /* ---- status ---- */
   .status{text-align:center;color:var(--muted);font-size:16px}
-  .status p{margin:0 auto;max-width:44ch}
+  .status p{margin:0 auto;max-width:52ch}
   .status b{color:var(--ink)}
-  .status .build{margin-top:34px}
-  .status .build a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
-  .status .build a:hover{color:var(--gold)}
+  .status .build{margin-top:30px}
+  .status a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+  .status a:hover{color:var(--gold)}
 
   footer{margin:96px 0 0;padding:28px 0 40px;border-top:1px solid var(--line);
          display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
@@ -83,29 +114,104 @@
 
 <div class="wrap">
 
-  <!-- ================= HERO ================= -->
+  <!-- ================= 1. HERO ================= -->
   <div class="hero">
-    <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">BATHRON — a settlement kernel for Bitcoin</h1>
+    <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">BATHRON — create a market, no permission required</h1>
     <img class="emblem" src="/img/emblem.png" alt="BATHRON emblem" width="560" height="360">
     <img class="word" src="/img/wordmark.png" alt="BATHRON" width="540" height="89">
-    <p class="tagline">A settlement kernel for Bitcoin.</p>
-    <p class="kernelsub">Programs written against a shared settlement state.</p>
 
-    <p class="memorable">Bitcoin sees <b>two transactions</b>.<br>
-    BATHRON executes everything in&nbsp;between.</p>
+    <p class="memorable">Create a market.<br><b>No permission required.</b></p>
 
-    <div class="space" aria-label="A programmable settlement state with confidential internal transfers, anchored by two Bitcoin transactions">
+    <p class="tagline">BATHRON is an open settlement protocol.<br>
+    <b>Markets belong to whoever builds them.</b> Bitcoin remains the final asset.</p>
+
+    <div class="cta">
+      <a class="btn primary" href="/docs/start-here.html">The 5-minute overview</a>
+      <a class="btn" href="/docs/operate/run-a-node.html">Run a node</a>
+      <a class="btn" href="https://explorer.bathron.org/" target="_blank" rel="noopener">Testnet explorer</a>
+      <a class="btn" href="https://github.com/bathron-network" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+
+  <!-- ================= 2. THE PROBLEM ================= -->
+  <section class="problem">
+    <p class="eyebrow">The problem</p>
+    <p>Today a market exists because an exchange lists it — <b>and dies when the exchange delists it.</b></p>
+    <p>Two parties who both hold inventory still cannot settle against each other without handing custody to a third.</p>
+    <p>Bitcoin settles value. It deliberately refuses to express the conditions of a trade.</p>
+
+    <div class="compare" aria-label="Today versus BATHRON">
+      <div>
+        <p class="k">Today</p>
+        <p class="flow">asset → <span>listing committee</span> → market</p>
+        <p class="note">Born by permission. Dies by decision.</p>
+      </div>
+      <div>
+        <p class="k">On BATHRON</p>
+        <p class="flow">inventory + quotes → market</p>
+        <p class="note">Born when two parties can settle. Nobody can revoke what nobody granted.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3. WHAT IT PROVIDES ================= -->
+  <section>
+    <p class="eyebrow">What BATHRON provides</p>
+    <h2>Three things. Only three.</h2>
+    <div class="three">
+      <div>
+        <h3>A common settlement unit — M1</h3>
+        <p>Every settlement on the network is expressed in one numéraire. M1 is created only from verified, irreversible Bitcoin destruction. Nobody issues it; nobody can print it. Market builders and providers hold it as working capital — end users keep settling in the assets they already hold.</p>
+      </div>
+      <div>
+        <h3>A consensus that guarantees settlement</h3>
+        <p>Accounting integrity, Bitcoin facts verified inside consensus, the conditions written into contracts, and transfers — final in about a minute. Every node checks every block; a finality quorum can order, never mint.</p>
+      </div>
+      <div>
+        <h3>An infrastructure any market can be built on</h3>
+        <p>Covenants, timelocks, hashlocks, Bitcoin-fact verification and confidential transfers — composable by anyone, enforced by every node, frozen so that what grows is what is built on top.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4. WHAT IT DOES NOT DO ================= -->
+  <section>
+    <p class="eyebrow">What BATHRON deliberately does not do</p>
+    <div class="not">
+      <p class="list">No order book<span>·</span>No matching engine<span>·</span>No listing<span>·</span>No published price<span>·</span>No chosen market maker<span>·</span>No token sale<span>·</span>No premine<span>·</span>No treasury<span>·</span>No yield</p>
+      <p class="tail"><b>The consensus only settles.</b> Everything else is yours.</p>
+    </div>
+    <p class="fine">Bitcoin does not decide who may hold BTC. BATHRON does not decide which markets may exist.</p>
+  </section>
+
+  <!-- ================= 5. HOW A MARKET APPEARS ================= -->
+  <section>
+    <p class="eyebrow">How a market appears</p>
+    <h2>Nobody approves any of it.</h2>
+    <div class="steps">
+      <div><p class="n">1</p><h3>Bring inventory</h3><p>The asset to pair, and M1.</p></div>
+      <div><p class="n">2</p><h3>Publish quotes</h3><p>Signed, off-chain, on any relay. The consensus never sees them.</p></div>
+      <div><p class="n">3</p><h3>Settle</h3><p>A counterparty accepts. Both legs settle on BATHRON — the only on-chain step.</p></div>
+      <div><p class="n">4</p><h3>Others join</h3><p>Another provider quotes the same pair, tighter or deeper. No invitation needed.</p></div>
+    </div>
+    <p class="pairs">BTC/M1<span>·</span>PIVX/M1<span>·</span>DOGE/M1<span>·</span>LTC/M1<span>·</span>any/M1</p>
+    <p class="fine">Native BTC ⇄ M1 is paired atomically with hashlocks on both chains — demonstrated on testnet. Any chain that supports hashlocks and timelocks can be paired the same way: a capability of the primitives, not a shipped product.</p>
+    <p class="lead" style="margin-top:22px"><a href="/docs/markets/how-a-market-appears.html" style="color:var(--gold)">How a market appears →</a></p>
+  </section>
+
+  <!-- ================= 6. BITCOIN AT THE CENTER ================= -->
+  <section>
+    <p class="eyebrow">Why Bitcoin stays at the center</p>
+    <h2>Bitcoin sees two transactions. BATHRON settles everything in between.</h2>
+    <div class="space" aria-label="A settlement state anchored by two Bitcoin transactions">
       <svg viewBox="0 0 640 158" xmlns="http://www.w3.org/2000/svg" role="img">
-        <!-- the settlement space -->
-        <rect x="80" y="8" width="480" height="80" rx="14"
-              fill="#0C0F14" stroke="#1C222C"/>
+        <rect x="80" y="8" width="480" height="80" rx="14" fill="#0C0F14" stroke="#1C222C"/>
         <text x="320" y="32" text-anchor="middle" fill="#D9A441" letter-spacing="3"
               font-family="ui-monospace,Menlo,monospace" font-size="12" font-weight="600">BATHRON</text>
         <text x="320" y="54" text-anchor="middle" fill="#E8EBF0"
-              font-family="ui-monospace,Menlo,monospace" font-size="14">programmable settlement state</text>
+              font-family="ui-monospace,Menlo,monospace" font-size="14">settlement in M1 · covenants · confidential transfers</text>
         <text x="320" y="76" text-anchor="middle" fill="#8A919C"
-              font-family="ui-monospace,Menlo,monospace" font-size="13">confidential transfers · Payments · Escrow · DvP</text>
-        <!-- the Bitcoin rail underneath -->
+              font-family="ui-monospace,Menlo,monospace" font-size="13">the markets live above this box — and belong to you</text>
         <line x1="42" y1="120" x2="598" y2="120" stroke="#D9A441" stroke-width="2" opacity=".55"/>
         <rect x="16" y="108" width="24" height="24" rx="6" fill="#D9A441"/>
         <rect x="600" y="108" width="24" height="24" rx="6" fill="#D9A441"/>
@@ -115,41 +221,30 @@
               font-family="ui-monospace,Menlo,monospace" font-size="13">BTC</text>
       </svg>
     </div>
-
-    <div class="cta">
-      <a class="btn primary" href="/docs/">Documentation</a>
-      <a class="btn" href="https://explorer.bathron.org/" target="_blank" rel="noopener">Testnet explorer</a>
-      <a class="btn" href="https://github.com/bathron-network" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="mailto:contact@bathron.org" target="_blank">Contact</a>
-    </div>
-  </div>
-
-  <!-- ================= THREE IDEAS ================= -->
-  <section>
-    <p class="vision">Bitcoin secures <b>value</b>.<br>BATHRON coordinates <b>settlement</b>.</p>
-    <div class="idea">
-      <h2>Consensus keeps the accounts.</h2>
-      <p>A shared settlement state. Private transfers.
-      Finality in about a minute.</p>
-    </div>
-    <div class="idea">
-      <h2>Bitcoin provides the facts.</h2>
-      <p>Contracts verify Bitcoin transactions through SPV inside consensus.
-      No oracle. No federation. No token sale, premine or promised yield.</p>
-    </div>
-    <div class="idea">
-      <h2>Markets provide the liquidity.</h2>
-      <p>Native BTC is provided by an open market of <b>Clearing and Liquidity
-      Providers</b> competing on fees, on top of consensus run by <b>Settlement
-      Operators</b>. The protocol never sells anything.</p>
+    <div class="btc-lines">
+      <p><b>Bitcoin is the final asset</b> — the reserve of value and the only origin of M1: <span class="mono">BTC → M0 → M1</span>, one way, verified by SPV inside consensus.</p>
+      <p><b>BATHRON never replaces Bitcoin</b> and never holds it. There is no reserve and no redemption — what brings native BTC back is a market, not a vault.</p>
+      <p><b>Bitcoin facts are checked by every node.</b> No oracle, no federation, no designated attester.</p>
     </div>
   </section>
 
+  <!-- ================= 7. ROLES ================= -->
+  <section>
+    <p class="eyebrow">Who is who</p>
+    <div class="roles">
+      <div><h3>Operators</h3><p>Run consensus: produce blocks, sign finality, publish facts about themselves. One operator, one vote. They never rank, never choose a provider, never set a price.</p></div>
+      <div><h3>Settlement Providers</h3><p>Participants, not administrators. A Clearing Provider quotes and orchestrates; a Liquidity Provider holds inventory and prices a pair. They appear and disappear freely.</p></div>
+      <div><h3>You</h3><p>Build a market, an application, or simply settle. The protocol asks nothing of you but a node.</p></div>
+    </div>
+  </section>
 
-  <!-- ================= STATUS ================= -->
+  <!-- ================= 8. STATUS ================= -->
   <section class="status">
-    <p><b>Experimental.</b><br>Public testnet live.<br>No mainnet.</p>
-    <p class="build">Looking to build on BATHRON? <a href="mailto:contact@bathron.org">Contact us</a>.</p>
+    <p class="eyebrow">Where we are</p>
+    <p><b>Experimental.</b> Public testnet live. No mainnet.</p>
+    <p style="margin-top:14px">Anyone can build, quote, pair and settle without asking permission. <b>Operator admission is not yet open</b> — the current operator set is project-run while the open-admission threat model is worked. No external audit yet. No proven market.</p>
+    <p class="build"><a href="/docs/consensus/status-and-claims.html">Status &amp; claims</a> — the one page that says exactly what is and is not proven.<br>
+    Looking to build a market? <a href="mailto:contact@bathron.org">Contact us</a>.</p>
   </section>
 
   <footer>

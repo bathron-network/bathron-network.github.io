@@ -1,59 +1,94 @@
 # FAQ
 
-## What problem is BATHRON trying to solve?
+## Do I need permission to create a market?
 
-Conditional Bitcoin settlement: coordinating a Bitcoin payment with another payment, delivery,
-deadline or verifiable event without giving one intermediary unrestricted custody of the funds.
+No. A market on BATHRON exists when someone brings inventory, publishes quotes and finds a
+counterparty. There is no listing process, no committee, no fee to the protocol. Nobody can
+approve a pair, so nobody can delist it. → [How a market appears](markets/how-a-market-appears.md)
 
-## Is BATHRON a coin offered to users?
+## Who decides which assets can trade?
 
-No. There is no token sale, premine, treasury, block reward or promised yield. The target client
-sends and receives familiar external assets. M0 and M1 are internal accounting states used by
-professional providers, and their market value is neither guaranteed nor promoted.
+Nobody. The consensus does not know which pairs exist — it only settles. Any chain that supports
+hashlocks and timelocks can be paired against M1 with the same atomic pattern used for native BTC.
+That is a capability of the primitives; no pair other than BTC/M1 has been tested or shipped.
+→ [Pairing any asset](markets/pairing-any-asset.md)
+
+## Is M1 a coin I should buy?
+
+No. M1 is the settlement unit — the working capital of whoever runs a market. End users settle in
+the assets they already hold; market builders and providers settle in M1. Because anyone can create
+M1 at parity by destroying bitcoin, its price cannot durably exceed that parity: there is nothing to
+speculate up. There is no token sale, premine, treasury, block reward or promised yield.
+→ [The settlement unit](provides/settlement-unit-m1.md)
+
+## Is M1 pegged to Bitcoin? Is it "backed by Bitcoin"?
+
+No, and no. Consensus enforces the internal 1:1 between M0 and M1. It does not enforce, and the
+protocol never promises, an external price. The destroyed bitcoin is gone — there is no reserve and
+no redemption desk. What makes native BTC available again is the market: providers holding
+inventory on both sides, paired atomically. → [Bitcoin is the final asset](bitcoin/final-asset.md)
+
+## Why destroy bitcoin at all?
+
+Because it is the only way to create the unit without a keeper. A reserve needs a custodian or a
+federation; a destroyed satoshi needs nobody. The BTC is gone, verifiably, and one M0 unit exists
+in its place. Irreversible by design — a cost recovered through service revenue, never through
+appreciation. → [From destroyed BTC to M1](bitcoin/from-btc-to-m1.md)
+
+## Why not just use an exchange, or a bridge?
+
+An exchange's listing committee is the permission problem itself; a bridge always has a keeper.
+BATHRON is custody-free, verifies Bitcoin itself, and is open — and gives up a recoverable vault
+in exchange. → [Why not an exchange, a bridge, or a stablecoin](problem/why-not-alternatives.md)
+
+## Does BATHRON hold my BTC?
+
+Never. BATHRON verifies Bitcoin facts and irreversible burns; it cannot move native BTC or trigger
+a Bitcoin transaction. Native BTC moves only through Bitcoin-side contracts (hashlocked legs)
+between you and a counterparty.
 
 ## Who provides the service?
 
-A **Clearing Provider (CP)** gives the client a quote and orchestrates the settlement paths. One
-or more **Liquidity Providers (LPs)** supply inventory and pair-specific prices. **Settlement
-Operators** run consensus and finality; they do not set commercial prices.
+Settlement Providers — participants, not administrators. A Clearing Provider quotes and
+orchestrates; a Liquidity Provider holds inventory and prices a pair. Operators run consensus and
+finality; they publish facts about themselves and never rank anyone, choose a provider or set a
+price. → [Roles](markets/roles.md)
 
-## Why is an internal settlement asset necessary?
+## Is the network permissionless today?
 
-BATHRON can verify Bitcoin facts but cannot command Bitcoin to spend. Its contracts therefore
-need internal state they can lock and release when a condition is satisfied. M1 carries that
-programmable state; M0 accounts for its origin.
-
-## Why destroy Bitcoin?
-
-Verified destruction is the only route by which M0 can be created. It avoids a custodian holding
-a redemption reserve, but it is irreversible: the BTC is gone. This is a professional inventory
-cost, not a guarantee that M0 or M1 can later be sold for BTC.
-
-## Is M1 pegged to Bitcoin?
-
-No. Consensus enforces only the internal M0↔M1 accounting equality. It does not guarantee an
-external price, redemption or liquidity. A provider's realizable value can be heavily discounted
-and can fall to zero.
+Anyone can build, quote, pair and settle on BATHRON without asking permission. Operator admission
+is **not yet open**: the current operator set is project-run while the open-admission threat model
+is worked. → [Open-network hardening](consensus/open-network-hardening.md)
 
 ## Is settlement atomic and risk-free today?
 
-No general guarantee is claimed. Individual HTLC and covenant components have run on the
-testnet, but the complete state machine, reorganisation handling and timelock ordering still need
-formal specification and external review.
+Not as a general guarantee. Paired-HTLC and covenant components have run on the testnet; the
+complete cross-chain state machine, reorganisation handling and timelock ordering still need formal
+specification and external review. → [Status & claims](consensus/status-and-claims.md)
+
+## Why is the consensus so small?
+
+On purpose. Anything that can be built above consensus must be built above it — quotes, matching,
+reputation, provider choice, fast liveness signals. Every consensus line is decades of maintenance
+and attack surface, and a protocol that lists cannot be neutral about listing. The surface is
+frozen. → [Why the consensus is frozen](consensus/why-frozen.md)
 
 ## Why confidentiality?
 
-Commercial settlement can expose counterparties, sizes and treasury flows. Sapling can hide
-amounts and linkage in the internal leg while consensus still checks conservation. Confidentiality
-is a service property, not a retail “private cash” proposition.
+Commercial settlement exposes counterparties, sizes and treasury flows. Shielded transfers hide
+amounts and linkage on the internal leg while consensus still checks conservation. It is a
+property of settlement, not a "private cash" product, and not Monero's anonymity set.
+→ [Confidential settlement](markets/confidential-settlement.md)
 
 ## Is this CLS for crypto?
 
-No. Payment-versus-payment is a useful functional analogy, but BATHRON has no central-bank
-accounts, regulated settlement membership, equivalent legal finality or systemic track record.
+No. Payment-versus-payment — one leg if and only if the other — is a useful functional analogy.
+BATHRON has no central-bank accounts, no regulated membership, no equivalent legal finality and no
+systemic track record.
 
 ## What exists today?
 
-An experimental testnet with covenant execution, Bitcoin proofs checked in consensus,
-confidential internal transfers, paired HTLC demonstrations and fast finality. There is no
-mainnet, external safety certification, sustained multi-provider liquidity or proven demand.
+A public testnet with covenant execution, Bitcoin headers and proofs checked in consensus (source:
+Bitcoin testnet4), confidential internal transfers, paired-HTLC demonstrations, fast finality, and
+provider prototypes exposing quotes over HTTP. No mainnet, no external audit, no proven market.
+→ [Status & claims](consensus/status-and-claims.md)

@@ -18,3 +18,26 @@ level = 1
 
 [output.html.search]
 limit-results = 15
+
+[output.html.redirect]
+"/introduction.html" = "start-here.html"
+"/getting-started/run-a-node.html" = "../operate/run-a-node.html"
+"/getting-started/run-a-wallet.html" = "../operate/run-a-wallet.html"
+"/getting-started/run-a-settlement-provider.html" = "../operate/create-your-first-market.html"
+"/getting-started/first-application.html" = "../operate/first-application.html"
+"/learn/architecture.html" = "../provides/infrastructure.html"
+"/learn/security-model.html" = "../consensus/security-model.html"
+"/learn/consensus.html" = "../consensus/production-and-finality.html"
+"/learn/bitcoin-integration.html" = "../bitcoin/facts-in-consensus.html"
+"/learn/settlement-providers.html" = "../markets/roles.html"
+"/learn/privacy.html" = "../markets/confidential-settlement.html"
+"/learn/applications.html" = "../markets/patterns.html"
+"/learn/applications/payments.html" = "../../markets/patterns/escrow.html"
+"/learn/applications/escrow.html" = "../../markets/patterns/escrow.html"
+"/learn/applications/dvp.html" = "../../markets/patterns/dvp-otc.html"
+"/learn/applications/otc.html" = "../../markets/patterns/dvp-otc.html"
+"/learn/applications/vaults.html" = "../../reference/patterns-for-providers.html"
+"/learn/applications/miner-hedging.html" = "../../markets/patterns/hedging.html"
+"/learn/applications/stable-value.html" = "../../markets/patterns/fixed-term-value.html"
+"/build/wallet.html" = "../operate/run-a-wallet.html"
+"/roadmap.html" = "consensus/status-and-claims.html"
