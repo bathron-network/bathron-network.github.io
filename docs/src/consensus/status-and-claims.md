@@ -108,6 +108,6 @@ If a page anywhere on bathron.org contradicts this list, the list wins and the p
 
 ## One line for the other pages
 
-Every other page links here instead of repeating these caveats.
+Every other page — and every README in the `bathron-network` repositories — links here instead of repeating these caveats; where any other public text claims more, this page prevails ([documentation policy](../reference/documentation-policy.md)).
 
 **See also:** [Open-network hardening](open-network-hardening.md) · [Security model](security-model.md) · [Why the consensus is frozen](why-frozen.md)
