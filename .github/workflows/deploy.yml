@@ -19,14 +19,28 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MDBOOK_VERSION: v0.4.52
+      # SHA-256 officiel de l'asset, tel que publié par l'API GitHub Releases
+      # (GET /repos/rust-lang/mdBook/releases/tags/v0.4.52 -> .assets[].digest).
+      # Non calculé localement. Si MDBOOK_VERSION change sans mettre à jour cette
+      # valeur, sha256sum --check échoue et le déploiement s'arrête : fail-closed.
+      MDBOOK_SHA256: c0b903f01dd8f4edc644372ad2b80b1fdddd12552d37b6a098657cbd8eddd768
     steps:
       - uses: actions/checkout@v4
 
       - name: Install mdBook
         run: |
           mkdir -p "$HOME/.local/bin"
-          curl -sL "https://github.com/rust-lang/mdBook/releases/download/${MDBOOK_VERSION}/mdbook-${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz" \
-            | tar xz -C "$HOME/.local/bin"
+          tarball="$(mktemp -d)/mdbook.tar.gz"
+          # Téléchargement dans un fichier : plus de « curl | tar », qui extrait
+          # l'archive au fil de l'eau et ne peut donc rien vérifier avant.
+          # --fail : un HTTP 4xx/5xx devient une erreur au lieu d'une page HTML
+          # extraite comme si c'était l'outil.
+          curl --fail --show-error --location --silent \
+            -o "$tarball" \
+            "https://github.com/rust-lang/mdBook/releases/download/${MDBOOK_VERSION}/mdbook-${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+          echo "${MDBOOK_SHA256}  ${tarball}" | sha256sum --check --strict -
+          # Extraction SEULEMENT après validation.
+          tar xzf "$tarball" -C "$HOME/.local/bin"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Build docs
