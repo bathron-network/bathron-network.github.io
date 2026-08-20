@@ -28,7 +28,7 @@ cannot gate it.
 | You want a market to… | Primitive | Where it is used |
 |---|---|---|
 | move native BTC in and out without a custodian | **hashlocks + timelocks** (HTLC family, `CSV`/`CLTV`) on both chains | [Native BTC ⇄ M1](../markets/native-btc-pair.md) |
-| pair any other chain that has hashlocks and timelocks | the same HTLC pattern, one leg per chain | [Pairing any asset](../markets/pairing-any-asset.md) |
+| pair another chain that has hashlocks and timelocks | the same HTLC pattern, one leg per chain, **plus per-chain application work** | [Pairing an external asset](../markets/pairing-any-asset.md) |
 | release one leg only when the other is proven | **`TX_CONFIRMED`** — a Bitcoin payment's Merkle proof checked against the in-consensus header chain | [DvP & OTC](../markets/patterns/dvp-otc.md), [Escrow](../markets/patterns/escrow.md) |
 | force where funds go next | **`CTV`** (`OP_TEMPLATEVERIFY`) — commit to the spending transaction's template | escrow, provider controls |
 | carry state across settlements (a contract that re-creates itself) | **output introspection** (`OP_OUTPUTVALUE`, `OP_OUTPUTSCRIPT`) — recursive covenants | rolling positions, standing rules |

@@ -33,8 +33,7 @@ finality, the in-consensus Bitcoin header chain, burn → mint, the covenant opc
 transfers, a real Bitcoin payment releasing a covenant, and paired HTLCs for a BTC-out leg. The
 consensus surface was frozen during this phase; the work was proof, not features — every
 primitive exercised on-chain (accept *and* reject paths), adversarial red-teaming, fuzzing of
-the money chokepoints, and the code driven to zero legacy and zero dead code. **Its gate was
-passed:** full surface proven live, no open monetary or safety issue, a clean launch genesis
+the money chokepoints, and dead code removed where it was found. **Its gate was passed** on the evidence available at the time: the surfaces then in scope were exercised live and no monetary or safety issue was open against them, with a clean launch genesis
 rehearsed.
 
 **Now — public testnet.** The current phase. Published genesis and peers, a public block
@@ -57,15 +56,16 @@ The mechanical launch steps (mine and pin the mainnet genesis with a recency pro
 covenant gates to active, ship the non-disposable bootstrap tooling) are written down and mostly
 built — execution, not research. The research-shaped prerequisites are the hardening track.
 
-## How to read the four labels
+## How to read the five labels
 
-This documentation labels every capability. The labels are load-bearing:
+This documentation labels every capability. The labels are load-bearing, and the first one is the one most easily misread: an opcode being active in consensus does **not** mean a product uses it.
 
 | Label | Means |
 |---|---|
-| `LIVE NOW` | works on the current public testnet |
-| `TESTED` | has tests, no complete product |
-| `AVAILABLE PRIMITIVE` | buildable with no consensus change — **not built** |
+| `ACTIVE IN CONSENSUS` | the opcode or rule is enabled on this testnet — **not a statement about any product** |
+| `TESTED` | has a test suite |
+| `DEMONSTRATED` | an end-to-end flow has actually been run |
+| `AVAILABLE PRIMITIVE` | composable with no consensus change — **no product exists** |
 | `TARGET NETWORK` | the architecture being aimed at — **not deployed** |
 
 **Active primitives.** The covenant, introspection and Bitcoin-fact opcodes are active in

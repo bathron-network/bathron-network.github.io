@@ -10,9 +10,12 @@ where the protocol stops.
   1. INVENTORY            2. QUOTES                3. SETTLEMENT           4. OTHERS JOIN
   ────────────            ─────────                ─────────────           ─────────────
   someone holds           publishes signed          a counterparty          another provider
-  the asset (PIVX,        bid/ask for               accepts; both legs      quotes the same
-  DOGE, LTC, BTC…)        PIVX/M1 — off-chain,      settle on BATHRON       pair, tighter,
-  and M1                  on any relay              (the only on-chain step) or deeper
+  the asset (PIVX,        bid/ask for               accepts; the M1 leg     quotes the same
+  DOGE, LTC, BTC…)        PIVX/M1 — off-chain,      settles on BATHRON,     pair, tighter,
+  and M1                  on any relay              the external leg on     or deeper
+                                                    its own native chain,
+                                                    linked by compatible
+                                                    conditions
         │                       │                        │                       │
         └───────────────────────┴────────────────────────┴───────────────────────┘
                      no listing committee approves the pair — the protocol only settles step 3
