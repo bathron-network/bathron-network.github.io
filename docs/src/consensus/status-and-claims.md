@@ -18,23 +18,21 @@ promise the code hasn't made yet.
     <circle cx="330" cy="46" r="9" fill="#D9A441"/>
     <circle cx="590" cy="46" r="8" fill="#0C0F14" stroke="#3A4150" stroke-width="2"/>
     <text x="70" y="24" text-anchor="middle" fill="#E8EBF0" font-size="12" font-weight="600">Private testnet</text>
-    <text x="70" y="74" text-anchor="middle" fill="#8A919C" font-size="11">done · surface proven</text>
+    <text x="70" y="74" text-anchor="middle" fill="#8A919C" font-size="11">done · scoped surface exercised</text>
     <text x="330" y="24" text-anchor="middle" fill="#E8EBF0" font-size="12" font-weight="600">Public testnet</text>
     <text x="330" y="74" text-anchor="middle" fill="#8A919C" font-size="11">now · first builders</text>
     <text x="590" y="24" text-anchor="middle" fill="#E8EBF0" font-size="12" font-weight="600">Mainnet</text>
     <text x="590" y="74" text-anchor="middle" fill="#8A919C" font-size="11">gated · audits + economics</text>
-    <text x="200" y="106" text-anchor="middle" fill="#5B626E" font-size="10">gate: it works, live</text>
+    <text x="200" y="106" text-anchor="middle" fill="#5B626E" font-size="10">gate: ran live, in scope</text>
     <text x="460" y="106" text-anchor="middle" fill="#5B626E" font-size="10">gate: open-network safe</text>
   </g>
 </svg>
 
-**Done — private testnet.** A multi-node network ran the entire consensus surface live: VRF
+**Done — private testnet.** A multi-node network exercised the consensus surfaces then in scope: VRF
 finality, the in-consensus Bitcoin header chain, burn → mint, the covenant opcodes, shielded
 transfers, a real Bitcoin payment releasing a covenant, and paired HTLCs for a BTC-out leg. The
-consensus surface was frozen during this phase; the work was proof, not features — every
-primitive exercised on-chain (accept *and* reject paths), adversarial red-teaming, fuzzing of
-the money chokepoints, and the code driven to zero legacy and zero dead code. **Its gate was
-passed:** full surface proven live, no open monetary or safety issue, a clean launch genesis
+consensus surface was frozen during this phase; the work was proof, not features — the primitives then in scope exercised on-chain (accept *and* reject paths), adversarial red-teaming, fuzzing of
+the money chokepoints, and dead code removed where it was found. **Its gate was passed** on the evidence available at the time: the surfaces then in scope were exercised live, with no monetary or safety issue open against them **that this work had identified** — an absence of findings, not a proof of absence, and no external audit was involved — with a clean launch genesis
 rehearsed.
 
 **Now — public testnet.** The current phase. Published genesis and peers, a public block
@@ -57,23 +55,62 @@ The mechanical launch steps (mine and pin the mainnet genesis with a recency pro
 covenant gates to active, ship the non-disposable bootstrap tooling) are written down and mostly
 built — execution, not research. The research-shaped prerequisites are the hardening track.
 
-## What runs today
+## How to read the five labels
 
-Public testnet, live (measurement network):
+This documentation labels every capability. The labels are load-bearing, and the first one is the one most easily misread: an opcode being active in consensus does **not** mean a product uses it.
+
+| Label | Means |
+|---|---|
+| `ACTIVE IN CONSENSUS` | the opcode or rule is enabled on this testnet — **not a statement about any product** |
+| `TESTED` | has a test suite |
+| `DEMONSTRATED` | an end-to-end flow has actually been run |
+| `AVAILABLE PRIMITIVE` | composable with no consensus change — **no product exists** |
+| `TARGET NETWORK` | the architecture being aimed at — **not deployed** |
+
+**Active primitives.** The covenant, introspection and Bitcoin-fact opcodes are active in
+consensus on this testnet: `OP_BTCSTATEVERIFY`, `OP_TEMPLATEVERIFY`, `OP_CHECKSIGFROMSTACK`,
+`OP_CAT`, `OP_CHECKOUTPUTVALUE`, `OP_CHECKOUTPUTSCRIPT`, `OP_PUSHCURRENTSCRIPT`, plus the two
+timelock opcodes. Declared in `src/script/script.h`, implemented in `src/script/interpreter.cpp`.
+
+**Demonstrations.** Paired-HTLC settlement against Bitcoin, covenant accept **and** reject paths.
+
+**Products that do not exist.** No price oracle, no margin engine, no liquidation in consensus, no
+synthetic asset, no built market. An active opcode is not a product.
+
+**Target network, not deployed.** Open Consensus-Operator admission, several independent operators
+and providers — see [The target open network](../network/open-network-target.md). The exact
+admission mechanism is **`OPEN DESIGN`**: not decided.
+
+**Known coverage gaps.** `BTCSTATE_TX_CONFIRMED` has no dedicated test suite. `OP_CAT`,
+`OP_CHECKSIGFROMSTACK` and the two output-introspection opcodes have unit tests but no end-to-end
+demonstration. The confidentiality of covenant-bearing settlement is not demonstrated.
+
+## Current public testnet
+
+Live (measurement network):
 
 - Genesis block 0: `691b0a7e8cb0e7ee159ef7a4fa10d9c6ddb2d5282e5bac7447846459ff54c730`
 - Public seed: `57.131.33.151:27171`
 - Bitcoin source read by consensus: **Bitcoin testnet4** (mainnet at mainnet)
 
-Demonstrated on testnet:
+Exercised on this network:
 
 - covenants — accept **and** reject paths;
 - Bitcoin headers and Merkle proofs verified inside consensus;
 - burn → M0 → M1;
 - shielded transfers;
-- `TX_CONFIRMED` releasing a covenant on proof of a Bitcoin payment;
-- **paired HTLCs** — an M1 HTLC and a Bitcoin P2WSH HTLC sharing one preimage;
-- Clearing and Liquidity Provider prototypes (`pna-lp`, `pna-swap`) exposing quotes over HTTP.
+- **paired HTLCs** — an M1 HTLC and a Bitcoin P2WSH HTLC sharing one preimage. Components are
+  covered by public test suites; **no reproducible artifact of an end-to-end run is published**.
+
+## Historical demonstrations
+
+Runs from **earlier networks**, kept for the record. They were real; the network they ran against
+is **not** the one live today, and nothing here should be read as describing current behaviour.
+
+- The Clearing and Liquidity Provider prototypes (`pna-lp`, `pna-swap`) exposed quotes over HTTP.
+  They are **decommissioned**: their application state belonged to a superseded network and the
+  services are **not running**. Their HTTP APIs are not available, and no endpoint should be
+  treated as callable.
 
 ## What is not proven
 

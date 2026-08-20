@@ -10,18 +10,23 @@ where the protocol stops.
   1. INVENTORY            2. QUOTES                3. SETTLEMENT           4. OTHERS JOIN
   ────────────            ─────────                ─────────────           ─────────────
   someone holds           publishes signed          a counterparty          another provider
-  the asset (PIVX,        bid/ask for               accepts; both legs      quotes the same
-  DOGE, LTC, BTC…)        PIVX/M1 — off-chain,      settle on BATHRON       pair, tighter,
-  and M1                  on any relay              (the only on-chain step) or deeper
+  the asset (PIVX,        bid/ask for               accepts; the M1 leg     quotes the same
+  DOGE, LTC, BTC…)        PIVX/M1 — off-chain,      settles on BATHRON,     pair, tighter,
+  and M1                  on any relay              the external leg on     or deeper
+                                                    its own native chain,
+                                                    linked by compatible
+                                                    conditions
         │                       │                        │                       │
         └───────────────────────┴────────────────────────┴───────────────────────┘
-                     nobody approves any of it — the protocol only settles step 3
+                     no listing committee approves the pair — the protocol only settles step 3
 ```
 
 **Step 1 — inventory.** A market maker holds the asset to be paired and M1. M1 is acquired
 either from an existing holder or by the one-way route (destroy BTC, receive M0, lock it into M1
-— → [From destroyed BTC to M1](../bitcoin/from-btc-to-m1.md)). That cost is real and irreversible;
-it is recovered through spreads and fees, never through appreciation.
+— → [From destroyed BTC to M1](../bitcoin/from-btc-to-m1.md)). Creating M0 by burn irreversibly
+destroys BTC. The resulting protocol position is transferable and may acquire a market value that
+the protocol neither fixes, supports nor predicts. Whether an activity recovers its economic cost
+is a commercial outcome, not a protocol guarantee.
 
 **Step 2 — quotes.** The maker publishes signed quotes: pair, bid, ask, size, expiry. They travel
 off-chain — a relay, an HTTP endpoint, a message bus. The consensus never sees a quote and never
@@ -43,7 +48,7 @@ because anyone was invited.
 
 | Party | Pays | Earns |
 |---|---|---|
-| Liquidity Provider | inventory cost (irreversible if acquired by burn), capital, market risk | the spread |
+| Liquidity Provider | inventory cost (the BTC destroyed to acquire M0 is gone), capital, market risk | the spread |
 | Clearing Provider | orchestration, deadlines, service | explicit fees |
 | Taker | the spread and fees, disclosed in the quote | the settlement it wanted |
 | Operators | running consensus | block fees only — no reward, no subsidy |

@@ -130,10 +130,11 @@ corruption hard. The levers below turn "bounded" into "priced out."
   Operating a node carries **no guaranteed commercial revenue** — fees are market-driven.
 
 - **External cryptographic audit of the VRF module.** Finality has a single path — the ECVRF
-  sortition — so its implementation is the hardest mainnet gate. An internal audit has already
-  de-risked it (correctness against known-answer vectors, fixed undefined-behavior on malformed
-  proofs, hardened key registration); an **independent external audit is a hard, non-negotiable
-  gate** before real value.
+  sortition — so its implementation is the hardest mainnet gate. What is publicly checkable today
+  is the code and its tests in `bathron-core` — the vendored ECVRF module and
+  `src/test/vrf_tests.cpp`, which exercises it against known-answer vectors. **No external
+  cryptographic audit has been performed**, and an independent one is a hard, non-negotiable gate
+  before real value.
 
 - **Separating the producer and the provider.** An Operator that both produces blocks and also
   competes as a Clearing or Liquidity Provider could, in principle, order or delay a

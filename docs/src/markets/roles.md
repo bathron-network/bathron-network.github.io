@@ -74,13 +74,16 @@ in M1.
 
 ## How providers are paid
 
-The CP charges explicit service fees. LPs quote spreads that compensate inventory acquisition,
-liquidity, capital and operating costs. Competition may compress prices, but the protocol does
-not guarantee liquidity or a price near par.
+The CP charges explicit service fees. LPs set spreads against inventory acquisition, liquidity,
+capital and operating costs. Competition may compress prices, but the protocol does not guarantee
+liquidity, a price near par, or that any spread covers any cost.
 
-The Bitcoin-destruction route is one way an LP can acquire M1 inventory. Because it is
-irreversible, the provider must recover that cost through real service revenue. Expected
-appreciation of M0 or M1 is not a business model.
+The Bitcoin-destruction route is one way an LP can acquire M1 inventory. **The destruction is
+irreversible**: the bitcoin is gone and nothing in the protocol returns it. What the burn produces
+is a transferable M0/M1 position that may carry a market value — a value the protocol neither sets,
+supports nor predicts. Whether service revenue ever covers the cost is a commercial question, and
+this documentation makes no claim either way. Expected appreciation of M0 or M1 is not a business
+model.
 
 Quoting and LP software exist as testnet prototypes; see
 [Status & claims](../consensus/status-and-claims.md).

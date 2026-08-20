@@ -21,8 +21,9 @@ acquisition, liquidity, pricing, operations and software failure — see
 
 ## The prototypes
 
-Two testnet prototypes on the [BATHRON GitHub organization](https://github.com/bathron-network)
-show the two commercial roles:
+Two **historical prototypes, decommissioned** — their state belonged to a superseded network and
+neither service is running. They are read as illustrations of the two commercial roles, not as
+software to point at:
 
 - **`pna-lp`** — a Liquidity Provider service. It holds inventory, prices a pair and exposes
   quotes over plain HTTP: `GET /api/status` for health, and
@@ -53,5 +54,5 @@ represented as a generally atomic or risk-free client service — see
 Interested in evaluating the economics? [Contact us](mailto:contact@bathron.org).
 
 **See also:** [How a market appears](../markets/how-a-market-appears.md) ·
-[Pairing any asset against M1](../markets/pairing-any-asset.md) ·
+[Pairing an external asset against M1](../markets/pairing-any-asset.md) ·
 [Patterns for providers](../reference/patterns-for-providers.md)

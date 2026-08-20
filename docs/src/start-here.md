@@ -1,77 +1,72 @@
 # Start here — BATHRON in five minutes
 
-Today a market exists because an exchange lists it, and it dies when the exchange delists it. Two
-parties who both hold inventory still cannot settle against each other without handing custody to
-a third. Bitcoin settles value beautifully — and deliberately refuses to express the conditions of
-a trade.
+**Build contracts around facts Bitcoin can prove.**
 
-BATHRON is built for exactly that gap.
+BATHRON is an open programmable settlement protocol for markets, instruments and applications
+anchored in Bitcoin.
 
-## What BATHRON is
+> BATHRON is running an **experimental public testnet**. Application building is open;
+> **Consensus-Operator admission is not yet open**.
 
-**An open settlement protocol.** It owns no market and no exchange, and it never decides which
-assets may trade. It provides three things, and only three:
+## The core
 
-1. **A common settlement unit — M1.** Every settlement on the network is expressed in one
-   numéraire. M1 is created only from verified, irreversible Bitcoin destruction; nobody issues it,
-   nobody can print it.
-2. **A consensus that guarantees settlement.** Accounting integrity, Bitcoin facts, the conditions
-   written into contracts, and transfers — final in about a minute.
-3. **An infrastructure any market can be built on.** Covenants, timelocks, hashlocks, Bitcoin-fact
-   verification and confidential transfers, composable by anyone.
+Five things, and they compose:
 
-**Markets belong to whoever builds them.** A market on BATHRON exists because someone brings
-inventory, publishes quotes and finds a counterparty — not because a committee allowed it.
-
-**Bitcoin remains the final asset.** BATHRON does not replace Bitcoin, does not hold BTC, and does
-not compete with it. It reads Bitcoin facts inside its own consensus and settles above it.
-
-## What BATHRON deliberately does not do
-
-No order book. No matching engine. No listing process. No published price. No chosen market
-maker. No token sale, premine, treasury or promised yield. **The consensus only settles.
-Everything else is yours.** → [What BATHRON does not do](provides/what-it-does-not-do.md)
-
-## How a market appears
-
-```text
-1. someone brings inventory        (BTC, PIVX, DOGE, LTC… — and M1)
-2. publishes signed quotes         (off-chain, on any relay — nobody approves them)
-3. a counterparty settles          (M1 leg on BATHRON; an external leg on its own chain, linked)
-4. anyone else joins the same pair (more inventory, tighter spreads — no permission asked)
-```
-
-Native BTC ⇄ M1 is paired with hashlocked legs on both chains sharing one preimage — the
-components have been demonstrated on testnet; a generally atomic client flow is not yet claimed.
-Any other chain that supports hashlocks and timelocks can be paired the same way — a capability
-of the primitives, not a shipped product. → [How a market appears](markets/how-a-market-appears.md)
+1. **Bitcoin facts, verified in consensus.** A script can assert that difficulty at a Bitcoin
+   height was above or below a threshold, that a height was reached, that a median-time-past has
+   passed, or that a Bitcoin transaction paying a given script was confirmed deep enough. Every
+   node checks it. No designated oracle.
+   → [Bitcoin-verifiable contracts](protocol/bitcoin-verifiable-contracts.md)
+2. **Programmable settlement.** Covenants — including recursive ones — output constraints,
+   hashlocks, timelocks, and signature verification over arbitrary messages.
+   → [Programmable settlement](protocol/programmable-settlement.md)
+3. **A settlement unit that nobody issues.** **M0** originates from consensus-verified Bitcoin
+   destruction; **M1** is obtained through the protocol's M0/M1 conversion and accounting rules,
+   with conservation enforced in consensus. **Neither is a redeemable claim on BTC**: no peg, no
+   reserve, no redemption promise.
+   → [Bitcoin is the final asset](bitcoin/final-asset.md)
+4. **Finality in about a minute**, one Consensus Operator one vote.
+   → [Production and finality](consensus/production-and-finality.md)
+5. **Confidential transfers.** Values can move without being published.
 
 ## Who is who
 
-- **Operators** run consensus: produce blocks, sign finality, publish facts. One operator, one
-  vote. They never rank, never choose a provider, never set a price.
-- **Settlement Providers** are participants, not administrators: a Clearing Provider quotes and
-  orchestrates, a Liquidity Provider holds inventory and prices a pair. They appear and disappear
-  freely.
-- **You** build a market, an application, or simply settle. End users settle in the assets they
-  already hold; market builders and providers settle in M1.
+| Role | Does |
+|---|---|
+| **Consensus Operators** | produce blocks and take part in finality |
+| **Settlement Providers** | build settlement services on top of the protocol |
+| **Clearing Providers** | orchestrate settlement conditions and flows |
+| **Liquidity Providers** | hold inventory and publish prices |
+| **Market / Application Builders** | create interfaces, instruments, markets, software |
+| **Users** | choose their application, provider and counterparty |
 
-## The permissionless sentence, both halves
+No role is granted by the protocol except the first, and that one is **not yet open**.
 
-Anyone can build, quote, pair and settle on BATHRON without asking permission. Operator admission
-is **not yet open**: the current operator set is project-run while the open-admission threat model
-is worked. → [Status & claims](consensus/status-and-claims.md)
+## What can be built
 
-## Where you are
+- **Native to Bitcoin facts, no oracle**: difficulty hedges, buried-payment escrows, time-bound
+  agreements, prediction instruments over what Bitcoin proves.
+- **Programmable settlement**: conditional cross-chain flows, covenant-constrained spends, DLC
+  shapes with an external attestation.
+- **Markets**: a pair appears because someone quotes it, not because a committee approved it.
+- **Needing external components**: anything indexed on a price. BATHRON has **no price oracle, no
+  margin engine, no liquidation in consensus**.
 
-Public testnet, live. No mainnet. No external audit yet. No proven market. That page above is the
-only place these caveats are spelled out in full; every other page links to it.
+The full table, with what each thing depends on:
+→ [Application map](build/application-map.md)
 
-## The sentence to take away
+## What is true today, and what is not
 
-> BATHRON is an open settlement infrastructure where anyone can create a market without
-> permission, while Bitcoin remains the ultimate settlement asset.
+Anyone can build an application or propose a settlement flow **without a listing committee**.
+Native Bitcoin facts require **no designated oracle**. External prices and real-world events still
+require **external attestations**.
 
-If that sentence is clear, continue with [The problem](problem/markets-need-permission.md). If you
-want to run something, go to [Run a node](operate/run-a-node.md). If you want to build, start
-with [The infrastructure](provides/infrastructure.md).
+The protocol supplies settlement primitives; applications supply product logic, liquidity and
+interfaces. **Markets are one application of the settlement layer, not the protocol itself.**
+
+The network being aimed at — several independent Consensus Operators, open admission, several
+independent providers — is described in
+[The target open network](network/open-network-target.md). It is a target, not a description of
+today.
+
+→ [Status & claims](consensus/status-and-claims.md) prevails over every other page.
