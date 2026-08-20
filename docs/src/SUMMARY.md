@@ -2,26 +2,32 @@
 
 [Start here — BATHRON in five minutes](start-here.md)
 
-# I. The problem
+# I. The protocol
+
+- [What BATHRON is](protocol/what-bathron-is.md)
+- [Bitcoin-verifiable contracts](protocol/bitcoin-verifiable-contracts.md)
+- [Programmable settlement](protocol/programmable-settlement.md)
+
+# II. The problem
 
 - [Markets need permission today](problem/markets-need-permission.md)
 - [What Bitcoin does, and where it stops](problem/what-bitcoin-does.md)
 - [Why not an exchange, a bridge, or a stablecoin](problem/why-not-alternatives.md)
 
-# II. What BATHRON provides
+# III. What BATHRON provides
 
 - [The settlement unit: M1](provides/settlement-unit-m1.md)
 - [Settlement guarantees: what consensus enforces](provides/settlement-guarantees.md)
 - [The infrastructure: what you can build on](provides/infrastructure.md)
 - [What BATHRON deliberately does not do](provides/what-it-does-not-do.md)
 
-# III. Markets on BATHRON
+# IV. Markets — one application of the layer
 
 - [How a market appears](markets/how-a-market-appears.md)
 - [Quotes live off-chain, settlement on-chain](markets/quotes-off-chain.md)
 - [Roles: Operators, Settlement Providers, users](markets/roles.md)
-- [Native BTC ⇄ M1: the atomic pair](markets/native-btc-pair.md)
-- [Pairing any asset against M1](markets/pairing-any-asset.md)
+- [Native BTC ⇄ M1: paired HTLC components](markets/native-btc-pair.md)
+- [Pairing an external asset against M1](markets/pairing-any-asset.md)
 - [Settlement patterns](markets/patterns.md)
   - [Delivery-versus-payment and OTC](markets/patterns/dvp-otc.md)
   - [Conditional escrow](markets/patterns/escrow.md)
@@ -29,13 +35,17 @@
   - [Fixed-term value positions](markets/patterns/fixed-term-value.md)
 - [Confidential settlement](markets/confidential-settlement.md)
 
-# IV. Bitcoin at the center
+# V. Bitcoin at the center
 
 - [Bitcoin is the final asset](bitcoin/final-asset.md)
 - [From destroyed BTC to M1](bitcoin/from-btc-to-m1.md)
 - [Bitcoin facts inside consensus](bitcoin/facts-in-consensus.md)
 
-# V. The consensus — and why it is minimal
+# VI. The network
+
+- [The target open network](network/open-network-target.md)
+
+# VII. The consensus — and why it is minimal
 
 - [Why the consensus is frozen](consensus/why-frozen.md)
 - [Production and finality](consensus/production-and-finality.md)
@@ -43,17 +53,18 @@
 - [Open-network hardening](consensus/open-network-hardening.md)
 - [Status & claims](consensus/status-and-claims.md)
 
-# VI. Build & operate
+# VIII. Build & operate
 
 - [Run a node](operate/run-a-node.md)
 - [Run a wallet](operate/run-a-wallet.md)
 - [Create your first market](operate/create-your-first-market.md)
 - [Build your first application](operate/first-application.md)
+- [Application map](build/application-map.md)
 - [SDK](build/sdk.md)
 - [RPC API](build/api.md)
 - [Examples](build/examples.md)
 
-# VII. Reference
+# IX. Reference
 
 - [Transaction types](reference/transaction-types.md)
 - [Script & opcodes](reference/opcodes.md)

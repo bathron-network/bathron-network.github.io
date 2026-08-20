@@ -20,7 +20,7 @@ of it can be free.
 | **no issuer, no freeze list, no redemption desk** | the burn is one-way; nobody holds a reserve, so nobody can gate access to it |
 | **no slashing** | deterrence is the up-front cost of acquiring M0 collateral plus loss of eligibility; a slashing bug can destroy honest operators' funds — this will not be reconsidered |
 | **no protocol ranking of operators or providers** | the protocol publishes facts (age, blocks produced, service history) and never a judgement; 1 operator = 1 vote |
-| **no general-purpose VM** | scripts terminate and stay auditable; the covenant surface is frozen |
+| **no general-purpose VM** | scripts terminate and stay auditable; the deployed covenant surface is intentionally narrow |
 
 ## What the consensus does instead
 
@@ -35,7 +35,7 @@ following sentence true: **markets belong to whoever builds them.** A protocol t
 be neutral about listing; a protocol that ranks cannot be neutral about providers; a protocol
 that mints cannot be neutral about value.
 
-The consensus is frozen so that this list stays true. Any future value must be built above it —
+The currently deployed surface is intentionally narrow. Any consensus change requires an explicit protocol and governance decision. That is what keeps this list true. Any future value must be built above it —
 which is exactly what part III describes.
 
 **Next:** [How a market appears](../markets/how-a-market-appears.md)

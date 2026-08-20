@@ -46,8 +46,10 @@ belongs to the wallet and the user, never to the protocol.
 The Clearing/Liquidity Provider prototype (`pna-lp`) exposes quotes and settlement over HTTP:
 `GET /api/quote?from=…&to=…&amount=…` returns a priced quote; `/api/status`, `/api/lps`,
 `/api/reputation` expose provider state, announced providers and observable history; the swap
-front-end (`pna-swap`) consumes them. Both are **testnet prototypes** published on the BATHRON
-GitHub organization — an illustration of the split above, not a standard and not a product.
+front-end (`pna-swap`) consumes them. Both are **historical testnet prototypes, decommissioned**:
+their application state belonged to a superseded network and the services are not running. They
+illustrate the split above — they are not a standard, not a product, and not a service you can
+call today.
 → [Create your first market](../operate/create-your-first-market.md)
 
 ## The maker's real problem: the free option
