@@ -49,9 +49,15 @@
 
   /* ---- provides / does not ---- */
   .three{display:grid;gap:14px;margin-top:30px}
+  @media (min-width:760px){.three{grid-template-columns:1fr 1fr}}
   .three div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
   .three h3{margin:0 0 6px;font-size:17px}
   .three p{margin:0;color:var(--muted);font-size:15px}
+  .three a.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+                padding:18px 20px;text-decoration:none;transition:border-color .15s,background .15s}
+  .three a.card:hover{border-color:var(--gold);background:#10141B}
+  .three a.card h3{color:var(--gold)}
+  .three a.card h3::after{content:" \2192";opacity:.7}
 
   .fine{margin:12px auto 0;max-width:60ch;text-align:center;color:var(--muted);font-size:13.5px}
 
@@ -67,8 +73,8 @@
   footer{margin:96px 0 0;padding:28px 0 40px;border-top:1px solid var(--line);
          display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
          color:var(--muted);font-size:13.5px}
-  footer a{color:var(--muted);text-decoration:none}
-  footer a:hover{color:var(--gold)}
+  footer a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--dim)}
+  footer a:hover{color:var(--gold);text-decoration-color:var(--gold)}
 </style>
 </head>
 <body>
@@ -166,12 +172,13 @@
     <p class="eyebrow">Start here</p>
     <h2>Build on the settlement layer.</h2>
     <div class="three" style="margin-top:1.6rem">
-      <div><h3><a href="/docs/">Read the documentation</a></h3><p>The protocol, the primitives and the reference.</p></div>
-      <div><h3><a href="/docs/build/application-map.html">Explore applications</a></h3><p>What the layer makes buildable, and what each one needs.</p></div>
-      <div><h3><a href="/docs/operate/run-a-node.html">Run a node</a></h3><p>Verify the chain yourself, from your own machine.</p></div>
+      <a class="card" href="/docs/"><h3>Read the documentation</h3><p>The protocol, the primitives and the reference.</p></a>
+      <a class="card" href="/docs/build/application-map.html"><h3>Explore applications</h3><p>What the layer makes buildable, and what each one needs.</p></a>
+      <a class="card" href="/docs/operate/run-a-node.html"><h3>Run a node</h3><p>Verify the chain yourself, from your own machine.</p></a>
+      <a class="card" href="https://explorer.bathron.org/"><h3>Public explorer</h3><p>Watch the network produce and finalize blocks, live.</p></a>
+      <a class="card" href="https://github.com/bathron-network/bathron-core" target="_blank" rel="noopener"><h3>Source code</h3><p>The node implementation, on GitHub.</p></a>
+      <a class="card" href="/docs/consensus/status-and-claims.html"><h3>Network status</h3><p>What runs today, and what the protocol does not claim.</p></a>
     </div>
-    <p class="fine" style="margin-top:1.8rem">Explore the public testnet and read the current network status.<br>
-    <a href="https://explorer.bathron.org/">Public explorer</a> and <a href="/docs/consensus/status-and-claims.html">Status &amp; claims</a>.</p>
   </section>
 
   <footer>
