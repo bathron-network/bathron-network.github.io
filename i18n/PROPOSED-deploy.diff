@@ -1,0 +1,36 @@
+--- a/.github/workflows/deploy.yml
++++ b/.github/workflows/deploy.yml
+@@ -46,10 +46,32 @@
+       - name: Build docs
+         run: mdbook build docs
+ 
++      # i18n de la page d'accueil. Aucune dépendance externe : ni po4a, ni
++      # gettext, ni service tiers — le générateur est un script Python de la
++      # bibliothèque standard. po4a a été évalué puis ÉCARTÉ (il reformate le
++      # bloc <style> et fait entrer tout le CSS dans le catalogue ; sous une
++      # règle « 100 % ou rien », changer une couleur casserait le build FR).
++      # Version de Python épinglée pour que le rendu soit reproductible.
++      - name: Set up Python
++        uses: actions/setup-python@v5
++        with:
++          python-version: '3.12'
++
++      # Fail-closed : une chaîne anglaise manquante, vide ou marquée fuzzy
++      # dans i18n/homepage.fr.po fait échouer CETTE étape, donc tout le
++      # déploiement. Une page française périmée ou partielle ne peut pas être
++      # publiée — et comme fr/index.html n'est pas versionné, il n'existe
++      # aucune ancienne copie à servir à la place.
++      - name: Build the French homepage (fail-closed)
++        run: |
++          python3 i18n/i18n.py check fr
++          python3 i18n/i18n.py build fr
++
+       - name: Assemble site
+         run: |
+-          mkdir -p _site/docs
++          mkdir -p _site/docs _site/fr
+           cp index.html CNAME robots.txt sitemap.xml 404.html _site/
++          cp fr/index.html _site/fr/
+           cp -r img _site/
+           cp -r docs/book/. _site/docs/
+ 

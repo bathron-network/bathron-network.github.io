@@ -1,0 +1,282 @@
+# BATHRON homepage — GENERATED, DO NOT EDIT BY HAND.
+# Regenerate with: python3 i18n/i18n.py extract
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "BATHRON: Programmable settlement anchored in Bitcoin"
+msgstr ""
+
+msgid "A programmable settlement protocol anchored in Bitcoin. Build contracts, instruments, markets and applications around facts every BATHRON node can verify."
+msgstr ""
+
+msgid "Build contracts, instruments, markets and applications around facts every BATHRON node can verify. Covenants, hashlocks, timelocks and confidential transfers."
+msgstr ""
+
+msgid "BATHRON: programmable settlement anchored in Bitcoin"
+msgstr ""
+
+msgid "BATHRON emblem"
+msgstr ""
+
+msgid "BATHRON"
+msgstr ""
+
+msgctxt "hero"
+msgid "Programmable settlement"
+msgstr ""
+
+msgctxt "hero"
+msgid "anchored in Bitcoin."
+msgstr ""
+
+msgid "Build contracts, instruments, markets and applications around facts every BATHRON node can verify."
+msgstr ""
+
+msgid "EN"
+msgstr ""
+
+msgid "/"
+msgstr ""
+
+msgid "FR"
+msgstr ""
+
+msgid "Explore the protocol"
+msgstr ""
+
+msgid "See what can be built"
+msgstr ""
+
+msgid "Run a node"
+msgstr ""
+
+msgid "View network status"
+msgstr ""
+
+msgid "Facts, not opinions"
+msgstr ""
+
+msgid "Bitcoin already proves things. Now a contract can use them."
+msgstr ""
+
+msgid "Bitcoin records facts that contracts can verify. BATHRON carries the relevant Bitcoin headers in consensus, so every node evaluates the same evidence."
+msgstr ""
+
+msgid "Mining difficulty"
+msgstr ""
+
+msgid "The mining difficulty recorded at a given Bitcoin height."
+msgstr ""
+
+msgid "Block height"
+msgstr ""
+
+msgid "How far the chain has advanced."
+msgstr ""
+
+msgid "Median time"
+msgstr ""
+
+msgid "Bitcoin's own clock, resistant to a single miner's timestamp."
+msgstr ""
+
+msgid "Confirmed payments"
+msgstr ""
+
+msgid "A payment to a given script, included and buried in Bitcoin’s chain."
+msgstr ""
+
+msgid "How Bitcoin facts are verified →"
+msgstr ""
+
+msgid "Programmable settlement"
+msgstr ""
+
+msgid "Write the conditions. The network enforces them."
+msgstr ""
+
+msgid "Settlement on BATHRON is described in script and carried out by consensus. The same primitives compose, so a single agreement can depend on a Bitcoin fact, a secret and a deadline at once."
+msgstr ""
+
+msgid "Covenants"
+msgstr ""
+
+msgid "Constrain what a spend is allowed to become."
+msgstr ""
+
+msgid "Hashlocks"
+msgstr ""
+
+msgid "Release value against the reveal of a secret."
+msgstr ""
+
+msgid "Timelocks"
+msgstr ""
+
+msgid "Make an outcome depend on time, absolute or relative."
+msgstr ""
+
+msgid "Signatures and attestations"
+msgstr ""
+
+msgid "Verify a signature over any message, including one from an outside source."
+msgstr ""
+
+msgid "Confidential transfers"
+msgstr ""
+
+msgid "Move value without publishing the amount."
+msgstr ""
+
+msgid "Covenants, attestations and confidentiality →"
+msgstr ""
+
+msgid "One protocol, many applications"
+msgstr ""
+
+msgid "What becomes possible."
+msgstr ""
+
+msgid "Mining difficulty instruments"
+msgstr ""
+
+msgid "Agreements that settle on Bitcoin's own difficulty, with no outside reporter involved."
+msgstr ""
+
+msgid "Payment-driven escrows"
+msgstr ""
+
+msgid "Value that releases when a Bitcoin payment is confirmed and settled deeply enough."
+msgstr ""
+
+msgid "Programmable financial agreements"
+msgstr ""
+
+msgid "Terms, deadlines and outcomes written once and enforced by the network."
+msgstr ""
+
+msgid "Open markets and cross-chain flows"
+msgstr ""
+
+msgid "Pairs quoted by whoever holds inventory, settled against linked conditions."
+msgstr ""
+
+msgid "The full application map →"
+msgstr ""
+
+msgid "A network of distinct roles"
+msgstr ""
+
+msgid "Three roles, kept apart on purpose."
+msgstr ""
+
+msgid "Consensus Operators"
+msgstr ""
+
+msgid "Secure the network, order transactions and finalize them. One operator, one vote."
+msgstr ""
+
+msgid "Settlement Providers"
+msgstr ""
+
+msgid "Create the services and settlement flows that people actually use. They compete, and they come and go."
+msgstr ""
+
+msgid "Builders"
+msgstr ""
+
+msgid "Compose applications and instruments on top, choosing their own interfaces and their own terms."
+msgstr ""
+
+msgid "No consensus operator chooses which application may be built."
+msgstr ""
+
+msgid "Bitcoin remains the anchor"
+msgstr ""
+
+msgid "The anchor is Bitcoin, and it stays where it is."
+msgstr ""
+
+msgid "M0 originates from Bitcoin destruction verified by consensus. Protocol conversion moves value from M0 into M1, the unit used for settlement."
+msgstr ""
+
+msgid "Bitcoin remains the monetary anchor. BATHRON verifies its history directly and provides the programmable settlement layer built around it."
+msgstr ""
+
+msgid "Why Bitcoin is the final asset →"
+msgstr ""
+
+msgid "Markets, as one application"
+msgstr ""
+
+msgid "A pair exists because someone quotes it."
+msgstr ""
+
+msgid "A provider with inventory can publish offers for a pair. Other providers can quote the same pair independently. Markets emerge from available inventory and executable settlement conditions, not from a listing decision."
+msgstr ""
+
+msgid "See how a market is built →"
+msgstr ""
+
+msgid "Start here"
+msgstr ""
+
+msgid "Build on the settlement layer."
+msgstr ""
+
+msgid "Read the documentation"
+msgstr ""
+
+msgid "The protocol, the primitives and the reference."
+msgstr ""
+
+msgid "Explore applications"
+msgstr ""
+
+msgid "What the layer makes buildable, and what each one needs."
+msgstr ""
+
+msgid "Verify the chain yourself, from your own machine."
+msgstr ""
+
+msgid "Public explorer"
+msgstr ""
+
+msgid "Watch the network produce and finalize blocks, live."
+msgstr ""
+
+msgid "Source code"
+msgstr ""
+
+msgid "The node implementation, on GitHub."
+msgstr ""
+
+msgid "Network status"
+msgstr ""
+
+msgid "What runs today, and what the protocol does not claim."
+msgstr ""
+
+msgid "contact@bathron.org"
+msgstr ""
+
+msgid ","
+msgstr ""
+
+msgid "releases"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
+msgid "security policy"
+msgstr ""
+
+msgid "Report a vulnerability to"
+msgstr ""
+
+msgid "security@bathron.org"
+msgstr ""
+
