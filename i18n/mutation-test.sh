@@ -1,137 +1,208 @@
 #!/usr/bin/env bash
-# BATHRON homepage i18n — MANDATORY mutation test.
+# BATHRON homepage i18n — MANDATORY fail-closed mutation test.
 #
-# Proves, by execution rather than by argument, that an English change which is
-# not reflected in the French catalogue CANNOT produce a published French page.
+# Proves by execution, not by argument, that a French page which is incomplete,
+# stale, fuzzy, duplicated or built from a malformed catalogue CANNOT be
+# published.
 #
-# Run from the repository root:  bash i18n/mutation-test.sh
-# Exit 0 = the fail-closed guarantee holds. Any other exit = it does not.
+# The whole test runs inside a throwaway COPY of the source files. The calling
+# worktree is never written to; that is asserted, not assumed, by comparing
+# SHA-256 digests and `git status` before and after. There is no reset, no
+# clean and no recursive delete outside the temporary directory.
+#
+#   bash i18n/mutation-test.sh          exit 0 = the guarantee holds
 set -u
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
-SRC=index.html
-PO=i18n/homepage.fr.po
-OUT=fr/index.html
-BAK="$(mktemp -d)"
-STEP=0
+
 FAILED=0
+STEP=0
+say()  { STEP=$((STEP+1)); printf '\n=== STEP %d — %s ===\n' "$STEP" "$1"; }
+ok()   { printf '  PASS  %s\n' "$1"; }
+bad()  { printf '  FAIL  %s\n' "$1"; FAILED=1; }
 
-cp "$SRC" "$BAK/index.html"
-cp "$PO"  "$BAK/homepage.fr.po"
+# ---------------------------------------------------------------- guard rails
+GUARDED=(index.html i18n/homepage.fr.po i18n/i18n.py i18n/mutation-test.sh)
+declare -A BEFORE
+for f in "${GUARDED[@]}"; do
+    BEFORE[$f]="$(sha256sum "$f" | cut -d' ' -f1)"
+done
+GIT_BEFORE="$(git status --porcelain 2>/dev/null || echo '(not a git worktree)')"
 
-restore() {
-    cp "$BAK/index.html" "$SRC"
-    cp "$BAK/homepage.fr.po" "$PO"
-    python3 i18n/i18n.py extract >/dev/null
-    rm -rf "$BAK"
+if ! command -v msgmerge >/dev/null 2>&1; then
+    printf 'MUTATION TEST: FAIL — msgmerge not found.\n'
+    printf 'The fuzzy case must exercise the real GNU gettext output, not a\n'
+    printf 'hand-written imitation of it. Install the "gettext" package.\n'
+    exit 1
+fi
+
+SANDBOX="$(mktemp -d -t bathron-i18n-mutation-XXXXXX)"
+cleanup() {
+    # bounded: only the directory this script created
+    case "$SANDBOX" in
+        /tmp/bathron-i18n-mutation-*|/var/folders/*) rm -rf "$SANDBOX" ;;
+        *) printf '  refusing to remove unexpected sandbox path %s\n' "$SANDBOX" ;;
+    esac
 }
-trap restore EXIT
+trap cleanup EXIT
 
-say() { STEP=$((STEP+1)); printf '\n=== STEP %d — %s ===\n' "$STEP" "$1"; }
-ok()  { printf '  PASS  %s\n' "$1"; }
-bad() { printf '  FAIL  %s\n' "$1"; FAILED=1; }
+mkdir -p "$SANDBOX/i18n"
+cp index.html            "$SANDBOX/index.html"
+cp i18n/i18n.py          "$SANDBOX/i18n/i18n.py"
+cp i18n/homepage.fr.po   "$SANDBOX/i18n/homepage.fr.po"
+printf '  sandbox: %s\n' "$SANDBOX"
+
+PO="$SANDBOX/i18n/homepage.fr.po"
+SRC="$SANDBOX/index.html"
+OUT="$SANDBOX/fr/index.html"
+PRISTINE_PO="$SANDBOX/pristine.po"
+PRISTINE_SRC="$SANDBOX/pristine.html"
+cp "$PO" "$PRISTINE_PO"
+cp "$SRC" "$PRISTINE_SRC"
+
+run()      { ( cd "$SANDBOX" && python3 i18n/i18n.py "$@" ); }
+reset_sandbox() { cp "$PRISTINE_PO" "$PO"; cp "$PRISTINE_SRC" "$SRC"; run extract >/dev/null; }
 
 ORIG='Verify the chain yourself, from your own machine.'
 MUT='Verify the chain yourself, from your own laptop.'
 
+expect_refusal() {   # $1 = human label
+    local label="$1" rc
+    run build fr >/dev/null 2>&1; rc=$?
+    if [ "$rc" -eq 0 ]; then bad "$label: build succeeded, expected refusal"; return; fi
+    ok "$label: build refused (exit $rc)"
+    if [ -e "$OUT" ]; then bad "$label: fr/index.html survives a refused build"
+    else ok "$label: no French page on disk"; fi
+}
+
 # ---------------------------------------------------------------- 1
 say 'clean build succeeds'
-python3 i18n/i18n.py extract >/dev/null
-python3 i18n/i18n.py build fr
-rc=$?
-[ $rc -eq 0 ] && ok "build exited 0" || bad "build exited $rc, expected 0"
-[ -f "$OUT" ] && ok "$OUT exists" || bad "$OUT missing"
-BUILT_SIZE=$(wc -c < "$OUT" 2>/dev/null || echo 0)
+run extract >/dev/null
+if run build fr >/dev/null; then ok 'build exited 0'; else bad 'clean build failed'; fi
+if [ -f "$OUT" ]; then
+    SIZE=$(wc -c < "$OUT"); ok "fr/index.html built ($SIZE bytes)"
+else
+    bad 'fr/index.html not produced'; SIZE=0
+fi
+grep -q '<html lang="fr"' "$OUT" 2>/dev/null && ok 'page declares lang="fr"' \
+    || bad 'page does not declare lang="fr"'
 
 # ---------------------------------------------------------------- 2
-say 'mutate one English sentence, leave the catalogue untouched'
-grep -qF "$ORIG" "$SRC" || { bad "anchor sentence not found in $SRC"; exit 1; }
+say 'English changed, catalogue untouched'
 python3 - "$SRC" "$ORIG" "$MUT" <<'PY'
 import sys
-p, a, b = sys.argv[1], sys.argv[2], sys.argv[3]
+p, a, b = sys.argv[1:4]
 s = open(p, encoding='utf-8').read()
 assert s.count(a) == 1, f'anchor appears {s.count(a)} times'
 open(p, 'w', encoding='utf-8').write(s.replace(a, b))
 PY
-grep -qF "$MUT" "$SRC" && ok "English source mutated" || bad "mutation did not apply"
-cmp -s "$PO" "$BAK/homepage.fr.po" && ok "French catalogue untouched" || bad "catalogue changed"
+cmp -s "$PO" "$PRISTINE_PO" && ok 'catalogue untouched' || bad 'catalogue changed'
+run extract >/dev/null
+expect_refusal 'missing translation'
+ok "the ${SIZE}-byte page from step 1 was removed, not served stale"
+reset_sandbox
 
 # ---------------------------------------------------------------- 3
-say 'rebuild must FAIL (missing translation)'
-python3 i18n/i18n.py extract >/dev/null
-python3 i18n/i18n.py build fr
-rc=$?
-[ $rc -ne 0 ] && ok "build exited $rc (non-zero)" || bad "build exited 0 — fail-closed BROKEN"
+say 'catalogue absent'
+mv "$PO" "$SANDBOX/parked.po"
+expect_refusal 'absent catalogue'
+mv "$SANDBOX/parked.po" "$PO"
+reset_sandbox
 
 # ---------------------------------------------------------------- 4
-say 'no stale French page may survive a failed build'
-if [ -e "$OUT" ]; then
-    bad "$OUT still present after a failed build ($(wc -c < "$OUT") bytes)"
-else
-    ok "$OUT absent — the previous ${BUILT_SIZE}-byte page was removed, not served stale"
-fi
+say 'fuzzy entry (as produced by msgmerge)'
+python3 - "$SRC" "$ORIG" "$MUT" <<'PY'
+import sys
+p, a, b = sys.argv[1:4]
+s = open(p, encoding='utf-8').read()
+open(p, 'w', encoding='utf-8').write(s.replace(a, b))
+PY
+run extract >/dev/null
+msgmerge --quiet --update --backup=none "$PO" "$SANDBOX/i18n/homepage.pot"
+grep -q '^#, fuzzy' "$PO" && ok 'msgmerge flagged the entry fuzzy' \
+    || bad 'msgmerge produced no fuzzy flag'
+# msgmerge also emits "#| msgid" hints and may comment the old entry out
+python3 - "$PO" <<'PY'
+import sys
+p = sys.argv[1]
+keep = [l for l in open(p, encoding='utf-8').read().split('\n')
+        if not l.startswith('#|') and not l.startswith('#~')]
+open(p, 'w', encoding='utf-8').write('\n'.join(keep))
+PY
+expect_refusal 'fuzzy entry'
 
 # ---------------------------------------------------------------- 5
-say 'msgmerge marks the entry fuzzy — a fuzzy entry must ALSO block the build'
-msgmerge --quiet --update --backup=none "$PO" i18n/homepage.pot
-if grep -q '^#, fuzzy' "$PO"; then
-    ok "entry flagged fuzzy by msgmerge"
-else
-    bad "msgmerge produced no fuzzy flag"
-fi
-python3 i18n/i18n.py build fr
-rc=$?
-[ $rc -ne 0 ] && ok "build exited $rc — fuzzy is not publishable" || bad "fuzzy entry was published"
-[ -e "$OUT" ] && bad "$OUT present after fuzzy-refused build" || ok "$OUT still absent"
-
-# ---------------------------------------------------------------- 6
-say 'translate the mutation and clear fuzzy — build must succeed again'
+say 'fuzzy cleared and translated — build succeeds again'
 python3 - "$PO" "$MUT" <<'PY'
-import sys, re
+import sys
 p, mut = sys.argv[1], sys.argv[2]
 lines = open(p, encoding='utf-8').read().split('\n')
 out, i = [], 0
 while i < len(lines):
     ln = lines[i]
-    if ln.startswith('#, ') and 'fuzzy' in ln:
-        rest = [f.strip() for f in ln[3:].split(',') if f.strip() != 'fuzzy']
+    if ln.startswith('#,') and 'fuzzy' in ln:
+        rest = [f.strip() for f in ln[2:].split(',') if f.strip() != 'fuzzy']
         if rest: out.append('#, ' + ', '.join(rest))
-        i += 1; continue
-    if ln.startswith('#| '):          # msgmerge's previous-msgid comment
         i += 1; continue
     if ln == f'msgid "{mut}"':
         out.append(ln)
-        out.append('msgstr "Vérifier la chaîne vous-même, depuis votre ordinateur portable."')
-        i += 2                        # skip the stale msgstr line
-        continue
+        out.append('msgstr "Verifiez la chaine depuis votre propre ordinateur."')
+        i += 2; continue
     out.append(ln); i += 1
 open(p, 'w', encoding='utf-8').write('\n'.join(out))
 PY
-grep -q '^#, fuzzy' "$PO" && bad "fuzzy flags remain" || ok "no fuzzy flag left"
-python3 i18n/i18n.py build fr
-rc=$?
-[ $rc -eq 0 ] && ok "build exited 0" || bad "build exited $rc, expected 0"
-[ -f "$OUT" ] && ok "$OUT rebuilt" || bad "$OUT missing"
-grep -qF 'ordinateur portable' "$OUT" && ok "new translation present in the page" \
-    || bad "new translation absent from the page"
+grep -q '^#, fuzzy' "$PO" && bad 'a fuzzy flag remains' || ok 'no fuzzy flag left'
+if run build fr >/dev/null; then ok 'build exited 0'; else bad 'build failed after translating'; fi
+grep -qF 'Verifiez la chaine depuis votre propre ordinateur.' "$OUT" 2>/dev/null \
+    && ok 'the new translation is in the page' || bad 'new translation absent from the page'
+reset_sandbox
+
+# ---------------------------------------------------------------- 6
+say 'duplicate entry in the catalogue'
+python3 - "$PO" <<'PY'
+import sys
+p = sys.argv[1]
+s = open(p, encoding='utf-8').read()
+i = s.index('msgid "', s.index('msgstr ""') + 8)      # first real entry
+j = s.index('\n\n', i) + 2
+open(p, 'w', encoding='utf-8').write(s[:j] + s[i:j] + s[j:])
+PY
+expect_refusal 'duplicate entry'
+reset_sandbox
 
 # ---------------------------------------------------------------- 7
-say 'restore the clean tree'
-restore
-trap - EXIT
-python3 i18n/i18n.py build fr >/dev/null
-if cmp -s "$SRC" <(git show HEAD:index.html 2>/dev/null) || true; then :; fi
-python3 i18n/i18n.py check fr >/dev/null && ok "catalogue clean again" || bad "catalogue not clean"
-grep -qF "$ORIG" "$SRC" && ok "English source restored" || bad "source not restored"
-grep -qF 'ordinateur portable' "$PO" && bad "test translation leaked into the catalogue" \
-    || ok "catalogue restored"
+say 'malformed catalogue entry'
+printf 'this line is not valid PO syntax\n' >> "$PO"
+expect_refusal 'malformed catalogue'
+reset_sandbox
+
+# ---------------------------------------------------------------- 8
+say 'sandbox recovered, and the calling worktree was never touched'
+if run build fr >/dev/null; then ok 'sandbox builds again after every mutation'
+else bad 'sandbox does not build after restoration'; fi
+cmp -s "$SRC" "$PRISTINE_SRC" && ok 'sandbox index.html byte-identical to pristine' \
+    || bad 'sandbox index.html diverged'
+cmp -s "$PO" "$PRISTINE_PO" && ok 'sandbox catalogue byte-identical to pristine' \
+    || bad 'sandbox catalogue diverged'
+
+for f in "${GUARDED[@]}"; do
+    now="$(sha256sum "$f" | cut -d' ' -f1)"
+    if [ "$now" = "${BEFORE[$f]}" ]; then ok "unchanged: $f"
+    else bad "MODIFIED: $f (${BEFORE[$f]} -> $now)"; fi
+done
+GIT_AFTER="$(git status --porcelain 2>/dev/null || echo '(not a git worktree)')"
+if [ "$GIT_BEFORE" = "$GIT_AFTER" ]; then ok 'git status identical before and after'
+else
+    bad 'git status changed'
+    printf '    before: %s\n    after : %s\n' "$GIT_BEFORE" "$GIT_AFTER"
+fi
 
 printf '\n================================\n'
 if [ $FAILED -eq 0 ]; then
-    printf 'MUTATION TEST: PASS — a stale or partial French page cannot be published.\n'
+    printf 'MUTATION TEST: PASS — no incomplete, stale, fuzzy, duplicated or\n'
+    printf 'malformed French catalogue can produce a published page.\n'
     exit 0
-else
-    printf 'MUTATION TEST: FAIL\n'
-    exit 1
 fi
+printf 'MUTATION TEST: FAIL\n'
+exit 1

@@ -13,7 +13,7 @@
 <meta property="og:title" content="BATHRON: Programmable settlement anchored in Bitcoin">
 <meta property="og:description" content="Build contracts, instruments, markets and applications around facts every BATHRON node can verify. Covenants, hashlocks, timelocks and confidential transfers.">
 <meta property="og:image" content="https://bathron.org/img/og.png">
-<meta property="og:url" content="https://bathron.org">
+<meta property="og:url" content="https://bathron.org/">
 <meta name="twitter:card" content="summary_large_image">
 <style>
   :root{
@@ -84,6 +84,11 @@
          color:var(--muted);font-size:13.5px}
   footer a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--dim)}
   footer a:hover{color:var(--gold);text-decoration-color:var(--gold)}
+  /* Separators are drawn by CSS, never by text nodes: a lone "," or "and"
+     between links is untranslatable in isolation and drifts between
+     languages. */
+  .footlinks a + a::before{content:"·";margin:0 .55em;color:var(--muted);
+         display:inline-block;text-decoration:none}
 </style>
 </head>
 <body>
@@ -194,7 +199,7 @@
   <footer>
     <span>BATHRON<br>
     <a href="mailto:contact@bathron.org">contact@bathron.org</a><br>
-    <a href="https://github.com/bathron-network/bathron-core" target="_blank" rel="noopener">Source code</a>, <a href="https://github.com/bathron-network/bathron-core/releases" target="_blank" rel="noopener">releases</a> and <a href="https://github.com/bathron-network/bathron-core/blob/main/SECURITY.md" target="_blank" rel="noopener">security policy</a><br>
+    <span class="footlinks"><a href="https://github.com/bathron-network/bathron-core" target="_blank" rel="noopener">Source code</a><a href="https://github.com/bathron-network/bathron-core/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/bathron-network/bathron-core/blob/main/SECURITY.md" target="_blank" rel="noopener">Security policy</a></span><br>
     Report a vulnerability to <a href="mailto:security@bathron.org">security@bathron.org</a></span>
   </footer>
 
