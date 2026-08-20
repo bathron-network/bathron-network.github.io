@@ -15,7 +15,7 @@ where the protocol stops.
   and M1                  on any relay              (the only on-chain step) or deeper
         │                       │                        │                       │
         └───────────────────────┴────────────────────────┴───────────────────────┘
-                     nobody approves any of it — the protocol only settles step 3
+                     no listing committee approves the pair — the protocol only settles step 3
 ```
 
 **Step 1 — inventory.** A market maker holds the asset to be paired and M1. M1 is acquired

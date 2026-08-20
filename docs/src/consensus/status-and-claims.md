@@ -57,6 +57,35 @@ The mechanical launch steps (mine and pin the mainnet genesis with a recency pro
 covenant gates to active, ship the non-disposable bootstrap tooling) are written down and mostly
 built — execution, not research. The research-shaped prerequisites are the hardening track.
 
+## How to read the four labels
+
+This documentation labels every capability. The labels are load-bearing:
+
+| Label | Means |
+|---|---|
+| `LIVE NOW` | works on the current public testnet |
+| `TESTED` | has tests, no complete product |
+| `AVAILABLE PRIMITIVE` | buildable with no consensus change — **not built** |
+| `TARGET NETWORK` | the architecture being aimed at — **not deployed** |
+
+**Active primitives.** The covenant, introspection and Bitcoin-fact opcodes are active in
+consensus on this testnet: `OP_BTCSTATEVERIFY`, `OP_TEMPLATEVERIFY`, `OP_CHECKSIGFROMSTACK`,
+`OP_CAT`, `OP_CHECKOUTPUTVALUE`, `OP_CHECKOUTPUTSCRIPT`, `OP_PUSHCURRENTSCRIPT`, plus the two
+timelock opcodes. Declared in `src/script/script.h`, implemented in `src/script/interpreter.cpp`.
+
+**Demonstrations.** Paired-HTLC settlement against Bitcoin, covenant accept **and** reject paths.
+
+**Products that do not exist.** No price oracle, no margin engine, no liquidation in consensus, no
+synthetic asset, no built market. An active opcode is not a product.
+
+**Target network, not deployed.** Open Consensus-Operator admission, several independent operators
+and providers — see [The target open network](../network/open-network-target.md). The exact
+admission mechanism is **`OPEN DESIGN`**: not decided.
+
+**Known coverage gaps.** `BTCSTATE_TX_CONFIRMED` has no dedicated test suite. `OP_CAT`,
+`OP_CHECKSIGFROMSTACK` and the two output-introspection opcodes have unit tests but no end-to-end
+demonstration. The confidentiality of covenant-bearing settlement is not demonstrated.
+
 ## What runs today
 
 Public testnet, live (measurement network):

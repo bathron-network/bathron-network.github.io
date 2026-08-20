@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BATHRON — Create a market. No permission required.</title>
+<title>BATHRON — Build contracts around facts Bitcoin can prove.</title>
 <meta name="description" content="An open settlement protocol. Markets belong to whoever builds them. Bitcoin remains the final asset.">
 <link rel="icon" type="image/png" href="/img/favicon.png">
-<meta property="og:title" content="BATHRON — Create a market. No permission required.">
+<meta property="og:title" content="BATHRON — Build contracts around facts Bitcoin can prove.">
 <meta property="og:description" content="An open settlement protocol. Markets belong to whoever builds them. Bitcoin remains the final asset.">
 <meta property="og:image" content="https://bathron.org/img/og.png">
 <meta property="og:url" content="https://bathron.org">
@@ -116,11 +116,13 @@
 
   <!-- ================= 1. HERO ================= -->
   <div class="hero">
-    <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">BATHRON — create a market, no permission required</h1>
+    <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">BATHRON — build contracts around facts Bitcoin can prove</h1>
     <img class="emblem" src="/img/emblem.png" alt="BATHRON emblem" width="560" height="360">
     <img class="word" src="/img/wordmark.png" alt="BATHRON" width="540" height="89">
 
-    <p class="memorable">Create a market.<br><b>No permission required.</b></p>
+    <p class="memorable">Build contracts around<br><b>facts Bitcoin can prove.</b></p>
+    <p style="max-width:52ch;margin:1.2rem auto 0">An open programmable settlement protocol for markets, instruments and applications anchored in Bitcoin.</p>
+    <p style="max-width:56ch;margin:1rem auto 0;font-size:.92em;opacity:.85">BATHRON is running an <b>experimental public testnet</b>. Application building is open; <b>Consensus-Operator admission is not yet open</b>.</p>
 
     <p class="tagline">BATHRON is an open settlement protocol.<br>
     <b>Markets belong to whoever builds them.</b> Bitcoin remains the final asset.</p>
@@ -164,11 +166,11 @@
         <p>Every settlement on the network is expressed in one numéraire. M1 is created only from verified, irreversible Bitcoin destruction. Nobody issues it; nobody can print it. Market builders and providers hold it as working capital — end users keep settling in the assets they already hold.</p>
       </div>
       <div>
-        <h3>A consensus that guarantees settlement</h3>
+        <h3>A consensus that enforces settlement conditions</h3>
         <p>Accounting integrity, Bitcoin facts verified inside consensus, the conditions written into contracts, and transfers — final in about a minute. Every node checks every block; a finality quorum can order, never mint.</p>
       </div>
       <div>
-        <h3>An infrastructure any market can be built on</h3>
+        <h3>An infrastructure for markets, instruments and applications</h3>
         <p>Covenants, timelocks, hashlocks, Bitcoin-fact verification and confidential transfers — composable by anyone, enforced by every node, frozen so that what grows is what is built on top.</p>
       </div>
     </div>
@@ -187,7 +189,7 @@
   <!-- ================= 5. HOW A MARKET APPEARS ================= -->
   <section>
     <p class="eyebrow">How a market appears</p>
-    <h2>Nobody approves any of it.</h2>
+    <h2>No listing committee stands between you and a market.</h2>
     <div class="steps">
       <div><p class="n">1</p><h3>Bring inventory</h3><p>The asset to pair, and M1.</p></div>
       <div><p class="n">2</p><h3>Publish quotes</h3><p>Signed, off-chain, on any relay. The consensus never sees them.</p></div>
@@ -224,7 +226,7 @@
     <div class="btc-lines">
       <p><b>Bitcoin is the final asset</b> — the reserve of value and the only origin of M1: <span class="mono">BTC → M0 → M1</span>, one way, verified by SPV inside consensus.</p>
       <p><b>BATHRON never replaces Bitcoin</b> and never holds it. There is no reserve and no redemption — what brings native BTC back is a market, not a vault.</p>
-      <p><b>Bitcoin facts are checked by every node.</b> No oracle, no federation, no designated attester.</p>
+      <p><b>Bitcoin facts are checked by every node.</b> No designated oracle is needed for native Bitcoin facts — difficulty, height, median-time-past, confirmed payment. External prices and real-world events still require external attestations.</p>
     </div>
   </section>
 
@@ -234,7 +236,7 @@
     <div class="roles">
       <div><h3>Operators</h3><p>Run consensus: produce blocks, sign finality, publish facts about themselves. One operator, one vote. They never rank, never choose a provider, never set a price.</p></div>
       <div><h3>Settlement Providers</h3><p>Participants, not administrators. A Clearing Provider quotes and orchestrates; a Liquidity Provider holds inventory and prices a pair. They appear and disappear freely.</p></div>
-      <div><h3>You</h3><p>Build a market, an application, or simply settle. The protocol asks nothing of you but a node.</p></div>
+      <div><h3>You</h3><p>Build an application, propose a settlement flow, or simply settle. Reading and verifying the chain asks nothing of you but a node; producing blocks requires collateral and an operator registration that is not yet open.</p></div>
     </div>
   </section>
 
