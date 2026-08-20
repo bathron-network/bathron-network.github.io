@@ -10,7 +10,10 @@ attributes. <style> and <script> are never translatable.
   build  <lang> -> <lang>/index.html   (generated artifact, gitignored)
   verify <lang> -> structural facts of the page actually served for <lang>
   compare       -> EN/FR tag-skeleton equivalence
-  overflow      -> static horizontal-overflow check on both pages
+  static-overflow-check
+                -> static scan for fixed widths wider than the smallest
+                   viewport. NOT a rendering check: it does not lay the page
+                   out. Browser verification stays a local editorial step.
 
 Disambiguation: when one English string needs two different translations
 depending on where it appears, wrap the element in data-i18n-context="<name>".
@@ -604,12 +607,15 @@ def compare(verbose=True):
 _FIXED_W = re.compile(r'(?<![-a-z])width:\s*(\d+(?:\.\d+)?)px', re.I)
 
 
-def overflow(verbose=True):
-    """Static horizontal-overflow check.
+def static_overflow_check(verbose=True):
+    """Static scan for horizontal-overflow HAZARDS. Not a rendering check.
 
     A `max-width` in px cannot cause overflow; a FIXED `width:Npx` wider than
-    the narrowest supported viewport can. This is a structural check, not a
-    layout engine — browser measurement stays a local step (see README).
+    the narrowest supported viewport can. This reads the markup — it does not
+    lay the page out, does not resolve the cascade, and cannot see a long word,
+    a wide flex item or an oversized image. A clean result means "no fixed
+    width that is certain to overflow was found", never "the page renders
+    correctly". Browser measurement stays a local editorial step (see README).
     """
     problems = []
     for lang in ('en', 'fr'):
@@ -634,14 +640,16 @@ def overflow(verbose=True):
                 problems.append(('SCROLLABLE',
                                  f'{lang}: {tag[:40]} has no overflow handling'))
     if verbose:
-        print(f'  static overflow problems : {len(problems)}')
+        print(f'  static-overflow-check: {len(problems)} hazard(s) '
+              f'(static markup scan — NOT a rendering check)')
         for kind, s in problems: print(f'    {kind:14} {s[:88]}')
     return problems
 
 
 # --------------------------------------------------------------------------
 
-USAGE = 'usage: i18n.py {extract | check <lang> | build <lang> | verify <lang> | compare | overflow}'
+USAGE = ('usage: i18n.py {extract | check <lang> | build <lang> | verify <lang>'
+         ' | compare | static-overflow-check}')
 
 
 def main(argv):
@@ -665,8 +673,8 @@ def main(argv):
             return 1 if verify(arg) else 0
         if cmd == 'compare':
             return 1 if compare() else 0
-        if cmd == 'overflow':
-            return 1 if overflow() else 0
+        if cmd == 'static-overflow-check':
+            return 1 if static_overflow_check() else 0
     except I18nError as e:
         print(f'  REFUSED: {e}')
         return 2

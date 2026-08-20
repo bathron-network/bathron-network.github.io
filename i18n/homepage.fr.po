@@ -57,7 +57,7 @@ msgid "See what can be built"
 msgstr "Voir ce qui peut être construit"
 
 msgid "Run a node"
-msgstr "Faire tourner un nœud"
+msgstr "Exécuter un nœud"
 
 msgid "View network status"
 msgstr "Voir l’état du réseau"
@@ -168,7 +168,7 @@ msgid "Open markets and cross-chain flows"
 msgstr "Marchés ouverts et flux inter-chaînes"
 
 msgid "Pairs quoted by whoever holds inventory, settled against linked conditions."
-msgstr "Des paires cotées par ceux qui détiennent l’inventaire, réglées selon des conditions liées."
+msgstr "Des paires cotées à partir de la liquidité disponible, réglées selon des conditions liées."
 
 msgid "The full application map →"
 msgstr "La carte complète des applications →"
@@ -201,16 +201,16 @@ msgid "No consensus operator chooses which application may be built."
 msgstr "Aucun opérateur de consensus ne décide quelle application a le droit d’exister."
 
 msgid "Bitcoin remains the anchor"
-msgstr "Bitcoin reste l’ancrage"
+msgstr "L’ancrage reste Bitcoin"
 
 msgid "The anchor is Bitcoin, and it stays where it is."
-msgstr "L’ancrage, c’est Bitcoin, et il ne bouge pas."
+msgstr "Bitcoin demeure l’ancrage monétaire."
 
 msgid "M0 originates from Bitcoin destruction verified by consensus. Protocol conversion moves value from M0 into M1, the unit used for settlement."
 msgstr "Le M0 naît d’une destruction de bitcoins vérifiée par le consensus. La conversion opérée par le protocole fait passer la valeur du M0 au M1, l’unité utilisée pour le règlement."
 
 msgid "Bitcoin remains the monetary anchor. BATHRON verifies its history directly and provides the programmable settlement layer built around it."
-msgstr "Bitcoin demeure l’ancrage monétaire. BATHRON vérifie son historique directement et fournit la couche de règlement programmable construite autour de lui."
+msgstr "Bitcoin reste l’ancrage monétaire du système. BATHRON en vérifie l’historique directement et fournit la couche de règlement programmable construite autour de lui."
 
 msgid "Why Bitcoin is the final asset →"
 msgstr "Pourquoi Bitcoin est l’actif final →"
@@ -219,10 +219,10 @@ msgid "Markets, as one application"
 msgstr "Les marchés, une application parmi d’autres"
 
 msgid "A pair exists because someone quotes it."
-msgstr "Une paire existe parce que quelqu’un la cote."
+msgstr "Une paire existe dès que quelqu’un en propose un prix."
 
 msgid "A provider with inventory can publish offers for a pair. Other providers can quote the same pair independently. Markets emerge from available inventory and executable settlement conditions, not from a listing decision."
-msgstr "Un fournisseur disposant d’inventaire peut publier des offres sur une paire. D’autres fournisseurs peuvent coter la même paire de leur côté. Les marchés naissent de l’inventaire disponible et de conditions de règlement exécutables, pas d’une décision d’inscription."
+msgstr "Un fournisseur disposant d’actifs peut publier des offres sur une paire. D’autres fournisseurs peuvent coter la même paire de leur côté. Les marchés naissent de la liquidité disponible et de conditions de règlement exécutables, pas d’une décision de référencement."
 
 msgid "See how a market is built →"
 msgstr "Comment se construit un marché →"

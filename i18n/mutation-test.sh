@@ -30,13 +30,6 @@ for f in "${GUARDED[@]}"; do
 done
 GIT_BEFORE="$(git status --porcelain 2>/dev/null || echo '(not a git worktree)')"
 
-if ! command -v msgmerge >/dev/null 2>&1; then
-    printf 'MUTATION TEST: FAIL — msgmerge not found.\n'
-    printf 'The fuzzy case must exercise the real GNU gettext output, not a\n'
-    printf 'hand-written imitation of it. Install the "gettext" package.\n'
-    exit 1
-fi
-
 SANDBOX="$(mktemp -d -t bathron-i18n-mutation-XXXXXX)"
 cleanup() {
     # bounded: only the directory this script created
@@ -111,25 +104,38 @@ mv "$SANDBOX/parked.po" "$PO"
 reset_sandbox
 
 # ---------------------------------------------------------------- 4
-say 'fuzzy entry (as produced by msgmerge)'
-python3 - "$SRC" "$ORIG" "$MUT" <<'PY'
+say 'fuzzy entry'
+# The property under test is that the GENERATOR refuses a "#, fuzzy" entry.
+# The flag is injected deterministically, reproducing what msgmerge writes: the
+# msgid is updated to the new English, the old translation is kept, and the
+# entry is flagged. This needs Python only, so neither this test nor the deploy
+# that runs it depends on the Ubuntu archives. Compatibility with the REAL
+# msgmerge output is covered separately, and optionally, by
+# i18n/msgmerge-compat.sh.
+python3 - "$SRC" "$ORIG" "$MUT" <<'MUTPY'
 import sys
 p, a, b = sys.argv[1:4]
 s = open(p, encoding='utf-8').read()
 open(p, 'w', encoding='utf-8').write(s.replace(a, b))
-PY
+MUTPY
 run extract >/dev/null
-msgmerge --quiet --update --backup=none "$PO" "$SANDBOX/i18n/homepage.pot"
-grep -q '^#, fuzzy' "$PO" && ok 'msgmerge flagged the entry fuzzy' \
-    || bad 'msgmerge produced no fuzzy flag'
-# msgmerge also emits "#| msgid" hints and may comment the old entry out
-python3 - "$PO" <<'PY'
+python3 - "$PO" "$ORIG" "$MUT" <<'FUZZPY'
 import sys
-p = sys.argv[1]
-keep = [l for l in open(p, encoding='utf-8').read().split('\n')
-        if not l.startswith('#|') and not l.startswith('#~')]
-open(p, 'w', encoding='utf-8').write('\n'.join(keep))
-PY
+p, old, new = sys.argv[1:4]
+lines = open(p, encoding='utf-8').read().split('\n')
+out, done = [], False
+for ln in lines:
+    if ln == 'msgid "%s"' % old:
+        out.append('#, fuzzy')                  # exactly what msgmerge emits
+        out.append('msgid "%s"' % new)          # msgid updated, translation stale
+        done = True
+        continue
+    out.append(ln)
+assert done, 'anchor msgid not found in the catalogue'
+open(p, 'w', encoding='utf-8').write('\n'.join(out))
+FUZZPY
+grep -q '^#, fuzzy' "$PO" && ok 'entry carries a fuzzy flag' \
+    || bad 'no fuzzy flag was injected'
 expect_refusal 'fuzzy entry'
 
 # ---------------------------------------------------------------- 5

@@ -1,0 +1,88 @@
+# Pull-request validation for the homepage i18n. This workflow NEVER deploys.
+#
+# It builds nothing that is published, uploads no Pages artifact, requests no
+# Pages permission and no id-token, and reads no secret. Its only job is to run
+# i18n/ci-check.sh — the same script the deploy workflow runs — so that a pull
+# request is judged by exactly the checks that will later guard publication.
+#
+# Everything is pinned:
+#   actions/checkout      11d5960a326750d5838078e36cf38b85af677262  (tag v4.4.0,
+#                         GET /repos/actions/checkout/git/ref/tags/v4.4.0,
+#                         commit dated 2026-07-16)
+#   actions/setup-python  a26af69be951a213d495a4c3e4e4022e16d87065  (tag v5.6.0,
+#                         GET /repos/actions/setup-python/tags,
+#                         commit dated 2025-04-24)
+#   Python                3.12.14, an exact patch release present in
+#                         actions/python-versions for linux-x64.
+name: i18n check
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'i18n/**'
+      - 'sitemap.xml'
+      - '.github/workflows/i18n-check.yml'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+# Read-only. No pages:write, no id-token:write, nothing else.
+permissions:
+  contents: read
+
+concurrency:
+  group: i18n-check-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  i18n:
+    name: i18n gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+
+      - name: Set up Python 3.12.14
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5.6.0
+        with:
+          python-version: '3.12.14'
+
+      - name: Record the interpreter actually used
+        run: |
+          python3 -VV
+          command -v python3
+          python3 -c "import sys; assert sys.version_info[:3] == (3, 12, 14), sys.version"
+          echo "interpreter is exactly 3.12.14"
+
+      - name: i18n gates (same script as the deploy workflow)
+        run: bash i18n/ci-check.sh
+
+  # Separate, NON-BLOCKING, and never on the deployment path: does the strict PO
+  # reader still understand what a real GNU msgmerge writes? This is the only
+  # place that installs a package, and a failure here must not stop a pull
+  # request or a publication — it is a compatibility signal, not a gate.
+  msgmerge-compat:
+    name: msgmerge compatibility (optional, non-blocking)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+
+      - name: Set up Python 3.12.14
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5.6.0
+        with:
+          python-version: '3.12.14'
+
+      - name: Install GNU gettext
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -qq gettext
+
+      - name: Compatibility with real msgmerge
+        run: |
+          bash i18n/msgmerge-compat.sh; rc=$?
+          if [ $rc -eq 77 ]; then echo "skipped: msgmerge unavailable"; exit 0; fi
+          exit $rc

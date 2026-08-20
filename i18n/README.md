@@ -20,18 +20,61 @@ would create a second thing to keep in sync, which is what this design removes.
 ## Commands
 
 ```bash
+bash   i18n/ci-check.sh          # ALL the gates, in order — what CI runs
+```
+
+That script is the single definition of "the i18n gates". Both workflows call
+it, so the checks guarding a pull request and the checks guarding a publication
+cannot drift apart. It needs Python 3 and git; it installs nothing, downloads
+nothing and reads no secret.
+
+Individually:
+
+```bash
 python3 i18n/i18n.py extract     # refresh homepage.pot from index.html
 python3 i18n/i18n.py check fr    # audit the catalogue; exit non-zero if anything is off
 python3 i18n/i18n.py build fr    # generate fr/index.html; refuses unless 100 % complete
 python3 i18n/i18n.py verify fr   # lang, canonical, og:url, hreflang, selector, HTML balance
 python3 i18n/i18n.py compare     # EN and FR must share one tag skeleton
-python3 i18n/i18n.py overflow    # no fixed width wider than the smallest viewport
+python3 i18n/i18n.py static-overflow-check   # see the caveat below
 python3 i18n/test_i18n.py        # unit tests
 bash   i18n/mutation-test.sh     # prove the fail-closed guarantee, in a sandbox
+bash   i18n/msgmerge-compat.sh   # OPTIONAL, needs GNU gettext — see below
 ```
 
-Every one of these runs in the deploy workflow, before `_site` is assembled.
-A validation that only ever ran on a laptop is not a production guarantee.
+### `static-overflow-check` is not a rendering check
+
+It scans the markup for fixed pixel widths wider than the smallest supported
+viewport. It does not lay the page out, does not resolve the cascade, and cannot
+see a long unbreakable word, a wide flex item or an oversized image. A clean
+result means *no fixed width certain to overflow was found* — never *the page
+renders correctly*. Looking at the page in a browser at desktop and mobile
+widths remains a **local editorial step**, and screenshots taken that way are
+review material, not evidence produced by CI.
+
+### `msgmerge-compat.sh` is optional and off the deployment path
+
+The fail-closed guarantee is proven by `mutation-test.sh`, which injects the
+`#, fuzzy` flag deterministically and therefore needs Python only. Publishing
+the site must not depend on the Ubuntu archives being reachable, so **nothing on
+the deploy path runs `apt-get`**.
+
+`msgmerge-compat.sh` answers a separate, narrower question — does the strict PO
+reader still understand what a *real* `msgmerge --update` writes? It runs
+locally on demand, and in CI as a **non-blocking** job that cannot stop a pull
+request or a publication. It exits `77` when gettext is absent.
+
+## Workflows
+
+| Workflow | Trigger | Permissions | Deploys |
+|---|---|---|---|
+| `.github/workflows/i18n-check.yml` | `pull_request` on the i18n paths | `contents: read` only | never |
+| `.github/workflows/deploy.yml` | `push` to `main` | `contents: read`, `pages: write`, `id-token: write` | yes |
+
+Both run `bash i18n/ci-check.sh`. The PR workflow requests no Pages permission,
+no `id-token`, reads no secret and uploads no artifact — it exists purely to
+judge a branch by the same gates that will later guard `main`. Actions are
+pinned by commit SHA and Python to the exact patch release 3.12.14 in both.
 
 ## The guarantee
 

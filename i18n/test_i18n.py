@@ -578,7 +578,7 @@ class TestBuild(RepoCase):
 
 
 # --------------------------------------------------------------------------
-# 5. verify / compare / overflow on the REAL pages
+# 5. verify / compare / static-overflow-check on the REAL pages
 # --------------------------------------------------------------------------
 
 class TestRealPages(unittest.TestCase):
@@ -597,9 +597,9 @@ class TestRealPages(unittest.TestCase):
         self.assertTrue(self.built)
         self.assertEqual(M.compare(verbose=False), [])
 
-    def test_no_static_overflow(self):
+    def test_no_static_overflow_hazard(self):
         self.assertTrue(self.built)
-        self.assertEqual(M.overflow(verbose=False), [])
+        self.assertEqual(M.static_overflow_check(verbose=False), [])
 
     def test_catalogue_is_complete(self):
         self.assertEqual(M.check('fr', verbose=False), [])
