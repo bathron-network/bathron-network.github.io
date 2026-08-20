@@ -107,10 +107,6 @@ Exercised on this network:
 Runs from **earlier networks**, kept for the record. They were real; the network they ran against
 is **not** the one live today, and nothing here should be read as describing current behaviour.
 
-- Work on `TX_CONFIRMED` predates the move to Bitcoin testnet4 and was carried out when the
-  Bitcoin source was **signet**. No end-to-end run of that query is published in the public
-  repository, so this documentation does **not** label it demonstrated — see
-  [Bitcoin-verifiable contracts](../protocol/bitcoin-verifiable-contracts.md).
 - The Clearing and Liquidity Provider prototypes (`pna-lp`, `pna-swap`) exposed quotes over HTTP.
   They are **decommissioned**: their application state belonged to a superseded network and the
   services are **not running**. Their HTTP APIs are not available, and no endpoint should be

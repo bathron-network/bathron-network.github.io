@@ -70,14 +70,15 @@ The most intricate of the five: Merkle proof, strict Bitcoin serialization, and 
 ambiguity of CVE-2017-12842. Its status has three parts, and they must not be collapsed:
 
 - **`ACTIVE IN CONSENSUS`** — the query is enabled on this testnet.
-- **`TESTED`** — covered in `src/test/btcstate_script_tests.cpp`: field marshalling, shape errors,
-  a full P2SH spend (`otc_leg_full_p2sh_spend`), multi-output and single-transaction-block sums,
-  an adversarial provider, and `segwit_64byte_preimage_rejected` for the CVE-2017-12842 leaf
-  ambiguity. Part of the suite runs against the **real provider** with an in-memory header
-  database rather than a mock.
-- **Not `DEMONSTRATED`.** No end-to-end run of this query is published in the public repository.
-  Anyone who tells you the path has been walked in production owes you a reference; this
-  documentation does not have one.
+- **`TESTED`** — covered by the identified public tests in
+  [`bathron-core@32ca174`](https://github.com/bathron-network/bathron-core/tree/32ca174e73aea6fed2f7d4097dada8c7ff45bf2c),
+  `src/test/btcstate_script_tests.cpp`: field marshalling, shape errors, a full P2SH spend
+  (`otc_leg_full_p2sh_spend`), multi-output and single-transaction-block sums, an adversarial
+  provider, and `segwit_64byte_preimage_rejected` for the CVE-2017-12842 leaf ambiguity. Part of
+  the suite runs against the **real provider** with an in-memory header database rather than a mock.
+- **No public end-to-end demonstration artifact identified.** The `DEMONSTRATED` label is therefore
+  not applied. Anyone who tells you the path has been walked in production owes you a reference;
+  this documentation does not have one.
 
 Treat it accordingly: the query is enabled and exercised by tests, and no public end-to-end
 evidence exists.
