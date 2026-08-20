@@ -29,7 +29,7 @@ No oracle. The facts come from Bitcoin headers carried in consensus.
 | Covenants, output constraints | `ACTIVE IN CONSENSUS`, `TESTED` | — |
 | Recursive covenants | `ACTIVE IN CONSENSUS`, `TESTED` | no end-to-end demonstration |
 | Hashlocks and timelocks | `ACTIVE IN CONSENSUS` | — |
-| Conditional cross-chain settlement | `TESTED` / demonstrated against Bitcoin | no general atomicity guarantee |
+| Conditional cross-chain settlement | `TESTED` (public suites + SDK); **no published e2e artifact** | no general atomicity guarantee |
 | DLC with external attestation | `AVAILABLE PRIMITIVE` | **external oracle**, product logic |
 | Confidential transfers | `ACTIVE IN CONSENSUS` | — |
 | Confidential **covenants** | `UNKNOWN` | not demonstrated |

@@ -23,8 +23,15 @@ script can require its successor to carry the same rules with new state.
 
 ## Hashlocks and timelocks
 
-Hashlocked, timelocked conditional scripts are the basis of cross-chain settlement. Paired-HTLC
-flows have run on the testnet against Bitcoin. `TESTED` and demonstrated for that pair.
+Hashlocked, timelocked conditional scripts are the basis of cross-chain settlement. Their
+components are **`TESTED`** with public evidence: `src/test/htlc3s_expiry_spec_tests.cpp`,
+`src/test/htlc3s_failure_tests.cpp` and `src/test/htlc_prune_tests.cpp`, plus the HTLC SDK under
+`contrib/dex/pna-lp/sdk/htlc/`.
+
+Paired-HTLC flows against Bitcoin have been run on a testnet, but **no reproducible artifact of
+such a run is published in the public repository**, so this documentation does not carry a
+`DEMONSTRATED` label for them. Note also that the SDK above belongs to the decommissioned provider
+prototypes.
 
 What is **not** claimed: a general atomicity guarantee. The complete cross-chain state machine,
 reorganisation handling and timelock ordering still need formal specification and external review.

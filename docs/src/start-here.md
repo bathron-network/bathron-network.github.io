@@ -20,9 +20,10 @@ Five things, and they compose:
 2. **Programmable settlement.** Covenants — including recursive ones — output constraints,
    hashlocks, timelocks, and signature verification over arbitrary messages.
    → [Programmable settlement](protocol/programmable-settlement.md)
-3. **A settlement unit that nobody issues.** M0 exists only against destroyed bitcoin; M1 is its
-   transferable receipt. Conservation is enforced in consensus. There is no reserve and no
-   redemption.
+3. **A settlement unit that nobody issues.** **M0** originates from consensus-verified Bitcoin
+   destruction; **M1** is obtained through the protocol's M0/M1 conversion and accounting rules,
+   with conservation enforced in consensus. **Neither is a redeemable claim on BTC**: no peg, no
+   reserve, no redemption promise.
    → [Bitcoin is the final asset](bitcoin/final-asset.md)
 4. **Finality in about a minute**, one Consensus Operator one vote.
    → [Production and finality](consensus/production-and-finality.md)

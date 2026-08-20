@@ -32,8 +32,18 @@ Nothing more recent can be queried.
 **Answers are snapshotted at the previous BATHRON block**, so a result never depends on transaction
 order inside a block or on script-thread scheduling.
 
-**Validity is monotone**, CLTV-style: a script that is not yet valid can become valid, never the
+**Validity is monotone within a bounded domain, not absolutely.** Inside the readable region — at
+least `BTCSTATE_REORG_MARGIN` blocks below the snapshot tip (`src/btcheaders/btcstate_provider.cpp`
+computes the floor as `snapTip - BTCSTATE_REORG_MARGIN`) — and given the btcheaders max-reorg-depth
+rule that rejects a header reorganisation as `bad-btcheaders-reorg-too-deep`, together with the
+floors below a pinned checkpoint and below a finalized burn
+(`src/btcheaders/btcheaders.cpp`), a script that is not yet valid can become valid and not the
 reverse.
+
+The domain is what makes this true. Monotonicity is a property of BATHRON's **accepted header view
+under those depth rules**, not a claim about Bitcoin itself. A reorganisation deeper than the
+margin lies outside the region these rules protect; the header chain rejects it rather than
+silently rewriting an answer, which is a different guarantee from "this can never happen".
 
 **Fail-closed.** With no provider installed, every query evaluates false.
 
@@ -60,11 +70,14 @@ The most intricate of the five: Merkle proof, strict Bitcoin serialization, and 
 ambiguity of CVE-2017-12842. Its status has three parts, and they must not be collapsed:
 
 - **`ACTIVE IN CONSENSUS`** — the query is enabled on this testnet.
-- **`DEMONSTRATED`, historically** — an end-to-end run exercised it against a real Bitcoin
-  transaction. That run was on **signet**, the Bitcoin source since replaced by testnet4. The
-  demonstration is real; the network it ran against is not the current one.
-- **No dedicated test suite today.** This is an explicit **coverage gap**, not an oversight being
-  hidden.
+- **`TESTED`** — covered in `src/test/btcstate_script_tests.cpp`: field marshalling, shape errors,
+  a full P2SH spend (`otc_leg_full_p2sh_spend`), multi-output and single-transaction-block sums,
+  an adversarial provider, and `segwit_64byte_preimage_rejected` for the CVE-2017-12842 leaf
+  ambiguity. Part of the suite runs against the **real provider** with an in-memory header
+  database rather than a mock.
+- **Not `DEMONSTRATED`.** No end-to-end run of this query is published in the public repository.
+  Anyone who tells you the path has been walked in production owes you a reference; this
+  documentation does not have one.
 
-Treat it accordingly: the path has been walked once, on a network that no longer feeds this chain,
-and nothing guards it against regression today.
+Treat it accordingly: the query is enabled and exercised by tests, and no public end-to-end
+evidence exists.

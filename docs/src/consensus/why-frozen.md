@@ -74,8 +74,9 @@ open-network hardening work — auditing the finality path, sizing committees, p
 — is a list of proofs to finish and permissions to safely remove, not features to add. It means
 the *shape* of consensus is finished, and the site describing it should rarely need to change:
 
-> If this page has to change often, something has gone wrong. The consensus surface is frozen
-> on purpose; the roadmap is mostly a list of proofs to finish and permissions to safely remove
+> If this page has to change often, something has gone wrong. The currently deployed surface is
+> intentionally narrow, and any consensus change requires an explicit protocol and governance
+> decision; the roadmap is mostly a list of proofs to finish and permissions to safely remove
 > — not features to add.
 
 **See also:** [What BATHRON deliberately does not do](../provides/what-it-does-not-do.md) · [Production and finality](production-and-finality.md) · [Status & claims](status-and-claims.md)

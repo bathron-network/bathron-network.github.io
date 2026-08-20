@@ -34,7 +34,7 @@ constructions instead; that is a different piece of engineering and is not cover
 
 | | Status |
 |---|---|
-| M1 HTLC on BATHRON + P2WSH HTLC on a Bitcoin test network, same preimage, both legs claimed | **demonstrated on testnet** |
+| M1 HTLC on BATHRON + P2WSH HTLC on a Bitcoin test network, same preimage, both legs claimed | components **tested** (public suites); run on a testnet, **no published artifact** |
 | A general, atomic client service for BTC ⇄ M1 | not claimed — see [Status & claims](../consensus/status-and-claims.md) |
 | Any pair other than BTC/M1 (PIVX, DOGE, LTC, …) | **capability of the primitives — nothing shipped, nothing tested** |
 | Adaptor-signature pairing for script-less chains | not built |
