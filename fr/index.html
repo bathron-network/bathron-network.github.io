@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BATHRON : le règlement programmable, ancré dans Bitcoin</title>
+<meta name="description" content="Un protocole de règlement programmable ancré dans Bitcoin. Construisez contrats, instruments, marchés et applications autour de faits que chaque nœud BATHRON peut vérifier.">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="alternate" hreflang="en" href="https://bathron.org/">
+<link rel="alternate" hreflang="fr" href="https://bathron.org/fr/">
+<link rel="alternate" hreflang="x-default" href="https://bathron.org/">
+<meta property="og:title" content="BATHRON : le règlement programmable, ancré dans Bitcoin">
+<meta property="og:description" content="Construisez contrats, instruments, marchés et applications autour de faits que chaque nœud BATHRON peut vérifier. Covenants, hashlocks, timelocks et transferts confidentiels.">
+<meta property="og:image" content="https://bathron.org/img/og.png">
+<meta property="og:url" content="https://bathron.org/fr/">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root{
+    --bg:#050608; --panel:#0C0F14; --line:#1C222C;
+    --ink:#E8EBF0; --muted:#8A919C; --gold:#D9A441; --dim:#3A414D;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);
+       font:16px/1.7 ui-sans-serif,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+       -webkit-font-smoothing:antialiased}
+  a{color:inherit}
+
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+  section{margin:96px 0 0}
+  .eyebrow{font:600 12px/1 ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.22em;
+           color:var(--gold);text-transform:uppercase;text-align:center;margin:0 0 26px}
+  h2{margin:0 0 14px;font-size:clamp(20px,3vw,26px);letter-spacing:-.01em;text-align:center;text-wrap:balance}
+  p.lead{margin:0 auto;max-width:58ch;text-align:center;color:var(--muted)}
+  p.lead b{color:var(--ink);font-weight:600}
+
+  /* ---- hero ---- */
+  .hero{min-height:auto;display:flex;flex-direction:column;align-items:center;
+        justify-content:center;text-align:center;padding:72px 0 56px}
+  @media (min-width:900px){.hero{padding:96px 0 72px}}
+  @media (max-width:560px){.hero{padding:56px 0 40px}}
+  .hero img.emblem{width:min(200px,48vw);height:auto}
+  .hero img.word{width:min(270px,64vw);height:auto;margin-top:4px}
+  .memorable{margin:34px auto 0;max-width:22ch;font-size:clamp(28px,5.4vw,44px);
+             line-height:1.2;font-weight:700;letter-spacing:-.015em;text-wrap:balance}
+  .memorable b{color:var(--gold)}
+  .langsel{margin:22px auto 0;font-size:13px;letter-spacing:.06em;color:var(--muted)}
+  .langsel b{color:var(--ink);font-weight:600}
+  .langsel span{opacity:.4;margin:0 4px}
+  .langsel a{color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--dim)}
+  .langsel a:hover{color:var(--gold);text-decoration-color:var(--gold)}
+  .cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;justify-content:center}
+  .btn{display:inline-block;padding:13px 26px;border:1px solid var(--line);border-radius:8px;
+       text-decoration:none;font-weight:600;font-size:15px;transition:border-color .15s,color .15s}
+  .btn:hover{border-color:var(--gold);color:var(--gold)}
+  .btn.primary{border-color:#2A3441;background:var(--panel)}
+
+  /* ---- provides / does not ---- */
+  .three{display:grid;gap:14px;margin-top:30px}
+  @media (min-width:760px){.three{grid-template-columns:1fr 1fr}}
+  .three div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+  .three h3{margin:0 0 6px;font-size:17px}
+  .three p{margin:0;color:var(--muted);font-size:15px}
+  .three a.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+                padding:18px 20px;text-decoration:none;transition:border-color .15s,background .15s}
+  .three a.card:hover{border-color:var(--gold);background:#10141B}
+  .three a.card h3{color:var(--gold)}
+  .three a.card h3::after{content:" \2192";opacity:.7}
+
+  .fine{margin:12px auto 0;max-width:60ch;text-align:center;color:var(--muted);font-size:13.5px}
+
+  /* ---- bitcoin ---- */
+
+  /* ---- roles ---- */
+  .roles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+  .roles div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 16px}
+  .roles h3{margin:0 0 6px;font-size:15.5px}
+  .roles p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55}
+  @media (max-width:640px){.roles{grid-template-columns:1fr}}
+
+  footer{margin:96px 0 0;padding:28px 0 40px;border-top:1px solid var(--line);
+         display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+         color:var(--muted);font-size:13.5px}
+  footer a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--dim)}
+  footer a:hover{color:var(--gold);text-decoration-color:var(--gold)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ================= 1. HERO ================= -->
+  <div class="hero">
+    <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">BATHRON : le règlement programmable, ancré dans Bitcoin</h1>
+    <img class="emblem" src="/img/emblem.png" alt="BATHRON emblem" width="560" height="360">
+    <img class="word" src="/img/wordmark.png" alt="BATHRON" width="540" height="89">
+    <p class="memorable">Le règlement programmable,<br><b>ancré dans Bitcoin.</b></p>
+    <p style="max-width:56ch;margin:1.4rem auto 0">Construisez contrats, instruments, marchés et applications autour de faits que chaque nœud BATHRON peut vérifier.</p>
+    <p class="langsel"><a href="/">EN</a> <span>/</span> <b>FR</b></p>
+    <div class="cta">
+      <a class="btn" href="/docs/protocol/what-bathron-is.html">Découvrir le protocole</a>
+      <a class="btn" href="/docs/build/application-map.html">Ce qui peut être construit</a>
+      <a class="btn" href="/docs/operate/run-a-node.html">Faire tourner un nœud</a>
+    </div>
+    <p class="fine" style="margin-top:18px"><a href="/docs/consensus/status-and-claims.html">État du réseau</a></p>
+  </div>
+
+  <!-- ================= 1. BITCOIN AS A SOURCE OF VERIFIABLE FACTS ================= -->
+  <section>
+    <p class="eyebrow">Des faits, pas des opinions</p>
+    <h2>Bitcoin prouve déjà des choses. Un contrat peut désormais s’en servir.</h2>
+    <p style="max-width:64ch">Bitcoin enregistre des faits que des contrats peuvent vérifier. BATHRON transporte les en-têtes Bitcoin pertinents dans son consensus, de sorte que chaque nœud évalue les mêmes preuves.</p>
+    <div class="three" style="margin-top:1.6rem">
+      <div><h3>Difficulté de minage</h3><p>La difficulté de minage enregistrée à une hauteur Bitcoin donnée.</p></div>
+      <div><h3>Hauteur de bloc</h3><p>Jusqu’où la chaîne a avancé.</p></div>
+      <div><h3>Temps médian</h3><p>L’horloge propre à Bitcoin, résistante à l’horodatage d’un mineur isolé.</p></div>
+      <div><h3>Paiements confirmés</h3><p>Un paiement vers un script donné, inclus et enfoui dans la chaîne Bitcoin.</p></div>
+    </div>
+    <p class="fine"><a href="/docs/protocol/bitcoin-verifiable-contracts.html">Comment les faits Bitcoin sont vérifiés &rarr;</a></p>
+  </section>
+
+  <!-- ================= 2. PROGRAMMABLE SETTLEMENT ================= -->
+  <section>
+    <p class="eyebrow">Règlement programmable</p>
+    <h2>Écrivez les conditions. Le réseau les fait respecter.</h2>
+    <p style="max-width:64ch">Sur BATHRON, un règlement se décrit en script et s’exécute par consensus. Les primitives se composent, si bien qu’un même accord peut dépendre à la fois d’un fait Bitcoin, d’un secret et d’une échéance.</p>
+    <div class="three" style="margin-top:1.6rem">
+      <div><h3>Covenants</h3><p>Contraindre ce qu’une dépense a le droit de devenir.</p></div>
+      <div><h3>Hashlocks</h3><p>Libérer de la valeur contre la révélation d’un secret.</p></div>
+      <div><h3>Timelocks</h3><p>Faire dépendre une issue du temps, absolu ou relatif.</p></div>
+      <div><h3>Signatures et attestations</h3><p>Vérifier une signature sur n’importe quel message, y compris venu d’une source extérieure.</p></div>
+      <div><h3>Transferts confidentiels</h3><p>Déplacer de la valeur sans publier le montant.</p></div>
+    </div>
+    <p class="fine"><a href="/docs/protocol/programmable-settlement.html">Covenants, attestations et confidentialité &rarr;</a></p>
+  </section>
+
+  <!-- ================= 3. ONE PROTOCOL, MANY APPLICATIONS ================= -->
+  <section>
+    <p class="eyebrow">Un protocole, de nombreuses applications</p>
+    <h2>Ce qui devient possible.</h2>
+    <div class="three" style="margin-top:1.6rem">
+      <div><h3>Instruments sur la difficulté</h3><p>Des accords qui se règlent sur la difficulté propre à Bitcoin, sans intervention d’un rapporteur extérieur.</p></div>
+      <div><h3>Séquestres déclenchés par paiement</h3><p>De la valeur qui se libère lorsqu’un paiement Bitcoin est confirmé et suffisamment enfoui.</p></div>
+      <div><h3>Accords financiers programmables</h3><p>Des termes, des échéances et des issues écrits une fois, puis appliqués par le réseau.</p></div>
+      <div><h3>Marchés ouverts et flux inter-chaînes</h3><p>Des paires cotées par qui détient l’inventaire, réglées contre des conditions liées.</p></div>
+    </div>
+    <p class="fine"><a href="/docs/build/application-map.html">La carte complète des applications &rarr;</a></p>
+  </section>
+
+  <!-- ================= 4. A NETWORK OF DISTINCT ROLES ================= -->
+  <section>
+    <p class="eyebrow">Un réseau aux rôles distincts</p>
+    <h2>Trois rôles, séparés à dessein.</h2>
+    <div class="roles">
+      <div><h3>Opérateurs de consensus</h3><p>Sécurisent le réseau, ordonnent les transactions et les finalisent. Un opérateur, une voix.</p></div>
+      <div><h3>Fournisseurs de règlement</h3><p>Créent les services et les flux de règlement réellement utilisés. Ils se font concurrence, ils vont et viennent.</p></div>
+      <div><h3>Constructeurs</h3><p>Composent applications et instruments par-dessus, avec leurs propres interfaces et leurs propres termes.</p></div>
+    </div>
+    <p class="fine">Aucun opérateur de consensus ne choisit quelle application peut être construite.</p>
+  </section>
+
+  <!-- ================= 5. BITCOIN REMAINS THE ANCHOR ================= -->
+  <section>
+    <p class="eyebrow">Bitcoin reste l’ancrage</p>
+    <h2>L’ancrage, c’est Bitcoin, et il ne bouge pas.</h2>
+    <p style="max-width:64ch">Le M0 provient d’une destruction de bitcoins vérifiée par le consensus. La conversion du protocole fait passer la valeur du M0 vers le M1, l’unité utilisée pour le règlement.</p>
+    <p style="max-width:64ch">Bitcoin demeure l’ancrage monétaire. BATHRON vérifie son historique directement et fournit la couche de règlement programmable construite autour.</p>
+    <p class="fine"><a href="/docs/bitcoin/final-asset.html">Pourquoi Bitcoin est l’actif final &rarr;</a></p>
+  </section>
+
+  <!-- ================= 6. MARKETS AS AN APPLICATION ================= -->
+  <section>
+    <p class="eyebrow">Les marchés, une application parmi d’autres</p>
+    <h2>Une paire existe parce que quelqu’un la cote.</h2>
+    <p style="max-width:64ch">Un fournisseur disposant d’inventaire peut publier des offres sur une paire. D’autres fournisseurs peuvent coter la même paire de leur côté. Les marchés naissent de l’inventaire disponible et de conditions de règlement exécutables, pas d’une décision de cotation.</p>
+    <p class="fine"><a href="/docs/markets/how-a-market-appears.html">Comment un marché se construit &rarr;</a></p>
+  </section>
+
+  <!-- ================= 7. FINAL CALL TO ACTION ================= -->
+  <section>
+    <p class="eyebrow">Commencer ici</p>
+    <h2>Construire sur la couche de règlement.</h2>
+    <p class="fine" style="margin-top:.6rem">La documentation technique est en anglais.</p>
+    <div class="three" style="margin-top:1.6rem">
+      <a class="card" href="/docs/"><h3>Lire la documentation</h3><p>Le protocole, les primitives et la référence. En anglais.</p></a>
+      <a class="card" href="/docs/build/application-map.html"><h3>Explorer les applications</h3><p>Ce que la couche rend constructible, et ce que chaque cas exige.</p></a>
+      <a class="card" href="/docs/operate/run-a-node.html"><h3>Faire tourner un nœud</h3><p>Vérifier la chaîne vous-même, depuis votre machine.</p></a>
+      <a class="card" href="https://explorer.bathron.org/"><h3>Explorateur public</h3><p>Voir le réseau produire et finaliser des blocs, en direct.</p></a>
+      <a class="card" href="https://github.com/bathron-network/bathron-core" target="_blank" rel="noopener"><h3>Code source</h3><p>L’implémentation du nœud, sur GitHub.</p></a>
+      <a class="card" href="/docs/consensus/status-and-claims.html"><h3>État du réseau</h3><p>Ce qui tourne aujourd’hui, et ce que le protocole ne prétend pas.</p></a>
+    </div>
+  </section>
+
+  <footer>
+    <span>BATHRON<br>
+    <a href="mailto:contact@bathron.org">contact@bathron.org</a><br>
+    <a href="https://github.com/bathron-network/bathron-core" target="_blank" rel="noopener">Code source</a>, <a href="https://github.com/bathron-network/bathron-core/releases" target="_blank" rel="noopener">versions</a> et <a href="https://github.com/bathron-network/bathron-core/blob/main/SECURITY.md" target="_blank" rel="noopener">politique de sécurité</a><br>
+    Signaler une vulnérabilité à <a href="mailto:security@bathron.org">security@bathron.org</a></span>
+  </footer>
+
+</div>
+
+</body>
+</html>
