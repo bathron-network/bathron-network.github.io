@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BATHRON — Programmable settlement anchored in Bitcoin.</title>
+<title>BATHRON: Programmable settlement anchored in Bitcoin</title>
 <meta name="description" content="A programmable settlement protocol anchored in Bitcoin. Build contracts, instruments, markets and applications around facts every BATHRON node can verify.">
 <link rel="icon" type="image/png" href="/img/favicon.png">
-<meta property="og:title" content="BATHRON — Programmable settlement anchored in Bitcoin.">
+<meta property="og:title" content="BATHRON: Programmable settlement anchored in Bitcoin">
 <meta property="og:description" content="Build contracts, instruments, markets and applications around facts every BATHRON node can verify. Covenants, hashlocks, timelocks and confidential transfers.">
 <meta property="og:image" content="https://bathron.org/img/og.png">
 <meta property="og:url" content="https://bathron.org">
@@ -22,7 +22,7 @@
        font:16px/1.7 ui-sans-serif,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
        -webkit-font-smoothing:antialiased}
   a{color:inherit}
-  .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+
   .wrap{max-width:760px;margin:0 auto;padding:0 24px}
   section{margin:96px 0 0}
   .eyebrow{font:600 12px/1 ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.22em;
@@ -32,8 +32,10 @@
   p.lead b{color:var(--ink);font-weight:600}
 
   /* ---- hero ---- */
-  .hero{min-height:92vh;display:flex;flex-direction:column;align-items:center;
-        justify-content:center;text-align:center;padding:48px 0 16px}
+  .hero{min-height:auto;display:flex;flex-direction:column;align-items:center;
+        justify-content:center;text-align:center;padding:72px 0 56px}
+  @media (min-width:900px){.hero{padding:96px 0 72px}}
+  @media (max-width:560px){.hero{padding:56px 0 40px}}
   .hero img.emblem{width:min(200px,48vw);height:auto}
   .hero img.word{width:min(270px,64vw);height:auto;margin-top:4px}
   .memorable{margin:34px auto 0;max-width:22ch;font-size:clamp(28px,5.4vw,44px);
@@ -47,46 +49,15 @@
   .btn:hover{border-color:var(--gold);color:var(--gold)}
   .btn.primary{border-color:#2A3441;background:var(--panel)}
 
-  /* ---- problem ---- */
-  .problem p{margin:0 auto;max-width:56ch;text-align:center;color:var(--muted);font-size:17px}
-  .problem p + p{margin-top:14px}
-  .problem p b{color:var(--ink);font-weight:600}
-  .compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:34px auto 0;max-width:640px}
-  .compare div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 18px 16px}
-  .compare .k{font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
-  .compare .flow{font-family:ui-monospace,Menlo,monospace;font-size:13.5px;line-height:1.8;margin:0;color:var(--ink)}
-  .compare .flow span{color:var(--gold)}
-  .compare .note{margin:10px 0 0;font-size:13px;color:var(--muted)}
-  @media (max-width:560px){.compare{grid-template-columns:1fr}}
-
   /* ---- provides / does not ---- */
   .three{display:grid;gap:14px;margin-top:30px}
   .three div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
   .three h3{margin:0 0 6px;font-size:17px}
   .three p{margin:0;color:var(--muted);font-size:15px}
-  .not{margin:30px auto 0;max-width:640px;border:1px solid var(--gold);border-radius:10px;padding:22px 24px;text-align:center}
-  .not p.list{margin:0;font-size:16.5px;line-height:1.9;color:var(--ink)}
-  .not p.list span{color:var(--dim);padding:0 8px}
-  .not p.tail{margin:14px 0 0;color:var(--muted);font-size:15px}
-  .not p.tail b{color:var(--gold);font-weight:600}
 
-  /* ---- steps ---- */
-  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:30px 0 0}
-  .steps div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 14px}
-  .steps .n{font:600 12px/1 ui-monospace,Menlo,monospace;color:var(--gold);letter-spacing:.14em;margin:0 0 8px}
-  .steps h3{margin:0 0 6px;font-size:15px}
-  .steps p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55}
-  @media (max-width:640px){.steps{grid-template-columns:1fr 1fr}}
-  .pairs{margin:22px auto 0;text-align:center;font-family:ui-monospace,Menlo,monospace;font-size:14px;color:var(--ink)}
-  .pairs span{color:var(--dim);padding:0 8px}
   .fine{margin:12px auto 0;max-width:60ch;text-align:center;color:var(--muted);font-size:13.5px}
 
   /* ---- bitcoin ---- */
-  .space{margin:30px auto 0;width:100%;max-width:620px}
-  .space svg{display:block;width:100%;height:auto}
-  .btc-lines{margin:26px auto 0;max-width:56ch;color:var(--muted);text-align:center;font-size:15.5px}
-  .btc-lines p{margin:0 0 8px}
-  .btc-lines b{color:var(--ink);font-weight:600}
 
   /* ---- roles ---- */
   .roles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
@@ -94,14 +65,6 @@
   .roles h3{margin:0 0 6px;font-size:15.5px}
   .roles p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55}
   @media (max-width:640px){.roles{grid-template-columns:1fr}}
-
-  /* ---- status ---- */
-  .status{text-align:center;color:var(--muted);font-size:16px}
-  .status p{margin:0 auto;max-width:52ch}
-  .status b{color:var(--ink)}
-  .status .build{margin-top:30px}
-  .status a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
-  .status a:hover{color:var(--gold)}
 
   footer{margin:96px 0 0;padding:28px 0 40px;border-top:1px solid var(--line);
          display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
@@ -116,7 +79,7 @@
 
   <!-- ================= 1. HERO ================= -->
   <div class="hero">
-    <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">BATHRON — programmable settlement anchored in Bitcoin</h1>
+    <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">BATHRON: programmable settlement anchored in Bitcoin</h1>
     <p class="tagline">BATHRON</p>
     <p class="memorable">Programmable settlement<br><b>anchored in Bitcoin.</b></p>
     <p style="max-width:56ch;margin:1.4rem auto 0">Build contracts, instruments, markets and applications around facts every BATHRON node can verify.</p>
@@ -124,20 +87,20 @@
       <a class="btn" href="/docs/protocol/what-bathron-is.html">Explore the protocol</a>
       <a class="btn" href="/docs/build/application-map.html">See what can be built</a>
       <a class="btn" href="/docs/operate/run-a-node.html">Run a node</a>
-      <a class="btn" href="/docs/consensus/status-and-claims.html">View network status</a>
     </div>
+    <p class="fine" style="margin-top:18px"><a href="/docs/consensus/status-and-claims.html">View network status</a></p>
   </div>
 
   <!-- ================= 1. BITCOIN AS A SOURCE OF VERIFIABLE FACTS ================= -->
   <section>
     <p class="eyebrow">Facts, not opinions</p>
     <h2>Bitcoin already proves things. Now a contract can use them.</h2>
-    <p style="max-width:64ch">Every Bitcoin block carries facts nobody can forge. A BATHRON contract can depend on those facts directly, and every node on the network checks them for itself.</p>
+    <p style="max-width:64ch">Bitcoin records facts that contracts can verify. BATHRON carries the relevant Bitcoin headers in consensus, so every node evaluates the same evidence.</p>
     <div class="three" style="margin-top:1.6rem">
-      <div><h3>Mining difficulty</h3><p>How hard the network was working at a given point in Bitcoin's history.</p></div>
+      <div><h3>Mining difficulty</h3><p>The mining difficulty recorded at a given Bitcoin height.</p></div>
       <div><h3>Block height</h3><p>How far the chain has advanced.</p></div>
       <div><h3>Median time</h3><p>Bitcoin's own clock, resistant to a single miner's timestamp.</p></div>
-      <div><h3>Confirmed payments</h3><p>That a Bitcoin transaction paid a given script, proved and settled.</p></div>
+      <div><h3>Confirmed payments</h3><p>A payment to a given script, included and buried in Bitcoin&rsquo;s chain.</p></div>
     </div>
     <p class="fine"><a href="/docs/protocol/bitcoin-verifiable-contracts.html">How Bitcoin facts are verified &rarr;</a></p>
   </section>
@@ -160,7 +123,7 @@
   <!-- ================= 3. ONE PROTOCOL, MANY APPLICATIONS ================= -->
   <section>
     <p class="eyebrow">One protocol, many applications</p>
-    <h2>Four things this layer makes buildable.</h2>
+    <h2>What becomes possible.</h2>
     <div class="three" style="margin-top:1.6rem">
       <div><h3>Mining difficulty instruments</h3><p>Agreements that settle on Bitcoin's own difficulty, with no outside reporter involved.</p></div>
       <div><h3>Payment-driven escrows</h3><p>Value that releases when a Bitcoin payment is confirmed and settled deeply enough.</p></div>
@@ -186,8 +149,8 @@
   <section>
     <p class="eyebrow">Bitcoin remains the anchor</p>
     <h2>The anchor is Bitcoin, and it stays where it is.</h2>
-    <p style="max-width:64ch">Bitcoin facts are verified by the nodes themselves. M0 originates from Bitcoin destruction confirmed by consensus, and M1 is the settlement unit that follows from the M0 and M1 rules.</p>
-    <p style="max-width:64ch">BATHRON holds no bitcoin. It offers no reserve, no parity and no redemption. Bitcoin comes back to a holder through a market, the way any other asset does.</p>
+    <p style="max-width:64ch">M0 originates from Bitcoin destruction verified by consensus. Protocol conversion moves value from M0 into M1, the unit used for settlement.</p>
+    <p style="max-width:64ch">Bitcoin remains the monetary anchor. BATHRON verifies its history directly and provides the programmable settlement layer built around it.</p>
     <p class="fine"><a href="/docs/bitcoin/final-asset.html">Why Bitcoin is the final asset &rarr;</a></p>
   </section>
 
@@ -195,7 +158,7 @@
   <section>
     <p class="eyebrow">Markets, as one application</p>
     <h2>A pair exists because someone quotes it.</h2>
-    <p style="max-width:64ch">A provider holding inventory can publish offers and build a market. There is no listing committee to convince and no registry to enter, and a second provider can quote the same pair whenever it wants to.</p>
+    <p style="max-width:64ch">A provider with inventory can publish offers for a pair. Other providers can quote the same pair independently. Markets emerge from available inventory and executable settlement conditions, not from a listing decision.</p>
     <p class="fine"><a href="/docs/markets/how-a-market-appears.html">See how a market is built &rarr;</a></p>
   </section>
 
