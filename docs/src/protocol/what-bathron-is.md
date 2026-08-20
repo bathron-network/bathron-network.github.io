@@ -13,7 +13,7 @@ Markets are one application of this layer. They are not the protocol.
 |---|---|
 | **Bitcoin facts in consensus** | Five predicates a script can assert about the Bitcoin chain, verified by every node — no designated oracle |
 | **Programmable settlement** | Covenants, output introspection, hashlocks, timelocks, signature verification over arbitrary messages |
-| **M0 / M1** | A settlement unit created only against destroyed bitcoin, with conservation enforced in consensus |
+| **M0 / M1** | M0 originates from consensus-verified Bitcoin destruction; M1 comes from the protocol's M0/M1 conversion and accounting rules. Neither is a redeemable claim on BTC — no peg, no reserve, no redemption |
 | **HU finality** | One round of signatures, counted one Consensus Operator one vote |
 | **Confidential transfers** | Sapling shielded values |
 
@@ -33,7 +33,7 @@ Each is documented with its code reference and its limits in
 
 ## Reading the status labels
 
-Every capability in this documentation carries one of four labels. They are not decoration:
+Every capability in this documentation carries one of five labels. They are not decoration:
 
 - `ACTIVE IN CONSENSUS` — the opcode or rule is enabled on the current public testnet. **This says
   nothing about whether a product uses it.**

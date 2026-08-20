@@ -23,8 +23,10 @@ where the protocol stops.
 
 **Step 1 — inventory.** A market maker holds the asset to be paired and M1. M1 is acquired
 either from an existing holder or by the one-way route (destroy BTC, receive M0, lock it into M1
-— → [From destroyed BTC to M1](../bitcoin/from-btc-to-m1.md)). That cost is real and irreversible;
-it is recovered through spreads and fees, never through appreciation.
+— → [From destroyed BTC to M1](../bitcoin/from-btc-to-m1.md)). Creating M0 by burn irreversibly
+destroys BTC. The resulting protocol position is transferable and may acquire a market value that
+the protocol neither fixes, supports nor predicts. Whether an activity recovers its economic cost
+is a commercial outcome, not a protocol guarantee.
 
 **Step 2 — quotes.** The maker publishes signed quotes: pair, bid, ask, size, expiry. They travel
 off-chain — a relay, an HTTP endpoint, a message bus. The consensus never sees a quote and never
@@ -46,7 +48,7 @@ because anyone was invited.
 
 | Party | Pays | Earns |
 |---|---|---|
-| Liquidity Provider | inventory cost (irreversible if acquired by burn), capital, market risk | the spread |
+| Liquidity Provider | inventory cost (the BTC destroyed to acquire M0 is gone), capital, market risk | the spread |
 | Clearing Provider | orchestration, deadlines, service | explicit fees |
 | Taker | the spread and fees, disclosed in the quote | the settlement it wanted |
 | Operators | running consensus | block fees only — no reward, no subsidy |

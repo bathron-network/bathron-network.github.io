@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BATHRON — Build contracts around facts Bitcoin can prove.</title>
-<meta name="description" content="An open programmable settlement protocol. Write contracts whose conditions are facts Bitcoin can prove — difficulty, height, median-time-past, a confirmed payment — checked by every node. Markets are one application of it.">>
+<meta name="description" content="An open programmable settlement protocol. Write contracts whose conditions are facts Bitcoin can prove — difficulty, height, median-time-past, a confirmed payment — checked by every node. Markets are one application of it.">
 <link rel="icon" type="image/png" href="/img/favicon.png">
 <meta property="og:title" content="BATHRON — Build contracts around facts Bitcoin can prove.">
-<meta property="og:description" content="Write contracts whose conditions are facts Bitcoin can prove. Covenants, conditional settlement, confidential transfers. Experimental public testnet; consensus-operator admission not yet open.">>
+<meta property="og:description" content="Write contracts whose conditions are facts Bitcoin can prove. Covenants, conditional settlement, confidential transfers. Experimental public testnet; consensus-operator admission not yet open.">
 <meta property="og:image" content="https://bathron.org/img/og.png">
 <meta property="og:url" content="https://bathron.org">
 <meta name="twitter:card" content="summary_large_image">
@@ -158,6 +158,13 @@
 
   <!-- ================= 3. WHAT IT PROVIDES ================= -->
     <section>
+      <p class="eyebrow">The target open network</p>
+      <h2>Several operators. Several providers. No privileged one.</h2>
+      <p style="max-width:64ch">BATHRON is being built toward a public network with several independent Consensus Operators, several independent Settlement, Clearing and Liquidity Providers, and competing applications &mdash; where no operator chooses what settles and a provider can disappear without taking the instrument with it.</p>
+      <p style="max-width:64ch"><b>That network is not deployed.</b> Application building is open today; <b>Consensus-Operator admission is not</b>, and the exact admission mechanism is deliberately left open rather than invented. <a href="/docs/network/open-network-target.html">The target open network &rarr;</a></p>
+    </section>
+
+    <section>
       <p class="eyebrow">What contracts can verify</p>
       <h2>Facts Bitcoin can prove — checked by every node.</h2>
       <p style="max-width:64ch">A script can assert five classes of Bitcoin fact, verified against headers the protocol carries in consensus. No designated oracle takes part.</p>
@@ -191,32 +198,6 @@
       <p><a href="/docs/build/application-map.html">The application map: live, tested, possible, or needing external components &rarr;</a></p>
     </section>
 
-    <section>
-      <p class="eyebrow">The target open network</p>
-      <h2>Several operators. Several providers. No privileged one.</h2>
-      <p style="max-width:64ch">BATHRON is being built toward a public network with several independent Consensus Operators, several independent Settlement, Clearing and Liquidity Providers, and competing applications &mdash; where no operator chooses what settles and a provider can disappear without taking the instrument with it.</p>
-      <p style="max-width:64ch"><b>That network is not deployed.</b> Application building is open today; <b>Consensus-Operator admission is not</b>, and the exact admission mechanism is deliberately left open rather than invented. <a href="/docs/network/open-network-target.html">The target open network &rarr;</a></p>
-    </section>
-
-  <section>
-    <p class="eyebrow">What BATHRON provides</p>
-    <h2>The core the protocol supplies.</h2>
-    <div class="three">
-      <div>
-        <h3>A common settlement unit — M1</h3>
-        <p>Every settlement on the network is expressed in one numéraire. M1 is created only from verified, irreversible Bitcoin destruction. Nobody issues it; nobody can print it. Market builders and providers hold it as working capital — end users keep settling in the assets they already hold.</p>
-      </div>
-      <div>
-        <h3>A consensus that enforces settlement conditions</h3>
-        <p>Accounting integrity, Bitcoin facts verified inside consensus, the conditions written into contracts, and transfers — final in about a minute. Every node checks every block; a finality quorum can order, never mint.</p>
-      </div>
-      <div>
-        <h3>An infrastructure for markets, instruments and applications</h3>
-        <p>Covenants, timelocks, hashlocks, Bitcoin-fact verification and confidential transfers — composable by anyone, enforced by every node. The consensus surface is frozen <em>as it stands today</em> so that what grows is what is built on top.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- ================= 4. WHAT IT DOES NOT DO ================= -->
   <section>
     <p class="eyebrow">What BATHRON deliberately does not do</p>
@@ -237,7 +218,7 @@
       <div><p class="n">3</p><h3>Settle</h3><p>A counterparty accepts. The M1 leg settles on BATHRON; an external-asset leg settles on its native chain under linked conditions.</p></div>
       <div><p class="n">4</p><h3>Others join</h3><p>Another provider quotes the same pair, tighter or deeper. No invitation needed.</p></div>
     </div>
-    <p class="pairs">BTC/M1<span>·</span>PIVX/M1<span>·</span>DOGE/M1<span>·</span>LTC/M1<span>·</span>any/M1</p>
+    <p class="pairs">BTC/M1<span>·</span>PIVX/M1<span>·</span>DOGE/M1<span>·</span>LTC/M1<span>·</span>external asset / M1 &mdash; integration required</p>
     <p class="fine">Native BTC ⇄ M1 is paired with hashlocked legs on both chains sharing one preimage — the components are demonstrated on testnet; a generally atomic client flow is not yet claimed. A chain that supports hashlocks and timelocks can be paired the same way &mdash; but each chain needs its own application work: script shapes, timelock ordering, reorganisation handling and a provider holding both sides. Only the Bitcoin pair has been demonstrated.</p>
     <p class="lead" style="margin-top:22px"><a href="/docs/markets/how-a-market-appears.html" style="color:var(--gold)">How a market appears →</a></p>
   </section>
@@ -245,7 +226,7 @@
   <!-- ================= 6. BITCOIN AT THE CENTER ================= -->
   <section>
     <p class="eyebrow">Why Bitcoin stays at the center</p>
-    <h2>Bitcoin sees two transactions. BATHRON settles everything in between.</h2>
+    <h2>In one cross-chain pattern, Bitcoin sees two transactions and BATHRON settles what happens between them.</h2>
     <div class="space" aria-label="A settlement state anchored by two Bitcoin transactions">
       <svg viewBox="0 0 640 158" xmlns="http://www.w3.org/2000/svg" role="img">
         <rect x="80" y="8" width="480" height="80" rx="14" fill="#0C0F14" stroke="#1C222C"/>
