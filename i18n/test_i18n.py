@@ -692,10 +692,11 @@ class TestShellPortability(unittest.TestCase):
         """Lines that are not comments — comments may name a construct."""
         path = os.path.join(HERE, name)
         out = []
-        for i, line in enumerate(open(path, encoding='utf-8'), 1):
-            stripped = line.lstrip()
-            if stripped.startswith('#'): continue
-            out.append((i, line))
+        with open(path, encoding='utf-8') as fh:
+            for i, line in enumerate(fh, 1):
+                stripped = line.lstrip()
+                if stripped.startswith('#'): continue
+                out.append((i, line))
         return out
 
     def test_no_bash4_only_constructs(self):

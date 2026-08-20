@@ -66,7 +66,7 @@ msgid "Facts, not opinions"
 msgstr "Des faits, pas des opinions"
 
 msgid "Bitcoin already proves things. Now a contract can use them."
-msgstr "Bitcoin établit déjà des faits. Un contrat peut désormais s’en servir."
+msgstr "Bitcoin établit déjà des faits vérifiables. Les contrats peuvent désormais s’appuyer dessus."
 
 msgid "Bitcoin records facts that contracts can verify. BATHRON carries the relevant Bitcoin headers in consensus, so every node evaluates the same evidence."
 msgstr "Bitcoin enregistre des faits qu’un contrat peut vérifier. BATHRON intègre à son consensus les en-têtes Bitcoin correspondants : chaque nœud évalue donc les mêmes preuves."
@@ -105,7 +105,7 @@ msgid "Write the conditions. The network enforces them."
 msgstr "Écrivez les conditions. Le réseau les fait respecter."
 
 msgid "Settlement on BATHRON is described in script and carried out by consensus. The same primitives compose, so a single agreement can depend on a Bitcoin fact, a secret and a deadline at once."
-msgstr "Sur BATHRON, un règlement s’écrit en script et s’exécute par consensus. Les primitives se composent : un même accord peut dépendre à la fois d’un fait Bitcoin, d’un secret et d’une échéance."
+msgstr "Sur BATHRON, les conditions de règlement sont définies dans un script puis exécutées par le consensus. Les primitives se composent : un même accord peut dépendre à la fois d’un fait Bitcoin, d’un secret et d’une échéance."
 
 msgid "Covenants"
 msgstr "Covenants"
@@ -192,25 +192,25 @@ msgid "Create the services and settlement flows that people actually use. They c
 msgstr "Ils créent les services et les flux de règlement réellement utilisés. Ils se font concurrence, apparaissent et disparaissent."
 
 msgid "Builders"
-msgstr "Constructeurs"
+msgstr "Développeurs"
 
 msgid "Compose applications and instruments on top, choosing their own interfaces and their own terms."
-msgstr "Ils composent applications et instruments au-dessus, en choisissant leurs interfaces et leurs conditions."
+msgstr "Ils composent des applications et des instruments sur cette couche, en choisissant leurs interfaces et leurs conditions."
 
 msgid "No consensus operator chooses which application may be built."
 msgstr "Aucun opérateur de consensus ne décide quelle application a le droit d’exister."
 
 msgid "Bitcoin remains the anchor"
-msgstr "L’ancrage reste Bitcoin"
+msgstr "Bitcoin reste l’ancrage"
 
 msgid "The anchor is Bitcoin, and it stays where it is."
-msgstr "Bitcoin demeure l’ancrage monétaire."
+msgstr "Le règlement programmable s’appuie sur Bitcoin."
 
 msgid "M0 originates from Bitcoin destruction verified by consensus. Protocol conversion moves value from M0 into M1, the unit used for settlement."
 msgstr "Le M0 naît d’une destruction de bitcoins vérifiée par le consensus. La conversion opérée par le protocole fait passer la valeur du M0 au M1, l’unité utilisée pour le règlement."
 
 msgid "Bitcoin remains the monetary anchor. BATHRON verifies its history directly and provides the programmable settlement layer built around it."
-msgstr "Bitcoin reste l’ancrage monétaire du système. BATHRON en vérifie l’historique directement et fournit la couche de règlement programmable construite autour de lui."
+msgstr "BATHRON vérifie directement l’historique de Bitcoin et fournit la couche de règlement programmable construite autour de lui."
 
 msgid "Why Bitcoin is the final asset →"
 msgstr "Pourquoi Bitcoin est l’actif final →"
@@ -222,7 +222,7 @@ msgid "A pair exists because someone quotes it."
 msgstr "Une paire existe dès que quelqu’un en propose un prix."
 
 msgid "A provider with inventory can publish offers for a pair. Other providers can quote the same pair independently. Markets emerge from available inventory and executable settlement conditions, not from a listing decision."
-msgstr "Un fournisseur disposant d’actifs peut publier des offres sur une paire. D’autres fournisseurs peuvent coter la même paire de leur côté. Les marchés naissent de la liquidité disponible et de conditions de règlement exécutables, pas d’une décision de référencement."
+msgstr "Un fournisseur disposant d’actifs peut publier des offres sur une paire. D’autres fournisseurs peuvent proposer indépendamment leurs propres prix sur la même paire. Les marchés naissent de la liquidité disponible et de conditions de règlement exécutables, pas d’une décision de référencement."
 
 msgid "See how a market is built →"
 msgstr "Comment se construit un marché →"
@@ -243,7 +243,7 @@ msgid "Explore applications"
 msgstr "Explorer les applications"
 
 msgid "What the layer makes buildable, and what each one needs."
-msgstr "Ce que l’on peut construire sur cette couche, et ce que chaque cas demande."
+msgstr "Ce que permet cette couche et les exigences de chaque application."
 
 msgid "Verify the chain yourself, from your own machine."
 msgstr "Vérifier la chaîne vous-même, depuis votre propre machine."
