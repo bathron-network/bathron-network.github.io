@@ -15,8 +15,8 @@
 #    77  = skipped, msgmerge is not installed (POSIX "skipped" convention)
 set -u
 
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-cd "$ROOT"
+ROOT="$(cd "$(dirname "$0")/.." && pwd)" || exit 3
+cd "$ROOT" || exit 3
 
 if ! command -v msgmerge >/dev/null 2>&1; then
     printf 'SKIP — msgmerge not installed. Install "gettext" to run this check.\n'
@@ -28,15 +28,29 @@ FAILED=0
 ok()  { printf '  PASS  %s\n' "$1"; }
 bad() { printf '  FAIL  %s\n' "$1"; FAILED=1; }
 
-BEFORE_SRC="$(sha256sum index.html | cut -d' ' -f1)"
-BEFORE_PO="$(sha256sum i18n/homepage.fr.po | cut -d' ' -f1)"
+# Python, not sha256sum: a stock macOS has neither sha256sum nor a guaranteed
+# shasum on PATH, and Python 3 is already required.
+digest() {
+    python3 -c "import hashlib,sys;print(hashlib.sha256(open(sys.argv[1],'rb').read()).hexdigest())" "$1"
+}
+BEFORE_SRC="$(digest index.html)"          || exit 3
+BEFORE_PO="$(digest i18n/homepage.fr.po)"  || exit 3
 
-SANDBOX="$(mktemp -d -t bathron-i18n-msgmerge-XXXXXX)"
+TMPROOT="${TMPDIR:-/tmp}"; TMPROOT="${TMPROOT%/}"
+SANDBOX_PREFIX="$TMPROOT/bathron-i18n-msgmerge."
+SANDBOX="$(mktemp -d "${SANDBOX_PREFIX}XXXXXX")" || exit 3
+MARKER_NAME=".bathron-msgmerge-sandbox"
+printf 'bathron i18n msgmerge sandbox\n' > "$SANDBOX/$MARKER_NAME" || exit 3
 cleanup() {
+    [ -n "${SANDBOX:-}" ] || return 0
     case "$SANDBOX" in
-        /tmp/bathron-i18n-msgmerge-*|/var/folders/*) rm -rf "$SANDBOX" ;;
-        *) printf '  refusing to remove unexpected sandbox path %s\n' "$SANDBOX" ;;
+        "$SANDBOX_PREFIX"??????) : ;;
+        *) printf '  refusing to remove %s: path does not match the template\n' "$SANDBOX"; return 0 ;;
     esac
+    [ -d "$SANDBOX" ] || return 0
+    [ -f "$SANDBOX/$MARKER_NAME" ] || {
+        printf '  refusing to remove %s: marker missing\n' "$SANDBOX"; return 0; }
+    rm -rf -- "$SANDBOX"
 }
 trap cleanup EXIT
 
@@ -93,9 +107,9 @@ if grep -q '^#~' "$SANDBOX/i18n/homepage.fr.po"; then
 fi
 
 # 5. the calling worktree must be untouched
-[ "$(sha256sum index.html | cut -d' ' -f1)" = "$BEFORE_SRC" ] \
+[ "$(digest index.html)" = "$BEFORE_SRC" ] \
     && ok 'unchanged: index.html' || bad 'MODIFIED: index.html'
-[ "$(sha256sum i18n/homepage.fr.po | cut -d' ' -f1)" = "$BEFORE_PO" ] \
+[ "$(digest i18n/homepage.fr.po)" = "$BEFORE_PO" ] \
     && ok 'unchanged: i18n/homepage.fr.po' || bad 'MODIFIED: i18n/homepage.fr.po'
 
 printf '\n'

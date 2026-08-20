@@ -5,25 +5,24 @@
 # i18n/ci-check.sh — the same script the deploy workflow runs — so that a pull
 # request is judged by exactly the checks that will later guard publication.
 #
-# Everything is pinned:
-#   actions/checkout      11d5960a326750d5838078e36cf38b85af677262  (tag v4.4.0,
-#                         GET /repos/actions/checkout/git/ref/tags/v4.4.0,
-#                         commit dated 2026-07-16)
-#   actions/setup-python  a26af69be951a213d495a4c3e4e4022e16d87065  (tag v5.6.0,
-#                         GET /repos/actions/setup-python/tags,
-#                         commit dated 2025-04-24)
-#   Python                3.12.14, an exact patch release present in
-#                         actions/python-versions for linux-x64.
+# WHY THERE IS NO `paths:` FILTER. A check that is skipped for some pull
+# requests cannot safely be made required: GitHub reports it as pending, not
+# successful, and the branch never becomes mergeable. So the job runs on EVERY
+# pull request under one stable name — "i18n gates" — and decides internally
+# whether the i18n files changed. When they did not, it says so and succeeds
+# deterministically without running anything. The check can therefore be marked
+# required without stalling unrelated pull requests.
+#
+# Everything is pinned by commit SHA, each confirmed through the authoritative
+# GET /repos/<owner>/<repo>/git/ref/tags/<tag> endpoint:
+#   actions/checkout      v4.4.0  11d5960a326750d5838078e36cf38b85af677262
+#   actions/setup-python  v5.6.0  a26af69be951a213d495a4c3e4e4022e16d87065
+# Python is pinned to 3.12.14, an exact patch release present in
+# actions/python-versions for linux-x64, and asserted at runtime.
 name: i18n check
 
 on:
   pull_request:
-    paths:
-      - 'index.html'
-      - 'i18n/**'
-      - 'sitemap.xml'
-      - '.github/workflows/i18n-check.yml'
-      - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
 # Read-only. No pages:write, no id-token:write, nothing else.
@@ -38,17 +37,47 @@ jobs:
   i18n:
     name: i18n gates
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+        with:
+          fetch-depth: 0
+
+      - name: Decide whether the i18n gates apply
+        id: scope
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -u
+          if [ -z "${BASE:-}" ] || [ -z "${HEAD:-}" ]; then
+            echo "not a pull request event — running the gates"
+            echo "relevant=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          changed="$(git diff --name-only "$BASE" "$HEAD")"
+          echo "files changed by this pull request:"
+          printf '%s\n' "$changed" | sed 's/^/  /'
+          # grep -c, not grep -q: -q exits early and can SIGPIPE the writer.
+          match="$(printf '%s\n' "$changed" \
+                   | grep -cE '^(index\.html|sitemap\.xml|i18n/|\.github/workflows/(i18n-check|deploy)\.yml)' || true)"
+          if [ "$match" -gt 0 ]; then
+            echo "relevant=true" >> "$GITHUB_OUTPUT"
+            echo "=> $match i18n-relevant file(s) changed; running the gates"
+          else
+            echo "relevant=false" >> "$GITHUB_OUTPUT"
+            echo "=> no i18n-relevant file changed"
+          fi
 
       - name: Set up Python 3.12.14
+        if: steps.scope.outputs.relevant == 'true'
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5.6.0
         with:
           python-version: '3.12.14'
 
       - name: Record the interpreter actually used
+        if: steps.scope.outputs.relevant == 'true'
         run: |
           python3 -VV
           command -v python3
@@ -56,7 +85,15 @@ jobs:
           echo "interpreter is exactly 3.12.14"
 
       - name: i18n gates (same script as the deploy workflow)
+        if: steps.scope.outputs.relevant == 'true'
         run: bash i18n/ci-check.sh
+
+      - name: Nothing to check
+        if: steps.scope.outputs.relevant != 'true'
+        run: |
+          echo "This pull request touches no i18n file."
+          echo "index.html, sitemap.xml, i18n/** and the two workflow files are unchanged,"
+          echo "so the generated French page cannot differ. Reporting success."
 
   # Separate, NON-BLOCKING, and never on the deployment path: does the strict PO
   # reader still understand what a real GNU msgmerge writes? This is the only
@@ -70,19 +107,41 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+        with:
+          fetch-depth: 0
+
+      - name: Decide whether this applies
+        id: scope
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -u
+          if [ -z "${BASE:-}" ] || [ -z "${HEAD:-}" ]; then
+            echo "relevant=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          match="$(git diff --name-only "$BASE" "$HEAD" \
+                   | grep -cE '^(index\.html|i18n/)' || true)"
+          if [ "$match" -gt 0 ]; then echo "relevant=true" >> "$GITHUB_OUTPUT"
+          else echo "relevant=false" >> "$GITHUB_OUTPUT"; fi
 
       - name: Set up Python 3.12.14
+        if: steps.scope.outputs.relevant == 'true'
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5.6.0
         with:
           python-version: '3.12.14'
 
       - name: Install GNU gettext
+        if: steps.scope.outputs.relevant == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install --no-install-recommends -qq gettext
 
       - name: Compatibility with real msgmerge
+        if: steps.scope.outputs.relevant == 'true'
         run: |
-          bash i18n/msgmerge-compat.sh; rc=$?
+          set +e
+          bash i18n/msgmerge-compat.sh
+          rc=$?
           if [ $rc -eq 77 ]; then echo "skipped: msgmerge unavailable"; exit 0; fi
           exit $rc
