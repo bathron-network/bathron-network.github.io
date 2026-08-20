@@ -27,6 +27,69 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # ---------------------------------------------------------------
+      # i18n de la page d'accueil.
+      #
+      # Aucune dépendance externe pour GÉNÉRER la page : le générateur
+      # (i18n/i18n.py) n'utilise que la bibliothèque standard. po4a a été
+      # évalué puis écarté — il reformate le document et fait entrer tout le
+      # bloc CSS dans le catalogue, si bien que changer une couleur casserait
+      # le build français sous une règle « 100 % ou rien ».
+      #
+      # gettext n'est installé que pour le TEST : le cas « fuzzy » doit
+      # s'exécuter contre la vraie sortie de msgmerge, pas contre une
+      # imitation écrite à la main.
+      #
+      # Épinglage : actions/setup-python est fixé au SHA de commit de la
+      # v5.6.0 (source : GET /repos/actions/setup-python/tags, tag v5.6.0,
+      # commit a26af69…, daté 2025-04-24), et Python à une version patch
+      # exacte présente dans actions/python-versions pour linux-x64. Un tag
+      # mobile comme @v5 ou une version « 3.12 » ne sont pas des épinglages.
+      # ---------------------------------------------------------------
+      - name: Set up Python (pinned action, pinned interpreter)
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5.6.0
+        with:
+          python-version: '3.12.14'
+
+      - name: Install gettext (msgmerge, for the fuzzy case of the mutation test)
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -qq gettext
+
+      - name: No generated artifact may be tracked in git
+        run: |
+          tracked="$(git ls-files -- fr/ i18n/homepage.pot)"
+          if [ -n "$tracked" ]; then
+            echo "these generated files are tracked and must not be:"; echo "$tracked"; exit 1
+          fi
+
+      - name: Unit tests
+        run: python3 i18n/test_i18n.py
+
+      - name: Fail-closed mutation test (isolated sandbox)
+        run: bash i18n/mutation-test.sh
+
+      - name: Catalogue audit (fail-closed)
+        run: |
+          python3 i18n/i18n.py extract
+          python3 i18n/i18n.py check fr
+
+      - name: Build the French homepage
+        run: python3 i18n/i18n.py build fr
+
+      - name: Structural validation of both pages
+        run: |
+          python3 i18n/i18n.py verify en     # lang, canonical, og:url, hreflang, selector
+          python3 i18n/i18n.py verify fr
+          python3 i18n/i18n.py compare       # EN and FR must share one tag skeleton
+          python3 i18n/i18n.py overflow      # no fixed width wider than the min viewport
+
+      - name: The French page must exist before anything is assembled
+        run: |
+          test -s fr/index.html
+          grep -q '<html lang="fr"' fr/index.html
+          ! grep -q 'data-i18n-context' fr/index.html
+
       - name: Install mdBook
         run: |
           mkdir -p "$HOME/.local/bin"
@@ -48,8 +111,9 @@ jobs:
 
       - name: Assemble site
         run: |
-          mkdir -p _site/docs
+          mkdir -p _site/docs _site/fr
           cp index.html CNAME robots.txt sitemap.xml 404.html _site/
+          cp fr/index.html _site/fr/
           cp -r img _site/
           cp -r docs/book/. _site/docs/
 

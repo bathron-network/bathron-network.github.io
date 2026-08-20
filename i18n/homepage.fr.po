@@ -1,9 +1,10 @@
 # BATHRON homepage — French catalogue.
-# Hand-maintained. Regenerate the template with:
+# Hand-maintained and versioned. Regenerate the template with:
 #   python3 i18n/i18n.py extract
 # Verify before building with:
 #   python3 i18n/i18n.py check fr
-# An entry that is missing, empty or flagged fuzzy blocks the French build.
+# A missing, empty, fuzzy, duplicated or malformed entry blocks the
+# French build — see i18n/README.md.
 msgid ""
 msgstr ""
 "Project-Id-Version: bathron-homepage\n"
@@ -24,7 +25,7 @@ msgid "BATHRON: programmable settlement anchored in Bitcoin"
 msgstr "BATHRON : le règlement programmable, ancré dans Bitcoin"
 
 msgid "BATHRON emblem"
-msgstr "BATHRON emblem"
+msgstr "Emblème BATHRON"
 
 msgid "BATHRON"
 msgstr "BATHRON"
@@ -53,22 +54,22 @@ msgid "Explore the protocol"
 msgstr "Découvrir le protocole"
 
 msgid "See what can be built"
-msgstr "Ce qui peut être construit"
+msgstr "Voir ce qui peut être construit"
 
 msgid "Run a node"
 msgstr "Faire tourner un nœud"
 
 msgid "View network status"
-msgstr "État du réseau"
+msgstr "Voir l’état du réseau"
 
 msgid "Facts, not opinions"
 msgstr "Des faits, pas des opinions"
 
 msgid "Bitcoin already proves things. Now a contract can use them."
-msgstr "Bitcoin prouve déjà des choses. Un contrat peut désormais s’en servir."
+msgstr "Bitcoin établit déjà des faits. Un contrat peut désormais s’en servir."
 
 msgid "Bitcoin records facts that contracts can verify. BATHRON carries the relevant Bitcoin headers in consensus, so every node evaluates the same evidence."
-msgstr "Bitcoin enregistre des faits que des contrats peuvent vérifier. BATHRON transporte les en-têtes Bitcoin pertinents dans son consensus, de sorte que chaque nœud évalue les mêmes preuves."
+msgstr "Bitcoin enregistre des faits qu’un contrat peut vérifier. BATHRON intègre à son consensus les en-têtes Bitcoin correspondants : chaque nœud évalue donc les mêmes preuves."
 
 msgid "Mining difficulty"
 msgstr "Difficulté de minage"
@@ -86,13 +87,13 @@ msgid "Median time"
 msgstr "Temps médian"
 
 msgid "Bitcoin's own clock, resistant to a single miner's timestamp."
-msgstr "L’horloge propre à Bitcoin, résistante à l’horodatage d’un mineur isolé."
+msgstr "L’horloge propre à Bitcoin, que l’horodatage d’un seul mineur ne peut fausser."
 
 msgid "Confirmed payments"
 msgstr "Paiements confirmés"
 
 msgid "A payment to a given script, included and buried in Bitcoin’s chain."
-msgstr "Un paiement vers un script donné, inclus et enfoui dans la chaîne Bitcoin."
+msgstr "Un paiement vers un script donné, inclus puis enfoui dans la chaîne Bitcoin."
 
 msgid "How Bitcoin facts are verified →"
 msgstr "Comment les faits Bitcoin sont vérifiés →"
@@ -104,13 +105,13 @@ msgid "Write the conditions. The network enforces them."
 msgstr "Écrivez les conditions. Le réseau les fait respecter."
 
 msgid "Settlement on BATHRON is described in script and carried out by consensus. The same primitives compose, so a single agreement can depend on a Bitcoin fact, a secret and a deadline at once."
-msgstr "Sur BATHRON, un règlement se décrit en script et s’exécute par consensus. Les primitives se composent, si bien qu’un même accord peut dépendre à la fois d’un fait Bitcoin, d’un secret et d’une échéance."
+msgstr "Sur BATHRON, un règlement s’écrit en script et s’exécute par consensus. Les primitives se composent : un même accord peut dépendre à la fois d’un fait Bitcoin, d’un secret et d’une échéance."
 
 msgid "Covenants"
 msgstr "Covenants"
 
 msgid "Constrain what a spend is allowed to become."
-msgstr "Contraindre ce qu’une dépense a le droit de devenir."
+msgstr "Restreindre ce qu’une dépense a le droit de devenir."
 
 msgid "Hashlocks"
 msgstr "Hashlocks"
@@ -128,7 +129,7 @@ msgid "Signatures and attestations"
 msgstr "Signatures et attestations"
 
 msgid "Verify a signature over any message, including one from an outside source."
-msgstr "Vérifier une signature sur n’importe quel message, y compris venu d’une source extérieure."
+msgstr "Vérifier une signature sur n’importe quel message, y compris un message issu d’une source externe."
 
 msgid "Confidential transfers"
 msgstr "Transferts confidentiels"
@@ -146,28 +147,28 @@ msgid "What becomes possible."
 msgstr "Ce qui devient possible."
 
 msgid "Mining difficulty instruments"
-msgstr "Instruments sur la difficulté"
+msgstr "Instruments sur la difficulté de minage"
 
 msgid "Agreements that settle on Bitcoin's own difficulty, with no outside reporter involved."
-msgstr "Des accords qui se règlent sur la difficulté propre à Bitcoin, sans intervention d’un rapporteur extérieur."
+msgstr "Des accords qui se règlent sur la difficulté de Bitcoin lui-même, sans qu’aucune source de données externe n’intervienne."
 
 msgid "Payment-driven escrows"
-msgstr "Séquestres déclenchés par paiement"
+msgstr "Séquestres déclenchés par un paiement"
 
 msgid "Value that releases when a Bitcoin payment is confirmed and settled deeply enough."
-msgstr "De la valeur qui se libère lorsqu’un paiement Bitcoin est confirmé et suffisamment enfoui."
+msgstr "De la valeur qui se libère lorsqu’un paiement Bitcoin est confirmé et suffisamment enfoui dans la chaîne."
 
 msgid "Programmable financial agreements"
 msgstr "Accords financiers programmables"
 
 msgid "Terms, deadlines and outcomes written once and enforced by the network."
-msgstr "Des termes, des échéances et des issues écrits une fois, puis appliqués par le réseau."
+msgstr "Des conditions, des échéances et des issues écrites une fois, puis appliquées par le réseau."
 
 msgid "Open markets and cross-chain flows"
 msgstr "Marchés ouverts et flux inter-chaînes"
 
 msgid "Pairs quoted by whoever holds inventory, settled against linked conditions."
-msgstr "Des paires cotées par qui détient l’inventaire, réglées contre des conditions liées."
+msgstr "Des paires cotées par ceux qui détiennent l’inventaire, réglées selon des conditions liées."
 
 msgid "The full application map →"
 msgstr "La carte complète des applications →"
@@ -182,22 +183,22 @@ msgid "Consensus Operators"
 msgstr "Opérateurs de consensus"
 
 msgid "Secure the network, order transactions and finalize them. One operator, one vote."
-msgstr "Sécurisent le réseau, ordonnent les transactions et les finalisent. Un opérateur, une voix."
+msgstr "Ils sécurisent le réseau, ordonnent les transactions et les finalisent. Un opérateur, une voix."
 
 msgid "Settlement Providers"
 msgstr "Fournisseurs de règlement"
 
 msgid "Create the services and settlement flows that people actually use. They compete, and they come and go."
-msgstr "Créent les services et les flux de règlement réellement utilisés. Ils se font concurrence, ils vont et viennent."
+msgstr "Ils créent les services et les flux de règlement réellement utilisés. Ils se font concurrence, apparaissent et disparaissent."
 
 msgid "Builders"
 msgstr "Constructeurs"
 
 msgid "Compose applications and instruments on top, choosing their own interfaces and their own terms."
-msgstr "Composent applications et instruments par-dessus, avec leurs propres interfaces et leurs propres termes."
+msgstr "Ils composent applications et instruments au-dessus, en choisissant leurs interfaces et leurs conditions."
 
 msgid "No consensus operator chooses which application may be built."
-msgstr "Aucun opérateur de consensus ne choisit quelle application peut être construite."
+msgstr "Aucun opérateur de consensus ne décide quelle application a le droit d’exister."
 
 msgid "Bitcoin remains the anchor"
 msgstr "Bitcoin reste l’ancrage"
@@ -206,10 +207,10 @@ msgid "The anchor is Bitcoin, and it stays where it is."
 msgstr "L’ancrage, c’est Bitcoin, et il ne bouge pas."
 
 msgid "M0 originates from Bitcoin destruction verified by consensus. Protocol conversion moves value from M0 into M1, the unit used for settlement."
-msgstr "Le M0 provient d’une destruction de bitcoins vérifiée par le consensus. La conversion du protocole fait passer la valeur du M0 vers le M1, l’unité utilisée pour le règlement."
+msgstr "Le M0 naît d’une destruction de bitcoins vérifiée par le consensus. La conversion opérée par le protocole fait passer la valeur du M0 au M1, l’unité utilisée pour le règlement."
 
 msgid "Bitcoin remains the monetary anchor. BATHRON verifies its history directly and provides the programmable settlement layer built around it."
-msgstr "Bitcoin demeure l’ancrage monétaire. BATHRON vérifie son historique directement et fournit la couche de règlement programmable construite autour."
+msgstr "Bitcoin demeure l’ancrage monétaire. BATHRON vérifie son historique directement et fournit la couche de règlement programmable construite autour de lui."
 
 msgid "Why Bitcoin is the final asset →"
 msgstr "Pourquoi Bitcoin est l’actif final →"
@@ -221,10 +222,10 @@ msgid "A pair exists because someone quotes it."
 msgstr "Une paire existe parce que quelqu’un la cote."
 
 msgid "A provider with inventory can publish offers for a pair. Other providers can quote the same pair independently. Markets emerge from available inventory and executable settlement conditions, not from a listing decision."
-msgstr "Un fournisseur disposant d’inventaire peut publier des offres sur une paire. D’autres fournisseurs peuvent coter la même paire de leur côté. Les marchés naissent de l’inventaire disponible et de conditions de règlement exécutables, pas d’une décision de cotation."
+msgstr "Un fournisseur disposant d’inventaire peut publier des offres sur une paire. D’autres fournisseurs peuvent coter la même paire de leur côté. Les marchés naissent de l’inventaire disponible et de conditions de règlement exécutables, pas d’une décision d’inscription."
 
 msgid "See how a market is built →"
-msgstr "Comment un marché se construit →"
+msgstr "Comment se construit un marché →"
 
 msgid "Start here"
 msgstr "Commencer ici"
@@ -242,10 +243,10 @@ msgid "Explore applications"
 msgstr "Explorer les applications"
 
 msgid "What the layer makes buildable, and what each one needs."
-msgstr "Ce que la couche rend constructible, et ce que chaque cas exige."
+msgstr "Ce que l’on peut construire sur cette couche, et ce que chaque cas demande."
 
 msgid "Verify the chain yourself, from your own machine."
-msgstr "Vérifier la chaîne vous-même, depuis votre machine."
+msgstr "Vérifier la chaîne vous-même, depuis votre propre machine."
 
 msgid "Public explorer"
 msgstr "Explorateur public"
@@ -263,22 +264,16 @@ msgid "Network status"
 msgstr "État du réseau"
 
 msgid "What runs today, and what the protocol does not claim."
-msgstr "Ce qui tourne aujourd’hui, et ce que le protocole ne prétend pas."
+msgstr "Ce qui tourne aujourd’hui, et ce que le protocole ne prétend pas faire."
 
 msgid "contact@bathron.org"
 msgstr "contact@bathron.org"
 
-msgid ","
-msgstr ","
+msgid "Releases"
+msgstr "Versions"
 
-msgid "releases"
-msgstr "versions"
-
-msgid "and"
-msgstr "et"
-
-msgid "security policy"
-msgstr "politique de sécurité"
+msgid "Security policy"
+msgstr "Politique de sécurité"
 
 msgid "Report a vulnerability to"
 msgstr "Signaler une vulnérabilité à"
