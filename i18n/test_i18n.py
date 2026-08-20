@@ -7,7 +7,7 @@ HTML, not only on Python data structures.
 
     python3 i18n/test_i18n.py            # or: python3 -m unittest discover i18n
 """
-import builtins, importlib.util, os, shutil, sys, tempfile, unittest
+import builtins, importlib.util, os, shutil, subprocess, sys, tempfile, unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
@@ -603,6 +603,126 @@ class TestRealPages(unittest.TestCase):
 
     def test_catalogue_is_complete(self):
         self.assertEqual(M.check('fr', verbose=False), [])
+
+
+# --------------------------------------------------------------------------
+# 6. The mutation-test harness itself
+#
+# A harness that cannot run must never report success. An earlier version used
+# `declare -A`, which Bash 3.2 (the /bin/bash macOS ships) rejects; the guarded
+# file checks then silently did not run and the script still printed PASS and
+# exited 0. These tests make that class of failure a hard error.
+# --------------------------------------------------------------------------
+
+MUTATION = os.path.join(HERE, 'mutation-test.sh')
+SHELL_SCRIPTS = ['mutation-test.sh', 'ci-check.sh', 'msgmerge-compat.sh']
+
+
+def run_mutation(fault=None, tmpdir=None, timeout=300):
+    env = dict(os.environ)
+    if fault: env['BATHRON_MUTATION_TEST_FAULT'] = fault
+    if tmpdir: env['TMPDIR'] = tmpdir
+    return subprocess.run(['bash', MUTATION], cwd=REPO, env=env, timeout=timeout,
+                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                          universal_newlines=True)
+
+
+class TestMutationHarness(unittest.TestCase):
+    FAULTS = ['manifest', 'sandbox', 'copy', 'guard', 'skipguard']
+
+    def test_nominal_run_passes(self):
+        r = run_mutation()
+        self.assertEqual(r.returncode, 0, r.stdout[-2000:])
+        self.assertIn('MUTATION TEST: PASS', r.stdout)
+
+    def test_every_injected_fault_fails_and_never_prints_pass(self):
+        for fault in self.FAULTS:
+            with self.subTest(fault=fault):
+                r = run_mutation(fault=fault)
+                self.assertNotEqual(r.returncode, 0,
+                                    f'fault {fault!r} still exited 0:\n{r.stdout[-2000:]}')
+                self.assertNotIn('MUTATION TEST: PASS', r.stdout,
+                                 f'fault {fault!r} reported PASS:\n{r.stdout[-2000:]}')
+
+    def test_skipped_checks_are_caught_by_the_assertion_counter(self):
+        """The original defect: guarded-file checks silently do not run."""
+        r = run_mutation(fault='skipguard')
+        self.assertEqual(r.returncode, 3)
+        self.assertIn('assertions ran, expected', r.stdout)
+
+    def test_sandbox_lives_under_tmpdir_and_is_removed(self):
+        d = tempfile.mkdtemp(prefix='i18n-tmpdir-')
+        self.addCleanup(shutil.rmtree, d, True)
+        r = run_mutation(tmpdir=d)
+        self.assertEqual(r.returncode, 0, r.stdout[-2000:])
+        self.assertIn(d, r.stdout, 'the sandbox did not honour TMPDIR')
+        self.assertEqual(os.listdir(d), [], 'the sandbox was not cleaned up')
+
+    def test_cleanup_removes_only_its_own_sandbox(self):
+        """A decoy matching the prefix but lacking the marker must survive."""
+        d = tempfile.mkdtemp(prefix='i18n-tmpdir-')
+        self.addCleanup(shutil.rmtree, d, True)
+        decoy = os.path.join(d, 'bathron-i18n-mutation.DECOY')
+        os.makedirs(decoy)
+        with open(os.path.join(decoy, 'precious.txt'), 'w') as f:
+            f.write('do not delete me')
+        r = run_mutation(tmpdir=d)
+        self.assertEqual(r.returncode, 0, r.stdout[-2000:])
+        self.assertTrue(os.path.isdir(decoy), 'the decoy directory was removed')
+        with open(os.path.join(decoy, 'precious.txt')) as f:
+            self.assertEqual(f.read(), 'do not delete me')
+        self.assertEqual(os.listdir(d), ['bathron-i18n-mutation.DECOY'])
+
+
+class TestShellPortability(unittest.TestCase):
+    """No Bash 4+ construct, and no tool a stock macOS lacks."""
+
+    BASH4_ONLY = [
+        (r'declare\s+-A', 'associative array (Bash 4+)'),
+        (r'local\s+-A', 'associative array (Bash 4+)'),
+        (r'\bmapfile\b', 'mapfile (Bash 4+)'),
+        (r'\breadarray\b', 'readarray (Bash 4+)'),
+        (r'\$\{[A-Za-z_][A-Za-z0-9_]*\^\^', 'uppercase expansion (Bash 4+)'),
+        (r'\$\{[A-Za-z_][A-Za-z0-9_]*,,', 'lowercase expansion (Bash 4+)'),
+        (r';;&', 'fallthrough case (Bash 4+)'),
+    ]
+    MISSING_ON_MACOS = [(r'\bsha256sum\b', 'sha256sum is not on a stock macOS')]
+
+    def code_lines(self, name):
+        """Lines that are not comments — comments may name a construct."""
+        path = os.path.join(HERE, name)
+        out = []
+        for i, line in enumerate(open(path, encoding='utf-8'), 1):
+            stripped = line.lstrip()
+            if stripped.startswith('#'): continue
+            out.append((i, line))
+        return out
+
+    def test_no_bash4_only_constructs(self):
+        import re as _re
+        for name in SHELL_SCRIPTS:
+            for lineno, line in self.code_lines(name):
+                for pattern, why in self.BASH4_ONLY:
+                    with self.subTest(script=name, line=lineno, why=why):
+                        self.assertIsNone(_re.search(pattern, line),
+                                          f'{name}:{lineno} uses {why}: {line.strip()!r}')
+
+    def test_no_tools_absent_from_macos(self):
+        import re as _re
+        for name in SHELL_SCRIPTS:
+            for lineno, line in self.code_lines(name):
+                for pattern, why in self.MISSING_ON_MACOS:
+                    with self.subTest(script=name, line=lineno):
+                        self.assertIsNone(_re.search(pattern, line),
+                                          f'{name}:{lineno}: {why}: {line.strip()!r}')
+
+    def test_scripts_are_executable_and_have_a_shebang(self):
+        for name in SHELL_SCRIPTS:
+            path = os.path.join(HERE, name)
+            with self.subTest(script=name):
+                with open(path, encoding='utf-8') as f:
+                    self.assertEqual(f.readline().rstrip(), '#!/usr/bin/env bash')
+                self.assertTrue(os.access(path, os.X_OK), f'{name} is not executable')
 
 
 if __name__ == '__main__':

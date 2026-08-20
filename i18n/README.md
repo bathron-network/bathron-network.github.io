@@ -68,13 +68,75 @@ request or a publication. It exits `77` when gettext is absent.
 
 | Workflow | Trigger | Permissions | Deploys |
 |---|---|---|---|
-| `.github/workflows/i18n-check.yml` | `pull_request` on the i18n paths | `contents: read` only | never |
+| `.github/workflows/i18n-check.yml` | every `pull_request` | `contents: read` only | never |
 | `.github/workflows/deploy.yml` | `push` to `main` | `contents: read`, `pages: write`, `id-token: write` | yes |
 
 Both run `bash i18n/ci-check.sh`. The PR workflow requests no Pages permission,
 no `id-token`, reads no secret and uploads no artifact — it exists purely to
-judge a branch by the same gates that will later guard `main`. Actions are
-pinned by commit SHA and Python to the exact patch release 3.12.14 in both.
+judge a branch by the same gates that will later guard `main`.
+
+### Why the PR workflow has no `paths:` filter
+
+A check that is *skipped* for some pull requests cannot safely be made
+required: GitHub reports a skipped required check as pending, and the branch
+never becomes mergeable. So the job runs on **every** pull request under one
+stable name — `i18n gates` — and decides internally whether any i18n file
+changed. When none did, it says so and succeeds without running anything. The
+check can be made required without stalling unrelated pull requests.
+
+Making it required is a repository setting and is **not** applied here.
+
+### Pinning
+
+Every action is pinned by commit SHA — no mobile tags anywhere. Each SHA was
+confirmed through `GET /repos/<owner>/<repo>/git/ref/tags/<tag>`, which returns
+the commit a tag points at:
+
+| Action | Tag | Commit |
+|---|---|---|
+| `actions/checkout` | v4.4.0 | `11d5960a326750d5838078e36cf38b85af677262` |
+| `actions/setup-python` | v5.6.0 | `a26af69be951a213d495a4c3e4e4022e16d87065` |
+| `actions/upload-pages-artifact` | v3.0.1 | `56afc609e74202658d3ffba0e8f6dda462b719fa` |
+| `actions/deploy-pages` | v4.0.5 | `d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e` |
+
+Each is the newest release of the major line already in use, so pinning changed
+no behaviour. Python is pinned to 3.12.14 and **asserted at runtime**, so a
+silent interpreter drift fails the job instead of passing unnoticed.
+
+## Portability, and one lesson
+
+The shell scripts run on the Bash 3.2 that macOS ships as `/bin/bash`, as well
+as on Bash 5. No associative arrays, no `mapfile`, no `${var^^}`, and no
+`sha256sum` — a stock macOS has none of those. Hashing goes through Python,
+which is already a hard dependency.
+
+This matters because it went wrong. An earlier `mutation-test.sh` used
+`declare -A`. On Bash 3.2 that fails, the guarded-file comparisons then never
+ran, and the script still printed `MUTATION TEST: PASS` and exited 0 — a test
+that reported success precisely because it had not run.
+
+Two defences now make that impossible:
+
+- **`die()` on any harness error** — hashing, sandbox creation, copying, a
+  missing anchor — exits 3 with `FAIL (harness error)`, never PASS.
+- **Completeness counters.** The script counts the steps and assertions it
+  actually executed and refuses to print PASS unless both reach their expected
+  totals. `die()` cannot catch a check that silently does not run; the counter
+  can, and a regression test injects exactly that fault to prove it.
+
+`BATHRON_MUTATION_TEST_FAULT` injects failures at five points — `manifest`,
+`sandbox`, `copy`, `guard`, `skipguard` — and `test_i18n.py` asserts that each
+one exits non-zero and never prints PASS, on top of a static scan that fails the
+suite if a Bash 4-only construct or `sha256sum` reappears in any script.
+
+### Sandbox bounding
+
+The sandbox is created as `${TMPDIR:-/tmp}/bathron-i18n-mutation.XXXXXX` — a
+template both GNU and BSD `mktemp` handle — and a marker file is written inside
+it. Cleanup removes **only** the exact path `mktemp` returned, and only if it
+still matches that template *and* still carries the marker. A directory that
+matches the prefix but was not created by this run is left alone; a test plants
+exactly such a decoy and asserts it survives.
 
 ## The guarantee
 

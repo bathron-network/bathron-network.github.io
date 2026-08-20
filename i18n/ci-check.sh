@@ -5,8 +5,11 @@
 # workflow and the Pages deploy workflow both call it, so the checks that guard
 # a PR and the checks that guard a publication cannot drift apart.
 #
-# It needs Python 3 and git. Nothing is installed, nothing is downloaded, no
-# secret is read: a site publication must not depend on a package archive.
+# Dependencies: Python 3, git, and a POSIX shell. Everything here runs on the
+# Bash 3.2 that macOS ships as well as on Bash 5 — no associative arrays, and
+# no `sha256sum`, which a stock macOS does not have. Nothing is installed,
+# nothing is downloaded, no secret is read: a site publication must not depend
+# on a package archive.
 #
 #   bash i18n/ci-check.sh
 #     0 = every gate passed
@@ -16,8 +19,8 @@
 # It is an optional, separate check — see i18n/README.md.
 set -u
 
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-cd "$ROOT"
+ROOT="$(cd "$(dirname "$0")/.." && pwd)" || exit 3
+cd "$ROOT" || exit 3
 
 FAILED=0
 GATES=()
@@ -86,7 +89,7 @@ gate 'generated page present' artifact_present
 
 # --- 8. git cleanliness of tracked files -------------------------------------
 git_clean() {
-    local rc=0 tracked dirty
+    local rc=0 tracked after
     tracked="$(git ls-files -- fr/ i18n/homepage.pot)"
     if [ -n "$tracked" ]; then
         echo '  generated files are tracked and must not be:'
@@ -96,7 +99,6 @@ git_clean() {
         echo '  no generated artifact is tracked'
     fi
     # running the gates above must leave the tree exactly as it was found
-    local after
     after="$(git status --porcelain 2>/dev/null || echo '(no git)')"
     if [ "$after" != "$GIT_BEFORE" ]; then
         echo '  the checks changed the working tree:'
