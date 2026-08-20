@@ -1,9 +1,9 @@
-# Native BTC ⇄ M1: the atomic pair
+# Native BTC ⇄ M1: paired HTLC components
 
 Every market on BATHRON is a pair against M1, and the pair that matters first is Bitcoin
 itself: without a way for native BTC to enter and leave M1, no other market can be priced in
 BTC terms. The burn route creates M1 once and irreversibly (see
-[From destroyed BTC to M1](../bitcoin/from-btc-to-m1.md)); the atomic pair is how BTC and M1
+[From destroyed BTC to M1](../bitcoin/from-btc-to-m1.md)); the paired HTLC construction is how BTC and M1
 change hands afterwards — reversibly, repeatedly, and without anyone holding either side.
 
 ## The mechanism: two locks, one secret
@@ -49,7 +49,7 @@ header chain (see [Bitcoin facts inside consensus](../bitcoin/facts-in-consensus
 - Bitcoin sees two unremarkable transactions; the size and counterparties of the trade can
   stay shielded on the BATHRON side (see [Confidential settlement](confidential-settlement.md)).
 - Any chain with hashlocks and timelocks can be paired the same way — a capability, not a
-  shipped product (see [Pairing any asset against M1](pairing-any-asset.md)).
+  shipped product (see [Pairing an external asset against M1](pairing-any-asset.md)).
 
 ## Known limit: the initiator's free option
 

@@ -26,12 +26,12 @@ No oracle. The facts come from Bitcoin headers carried in consensus.
 
 | Application | Status | Depends on |
 |---|---|---|
-| Covenants, output constraints | `LIVE NOW` (opcodes), `TESTED` | — |
-| Recursive covenants | `LIVE NOW`, `TESTED` | no end-to-end demonstration |
-| Hashlocks and timelocks | `LIVE NOW` | — |
+| Covenants, output constraints | `ACTIVE IN CONSENSUS`, `TESTED` | — |
+| Recursive covenants | `ACTIVE IN CONSENSUS`, `TESTED` | no end-to-end demonstration |
+| Hashlocks and timelocks | `ACTIVE IN CONSENSUS` | — |
 | Conditional cross-chain settlement | `TESTED` / demonstrated against Bitcoin | no general atomicity guarantee |
 | DLC with external attestation | `AVAILABLE PRIMITIVE` | **external oracle**, product logic |
-| Confidential transfers | `LIVE NOW` | — |
+| Confidential transfers | `ACTIVE IN CONSENSUS` | — |
 | Confidential **covenants** | `UNKNOWN` | not demonstrated |
 
 ## C. Markets

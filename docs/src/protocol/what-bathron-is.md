@@ -35,10 +35,14 @@ Each is documented with its code reference and its limits in
 
 Every capability in this documentation carries one of four labels. They are not decoration:
 
-- `LIVE NOW` — works on the current public testnet.
-- `TESTED` — has tests, no complete product.
-- `AVAILABLE PRIMITIVE` — buildable with no consensus change, not built.
-- `TARGET NETWORK` — the architecture being aimed at, **not deployed**.
+- `ACTIVE IN CONSENSUS` — the opcode or rule is enabled on the current public testnet. **This says
+  nothing about whether a product uses it.**
+- `TESTED` — has a test suite.
+- `DEMONSTRATED` — an end-to-end flow has actually been run.
+- `AVAILABLE PRIMITIVE` — composable with no consensus change; **no product exists**.
+- `TARGET NETWORK` — the architecture being aimed at; **not deployed**.
+
+An active opcode is not a product, and this documentation never uses activation to imply one.
 
 The distinction matters most for the network itself: application building is open today,
 **Consensus Operator admission is not**. See [The target open network](../network/open-network-target.md)

@@ -3,8 +3,9 @@
 A BATHRON script can assert a fact about the Bitcoin chain, and **every node checks it** against
 headers the protocol already carries in consensus. No designated oracle takes part.
 
-This is the primitive that distinguishes BATHRON. Everything on this page is `LIVE NOW` unless
-marked otherwise.
+This is the primitive that distinguishes BATHRON. The five predicates are `ACTIVE IN CONSENSUS` and
+`TESTED`. Being active is not the same as being used by a product — no instrument built on them
+exists today.
 
 ## The five predicates
 
@@ -53,9 +54,17 @@ A price. An outside event. The state of another chain. None of these appears in 
 and no combination of the five predicates produces one. Those need an external attestation —
 see [Programmable settlement](programmable-settlement.md#external-attestations-dlc).
 
-## Coverage note
+## `BTCSTATE_TX_CONFIRMED` — read this before relying on it
 
-`BTCSTATE_TX_CONFIRMED` is the most intricate of the five — Merkle proof, strict Bitcoin
-serialization, and the 64-byte leaf ambiguity of CVE-2017-12842. It currently has **no dedicated
-test suite**. Treat it as `AVAILABLE PRIMITIVE` with a known coverage gap rather than as a proven
-path.
+The most intricate of the five: Merkle proof, strict Bitcoin serialization, and the 64-byte leaf
+ambiguity of CVE-2017-12842. Its status has three parts, and they must not be collapsed:
+
+- **`ACTIVE IN CONSENSUS`** — the query is enabled on this testnet.
+- **`DEMONSTRATED`, historically** — an end-to-end run exercised it against a real Bitcoin
+  transaction. That run was on **signet**, the Bitcoin source since replaced by testnet4. The
+  demonstration is real; the network it ran against is not the current one.
+- **No dedicated test suite today.** This is an explicit **coverage gap**, not an oversight being
+  hidden.
+
+Treat it accordingly: the path has been walked once, on a network that no longer feeds this chain,
+and nothing guards it against regression today.

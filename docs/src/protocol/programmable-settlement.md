@@ -9,14 +9,14 @@ Declared in `src/script/script.h`, implemented in `src/script/interpreter.cpp`:
 
 | Opcode | What it does | Status |
 |---|---|---|
-| `OP_TEMPLATEVERIFY` | commits a spend to a template of its outputs (CTV-style covenant) | `LIVE NOW`, tested |
-| `OP_BTCSTATEVERIFY` | asserts a Bitcoin fact — see [Bitcoin-verifiable contracts](bitcoin-verifiable-contracts.md) | `LIVE NOW`, tested |
-| `OP_CHECKSIGFROMSTACK` | verifies a signature over an **arbitrary message**, not the spending transaction | `LIVE NOW`, tested, no end-to-end demonstration |
-| `OP_CAT` | concatenates two stack elements, bounded by the 520-byte element cap | `LIVE NOW`, tested, no end-to-end demonstration |
-| `OP_CHECKOUTPUTVALUE` | constrains an output's amount | `LIVE NOW`, tested, no end-to-end demonstration |
-| `OP_CHECKOUTPUTSCRIPT` | constrains an output's script | `LIVE NOW`, tested, no end-to-end demonstration |
-| `OP_PUSHCURRENTSCRIPT` | pushes the executing script, enabling **recursive** covenants | `LIVE NOW`, tested, no end-to-end demonstration |
-| `OP_CHECKLOCKTIMEVERIFY` / `OP_CHECKSEQUENCEVERIFY` | absolute and relative timelocks | `LIVE NOW` |
+| `OP_TEMPLATEVERIFY` | commits a spend to a template of its outputs (CTV-style covenant) | `ACTIVE IN CONSENSUS`, `TESTED` |
+| `OP_BTCSTATEVERIFY` | asserts a Bitcoin fact — see [Bitcoin-verifiable contracts](bitcoin-verifiable-contracts.md) | `ACTIVE IN CONSENSUS`, `TESTED` |
+| `OP_CHECKSIGFROMSTACK` | verifies a signature over an **arbitrary message**, not the spending transaction | `ACTIVE IN CONSENSUS`, `TESTED`, not `DEMONSTRATED` |
+| `OP_CAT` | concatenates two stack elements, bounded by the 520-byte element cap | `ACTIVE IN CONSENSUS`, `TESTED`, not `DEMONSTRATED` |
+| `OP_CHECKOUTPUTVALUE` | constrains an output's amount | `ACTIVE IN CONSENSUS`, `TESTED`, not `DEMONSTRATED` |
+| `OP_CHECKOUTPUTSCRIPT` | constrains an output's script | `ACTIVE IN CONSENSUS`, `TESTED`, not `DEMONSTRATED` |
+| `OP_PUSHCURRENTSCRIPT` | pushes the executing script, enabling **recursive** covenants | `ACTIVE IN CONSENSUS`, `TESTED`, not `DEMONSTRATED` |
+| `OP_CHECKLOCKTIMEVERIFY` / `OP_CHECKSEQUENCEVERIFY` | absolute and relative timelocks | `ACTIVE IN CONSENSUS` |
 
 `OP_CHECKOUTPUTSCRIPT` together with `OP_PUSHCURRENTSCRIPT` form a **recursive covenant pair**: a
 script can require its successor to carry the same rules with new state.

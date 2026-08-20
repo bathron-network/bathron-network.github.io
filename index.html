@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BATHRON — Build contracts around facts Bitcoin can prove.</title>
-<meta name="description" content="An open settlement protocol. Markets belong to whoever builds them. Bitcoin remains the final asset.">
+<meta name="description" content="An open programmable settlement protocol. Write contracts whose conditions are facts Bitcoin can prove — difficulty, height, median-time-past, a confirmed payment — checked by every node. Markets are one application of it.">>
 <link rel="icon" type="image/png" href="/img/favicon.png">
 <meta property="og:title" content="BATHRON — Build contracts around facts Bitcoin can prove.">
-<meta property="og:description" content="An open settlement protocol. Markets belong to whoever builds them. Bitcoin remains the final asset.">
+<meta property="og:description" content="Write contracts whose conditions are facts Bitcoin can prove. Covenants, conditional settlement, confidential transfers. Experimental public testnet; consensus-operator admission not yet open.">>
 <meta property="og:image" content="https://bathron.org/img/og.png">
 <meta property="og:url" content="https://bathron.org">
 <meta name="twitter:card" content="summary_large_image">
@@ -125,7 +125,7 @@
     <p style="max-width:56ch;margin:1rem auto 0;font-size:.92em;opacity:.85">BATHRON is running an <b>experimental public testnet</b>. Application building is open; <b>Consensus-Operator admission is not yet open</b>.</p>
 
     <p class="tagline">BATHRON is an open settlement protocol.<br>
-    <b>Markets belong to whoever builds them.</b> Bitcoin remains the final asset.</p>
+    <b>Contracts belong to whoever writes them; markets to whoever builds them.</b> Bitcoin remains the final asset.</p>
 
     <div class="cta">
       <a class="btn primary" href="/docs/start-here.html">The 5-minute overview</a>
@@ -157,9 +157,50 @@
   </section>
 
   <!-- ================= 3. WHAT IT PROVIDES ================= -->
+    <section>
+      <p class="eyebrow">What contracts can verify</p>
+      <h2>Facts Bitcoin can prove — checked by every node.</h2>
+      <p style="max-width:64ch">A script can assert five classes of Bitcoin fact, verified against headers the protocol carries in consensus. No designated oracle takes part.</p>
+      <ul style="max-width:64ch">
+        <li><b>Difficulty</b> at a Bitcoin height, above or below a threshold.</li>
+        <li><b>Height reached</b> — a buried Bitcoin height.</li>
+        <li><b>Median-time-past</b> — Bitcoin&rsquo;s own clock.</li>
+        <li><b>A confirmed payment</b> — a Bitcoin transaction paying a given script, Merkle-proved and buried deep enough.</li>
+      </ul>
+      <p style="max-width:64ch"><b>The limits matter as much.</b> These are predicates, not readings: a script asserts <em>difficulty &ge; X</em>, it cannot read the number. Binary and barrier payoffs are native; a linear one must be decomposed. Only history buried 144 Bitcoin blocks is readable. <a href="/docs/protocol/bitcoin-verifiable-contracts.html">The five predicates and their limits &rarr;</a></p>
+    </section>
+
+    <section>
+      <p class="eyebrow">Programmable settlement</p>
+      <h2>Constrain what a spend may become.</h2>
+      <p style="max-width:64ch">Covenants, including a recursive pair; constraints on output amounts and scripts; hashlocks and timelocks; and signature verification over arbitrary messages. Active in consensus and tested &mdash; which is not the same as having a product that uses them.</p>
+      <p style="max-width:64ch"><b>External attestations.</b> For anything Bitcoin cannot prove &mdash; a price, an outside event &mdash; the engine can check a signed attestation, and supports discreet-log-contract shapes with no new opcode. BATHRON verifies the signature; it can never make the statement true.</p>
+      <p style="max-width:64ch"><b>Confidentiality, and its limit.</b> Shielded transfers move value without publishing it. The confidentiality of <em>covenant-bearing</em> settlement is <b>not demonstrated</b>. <a href="/docs/protocol/programmable-settlement.html">Covenants, DLC and confidentiality &rarr;</a></p>
+    </section>
+
+    <section>
+      <p class="eyebrow">What can be built</p>
+      <h2>Markets are one card in the deck.</h2>
+      <ul style="max-width:64ch">
+        <li><b>Markets with no listing committee</b> &mdash; a pair appears because someone quotes it.</li>
+        <li><b>Mining-difficulty hedges</b> &mdash; settled on a predicate every node checks.</li>
+        <li><b>Escrows opened by a buried Bitcoin payment.</b></li>
+        <li><b>Time-bound agreements</b> keyed to Bitcoin&rsquo;s clock.</li>
+        <li><b>Anything indexed on a price</b> &mdash; <b>not native</b>: no price oracle, no margin engine, no liquidation in consensus.</li>
+      </ul>
+      <p><a href="/docs/build/application-map.html">The application map: live, tested, possible, or needing external components &rarr;</a></p>
+    </section>
+
+    <section>
+      <p class="eyebrow">The target open network</p>
+      <h2>Several operators. Several providers. No privileged one.</h2>
+      <p style="max-width:64ch">BATHRON is being built toward a public network with several independent Consensus Operators, several independent Settlement, Clearing and Liquidity Providers, and competing applications &mdash; where no operator chooses what settles and a provider can disappear without taking the instrument with it.</p>
+      <p style="max-width:64ch"><b>That network is not deployed.</b> Application building is open today; <b>Consensus-Operator admission is not</b>, and the exact admission mechanism is deliberately left open rather than invented. <a href="/docs/network/open-network-target.html">The target open network &rarr;</a></p>
+    </section>
+
   <section>
     <p class="eyebrow">What BATHRON provides</p>
-    <h2>Three things. Only three.</h2>
+    <h2>The core the protocol supplies.</h2>
     <div class="three">
       <div>
         <h3>A common settlement unit — M1</h3>
@@ -171,7 +212,7 @@
       </div>
       <div>
         <h3>An infrastructure for markets, instruments and applications</h3>
-        <p>Covenants, timelocks, hashlocks, Bitcoin-fact verification and confidential transfers — composable by anyone, enforced by every node, frozen so that what grows is what is built on top.</p>
+        <p>Covenants, timelocks, hashlocks, Bitcoin-fact verification and confidential transfers — composable by anyone, enforced by every node. The consensus surface is frozen <em>as it stands today</em> so that what grows is what is built on top.</p>
       </div>
     </div>
   </section>
@@ -197,7 +238,7 @@
       <div><p class="n">4</p><h3>Others join</h3><p>Another provider quotes the same pair, tighter or deeper. No invitation needed.</p></div>
     </div>
     <p class="pairs">BTC/M1<span>·</span>PIVX/M1<span>·</span>DOGE/M1<span>·</span>LTC/M1<span>·</span>any/M1</p>
-    <p class="fine">Native BTC ⇄ M1 is paired with hashlocked legs on both chains sharing one preimage — the components are demonstrated on testnet; a generally atomic client flow is not yet claimed. Any chain that supports hashlocks and timelocks can be paired the same way: a capability of the primitives, not a shipped product.</p>
+    <p class="fine">Native BTC ⇄ M1 is paired with hashlocked legs on both chains sharing one preimage — the components are demonstrated on testnet; a generally atomic client flow is not yet claimed. A chain that supports hashlocks and timelocks can be paired the same way &mdash; but each chain needs its own application work: script shapes, timelock ordering, reorganisation handling and a provider holding both sides. Only the Bitcoin pair has been demonstrated.</p>
     <p class="lead" style="margin-top:22px"><a href="/docs/markets/how-a-market-appears.html" style="color:var(--gold)">How a market appears →</a></p>
   </section>
 

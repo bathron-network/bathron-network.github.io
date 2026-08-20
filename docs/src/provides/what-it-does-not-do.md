@@ -35,7 +35,7 @@ following sentence true: **markets belong to whoever builds them.** A protocol t
 be neutral about listing; a protocol that ranks cannot be neutral about providers; a protocol
 that mints cannot be neutral about value.
 
-The consensus is frozen so that this list stays true. Any future value must be built above it —
+The consensus surface is frozen **as it stands today** — a governance decision on the current surface, not a property of the code and not a promise about every future version — so that this list stays true. Any future value must be built above it —
 which is exactly what part III describes.
 
 **Next:** [How a market appears](../markets/how-a-market-appears.md)

@@ -8,10 +8,9 @@ approve a pair, so nobody can delist it. → [How a market appears](markets/how-
 
 ## Who decides which assets can trade?
 
-Nobody. The consensus does not know which pairs exist — it only settles. Any chain that supports
-hashlocks and timelocks can be paired against M1 with the same atomic pattern used for native BTC.
+Nobody. The consensus does not know which pairs exist — it only settles. A chain that supports hashlocks and timelocks **can** be paired against M1 with the same pattern used for native BTC — but each chain needs its own application work: script shapes, timelock ordering, reorganisation handling and a provider willing to hold both sides. Only the Bitcoin pair has been demonstrated.
 That is a capability of the primitives; no pair other than BTC/M1 has been tested or shipped.
-→ [Pairing any asset](markets/pairing-any-asset.md)
+→ [Pairing an external asset](markets/pairing-any-asset.md)
 
 ## Is M1 a coin I should buy?
 
