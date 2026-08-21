@@ -814,14 +814,11 @@ class TestLanguageSelector(RepoCase):
 class TestRealPages(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.built = M.build('fr') == 0
-
-    def test_english_page_verifies(self):
-        self.assertEqual(M.verify('en', verbose=False), [])
-
-    def test_french_page_verifies(self):
-        self.assertTrue(self.built)
-        self.assertEqual(M.verify('fr', verbose=False), [])
+        # Build EVERY generated language, not just one: compare() and
+        # static_overflow_check() look at all of them, and on a developer
+        # machine the others may linger from an earlier run — which is exactly
+        # how this passed locally and failed on a fresh CI checkout.
+        cls.built = all(M.build(code) == 0 for code in M.GENERATED_LANGS)
 
     def test_skeletons_match(self):
         self.assertTrue(self.built)
@@ -831,8 +828,16 @@ class TestRealPages(unittest.TestCase):
         self.assertTrue(self.built)
         self.assertEqual(M.static_overflow_check(verbose=False), [])
 
-    def test_catalogue_is_complete(self):
-        self.assertEqual(M.check('fr', verbose=False), [])
+    def test_every_catalogue_is_complete(self):
+        for code in M.GENERATED_LANGS:
+            with self.subTest(lang=code):
+                self.assertEqual(M.check(code, verbose=False), [])
+
+    def test_every_page_verifies(self):
+        self.assertTrue(self.built)
+        for L in M.LANGUAGES:
+            with self.subTest(lang=L['code']):
+                self.assertEqual(M.verify(L['code'], verbose=False), [])
 
 
 # --------------------------------------------------------------------------
