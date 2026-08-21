@@ -59,7 +59,9 @@ bad()  { ASSERTIONS=$((ASSERTIONS+1)); printf '  FAIL  %s\n' "$1"; FAILED=1; }
 
 # --- the files this test must leave untouched -------------------------------
 # Indexed array: available in Bash 3.2. An associative array is not.
-GUARDED=(index.html i18n/homepage.fr.po i18n/i18n.py i18n/mutation-test.sh i18n/ci-check.sh)
+GUARDED=(index.html i18n/i18n.py i18n/mutation-test.sh i18n/ci-check.sh
+         i18n/homepage.fr.po i18n/homepage.es.po i18n/homepage.zh-Hans.po
+         i18n/homepage.hi.po i18n/homepage.ar.po)
 ASSERTIONS_EXPECTED=$((ASSERTIONS_FIXED + ${#GUARDED[@]}))
 
 # sha256 of each path, one "<hex>  <path>" line per file. Python, not
