@@ -48,11 +48,28 @@ VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'met
 
 # Per-language values that are NOT prose: they are structural facts about the page.
 LANG_CONF = {
-    'en': {'lang': 'en', 'canonical': 'https://bathron.org/',
-           'sel': '<b>EN</b> <span>/</span> <a href="/fr/">FR</a>'},
-    'fr': {'lang': 'fr', 'canonical': 'https://bathron.org/fr/',
-           'sel': '<a href="/">EN</a> <span>/</span> <b>FR</b>'},
+    'en': {
+        'lang': 'en',
+        'canonical': 'https://bathron.org/',
+        # The whole <nav> is a per-language structural fact, aria-label
+        # included: it names a navigation control, not page prose, so it stays
+        # out of the catalogue like the canonical URL does.
+        'sel': ('<nav class="langsel" aria-label="Language selection">'
+                '<span aria-current="page" lang="en">EN</span>'
+                '<a href="/fr/" hreflang="fr" lang="fr">FR</a></nav>'),
+    },
+    'fr': {
+        'lang': 'fr',
+        'canonical': 'https://bathron.org/fr/',
+        'sel': ('<nav class="langsel" aria-label="Sélection de la langue">'
+                '<a href="/" hreflang="en" lang="en">EN</a>'
+                '<span aria-current="page" lang="fr">FR</span></nav>'),
+    },
 }
+# Where each language is served, used to check the other-language link target.
+LANG_HREF = {'en': '/', 'fr': '/fr/'}
+SELECTOR_RE = r'<nav class="langsel".*?</nav>'
+
 # English is the source, not a generated artifact. Only these are built.
 GENERATED_LANGS = {'fr'}
 # Narrowest viewport the layout is expected to survive, in CSS pixels.
@@ -448,8 +465,7 @@ def render(lang, src=None, entries=None):
                     f'<meta property="og:url" content="{conf["canonical"]}">', doc, 'og:url meta')
     doc = _sub_once(r'<link rel="canonical"[^>]*>',
                     f'<link rel="canonical" href="{conf["canonical"]}">', doc, 'canonical link')
-    doc = _sub_once(r'<p class="langsel">.*?</p>',
-                    f'<p class="langsel">{conf["sel"]}</p>', doc, 'language selector')
+    doc = _sub_once(SELECTOR_RE, conf['sel'], doc, 'language selector')
     return doc
 
 
@@ -537,6 +553,63 @@ def parse_skeleton(path):
     return s
 
 
+def _check_selector(doc, lang, problems):
+    """The language selector must be present exactly once, in the top bar,
+    with the right language active and the right target for the other one."""
+    conf = LANG_CONF[lang]
+    other = 'fr' if lang == 'en' else 'en'
+
+    navs = re.findall(SELECTOR_RE, doc, flags=re.S)
+    if len(navs) != 1:
+        problems.append(('COUNT', f'language selector: expected exactly 1, found {len(navs)}'))
+        return
+    nav = navs[0]
+    if doc.count('class="langsel"') != 1:
+        problems.append(('COUNT', 'the langsel class appears more than once'))
+    if nav != conf['sel']:
+        problems.append(('SELECTOR', f'selector markup differs from LANG_CONF[{lang!r}]:\n'
+                                     f'      got      {nav}\n      expected {conf["sel"]}'))
+
+    # only real attributes on tags — the CSS rule .langsel [aria-current="page"]
+    # is not an occurrence, and counting it would be a false alarm.
+    n = len(re.findall(r'<[a-zA-Z][^>]*\baria-current=', doc))
+    if n != 1:
+        problems.append(('ARIA-CURRENT', f'aria-current appears {n} time(s), expected exactly 1'))
+
+    m = re.search(r'<(\w+)([^>]*)aria-current="page"([^>]*)>([^<]*)</\1>', nav)
+    if not m:
+        problems.append(('ARIA-CURRENT', 'no element in the selector carries aria-current="page"'))
+    else:
+        tag, text = m.group(1), m.group(4).strip()
+        if tag == 'a':
+            problems.append(('SELECTOR', 'the active language must not be a link'))
+        if text != lang.upper():
+            problems.append(('SELECTOR', f'active language reads {text!r}, expected {lang.upper()!r}'))
+
+    links = re.findall(r'<a href="([^"]*)" hreflang="([^"]*)" lang="([^"]*)">([^<]*)</a>', nav)
+    if len(links) != 1:
+        problems.append(('SELECTOR', f'expected exactly 1 link in the selector, found {len(links)}'))
+    else:
+        href, hl, lg, txt = links[0]
+        if href != LANG_HREF[other]:
+            problems.append(('SELECTOR', f'other-language link points to {href!r}, '
+                                         f'expected {LANG_HREF[other]!r}'))
+        if hl != other or lg != other:
+            problems.append(('SELECTOR', f'link declares hreflang={hl!r} lang={lg!r}, expected {other!r}'))
+        if txt.strip() != other.upper():
+            problems.append(('SELECTOR', f'link reads {txt!r}, expected {other.upper()!r}'))
+
+    if re.search(r'<a\b[^>]*>(?:(?!</a>).)*<(?:a|button|select|input)\b', nav, flags=re.S):
+        problems.append(('SELECTOR', 'nested interactive element inside the selector'))
+
+    if 'class="topbar"' not in doc:
+        problems.append(('SELECTOR', 'no top bar container found'))
+    hero = re.search(r'<div class="hero">', doc)
+    if hero and doc.index(nav) > hero.start():
+        problems.append(('SELECTOR', 'the selector sits inside or after the hero; '
+                                     'it belongs to the top bar above it'))
+
+
 def verify(lang, verbose=True):
     """Check the structural facts of the page actually served for `lang`."""
     validate_lang(lang)
@@ -564,9 +637,7 @@ def verify(lang, verbose=True):
     got = one(r'<meta property="og:url" content="([^"]*)">', 'og:url')
     if got is not None and got != conf['canonical']:
         problems.append(('OG-URL', f'og:url is {got!r}, expected {conf["canonical"]!r}'))
-    sel = one(r'<p class="langsel">(.*?)</p>', 'language selector')
-    if sel is not None and sel != conf['sel']:
-        problems.append(('SELECTOR', f'selector is {sel!r}, expected {conf["sel"]!r}'))
+    _check_selector(doc, lang, problems)
     alts = dict(re.findall(r'<link rel="alternate" hreflang="([^"]*)" href="([^"]*)">', doc))
     want = {'en': LANG_CONF['en']['canonical'], 'fr': LANG_CONF['fr']['canonical'],
             'x-default': LANG_CONF['en']['canonical']}
@@ -592,9 +663,14 @@ def compare(verbose=True):
         problems.append(('SHAPE', f'EN has {len(a.tags)} tags, FR has {len(b.tags)}'))
     else:
         diffs = [(i, x, y) for i, (x, y) in enumerate(zip(a.tags, b.tags)) if x != y]
-        allowed_tags = {'link', 'b', 'a'}          # canonical + the two selector nodes
-        if len(diffs) > 3:
-            problems.append(('SHAPE', f'{len(diffs)} structural differences, at most 3 expected'))
+        # EXACTLY three differences are legitimate, and no others:
+        #   1. the canonical <link>
+        #   2. and 3. the two selector items swapping <span> and <a>
+        # Requiring an exact count, not a ceiling, means a new per-language
+        # divergence fails here instead of slipping through under the limit.
+        allowed_tags = {'link', 'a', 'span'}
+        if len(diffs) != 3:
+            problems.append(('SHAPE', f'{len(diffs)} structural differences, exactly 3 expected'))
         for i, x, y in diffs:
             if x[0] not in allowed_tags or y[0] not in allowed_tags:
                 problems.append(('SHAPE', f'#{i} unexpected difference {x} vs {y}'))
