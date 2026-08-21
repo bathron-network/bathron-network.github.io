@@ -1,0 +1,274 @@
+# BATHRON homepage — العربية catalogue.
+# Hand-maintained and versioned. Regenerate the template with:
+#   python3 i18n/i18n.py extract
+# Verify before building with:
+#   python3 i18n/i18n.py check ar
+# A missing, empty, fuzzy, duplicated or malformed entry blocks the
+# build for this language — see i18n/README.md.
+msgid ""
+msgstr ""
+"Project-Id-Version: bathron-homepage\n"
+"Language: ar\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "BATHRON: Programmable settlement anchored in Bitcoin"
+msgstr "BATHRON: تسوية قابلة للبرمجة مرتكزة على Bitcoin"
+
+msgid "A programmable settlement protocol anchored in Bitcoin. Build contracts, instruments, markets and applications around facts every BATHRON node can verify."
+msgstr "بروتوكول تسوية قابلة للبرمجة مرتكز على Bitcoin. ابنِ العقود والأدوات المالية والأسواق والتطبيقات حول وقائع تستطيع كل عقدة BATHRON التحقق منها."
+
+msgid "Build contracts, instruments, markets and applications around facts every BATHRON node can verify. Covenants, hashlocks, timelocks and confidential transfers."
+msgstr "ابنِ العقود والأدوات المالية والأسواق والتطبيقات حول وقائع تستطيع كل عقدة BATHRON التحقق منها. Covenants وHashlocks وTimelocks والتحويلات السرّية."
+
+msgid "BATHRON: programmable settlement anchored in Bitcoin"
+msgstr "BATHRON: تسوية قابلة للبرمجة مرتكزة على Bitcoin"
+
+msgid "BATHRON emblem"
+msgstr "شعار BATHRON"
+
+msgid "BATHRON"
+msgstr "BATHRON"
+
+msgctxt "hero"
+msgid "Programmable settlement"
+msgstr "التسوية القابلة للبرمجة،"
+
+msgctxt "hero"
+msgid "anchored in Bitcoin."
+msgstr "مرتكزة على Bitcoin."
+
+msgid "Build contracts, instruments, markets and applications around facts every BATHRON node can verify."
+msgstr "ابنِ العقود والأدوات المالية والأسواق والتطبيقات حول وقائع تستطيع كل عقدة BATHRON التحقق منها."
+
+msgid "Explore the protocol"
+msgstr "استكشاف البروتوكول"
+
+msgid "See what can be built"
+msgstr "شاهد ما يمكن بناؤه"
+
+msgid "Run a node"
+msgstr "تشغيل عقدة"
+
+msgid "View network status"
+msgstr "عرض حالة الشبكة"
+
+msgid "Facts, not opinions"
+msgstr "وقائع، لا آراء"
+
+msgid "Bitcoin already proves things. Now a contract can use them."
+msgstr "يُثبت Bitcoin بالفعل وقائع قابلة للتحقق. وصار بإمكان العقود الاعتماد عليها."
+
+msgid "Bitcoin records facts that contracts can verify. BATHRON carries the relevant Bitcoin headers in consensus, so every node evaluates the same evidence."
+msgstr "يسجّل Bitcoin وقائع يستطيع أي عقد التحقق منها. ويُدرج BATHRON ترويسات Bitcoin المعنية ضمن توافقه، فتقيّم كل عقدة الأدلة نفسها."
+
+msgid "Mining difficulty"
+msgstr "صعوبة التعدين"
+
+msgid "The mining difficulty recorded at a given Bitcoin height."
+msgstr "صعوبة التعدين المسجَّلة عند ارتفاع محدَّد في Bitcoin."
+
+msgid "Block height"
+msgstr "ارتفاع الكتلة"
+
+msgid "How far the chain has advanced."
+msgstr "إلى أي مدى تقدّمت السلسلة."
+
+msgid "Median time"
+msgstr "الزمن الوسيط"
+
+msgid "Bitcoin's own clock, resistant to a single miner's timestamp."
+msgstr "ساعة Bitcoin الخاصة، التي لا يستطيع ختمٌ زمني من معدِّن واحد تحريفها."
+
+msgid "Confirmed payments"
+msgstr "المدفوعات المؤكَّدة"
+
+msgid "A payment to a given script, included and buried in Bitcoin’s chain."
+msgstr "دفعة إلى سكربت محدَّد، أُدرجت ودُفنت في سلسلة Bitcoin."
+
+msgid "How Bitcoin facts are verified →"
+msgstr "كيف يجري التحقق من وقائع Bitcoin ←"
+
+msgid "Programmable settlement"
+msgstr "التسوية القابلة للبرمجة"
+
+msgid "Write the conditions. The network enforces them."
+msgstr "اكتب الشروط، والشبكة تُنفّذها."
+
+msgid "Settlement on BATHRON is described in script and carried out by consensus. The same primitives compose, so a single agreement can depend on a Bitcoin fact, a secret and a deadline at once."
+msgstr "في BATHRON تُحدَّد شروط التسوية في سكربت ثم ينفّذها التوافق. وتتركّب العناصر الأولية معًا: فقد يعتمد اتفاق واحد في آنٍ على واقعة من Bitcoin وعلى سرٍّ وعلى أجل."
+
+msgid "Covenants"
+msgstr "Covenants"
+
+msgid "Constrain what a spend is allowed to become."
+msgstr "تقييد ما يُسمح لعملية إنفاق أن تصير إليه."
+
+msgid "Hashlocks"
+msgstr "Hashlocks"
+
+msgid "Release value against the reveal of a secret."
+msgstr "إطلاق القيمة مقابل كشف سرّ."
+
+msgid "Timelocks"
+msgstr "Timelocks"
+
+msgid "Make an outcome depend on time, absolute or relative."
+msgstr "جعل النتيجة متوقفة على الوقت، مطلقًا كان أم نسبيًا."
+
+msgid "Signatures and attestations"
+msgstr "التواقيع والإثباتات"
+
+msgid "Verify a signature over any message, including one from an outside source."
+msgstr "التحقق من توقيع على أي رسالة، بما فيها رسالة واردة من مصدر خارجي."
+
+msgid "Confidential transfers"
+msgstr "التحويلات السرّية"
+
+msgid "Move value without publishing the amount."
+msgstr "نقل القيمة دون نشر المبلغ."
+
+msgid "Covenants, attestations and confidentiality →"
+msgstr "Covenants والإثباتات والسرّية ←"
+
+msgid "One protocol, many applications"
+msgstr "بروتوكول واحد، تطبيقات كثيرة"
+
+msgid "What becomes possible."
+msgstr "ما الذي يصبح ممكنًا."
+
+msgid "Mining difficulty instruments"
+msgstr "أدوات مالية على صعوبة التعدين"
+
+msgid "Agreements that settle on Bitcoin's own difficulty, with no outside reporter involved."
+msgstr "اتفاقات تُسوّى وفق صعوبة Bitcoin نفسها، دون تدخّل أي مصدر بيانات خارجي."
+
+msgid "Payment-driven escrows"
+msgstr "حسابات ضمان تُطلقها المدفوعات"
+
+msgid "Value that releases when a Bitcoin payment is confirmed and settled deeply enough."
+msgstr "قيمة تُطلَق عندما تتأكد دفعة بـ Bitcoin وتُدفن في السلسلة بعمق كافٍ."
+
+msgid "Programmable financial agreements"
+msgstr "اتفاقات مالية قابلة للبرمجة"
+
+msgid "Terms, deadlines and outcomes written once and enforced by the network."
+msgstr "شروط وآجال ونتائج تُكتب مرة واحدة ثم تُنفّذها الشبكة."
+
+msgid "Open markets and cross-chain flows"
+msgstr "أسواق مفتوحة وتدفّقات عبر السلاسل"
+
+msgid "Pairs quoted by whoever holds inventory, settled against linked conditions."
+msgstr "أزواج تُسعَّر انطلاقًا من السيولة المتاحة، وتُسوّى وفق شروط مترابطة."
+
+msgid "The full application map →"
+msgstr "خريطة التطبيقات الكاملة ←"
+
+msgid "A network of distinct roles"
+msgstr "شبكة بأدوار متمايزة"
+
+msgid "Three roles, kept apart on purpose."
+msgstr "ثلاثة أدوار، فُصلت عن قصد."
+
+msgid "Consensus Operators"
+msgstr "مشغّلو التوافق"
+
+msgid "Secure the network, order transactions and finalize them. One operator, one vote."
+msgstr "يؤمّنون الشبكة، ويرتّبون المعاملات ويحسمونها نهائيًا. مشغّل واحد، صوت واحد."
+
+msgid "Settlement Providers"
+msgstr "مزوّدو التسوية"
+
+msgid "Create the services and settlement flows that people actually use. They compete, and they come and go."
+msgstr "ينشئون الخدمات وتدفّقات التسوية التي يستخدمها الناس فعلًا. يتنافسون فيما بينهم، ويأتون ويذهبون."
+
+msgid "Builders"
+msgstr "المطوّرون"
+
+msgid "Compose applications and instruments on top, choosing their own interfaces and their own terms."
+msgstr "يركّبون التطبيقات والأدوات المالية فوق هذه الطبقة، ويختارون واجهاتهم وشروطهم."
+
+msgid "No consensus operator chooses which application may be built."
+msgstr "لا يقرّر أي مشغّل توافق أي تطبيق يُسمح ببنائه."
+
+msgid "Bitcoin remains the anchor"
+msgstr "يبقى Bitcoin هو المرتكز"
+
+msgid "The anchor is Bitcoin, and it stays where it is."
+msgstr "التسوية القابلة للبرمجة تستند إلى Bitcoin."
+
+msgid "M0 originates from Bitcoin destruction verified by consensus. Protocol conversion moves value from M0 into M1, the unit used for settlement."
+msgstr "ينشأ M0 من إتلاف Bitcoin يتحقق منه التوافق. ويَنقل تحويلُ البروتوكول القيمةَ من M0 إلى M1، وهي الوحدة المستخدَمة في التسوية."
+
+msgid "Bitcoin remains the monetary anchor. BATHRON verifies its history directly and provides the programmable settlement layer built around it."
+msgstr "يتحقق BATHRON مباشرة من تاريخ Bitcoin، ويوفّر طبقة التسوية القابلة للبرمجة المبنية حوله."
+
+msgid "Why Bitcoin is the final asset →"
+msgstr "لماذا Bitcoin هو الأصل النهائي ←"
+
+msgid "Markets, as one application"
+msgstr "الأسواق، بوصفها تطبيقًا من بين تطبيقات"
+
+msgid "A pair exists because someone quotes it."
+msgstr "يوجد الزوج ما إن يعرض أحدهم سعرًا له."
+
+msgid "A provider with inventory can publish offers for a pair. Other providers can quote the same pair independently. Markets emerge from available inventory and executable settlement conditions, not from a listing decision."
+msgstr "يستطيع مزوّد يملك أصولًا أن ينشر عروضًا على زوج ما. ويستطيع مزوّدون آخرون أن يعرضوا أسعارهم على الزوج نفسه باستقلال. تنشأ الأسواق من السيولة المتاحة ومن شروط تسوية قابلة للتنفيذ، لا من قرار إدراج."
+
+msgid "See how a market is built →"
+msgstr "كيف يُبنى السوق ←"
+
+msgid "Start here"
+msgstr "ابدأ من هنا"
+
+msgid "Build on the settlement layer."
+msgstr "ابنِ على طبقة التسوية."
+
+msgid "Read the documentation"
+msgstr "قراءة التوثيق"
+
+msgid "The protocol, the primitives and the reference."
+msgstr "البروتوكول والعناصر الأولية والمرجع. بالإنجليزية."
+
+msgid "Explore applications"
+msgstr "استكشاف التطبيقات"
+
+msgid "What the layer makes buildable, and what each one needs."
+msgstr "ما الذي تتيحه هذه الطبقة، ومتطلبات كل تطبيق."
+
+msgid "Verify the chain yourself, from your own machine."
+msgstr "تحقق من السلسلة بنفسك، من جهازك الخاص."
+
+msgid "Public explorer"
+msgstr "مستكشف عام"
+
+msgid "Watch the network produce and finalize blocks, live."
+msgstr "شاهد الشبكة تنتج الكتل وتحسمها، مباشرةً."
+
+msgid "Source code"
+msgstr "الشيفرة المصدرية"
+
+msgid "The node implementation, on GitHub."
+msgstr "تنفيذ العقدة، على GitHub."
+
+msgid "Network status"
+msgstr "حالة الشبكة"
+
+msgid "What runs today, and what the protocol does not claim."
+msgstr "ما الذي يعمل اليوم، وما الذي لا يدّعي البروتوكول فعله."
+
+msgid "contact@bathron.org"
+msgstr "contact@bathron.org"
+
+msgid "Releases"
+msgstr "الإصدارات"
+
+msgid "Security policy"
+msgstr "سياسة الأمان"
+
+msgid "Report a vulnerability to"
+msgstr "أبلغ عن ثغرة إلى"
+
+msgid "security@bathron.org"
+msgstr "security@bathron.org"
+

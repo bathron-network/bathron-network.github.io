@@ -1,10 +1,10 @@
-# BATHRON homepage — French catalogue.
+# BATHRON homepage — Français catalogue.
 # Hand-maintained and versioned. Regenerate the template with:
 #   python3 i18n/i18n.py extract
 # Verify before building with:
 #   python3 i18n/i18n.py check fr
 # A missing, empty, fuzzy, duplicated or malformed entry blocks the
-# French build — see i18n/README.md.
+# build for this language — see i18n/README.md.
 msgid ""
 msgstr ""
 "Project-Id-Version: bathron-homepage\n"
@@ -20,12 +20,6 @@ msgstr "Un protocole de règlement programmable ancré dans Bitcoin. Construisez
 
 msgid "Build contracts, instruments, markets and applications around facts every BATHRON node can verify. Covenants, hashlocks, timelocks and confidential transfers."
 msgstr "Construisez contrats, instruments, marchés et applications autour de faits que chaque nœud BATHRON peut vérifier. Covenants, hashlocks, timelocks et transferts confidentiels."
-
-msgid "EN"
-msgstr "EN"
-
-msgid "FR"
-msgstr "FR"
 
 msgid "BATHRON: programmable settlement anchored in Bitcoin"
 msgstr "BATHRON : le règlement programmable, ancré dans Bitcoin"
@@ -195,7 +189,7 @@ msgid "Compose applications and instruments on top, choosing their own interface
 msgstr "Ils composent des applications et des instruments sur cette couche, en choisissant leurs interfaces et leurs conditions."
 
 msgid "No consensus operator chooses which application may be built."
-msgstr "Aucun opérateur de consensus ne décide quelle application a le droit d’exister."
+msgstr "Aucun opérateur de consensus ne décide quelle application peut être construite."
 
 msgid "Bitcoin remains the anchor"
 msgstr "Bitcoin reste l’ancrage"

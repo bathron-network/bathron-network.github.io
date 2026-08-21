@@ -6,5 +6,9 @@ docs/book/
 # msgmerge and in CI; committing it would create a second thing to keep in
 # sync, which is exactly what this design removes.
 fr/index.html
+es/index.html
+zh-hans/index.html
+hi/index.html
+ar/index.html
 i18n/homepage.pot
 __pycache__/
