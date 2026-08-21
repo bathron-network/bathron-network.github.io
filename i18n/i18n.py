@@ -5,24 +5,34 @@ index.html is the canonical source: structure AND English text, and it is the
 page served at /. Translatable segments are the text nodes and a whitelist of
 attributes. <style> and <script> are never translatable.
 
+  languages     -> the language table: code, native name, URL, direction
   extract       -> i18n/homepage.pot   (generated, gitignored)
-  check  <lang> -> fail-closed audit of a catalogue against the current source
-  build  <lang> -> <lang>/index.html   (generated artifact, gitignored)
-  verify <lang> -> structural facts of the page actually served for <lang>
-  compare       -> EN/FR tag-skeleton equivalence
+  check  <lang|all> -> fail-closed audit of a catalogue against the source
+  build  <lang|all> -> the page for that language (generated, gitignored)
+  verify <lang|all> -> structural facts of the page actually served
+  compare       -> every generated page must share the English tag skeleton
   static-overflow-check
                 -> static scan for fixed widths wider than the smallest
                    viewport. NOT a rendering check: it does not lay the page
                    out. Browser verification stays a local editorial step.
 
+`all` means every generated language for check and build, and every language
+including the English source for verify.
+
+Six languages are declared in LANGUAGES, which is the single place any of this
+is configured. English is the source, served from index.html at /; the other
+five are generated into their own directory (/fr/, /es/, /zh-hans/, /hi/, /ar/)
+from a catalogue each. Arabic is served with dir="rtl". Adding a language is one
+table entry plus a complete catalogue — see i18n/README.md, "Adding a language".
+
 Disambiguation: when one English string needs two different translations
 depending on where it appears, wrap the element in data-i18n-context="<name>".
 That becomes the gettext msgctxt.
 
-  NOTE — the attribute is stripped from every GENERATED page (fr/index.html).
-  The English page is served straight from index.html and therefore KEEPS the
-  attribute. data-* is valid HTML5 and inert; see i18n/README.md, "Context
-  metadata", for why that model was chosen over generating an English copy.
+  NOTE — the attribute is stripped from every GENERATED page. The English page
+  is served straight from index.html and therefore KEEPS the attribute. data-*
+  is valid HTML5 and inert; see i18n/README.md, "Context metadata", for why
+  that model was chosen over generating an English copy.
 
 No framework, no runtime JS, no network, no AI. Deterministic.
 """

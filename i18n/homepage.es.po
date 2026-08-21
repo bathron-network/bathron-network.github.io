@@ -189,7 +189,7 @@ msgid "Compose applications and instruments on top, choosing their own interface
 msgstr "Componen aplicaciones e instrumentos sobre esta capa, eligiendo sus propias interfaces y sus propias condiciones."
 
 msgid "No consensus operator chooses which application may be built."
-msgstr "Ningún operador de consenso decide qué aplicación puede existir."
+msgstr "Ningún operador de consenso decide qué aplicación puede construirse."
 
 msgid "Bitcoin remains the anchor"
 msgstr "Bitcoin sigue siendo el ancla"
