@@ -60,15 +60,14 @@ gate 'fail-closed mutation test' bash i18n/mutation-test.sh
 
 # --- 3. catalogue ------------------------------------------------------------
 gate 'extract template' python3 i18n/i18n.py extract
-gate 'catalogue audit (check fr)' python3 i18n/i18n.py check fr
+gate 'catalogue audit (every language)' python3 i18n/i18n.py check all
 
 # --- 4. build ----------------------------------------------------------------
-gate 'build fr' python3 i18n/i18n.py build fr
+gate 'build every language' python3 i18n/i18n.py build all
 
 # --- 5. structural validation of both served pages ---------------------------
-gate 'verify en' python3 i18n/i18n.py verify en
-gate 'verify fr' python3 i18n/i18n.py verify fr
-gate 'EN/FR skeleton comparison' python3 i18n/i18n.py compare
+gate 'verify every page' python3 i18n/i18n.py verify all
+gate 'skeleton comparison' python3 i18n/i18n.py compare
 
 # --- 6. static overflow scan -------------------------------------------------
 # Reads the markup for fixed widths wider than the smallest supported viewport.
@@ -78,19 +77,30 @@ gate 'static-overflow-check' python3 i18n/i18n.py static-overflow-check
 
 # --- 7. the generated page must exist and be well-formed ---------------------
 artifact_present() {
-    [ -s fr/index.html ] || { echo '  fr/index.html is missing or empty'; return 1; }
-    grep -q '<html lang="fr"' fr/index.html || { echo '  fr/index.html does not declare lang="fr"'; return 1; }
-    if grep -q 'data-i18n-context' fr/index.html; then
-        echo '  build metadata leaked into the generated page'; return 1
-    fi
-    printf '  fr/index.html present, %s bytes, lang=fr, no build metadata\n' "$(wc -c < fr/index.html)"
+    local rc=0
+    # The list comes from the language table, so adding a language cannot leave
+    # this gate silently checking the old set.
+    python3 i18n/i18n.py languages | awk '$NF != "(source)" {print $1, $NF}' |
+    while read -r code out; do
+        f="$out/index.html"
+        if [ ! -s "$f" ]; then echo "  $f is missing or empty"; exit 1; fi
+        if ! grep -q "<html lang=\"$code\"" "$f"; then
+            echo "  $f does not declare lang=\"$code\""; exit 1
+        fi
+        if grep -q 'data-i18n-context' "$f"; then
+            echo "  build metadata leaked into $f"; exit 1
+        fi
+        if grep -q '<script' "$f"; then echo "  $f contains a script"; exit 1; fi
+        printf '  %-20s %7s bytes  lang=%s\n' "$f" "$(wc -c < "$f" | tr -d ' ')" "$code"
+    done || rc=1
+    return $rc
 }
 gate 'generated page present' artifact_present
 
 # --- 8. git cleanliness of tracked files -------------------------------------
 git_clean() {
     local rc=0 tracked after
-    tracked="$(git ls-files -- fr/ i18n/homepage.pot)"
+    tracked="$(git ls-files -- fr/ es/ zh-hans/ hi/ ar/ i18n/homepage.pot)"
     if [ -n "$tracked" ]; then
         echo '  generated files are tracked and must not be:'
         printf '    %s\n' $tracked

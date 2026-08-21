@@ -21,7 +21,7 @@ _UNIQ = [0]
 # A minimal but complete page, used to build throwaway repositories.
 # --------------------------------------------------------------------------
 
-FIXTURE_HTML = '''<!doctype html>
+FIXTURE_HTML = f'''<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -30,15 +30,13 @@ FIXTURE_HTML = '''<!doctype html>
 <meta property="og:url" content="https://bathron.org/">
 <meta property="og:image" content="https://bathron.org/img/og.png">
 <link rel="canonical" href="https://bathron.org/">
-<link rel="alternate" hreflang="en" href="https://bathron.org/">
-<link rel="alternate" hreflang="fr" href="https://bathron.org/fr/">
-<link rel="alternate" hreflang="x-default" href="https://bathron.org/">
+{chr(10).join(M.hreflang_html())}
 <title>Fixture</title>
-<style>body{color:#fff;width:900px}</style>
+<style>body{{color:#fff;width:900px}}</style>
 </head>
 <body>
 <div class="topbar">
-<nav class="langsel" aria-label="Language selection"><span aria-current="page" lang="en">EN</span><a href="/fr/" hreflang="fr" lang="fr">FR</a></nav>
+{M.selector_html("en")}
 </div>
 <div class="hero">
 <img src="/img/e.png" alt="An emblem">
@@ -47,7 +45,6 @@ FIXTURE_HTML = '''<!doctype html>
 <p>Settlement</p>
 <p>Bitcoin&rsquo;s chain.</p>
 <p>Read the docs &rarr;</p>
-<script>var x = "Not translatable";</script>
 </body>
 </html>
 '''
@@ -66,7 +63,7 @@ def po(entries, header=PO_HEADER):
     return ''.join(out)
 
 
-def full_fr_po(html=FIXTURE_HTML, override=None):
+def full_fr_po(html=FIXTURE_HTML, override=None, lang='fr'):
     """A complete French catalogue for `html`, translating each key as fr:<en>.
 
     `override` maps a (context, msgid) key to an explicit translation.
@@ -74,11 +71,11 @@ def full_fr_po(html=FIXTURE_HTML, override=None):
     override = override or {}
     rows = []
     for ctx, s in M.collect(html):
-        rows.append((ctx, s, override.get((ctx, s), f'fr:{s}'), []))
-    return po(rows)
+        rows.append((ctx, s, override.get((ctx, s), f'{lang}:{s}'), []))
+    return po(rows, header=PO_HEADER.replace('Language: fr', f'Language: {lang}'))
 
 
-def make_repo(html=FIXTURE_HTML, po_text=None, write_po=True):
+def make_repo(html=FIXTURE_HTML, po_text=None, write_po=True, po_all=False):
     """A throwaway repository whose i18n module is rooted inside it."""
     d = tempfile.mkdtemp(prefix='i18n-test-')
     os.makedirs(os.path.join(d, 'i18n'))
@@ -86,8 +83,11 @@ def make_repo(html=FIXTURE_HTML, po_text=None, write_po=True):
     with open(os.path.join(d, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(html)
     if write_po:
-        with open(os.path.join(d, 'i18n', 'homepage.fr.po'), 'w', encoding='utf-8') as f:
-            f.write(po_text if po_text is not None else full_fr_po(html))
+        codes = [L['code'] for L in M.LANGUAGES if L['out']] if po_all else ['fr']
+        for code in codes:
+            body = po_text if po_text is not None else full_fr_po(html, lang=code)
+            with open(os.path.join(d, 'i18n', f'homepage.{code}.po'), 'w', encoding='utf-8') as f:
+                f.write(body)
     _UNIQ[0] += 1
     name = f'i18n_sandbox_{_UNIQ[0]}'
     spec = importlib.util.spec_from_file_location(name, os.path.join(d, 'i18n', 'i18n.py'))
@@ -469,7 +469,7 @@ class TestBuild(RepoCase):
         out = self.built(d)
         self.assertIn('<link rel="canonical" href="https://bathron.org/fr/">', out)
         self.assertIn('<meta property="og:url" content="https://bathron.org/fr/">', out)
-        self.assertIn(M.LANG_CONF['fr']['sel'], out)
+        self.assertIn(M.selector_html('fr'), out)
         self.assertIn('aria-label="Sélection de la langue"', out)
         self.assertNotIn('aria-label="Language selection"', out)
 
@@ -532,11 +532,11 @@ class TestBuild(RepoCase):
 
     # --- structural facts absent or duplicated -------------------------
     def test_missing_selector_refused(self):
-        html = FIXTURE_HTML.replace(M.LANG_CONF['en']['sel'], '')
+        html = FIXTURE_HTML.replace(M.selector_html('en'), '')
         self.refuse(html=html, po_text=full_fr_po(html))
 
     def test_duplicate_selector_refused(self):
-        sel = M.LANG_CONF['en']['sel']
+        sel = M.selector_html('en')
         html = FIXTURE_HTML.replace(sel, sel + '\n' + sel)
         self.refuse(html=html, po_text=full_fr_po(html))
 
@@ -589,14 +589,22 @@ class TestBuild(RepoCase):
 class TestLanguageSelector(RepoCase):
     """The selector is a per-language structural fact, checked explicitly."""
 
-    def page(self, d, lang):
-        path = os.path.join(d, 'index.html') if lang == 'en' else os.path.join(d, 'fr', 'index.html')
-        with open(path, encoding='utf-8') as f:
+    def page(self, d, lang, mod=None):
+        mod = mod or M
+        rel = 'index.html' if lang == mod.SOURCE_LANG else \
+            os.path.join(mod.LANG_BY_CODE[lang]['out'], 'index.html')
+        with open(os.path.join(d, rel), encoding='utf-8') as f:
             return f.read()
 
+    def nav(self, d, lang, mod=None):
+        return re.search(r'<nav class="langsel".*?</nav>',
+                         self.page(d, lang, mod), re.S).group(0)
+
     def build_both(self):
-        d, mod = self.repo()
-        self.assertEqual(mod.build('fr'), 0)
+        """Build every generated language in a throwaway repository."""
+        d, mod = self.repo(po_all=True)
+        for code in mod.GENERATED_LANGS:
+            self.assertEqual(mod.build(code), 0, f'build {code} failed')
         return d, mod
 
     def test_exactly_one_selector_per_page(self):
@@ -608,23 +616,84 @@ class TestLanguageSelector(RepoCase):
                 self.assertEqual(len(re.findall(r'<nav class="langsel".*?</nav>', doc, re.S)), 1)
 
     def test_active_language_is_correct_and_not_a_link(self):
-        d, _mod = self.build_both()
-        for lang in ('en', 'fr'):
-            with self.subTest(lang=lang):
-                nav = re.search(r'<nav class="langsel".*?</nav>', self.page(d, lang), re.S).group(0)
-                m = re.search(r'<(\w+)[^>]*aria-current="page"[^>]*>([^<]*)</\1>', nav)
+        d, mod = self.build_both()
+        for L in mod.LANGUAGES:
+            with self.subTest(lang=L['code']):
+                nav = self.nav(d, L['code'], mod)
+                m = re.search(r'<(\w+)[^>]*aria-current="page"[^>]*>(?:<[^>]*>[^<]*</[^>]*>)?([^<]*)<', nav)
                 self.assertIsNotNone(m)
                 self.assertNotEqual(m.group(1), 'a', 'the active language must not be a link')
-                self.assertEqual(m.group(2), lang.upper())
+                self.assertEqual(m.group(2).strip(), L['name'])
 
-    def test_other_language_target_is_correct(self):
-        d, _mod = self.build_both()
-        for lang, other, href in (('en', 'fr', '/fr/'), ('fr', 'en', '/')):
-            with self.subTest(lang=lang):
-                nav = re.search(r'<nav class="langsel".*?</nav>', self.page(d, lang), re.S).group(0)
-                links = re.findall(r'<a href="([^"]*)" hreflang="([^"]*)" lang="([^"]*)">([^<]*)</a>', nav)
-                self.assertEqual(len(links), 1)
-                self.assertEqual(links[0], (href, other, other, other.upper()))
+    def test_every_other_language_is_a_real_link(self):
+        d, mod = self.build_both()
+        for L in mod.LANGUAGES:
+            with self.subTest(lang=L['code']):
+                nav = self.nav(d, L['code'], mod)
+                links = re.findall(r'<a class="lm-item" href="([^"]*)" lang="([^"]*)" hreflang="([^"]*)">', nav)
+                expected = [(O['path'], O['code'], O['code'])
+                            for O in mod.LANGUAGES if O['code'] != L['code']]
+                self.assertEqual(links, expected)
+
+    def test_menu_lists_exactly_the_declared_languages(self):
+        d, mod = self.build_both()
+        declared = sorted(O['code'] for O in mod.LANGUAGES)
+        for L in mod.LANGUAGES:
+            with self.subTest(lang=L['code']):
+                nav = self.nav(d, L['code'], mod)
+                self.assertEqual(len(re.findall(r'<li[\s>]', nav)), len(mod.LANGUAGES))
+                self.assertEqual(sorted(re.findall(r'\slang="([^"]*)"', nav)), declared)
+                for O in mod.LANGUAGES:
+                    self.assertIn(O['name'], nav, f'{O["name"]} missing from the menu')
+
+    def test_exactly_one_details_and_one_summary(self):
+        d, mod = self.build_both()
+        for L in mod.LANGUAGES:
+            with self.subTest(lang=L['code']):
+                nav = self.nav(d, L['code'], mod)
+                self.assertEqual(len(re.findall(r'<details[\s>]', nav)), 1)
+                self.assertEqual(len(re.findall(r'<summary[\s>]', nav)), 1)
+
+    def test_summary_names_the_current_language(self):
+        d, mod = self.build_both()
+        for L in mod.LANGUAGES:
+            with self.subTest(lang=L['code']):
+                nav = self.nav(d, L['code'], mod)
+                self.assertIn(f'<span class="lm-current">{L["name"]}</span>', nav)
+                self.assertIn(f'aria-label="{L["label"]}"', nav)
+
+    def test_no_javascript_anywhere(self):
+        d, mod = self.build_both()
+        for L in mod.LANGUAGES:
+            with self.subTest(lang=L['code']):
+                doc = self.page(d, L['code'])
+                self.assertNotIn('<script', doc)
+                self.assertIsNone(re.search(r'\son[a-z]+=', doc), 'inline event handler found')
+
+    def test_no_leftover_segmented_selector(self):
+        d, mod = self.build_both()
+        for L in mod.LANGUAGES:
+            with self.subTest(lang=L['code']):
+                doc = self.page(d, L['code'])
+                self.assertNotIn('<p class="langsel">', doc)
+                self.assertNotIn('<span>/</span>', doc)
+
+    def test_arabic_is_rtl_and_the_others_are_not(self):
+        d, mod = self.build_both()
+        for L in mod.LANGUAGES:
+            with self.subTest(lang=L['code']):
+                doc = self.page(d, L['code'])
+                tag = re.search(r'<html[^>]*>', doc).group(0)
+                if L['dir'] == 'rtl':
+                    self.assertIn('dir="rtl"', tag)
+                else:
+                    self.assertNotIn('dir=', tag)
+
+    def test_every_declared_language_is_generated_or_the_source(self):
+        d, mod = self.build_both()
+        for L in mod.LANGUAGES:
+            with self.subTest(lang=L['code']):
+                self.assertTrue(os.path.exists(mod.served_path(L['code'])))
 
     def test_aria_current_appears_exactly_once(self):
         d, _mod = self.build_both()
@@ -654,7 +723,7 @@ class TestLanguageSelector(RepoCase):
     def corrupt_and_verify(self, transform):
         """Build, corrupt the French page, and return verify()'s problems."""
         d, mod = self.build_both()
-        path = os.path.join(d, 'fr', 'index.html')
+        path = mod.served_path('fr')
         with open(path, encoding='utf-8') as f:
             doc = f.read()
         with open(path, 'w', encoding='utf-8') as f:
@@ -668,41 +737,68 @@ class TestLanguageSelector(RepoCase):
         p = self.corrupt_and_verify(lambda d, m: d.replace(' aria-current="page"', '', 1))
         self.assertIn('ARIA-CURRENT', self.kinds(p))
 
+    EN_LINK = '<a class="lm-item" href="/" lang="en" hreflang="en">'
+
     def test_verify_rejects_a_duplicated_aria_current(self):
         p = self.corrupt_and_verify(
-            lambda d, m: d.replace('<a href="/" hreflang="en" lang="en">',
-                                   '<a href="/" hreflang="en" lang="en" aria-current="page">', 1))
+            lambda d, m: d.replace(self.EN_LINK,
+                                   self.EN_LINK[:-1] + ' aria-current="page">', 1))
         self.assertIn('ARIA-CURRENT', self.kinds(p))
 
     def test_verify_rejects_an_active_language_that_is_a_link(self):
-        p = self.corrupt_and_verify(
-            lambda d, m: d.replace('<span aria-current="page" lang="fr">FR</span>',
-                                   '<a aria-current="page" lang="fr" href="/fr/">FR</a>', 1))
-        self.assertIn('SELECTOR', self.kinds(p))
+        def swap(doc, mod):
+            active = ('<span class="lm-item lm-on" aria-current="page" lang="fr">'
+                      '<span class="lm-badge" aria-hidden="true">FR</span>Français</span>')
+            assert active in doc
+            return doc.replace(active, active.replace('<span class="lm-item lm-on"',
+                                                      '<a href="/fr/" class="lm-item lm-on"', 1)
+                                             .replace('</span>', '</a>'), 1)
+        self.assertIn('SELECTOR', self.kinds(self.corrupt_and_verify(swap)))
 
     def test_verify_rejects_a_wrong_other_language_target(self):
         p = self.corrupt_and_verify(
-            lambda d, m: d.replace('<a href="/" hreflang="en" lang="en">',
-                                   '<a href="/en/" hreflang="en" lang="en">', 1))
+            lambda d, m: d.replace(self.EN_LINK,
+                                   '<a class="lm-item" href="/en/" lang="en" hreflang="en">', 1))
         self.assertIn('SELECTOR', self.kinds(p))
+
+    def test_verify_rejects_a_missing_language(self):
+        """Dropping one language from the menu must fail, not pass quietly."""
+        def drop(doc, mod):
+            item = re.search(r'<li><a class="lm-item" href="/es/".*?</li>', doc, re.S).group(0)
+            return doc.replace(item, '', 1)
+        self.assertIn('SELECTOR', self.kinds(self.corrupt_and_verify(drop)))
+
+    def test_verify_rejects_an_undeclared_language(self):
+        """A language nobody published must not appear in the menu."""
+        def add(doc, mod):
+            extra = ('<li><a class="lm-item" href="/de/" lang="de" hreflang="de">'
+                     '<span class="lm-badge" aria-hidden="true">DE</span>Deutsch</a></li>')
+            return doc.replace('</ul></details>', extra + '</ul></details>', 1)
+        self.assertIn('SELECTOR', self.kinds(self.corrupt_and_verify(add)))
 
     def test_verify_rejects_a_duplicated_selector(self):
         def dup(doc, mod):
-            nav = mod.LANG_CONF['fr']['sel']
+            nav = mod.selector_html('fr')
             return doc.replace(nav, nav + nav, 1)
         self.assertIn('COUNT', self.kinds(self.corrupt_and_verify(dup)))
 
     def test_verify_rejects_a_selector_left_in_the_hero(self):
         def move(doc, mod):
-            nav = mod.LANG_CONF['fr']['sel']
+            nav = mod.selector_html('fr')
             return doc.replace(nav, '', 1).replace('<div class="hero">',
                                                    '<div class="hero">' + nav, 1)
         self.assertIn('SELECTOR', self.kinds(self.corrupt_and_verify(move)))
 
-    def test_verify_accepts_the_untouched_page(self):
+    def test_verify_rejects_injected_javascript(self):
+        p = self.corrupt_and_verify(
+            lambda d, m: d.replace('</body>', '<script>var x=1;</script></body>', 1))
+        self.assertIn('SELECTOR', self.kinds(p))
+
+    def test_verify_accepts_every_untouched_page(self):
         d, mod = self.build_both()
-        self.assertEqual(mod.verify('fr', verbose=False), [])
-        self.assertEqual(mod.verify('en', verbose=False), [])
+        for L in mod.LANGUAGES:
+            with self.subTest(lang=L['code']):
+                self.assertEqual(mod.verify(L['code'], verbose=False), [])
 
     def test_selector_carries_no_prose_into_the_catalogue(self):
         """aria-label is a structural fact, not a translatable string."""

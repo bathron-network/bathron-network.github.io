@@ -224,44 +224,89 @@ applied by count-checked substitution: if one of them stops matching exactly
 once, the build fails rather than emitting a page with a wrong canonical or no
 language selector.
 
-### The language selector
+### The language menu
 
-It lives in a thin top bar above the hero and is a segmented control — the whole
-`<nav>` is one per-language value in `LANG_CONF`, `aria-label` included, because
-it names a navigation control rather than page prose:
+Six languages are published: English `/`, Français `/fr/`, Español `/es/`,
+中文（简体）`/zh-hans/`, हिन्दी `/hi/`, العربية `/ar/`. The BCP 47 tag and the URL
+are deliberately separate — `zh-Hans` is the tag, `/zh-hans/` is the path.
+
+The menu is a native `<details>`, no JavaScript:
 
 ```html
-<nav class="langsel" aria-label="Language selection"><span aria-current="page"
-  lang="en">EN</span><a href="/fr/" hreflang="fr" lang="fr">FR</a></nav>
+<nav class="langsel" aria-label="Language selection">
+  <details class="langmenu">
+    <summary><svg …globe…/><span class="lm-current">English</span><svg …chevron…/></summary>
+    <ul class="lm-list">
+      <li><span class="lm-item lm-on" aria-current="page" lang="en">…EN…English</span></li>
+      <li><a class="lm-item" href="/fr/" lang="fr" hreflang="fr">…FR…Français</a></li>
+      …
+    </ul>
+  </details>
+</nav>
 ```
 
-The active language is a `<span>`, never a link, and is **filled** rather than
-merely tinted, so it reads without relying on hue. `verify` checks, per page,
-that there is exactly one selector, that it sits above the hero, that the active
-item carries `aria-current="page"` exactly once in the document and is not a
-link, that the other language points at the right path with matching `hreflang`
-and `lang`, and that nothing interactive is nested inside. `compare` requires
-**exactly three** structural differences between the two pages — the canonical
-link and the two selector items swapping `<span>` and `<a>` — so a new
-per-language divergence fails instead of slipping in under a ceiling.
+It opens on click and on Enter/Space, because that is what `<summary>` does. A
+language switcher that needs a script is a switcher that can fail.
 
-No dropdown, no `navigator.language` detection, no automatic redirect, no
-runtime JavaScript. GitHub Pages cannot negotiate `Accept-Language` anyway, and
-a client-side redirect would hide `/fr/` from crawlers, which the `hreflang`
-annotations already handle correctly.
+The active language is a `<span>` carrying `aria-current="page"` — never a link
+— and is **filled** rather than tinted, so it reads without relying on hue. The
+badges (`EN`, `FR`, `ES`, `简`, `हि`, `ع`) are `aria-hidden` decoration: the
+native name is always written out, and no flag ever carries meaning on its own.
+The globe and chevron are inline SVG rather than emoji, whose rendering depends
+on the system font.
 
-Link separators in the footer are drawn by CSS, not written as text. A lone
-`,` or `and` sitting between two links is untranslatable in isolation and drifts
-between languages, so the structure removes the problem instead of asking a
-translator to solve it.
+`selector_html()` builds the whole `<nav>` from the table, so it is not prose
+and never reaches a catalogue: "Français" is Français in every language. The
+`langsel` class is in `SKIP_CLASSES`, which keeps the extractor out of that
+subtree entirely.
+
+### Right-to-left
+
+Arabic is served as `<html lang="ar" dir="rtl">`; every other language carries
+no `dir` at all. The layout needed almost nothing for this: the page uses
+centred text, flex and grid, with no physical `left`/`right` anywhere. The one
+rule that mattered is the dropdown panel, which uses `inset-inline-end: 0` so it
+hangs off the correct edge in both directions.
+
+`verify` checks the exact `<html>` tag per language, so a missing or stray
+`dir` fails the build.
+
+## Adding a language
+
+The machinery is extensible; publishing is deliberate. A language appears in
+the menu only once its catalogue is complete, because the menu is generated
+from the same table the build uses — there is no way to list a language that
+does not build.
+
+1. **Declare it** in `LANGUAGES` in `i18n/i18n.py`: `code` (BCP 47), `name`
+   (native), `path` (public URL), `out` (output directory, lowercase), `dir`,
+   `badge`, `label` (the localised accessible name of the menu).
+2. **Create the catalogue** `i18n/homepage.<code>.po` with a `Language:` header
+   matching the code, and translate every string. Nothing else is accepted:
+   a missing, empty, fuzzy, duplicated or malformed entry blocks the build.
+3. **`python3 i18n/i18n.py check <code>`** until it reports zero problems.
+4. **`python3 i18n/i18n.py build <code>`** to generate the page.
+5. **Add the output directory to `.gitignore`** — generated pages are never
+   committed — and add the URL to `sitemap.xml`. The `hreflang` set and the
+   menu update themselves from the table.
+6. **Run `bash i18n/ci-check.sh`.** The language ships only when every gate
+   passes; `verify` will refuse a page whose menu, canonical, `hreflang` or
+   `dir` disagrees with the table.
+
+Do not add an empty catalogue for a language you are not ready to publish. A
+declared language with no catalogue fails `check` and `build`, which is the
+intended behaviour — but it also fails the whole deploy, so declare and
+translate in the same change.
 
 ## Language and path bounding
 
 `build`, `check` and `verify` validate the language **before** computing any
-path and before touching the filesystem. Only languages declared in `LANG_CONF`
-are accepted, and only `fr` is generated — English is the source, not an output.
-The resolved output path must be exactly `<repo>/fr/index.html` and the
-catalogue path exactly `<repo>/i18n/homepage.<lang>.po`; anything else raises.
+path and before touching the filesystem. The regex is a shape check only; what
+actually authorises a language is membership in `LANGUAGES` — an allowlist,
+never a pattern, so a well-formed BCP 47 tag nobody declared is refused like any
+other unknown string. English is the source, not an output. Output and
+catalogue directory names come from the **table**, never from the argument, so
+a caller cannot steer the path even if validation were somehow bypassed.
 
 `python3 i18n/i18n.py build ../../x` therefore fails before a single file is
 opened, created or removed. The unit tests assert this with spies on `open`,
