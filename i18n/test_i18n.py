@@ -784,28 +784,74 @@ class TestMutationHarness(unittest.TestCase):
         self.assertEqual(r.returncode, 3)
         self.assertIn('assertions ran, expected', r.stdout)
 
+    # The mutation harness names every directory it creates with this prefix.
+    HARNESS_PREFIX = 'bathron-i18n-mutation.'
+    # Six characters, because mktemp replaces exactly the six X's of the
+    # template. A shorter name would not match the cleanup pattern at all, and
+    # the decoy would then survive by length rather than by the marker check —
+    # which is the thing under test.
+    DECOY = HARNESS_PREFIX + 'DECOY1'
+
+    def harness_entries(self, d):
+        """Only entries the harness itself could have created.
+
+        Asserting on the whole directory listing would test the cleanliness of
+        TMPDIR rather than the sandbox cleanup: macOS drops an `xcrun_db` entry
+        into any TMPDIR it hands a subprocess, and Python, git or the compiler
+        may leave their own scratch behind. None of that is ours to police.
+        Foreign files are covered by the sentinel instead, which proves cleanup
+        leaves them alone without hard-coding anyone's filename.
+        """
+        return sorted(e for e in os.listdir(d) if e.startswith(self.HARNESS_PREFIX))
+
+    def plant_sentinel(self, d):
+        """A file with no harness prefix. Cleanup must never touch it."""
+        path = os.path.join(d, 'unrelated-toolchain-file')
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write('not ours')
+        return path
+
+    def assertSentinelIntact(self, path):
+        self.assertTrue(os.path.isfile(path), 'a file that is not ours was removed')
+        with open(path, encoding='utf-8') as f:
+            self.assertEqual(f.read(), 'not ours')
+
     def test_sandbox_lives_under_tmpdir_and_is_removed(self):
         d = tempfile.mkdtemp(prefix='i18n-tmpdir-')
         self.addCleanup(shutil.rmtree, d, True)
+        sentinel = self.plant_sentinel(d)
         r = run_mutation(tmpdir=d)
         self.assertEqual(r.returncode, 0, r.stdout[-2000:])
         self.assertIn(d, r.stdout, 'the sandbox did not honour TMPDIR')
-        self.assertEqual(os.listdir(d), [], 'the sandbox was not cleaned up')
+        self.assertEqual(self.harness_entries(d), [],
+                         'a harness sandbox was left behind')
+        self.assertSentinelIntact(sentinel)
 
     def test_cleanup_removes_only_its_own_sandbox(self):
-        """A decoy matching the prefix but lacking the marker must survive."""
+        """A decoy matching the template but lacking the marker must survive."""
         d = tempfile.mkdtemp(prefix='i18n-tmpdir-')
         self.addCleanup(shutil.rmtree, d, True)
-        decoy = os.path.join(d, 'bathron-i18n-mutation.DECOY')
+        sentinel = self.plant_sentinel(d)
+        decoy = os.path.join(d, self.DECOY)
         os.makedirs(decoy)
-        with open(os.path.join(decoy, 'precious.txt'), 'w') as f:
+        with open(os.path.join(decoy, 'precious.txt'), 'w', encoding='utf-8') as f:
             f.write('do not delete me')
         r = run_mutation(tmpdir=d)
         self.assertEqual(r.returncode, 0, r.stdout[-2000:])
         self.assertTrue(os.path.isdir(decoy), 'the decoy directory was removed')
-        with open(os.path.join(decoy, 'precious.txt')) as f:
+        with open(os.path.join(decoy, 'precious.txt'), encoding='utf-8') as f:
             self.assertEqual(f.read(), 'do not delete me')
-        self.assertEqual(os.listdir(d), ['bathron-i18n-mutation.DECOY'])
+        # the decoy must be the ONLY harness-prefixed entry still present
+        self.assertEqual(self.harness_entries(d), [self.DECOY])
+        self.assertSentinelIntact(sentinel)
+
+    def test_decoy_name_really_matches_the_cleanup_pattern(self):
+        """Guards the test above: the decoy must be a candidate for removal,
+        saved only by the missing marker — not by a name the pattern misses."""
+        suffix = self.DECOY[len(self.HARNESS_PREFIX):]
+        self.assertEqual(len(suffix), 6,
+                         'mktemp substitutes exactly six characters; a decoy of '
+                         'another length would never match the cleanup pattern')
 
 
 class TestShellPortability(unittest.TestCase):
