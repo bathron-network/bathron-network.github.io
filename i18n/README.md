@@ -224,6 +224,32 @@ applied by count-checked substitution: if one of them stops matching exactly
 once, the build fails rather than emitting a page with a wrong canonical or no
 language selector.
 
+### The language selector
+
+It lives in a thin top bar above the hero and is a segmented control — the whole
+`<nav>` is one per-language value in `LANG_CONF`, `aria-label` included, because
+it names a navigation control rather than page prose:
+
+```html
+<nav class="langsel" aria-label="Language selection"><span aria-current="page"
+  lang="en">EN</span><a href="/fr/" hreflang="fr" lang="fr">FR</a></nav>
+```
+
+The active language is a `<span>`, never a link, and is **filled** rather than
+merely tinted, so it reads without relying on hue. `verify` checks, per page,
+that there is exactly one selector, that it sits above the hero, that the active
+item carries `aria-current="page"` exactly once in the document and is not a
+link, that the other language points at the right path with matching `hreflang`
+and `lang`, and that nothing interactive is nested inside. `compare` requires
+**exactly three** structural differences between the two pages — the canonical
+link and the two selector items swapping `<span>` and `<a>` — so a new
+per-language divergence fails instead of slipping in under a ceiling.
+
+No dropdown, no `navigator.language` detection, no automatic redirect, no
+runtime JavaScript. GitHub Pages cannot negotiate `Accept-Language` anyway, and
+a client-side redirect would hide `/fr/` from crawlers, which the `hreflang`
+annotations already handle correctly.
+
 Link separators in the footer are drawn by CSS, not written as text. A lone
 `,` or `and` sitting between two links is untranslatable in isolation and drifts
 between languages, so the structure removes the problem instead of asking a
