@@ -189,7 +189,7 @@ msgid "Compose applications and instruments on top, choosing their own interface
 msgstr "在这一层之上组合应用与金融工具，自行选择界面与条款。"
 
 msgid "No consensus operator chooses which application may be built."
-msgstr "没有任何共识运营方决定哪些应用可以存在。"
+msgstr "没有任何共识运营方决定哪些应用可以被构建。"
 
 msgid "Bitcoin remains the anchor"
 msgstr "Bitcoin 仍是锚"
@@ -198,7 +198,7 @@ msgid "The anchor is Bitcoin, and it stays where it is."
 msgstr "可编程结算以 Bitcoin 为依托。"
 
 msgid "M0 originates from Bitcoin destruction verified by consensus. Protocol conversion moves value from M0 into M1, the unit used for settlement."
-msgstr "M0 源自经共识验证的比特币销毁。协议转换把价值从 M0 转入 M1，即用于结算的单位。"
+msgstr "M0 源自经共识验证的 Bitcoin 销毁。协议转换把价值从 M0 转入 M1，即用于结算的单位。"
 
 msgid "Bitcoin remains the monetary anchor. BATHRON verifies its history directly and provides the programmable settlement layer built around it."
 msgstr "BATHRON 直接验证 Bitcoin 的历史，并提供围绕它构建的可编程结算层。"

@@ -144,7 +144,7 @@ msgid "Agreements that settle on Bitcoin's own difficulty, with no outside repor
 msgstr "اتفاقات تُسوّى وفق صعوبة Bitcoin نفسها، دون تدخّل أي مصدر بيانات خارجي."
 
 msgid "Payment-driven escrows"
-msgstr "ضمانات تُطلقها المدفوعات"
+msgstr "حسابات ضمان تُطلقها المدفوعات"
 
 msgid "Value that releases when a Bitcoin payment is confirmed and settled deeply enough."
 msgstr "قيمة تُطلَق عندما تتأكد دفعة بـ Bitcoin وتُدفن في السلسلة بعمق كافٍ."

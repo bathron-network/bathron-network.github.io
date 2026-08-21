@@ -1,4 +1,4 @@
-# BATHRON homepage — French catalogue.
+# BATHRON homepage — Français catalogue.
 # Hand-maintained and versioned. Regenerate the template with:
 #   python3 i18n/i18n.py extract
 # Verify before building with:
@@ -189,7 +189,7 @@ msgid "Compose applications and instruments on top, choosing their own interface
 msgstr "Ils composent des applications et des instruments sur cette couche, en choisissant leurs interfaces et leurs conditions."
 
 msgid "No consensus operator chooses which application may be built."
-msgstr "Aucun opérateur de consensus ne décide quelle application a le droit d’exister."
+msgstr "Aucun opérateur de consensus ne décide quelle application peut être construite."
 
 msgid "Bitcoin remains the anchor"
 msgstr "Bitcoin reste l’ancrage"

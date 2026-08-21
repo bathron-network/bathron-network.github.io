@@ -1,21 +1,42 @@
-# Homepage i18n — one source, versioned catalogue, fail-closed
+# Homepage i18n — one source, versioned catalogues, fail-closed
 
-The homepage exists in one place only: **`index.html`**. It is both the structure
-and the English text, and it is the page served at `/`. There is no second HTML
-file to keep in sync, because a second file is exactly what drifts.
+The homepage exists in one place only: **`index.html`**. It is both the
+structure and the English text, and it is the page served at `/`. There is no
+second HTML file to keep in sync, because a second file is exactly what drifts.
 
-French is a **catalogue of strings**, not a copy of the page:
+Every other language is a **catalogue of strings**, not a copy of the page:
 
 ```
-index.html                 source of truth (structure + English)
-i18n/homepage.fr.po        French catalogue     (hand-maintained, versioned)
-i18n/homepage.pot          extracted template   (generated, NOT versioned)
-fr/index.html              generated artifact   (generated, NOT versioned)
+index.html                    source of truth (structure + English), served at /
+i18n/homepage.fr.po           Français      (hand-maintained, versioned)
+i18n/homepage.es.po           Español       (hand-maintained, versioned)
+i18n/homepage.zh-Hans.po      中文（简体）   (hand-maintained, versioned)
+i18n/homepage.hi.po           हिन्दी          (hand-maintained, versioned)
+i18n/homepage.ar.po           العربية        (hand-maintained, versioned)
+
+i18n/homepage.pot             extracted template  (generated, NOT versioned)
+fr/  es/  zh-hans/  hi/  ar/  index.html per language
+                              (generated, NOT versioned)
 ```
 
-Only two files are versioned inputs. The `.pot` is a pure function of
-`index.html`, regenerated before every `msgmerge` and again in CI; committing it
-would create a second thing to keep in sync, which is what this design removes.
+The versioned inputs are `index.html` and the five catalogues — nothing else.
+The `.pot` is a pure function of `index.html`, regenerated before every
+`msgmerge` and again in CI; committing it would create a second thing to keep in
+sync, which is what this design removes. The generated pages are never committed
+either, so a language is either current or absent, never quietly stale.
+
+| Language | BCP 47 tag | URL | Direction |
+|---|---|---|---|
+| English | `en` | `/` | ltr — **source** |
+| Français | `fr` | `/fr/` | ltr |
+| Español | `es` | `/es/` | ltr |
+| 中文（简体） | `zh-Hans` | `/zh-hans/` | ltr |
+| हिन्दी | `hi` | `/hi/` | ltr |
+| العربية | `ar` | `/ar/` | **rtl** |
+
+The tag and the URL are deliberately distinct: `zh-Hans` is the tag, `/zh-hans/`
+is the path. Everything — output paths, catalogue paths, the menu, `hreflang`,
+the sitemap check — derives from the `LANGUAGES` table in `i18n.py`.
 
 ## Commands
 
@@ -31,15 +52,24 @@ nothing and reads no secret.
 Individually:
 
 ```bash
-python3 i18n/i18n.py extract     # refresh homepage.pot from index.html
-python3 i18n/i18n.py check fr    # audit the catalogue; exit non-zero if anything is off
-python3 i18n/i18n.py build fr    # generate fr/index.html; refuses unless 100 % complete
-python3 i18n/i18n.py verify fr   # lang, canonical, og:url, hreflang, selector, HTML balance
-python3 i18n/i18n.py compare     # EN and FR must share one tag skeleton
+python3 i18n/i18n.py languages       # the language table, as the tool sees it
+python3 i18n/i18n.py extract         # refresh homepage.pot from index.html
+python3 i18n/i18n.py check   all     # audit every catalogue; non-zero if anything is off
+python3 i18n/i18n.py build   all     # generate every page; refuses unless 100 % complete
+python3 i18n/i18n.py verify  all     # lang+dir, canonical, og:url, hreflang, menu, HTML balance
+python3 i18n/i18n.py compare         # every generated page vs the English skeleton
 python3 i18n/i18n.py static-overflow-check   # see the caveat below
-python3 i18n/test_i18n.py        # unit tests
-bash   i18n/mutation-test.sh     # prove the fail-closed guarantee, in a sandbox
-bash   i18n/msgmerge-compat.sh   # OPTIONAL, needs GNU gettext — see below
+python3 i18n/test_i18n.py            # unit tests
+bash   i18n/mutation-test.sh         # prove the fail-closed guarantee, in a sandbox
+bash   i18n/msgmerge-compat.sh       # OPTIONAL, needs GNU gettext — see below
+```
+
+`check`, `build` and `verify` also take a single language code:
+
+```bash
+python3 i18n/i18n.py check  ar       # one catalogue
+python3 i18n/i18n.py build  zh-Hans  # writes zh-hans/index.html
+python3 i18n/i18n.py verify en       # the source page counts for verify
 ```
 
 ### `static-overflow-check` is not a rendering check
@@ -140,47 +170,69 @@ exactly such a decoy and asserts it survives.
 
 ## The guarantee
 
-`build` refuses to write anything unless **every** source string has a non-empty,
-non-fuzzy translation, and it deletes any previous `fr/index.html` *before*
-validating. Since the artifact is never committed, there is no stale copy
-anywhere to fall back on. The page is written to a temporary file in the target
-directory, fsynced, then moved into place with `os.replace`, so an interrupted
-process leaves either the previous page or none — never half a page.
+For **each** language, `build` refuses to write anything unless every source
+string has a non-empty, non-fuzzy translation in that language's catalogue, and
+it deletes that language's previous page *before* validating. Since generated
+pages are never committed, there is no stale copy anywhere to fall back on. The
+page is written to a temporary file in the target directory, fsynced, then moved
+into place with `os.replace`, so an interrupted process leaves either the
+previous page or none — never half a page.
+
+`build all` builds every language and returns non-zero if **any** of them fails,
+so an incomplete catalogue in one language stops the deploy for all of them.
+That is deliberate: five languages that disagree about what the site says are
+worse than a deploy that did not happen.
 
 Conditions that block a build:
 
 | Condition | Meaning |
 |---|---|
-| `MISSING` | the English string has no entry in the catalogue |
+| `MISSING` | the English string has no entry in that catalogue |
 | `EMPTY` | the entry exists but `msgstr` is empty |
-| `FUZZY` | `msgmerge` flagged it — the English changed, the French did not |
+| `FUZZY` | `msgmerge` flagged it — the English changed, the translation did not |
 | `OBSOLETE` | the catalogue holds an entry the page no longer contains |
 | `CATALOGUE` | the `.po` is malformed, ambiguous, duplicated or for another language |
 
 `mutation-test.sh` proves this by execution: it copies the sources into a
 throwaway sandbox and exercises a changed English sentence, an absent catalogue,
-a `fuzzy` entry produced by real `msgmerge`, a duplicated entry and a malformed
-entry — checking each time that the build refuses *and* that no French page
-survives on disk. It then asserts, by SHA-256 and by `git status`, that the
-calling worktree was never written to. An argument is not a proof; run the test.
+a `fuzzy` entry, a duplicated entry and a malformed entry — checking each time
+that the build refuses *and* that no generated page survives on disk. It then
+asserts, by SHA-256 and by `git status`, that the calling worktree was never
+written to. An argument is not a proof; run the test.
+
+> **Scope of the mutation test.** It exercises **French only**, as a
+> representative catalogue. The mechanism it proves — fail-closed refusal,
+> stale-artifact removal, atomic write — is language-agnostic code shared by all
+> five, so proving it once proves it everywhere. What it does *not* do is
+> validate the other four catalogues; that is the job of `check all`, `build
+> all` and `verify all`, which run over every language on every PR and every
+> deploy. Do not read a green mutation test as "the five catalogues are fine".
 
 ## Changing English text
+
+Editing one English sentence invalidates that string in **all five**
+catalogues, so all five must be updated:
 
 ```bash
 #  1. edit index.html
 python3 i18n/i18n.py extract
-msgmerge --update --backup=none i18n/homepage.fr.po i18n/homepage.pot
-#  2. the changed entry is now marked #, fuzzy
-#  3. fix the msgstr, delete the fuzzy line
-python3 i18n/i18n.py check fr
+for po in i18n/homepage.*.po; do
+    msgmerge --update --backup=none "$po" i18n/homepage.pot
+done
+#  2. the changed entry is now marked #, fuzzy in every catalogue
+#  3. fix each msgstr and delete its fuzzy line
+python3 i18n/i18n.py check all
 ```
 
-Until step 3 is done, `/fr/` cannot be deployed. That is the point: the French
-page is either current or absent, never quietly wrong.
+Until step 3 is done for every language, **nothing** deploys — not just the
+language you forgot. That is the point: a page is either current or absent,
+never quietly wrong. If you cannot translate a change immediately, the honest
+options are to hold the English change or to remove a language from the table;
+there is no "publish it stale" path, by design.
 
 ## Disambiguation
 
-When one English string needs two different French renderings, wrap the element:
+When one English string needs two different renderings, wrap the element:
 
 ```html
 <p class="memorable" data-i18n-context="hero">Programmable settlement<br>…</p>
@@ -193,9 +245,9 @@ renames a class for styling reasons.
 ### Context metadata — what is actually true
 
 `data-i18n-context` is stripped from every **generated** page, so it never
-appears in `fr/index.html`; `verify fr` fails if it ever does. The **English
-page is not generated** — it is `index.html`, served as-is — so it **keeps the
-attribute**.
+appears in `fr/`, `es/`, `zh-hans/`, `hi/` or `ar/`; `verify <lang>` fails if it
+ever does. The **English page is not generated** — it is `index.html`, served
+as-is — so it **keeps the attribute**.
 
 That is a deliberate choice between two models:
 
@@ -218,8 +270,8 @@ prose is: `img/@alt`, `a/@title`, and the `<meta>` tags carrying real sentences
 `twitter:description`). `viewport`, `og:image`, `twitter:card` and friends are
 structural and stay out of the catalogue.
 
-Per-language facts — `<html lang>`, the canonical URL, `og:url`, and the EN/FR
-selector — are not prose either. They live in `LANG_CONF` in `i18n.py` and are
+Per-language facts — the whole `<html>` tag including `dir`, the canonical URL,
+`og:url`, and the language menu — are not prose either. They live in `LANG_CONF` in `i18n.py` and are
 applied by count-checked substitution: if one of them stops matching exactly
 once, the build fails rather than emitting a page with a wrong canonical or no
 language selector.
@@ -270,6 +322,51 @@ hangs off the correct edge in both directions.
 
 `verify` checks the exact `<html>` tag per language, so a missing or stray
 `dir` fails the build.
+
+## Deliberate non-literal renderings
+
+Translations are meant to read naturally, not word by word. Three departures
+from the English are intentional and are recorded here so nobody has to guess
+whether they are bugs.
+
+**1. "Bitcoin remains the monetary anchor." is not rendered in the paragraph.**
+The English section reads: eyebrow *Bitcoin remains the anchor* → heading *The
+anchor is Bitcoin, and it stays where it is.* → paragraph opening *Bitcoin
+remains the monetary anchor.* Three statements of the same idea in a row. French
+condensed it first, and the other four followed.
+
+This is a **kept** condensation, not an oversight. The section still carries the
+claim: every language translates the eyebrow as "Bitcoin remains the anchor",
+and the paragraph immediately before it is entirely about M0, M1 and monetary
+conversion, so "monetary" is not lost in context. Restoring the clause would
+reintroduce in five languages the repetition that was removed from one.
+
+If you disagree, the fix is one string per catalogue — the msgid is
+`Bitcoin remains the monetary anchor. BATHRON verifies its history…`.
+
+**2. "inventory" becomes "assets" once and "liquidity" once.** English uses
+*inventory* twice in the markets paragraph. Every translation renders the first
+as assets and the second as available liquidity, because a single literal word
+reads like warehouse stock in all five languages. The meaning — a provider
+quotes because it holds something, and markets emerge from what is available —
+is unchanged.
+
+**3. Arrows point the other way in Arabic.** `→` becomes `←` in the Arabic
+catalogue: in right-to-left text, forward is leftward. The five `→` in the other
+catalogues and the five `←` in Arabic are checked in the audit, not by a gate.
+
+### What this pass was, and was not
+
+The four new catalogues were written and then re-read against the English for
+meaning, not just for protected terms: settlement rendered as the financial term
+and never as a legal guarantee; Consensus Operators and Settlement Providers
+kept distinct; "one operator, one vote" intact; M0, M1, BATHRON, Bitcoin,
+e-mails and URLs untouched; no promise of price, reserve, refund or commercial
+outcome introduced; "not from a listing decision" not softened anywhere; the
+depth of a Bitcoin confirmation expressed as burial in the chain.
+
+That is an **editorial semantic check**. It is not a native review. No native
+speaker of Spanish, Chinese, Hindi or Arabic has read these pages.
 
 ## Adding a language
 
@@ -339,7 +436,7 @@ packaged for this machine (`po4a 0.73`), its xhtml module:
 - puts **the entire CSS block into the catalogue as one `msgid`**.
 
 That last one is fatal here: under a 100 %-or-nothing rule, changing a colour
-would mark the CSS entry fuzzy and break the French build. The generator in this
+would mark the CSS entry fuzzy and break every translated build. The generator in this
 directory uses only the Python standard library, which is also why the deploy
 workflow installs nothing to build the page. `gettext` is installed in CI for
 the *test* alone: the fuzzy case must run against real `msgmerge` output rather
@@ -348,4 +445,4 @@ than a hand-written imitation of it.
 ## Scope
 
 The homepage only. The mdBook documentation under `docs/` is English and is not
-touched by this system; the French homepage says so where it links to it.
+touched by this system; each translated homepage says so where it links to it.
