@@ -34,6 +34,11 @@ SRC = os.path.join(ROOT, 'index.html')
 POT = os.path.join(ROOT, 'i18n', 'homepage.pot')
 
 SKIP_TAGS = {'style', 'script'}
+# Elements whose whole subtree is excluded from extraction. The language menu
+# is regenerated per page from the table, and its content — native language
+# names, badges — must never be translated: "Français" is Français in every
+# language. Without this, six language names would land in every catalogue.
+SKIP_CLASSES = {'langsel'}
 # attributes whose value is prose and must be translated
 ATTRS = {('meta', 'content'), ('img', 'alt'), ('a', 'title'), ('html', 'lang')}
 # only these meta names/properties carry prose. viewport, og:image, og:url,
@@ -47,31 +52,90 @@ VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'met
         'path', 'circle', 'rect', 'line', 'polygon', 'use', 'stop'}
 
 # Per-language values that are NOT prose: they are structural facts about the page.
-LANG_CONF = {
-    'en': {
-        'lang': 'en',
-        'canonical': 'https://bathron.org/',
-        # The whole <nav> is a per-language structural fact, aria-label
-        # included: it names a navigation control, not page prose, so it stays
-        # out of the catalogue like the canonical URL does.
-        'sel': ('<nav class="langsel" aria-label="Language selection">'
-                '<span aria-current="page" lang="en">EN</span>'
-                '<a href="/fr/" hreflang="fr" lang="fr">FR</a></nav>'),
-    },
-    'fr': {
-        'lang': 'fr',
-        'canonical': 'https://bathron.org/fr/',
-        'sel': ('<nav class="langsel" aria-label="Sélection de la langue">'
-                '<a href="/" hreflang="en" lang="en">EN</a>'
-                '<span aria-current="page" lang="fr">FR</span></nav>'),
-    },
-}
-# Where each language is served, used to check the other-language link target.
-LANG_HREF = {'en': '/', 'fr': '/fr/'}
-SELECTOR_RE = r'<nav class="langsel".*?</nav>'
+SITE = 'https://bathron.org'
 
-# English is the source, not a generated artifact. Only these are built.
-GENERATED_LANGS = {'fr'}
+# The language table. Everything else — output paths, catalogue paths, the
+# menu, hreflang, the sitemap — is derived from it, so adding a language is one
+# entry plus a complete catalogue. `code` is the BCP 47 tag used in lang and
+# hreflang; `path` is the public URL; `out` is the directory the page is
+# generated into (lowercase, because URLs are). English has no `out`: it is the
+# source, served from index.html.
+LANGUAGES = [
+    {'code': 'en',      'name': 'English',      'path': '/',         'out': None,
+     'dir': 'ltr', 'badge': 'EN', 'label': 'Language selection'},
+    {'code': 'fr',      'name': 'Français',     'path': '/fr/',      'out': 'fr',
+     'dir': 'ltr', 'badge': 'FR', 'label': 'Sélection de la langue'},
+    {'code': 'es',      'name': 'Español',      'path': '/es/',      'out': 'es',
+     'dir': 'ltr', 'badge': 'ES', 'label': 'Selección de idioma'},
+    {'code': 'zh-Hans', 'name': '中文（简体）',  'path': '/zh-hans/', 'out': 'zh-hans',
+     'dir': 'ltr', 'badge': '简', 'label': '语言选择'},
+    {'code': 'hi',      'name': 'हिन्दी',        'path': '/hi/',      'out': 'hi',
+     'dir': 'ltr', 'badge': 'हि', 'label': 'भाषा चयन'},
+    {'code': 'ar',      'name': 'العربية',      'path': '/ar/',      'out': 'ar',
+     'dir': 'rtl', 'badge': 'ع',  'label': 'اختيار اللغة'},
+]
+
+LANG_BY_CODE = {L['code']: L for L in LANGUAGES}
+SOURCE_LANG = 'en'
+# Only these are generated. English is the source, not an output.
+GENERATED_LANGS = [L['code'] for L in LANGUAGES if L['out']]
+
+# Decorative only, aria-hidden: an emoji globe renders differently on every
+# platform and sometimes not at all.
+GLOBE_SVG = ('<svg class="lm-globe" aria-hidden="true" viewBox="0 0 16 16" width="15" height="15">'
+             '<circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.2"/>'
+             '<path d="M1.4 8h13.2M8 1.4c1.9 2 2.9 4.2 2.9 6.6S9.9 12.6 8 14.6C6.1 12.6 5.1 10.4 5.1 8'
+             'S6.1 3.4 8 1.4z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>')
+CHEVRON_SVG = ('<svg class="lm-chev" aria-hidden="true" viewBox="0 0 12 12" width="11" height="11">'
+               '<path d="M2 4.3 6 8.3l4-4" fill="none" stroke="currentColor" stroke-width="1.5" '
+               'stroke-linecap="round" stroke-linejoin="round"/></svg>')
+
+
+def canonical(code):
+    return SITE + LANG_BY_CODE[code]['path']
+
+
+def selector_html(code):
+    """The language menu for one page: <details>/<summary>, no JavaScript.
+
+    The active language is a <span> carrying aria-current="page" — never a
+    link. Every other language is a real anchor with lang and hreflang, so the
+    alternates are crawlable without running anything.
+    """
+    me = LANG_BY_CODE[code]
+    items = []
+    for L in LANGUAGES:
+        badge = f'<span class="lm-badge" aria-hidden="true">{L["badge"]}</span>'
+        if L['code'] == code:
+            items.append(f'<li><span class="lm-item lm-on" aria-current="page" '
+                         f'lang="{L["code"]}">{badge}{L["name"]}</span></li>')
+        else:
+            items.append(f'<li><a class="lm-item" href="{L["path"]}" '
+                         f'lang="{L["code"]}" hreflang="{L["code"]}">{badge}{L["name"]}</a></li>')
+    return (f'<nav class="langsel" aria-label="{me["label"]}">'
+            f'<details class="langmenu">'
+            f'<summary>{GLOBE_SVG}<span class="lm-current">{me["name"]}</span>{CHEVRON_SVG}</summary>'
+            f'<ul class="lm-list">{"".join(items)}</ul>'
+            f'</details></nav>')
+
+
+def hreflang_html():
+    """The alternate set, identical on every page, x-default on English."""
+    rows = [f'<link rel="alternate" hreflang="{L["code"]}" href="{canonical(L["code"])}">'
+            for L in LANGUAGES]
+    rows.append(f'<link rel="alternate" hreflang="x-default" href="{canonical(SOURCE_LANG)}">')
+    return rows
+
+
+def html_open_tag(code):
+    L = LANG_BY_CODE[code]
+    d = f' dir="{L["dir"]}"' if L['dir'] != 'ltr' else ''
+    return f'<html lang="{L["code"]}"{d}>'
+
+
+SELECTOR_RE = r'<nav class="langsel".*?</nav>'
+HTML_TAG_RE = r'<html[^>]*>'
+
 # Narrowest viewport the layout is expected to survive, in CSS pixels.
 MIN_VIEWPORT_PX = 390
 
@@ -91,18 +155,21 @@ class BuildError(I18nError): pass
 # any file is read, created or removed.
 # --------------------------------------------------------------------------
 
-LANG_RE = re.compile(r'^[a-z]{2}$')
+# Shape check only. Membership in LANGUAGES is what actually authorises a
+# language — an allowlist, never a pattern. A well-formed BCP 47 tag that is
+# not in the table is refused like any other unknown string.
+LANG_RE = re.compile(r'^[a-z]{2}(-[A-Z][a-z]{3})?$')
 
 
 def validate_lang(lang):
-    """Accept only a language declared in LANG_CONF. Raises before any I/O."""
+    """Accept only a language declared in LANGUAGES. Raises before any I/O."""
     if not isinstance(lang, str):
         raise LangError(f'language must be a string, got {type(lang).__name__}')
     if not LANG_RE.match(lang):
-        raise LangError(f'invalid language code {lang!r}: expected two lowercase letters')
-    if lang not in LANG_CONF:
-        known = ', '.join(sorted(LANG_CONF))
-        raise LangError(f'unknown language {lang!r}: known languages are {known}')
+        raise LangError(f'invalid language code {lang!r}')
+    if lang not in LANG_BY_CODE:
+        known = ', '.join(L['code'] for L in LANGUAGES)
+        raise LangError(f'unknown language {lang!r}: declared languages are {known}')
     return lang
 
 
@@ -118,33 +185,40 @@ def _bounded(path, must_be):
 
 
 def lang_dir(lang):
-    """Output directory for a generated language, strictly <repo>/<lang>/."""
+    """Output directory for a generated language.
+
+    The directory name comes from the TABLE, never from the argument, so a
+    caller cannot steer the path even if validation were somehow bypassed.
+    """
     validate_lang(lang)
     if lang not in GENERATED_LANGS:
         raise LangError(f'{lang!r} is not a generated language '
-                        f'(generated: {", ".join(sorted(GENERATED_LANGS))})')
-    return _bounded(os.path.join(ROOT, lang), os.path.join(ROOT, lang))
+                        f'(generated: {", ".join(GENERATED_LANGS)})')
+    out = LANG_BY_CODE[lang]['out']
+    return _bounded(os.path.join(ROOT, out), os.path.join(ROOT, out))
 
 
 def out_path(lang):
-    """<repo>/<lang>/index.html for a generated language."""
+    """<repo>/<out>/index.html for a generated language."""
     d = lang_dir(lang)
     p = os.path.join(d, 'index.html')
-    if os.path.dirname(os.path.realpath(os.path.join(d, 'index.html'))) != d:
+    if os.path.dirname(os.path.realpath(p)) != d:
         raise PathError(f'output path escapes {d!r}')
     return p
 
 
 def served_path(lang):
-    """The file actually served for `lang`: index.html for English."""
+    """The file actually served for `lang`: index.html for the source language."""
     validate_lang(lang)
-    return SRC if lang == 'en' else out_path(lang)
+    return SRC if lang == SOURCE_LANG else out_path(lang)
 
 
 def po_path(lang):
-    """<repo>/i18n/homepage.<lang>.po, bounded to the i18n directory."""
+    """<repo>/i18n/homepage.<code>.po, bounded to the i18n directory."""
     validate_lang(lang)
-    want = os.path.join(ROOT, 'i18n', f'homepage.{lang}.po')
+    if lang == SOURCE_LANG:
+        raise LangError(f'{lang!r} is the source language and has no catalogue')
+    want = os.path.join(ROOT, 'i18n', f'homepage.{LANG_BY_CODE[lang]["code"]}.po')
     return _bounded(want, want)
 
 
@@ -171,6 +245,8 @@ class Walker(HTMLParser):
         self.on_text, self.on_attr = on_text, on_attr
         self.strip_ctx = strip_ctx
         self.buf, self.ctx = [], ['']
+        # tags that opened a skipped subtree, innermost last
+        self.skipstack = []
 
     def _flush(self):
         if not self.buf: return
@@ -184,17 +260,34 @@ class Walker(HTMLParser):
 
     def handle_starttag(self, tag, attrs, selfclosing=False):
         self._flush()
-        if tag in SKIP_TAGS: self.skip += 1
+        classes = set()
+        for k, v in attrs:
+            if k == 'class' and v: classes = set(v.split())
+        if tag in SKIP_TAGS or (classes & SKIP_CLASSES):
+            self.skip += 1
+            if not selfclosing and tag not in VOID:
+                self.skipstack.append(tag)
         d = {k: v for k, v in attrs}
         mname = d.get('name') or d.get('property')
         own = d.get(CTX_ATTR)
         ctx = own if own else self.ctx[-1]
-        parts = []
+        parts, changed = [], False
         for k, v in attrs:
-            if k == CTX_ATTR and self.strip_ctx: continue
+            if k == CTX_ATTR and self.strip_ctx: changed = True; continue
             if v is None: parts.append(f' {k}'); continue
-            parts.append(f' {k}="{self.on_attr(tag, k, v, mname, ctx)}"')
-        self.out.append(f'<{tag}{"".join(parts)}{" /" if selfclosing else ""}>')
+            nv = self.on_attr(tag, k, v, mname, ctx)
+            if nv != v: changed = True
+            parts.append(f' {k}="{nv}"')
+        if changed:
+            self.out.append(f'<{tag}{"".join(parts)}{" /" if selfclosing else ""}>')
+        else:
+            # Re-emit the source text verbatim when nothing was rewritten.
+            # HTMLParser lowercases attribute NAMES, which would turn the SVG
+            # viewBox into viewbox; browsers case-fix that, but the round-trip
+            # should not depend on their goodwill.
+            raw = self.get_starttag_text()
+            self.out.append(raw if raw is not None
+                            else f'<{tag}{"".join(parts)}{" /" if selfclosing else ""}>')
         if not selfclosing and tag not in VOID:
             self.ctx.append(ctx)
 
@@ -203,7 +296,8 @@ class Walker(HTMLParser):
 
     def handle_endtag(self, tag):
         self._flush()
-        if tag in SKIP_TAGS: self.skip = max(0, self.skip - 1)
+        if self.skipstack and self.skipstack[-1] == tag:
+            self.skipstack.pop(); self.skip = max(0, self.skip - 1)
         if tag not in VOID and len(self.ctx) > 1: self.ctx.pop()
         self.out.append(f'</{tag}>')
 
@@ -315,8 +409,13 @@ def read_po(path, expect_lang=None):
                 m = re.search(r'^Language:[ \t]*([A-Za-z_-]+)', cur['str'] or '', re.M)
                 if not m:
                     raise PoError('header declares no "Language:" field')
-                declared = m.group(1).split('_')[0].split('-')[0].lower()
-                if declared != expect_lang:
+                # Normalise BOTH sides the same way, so "fr_FR" satisfies "fr"
+                # and "zh-Hans" satisfies "zh-Hans" instead of collapsing to
+                # "zh" on one side only.
+                def base(tag):
+                    return tag.replace('_', '-').lower()
+                declared = base(m.group(1))
+                if declared != base(expect_lang) and declared.split('-')[0] != base(expect_lang):
                     raise PoError(f'catalogue declares Language: {m.group(1)!r} '
                                   f'but {expect_lang!r} was requested')
         else:
@@ -439,7 +538,6 @@ def render(lang, src=None, entries=None):
             src = fh.read()
     if entries is None:
         entries, _ = read_po(po_path(lang), expect_lang=lang)
-    conf = LANG_CONF[lang]
 
     def text(d, ctx):
         n = norm(d)
@@ -450,7 +548,7 @@ def render(lang, src=None, entries=None):
         return d
 
     def attr(tag, k, v, name=None, ctx=''):
-        if (tag, k) == ('html', 'lang'): return conf['lang']
+        if (tag, k) == ('html', 'lang'): return lang   # re-stated by HTML_TAG_RE below
         if tag == 'meta':
             if k == 'content' and name in META_PROSE and (ctx, norm(v)) in entries:
                 return entries[(ctx, norm(v))]
@@ -461,11 +559,15 @@ def render(lang, src=None, entries=None):
     w = Walker(text, attr); w.feed(src); w.close()
     doc = w.document
     # language-dependent structural facts, each applied exactly once
+    url = canonical(lang)
+    # The whole <html> tag is rewritten, not just its lang: Arabic needs
+    # dir="rtl" and the other languages must NOT carry a dir at all.
+    doc = _sub_once(HTML_TAG_RE, html_open_tag(lang), doc, 'html open tag')
     doc = _sub_once(r'<meta property="og:url" content="[^"]*">',
-                    f'<meta property="og:url" content="{conf["canonical"]}">', doc, 'og:url meta')
+                    f'<meta property="og:url" content="{url}">', doc, 'og:url meta')
     doc = _sub_once(r'<link rel="canonical"[^>]*>',
-                    f'<link rel="canonical" href="{conf["canonical"]}">', doc, 'canonical link')
-    doc = _sub_once(SELECTOR_RE, conf['sel'], doc, 'language selector')
+                    f'<link rel="canonical" href="{url}">', doc, 'canonical link')
+    doc = _sub_once(SELECTOR_RE, selector_html(lang), doc, 'language selector')
     return doc
 
 
@@ -483,7 +585,7 @@ def build(lang):
     # 1. remove any previous artifact BEFORE validating, so a failed build can
     #    never leave yesterday's page in place.
     if os.path.exists(out):
-        os.remove(out); print(f'  removed stale artifact {lang}/index.html')
+        os.remove(out); print(f'  removed stale artifact {os.path.relpath(out, ROOT)}')
     problems = check(lang, verbose=False)
     if problems:
         print(f'  BUILD REFUSED for {lang}: {len(problems)} problem(s)')
@@ -511,7 +613,7 @@ def build(lang):
             os.remove(tmp)
     if not os.path.exists(out):
         print(f'  BUILD FAILED: {out} was not created'); return 1
-    print(f'  built {lang}/index.html ({os.path.getsize(out)} bytes)')
+    print(f'  built {os.path.relpath(out, ROOT)} ({os.path.getsize(out)} bytes)')
     return 0
 
 
@@ -554,60 +656,67 @@ def parse_skeleton(path):
 
 
 def _check_selector(doc, lang, problems):
-    """The language selector must be present exactly once, in the top bar,
-    with the right language active and the right target for the other one."""
-    conf = LANG_CONF[lang]
-    other = 'fr' if lang == 'en' else 'en'
+    """The language menu must be present exactly once, in the top bar, listing
+    every declared language, with this page's language active and every other
+    one a real link."""
+    me = LANG_BY_CODE[lang]
 
     navs = re.findall(SELECTOR_RE, doc, flags=re.S)
     if len(navs) != 1:
-        problems.append(('COUNT', f'language selector: expected exactly 1, found {len(navs)}'))
+        problems.append(('COUNT', f'language menu: expected exactly 1, found {len(navs)}'))
         return
     nav = navs[0]
     if doc.count('class="langsel"') != 1:
         problems.append(('COUNT', 'the langsel class appears more than once'))
-    if nav != conf['sel']:
-        problems.append(('SELECTOR', f'selector markup differs from LANG_CONF[{lang!r}]:\n'
-                                     f'      got      {nav}\n      expected {conf["sel"]}'))
+    if nav != selector_html(lang):
+        problems.append(('SELECTOR', f'menu markup differs from the one generated for {lang!r}'))
 
-    # only real attributes on tags — the CSS rule .langsel [aria-current="page"]
-    # is not an occurrence, and counting it would be a false alarm.
+    for tag, want in (('details', 1), ('summary', 1), ('ul', 1)):
+        n = len(re.findall(rf'<{tag}[\s>]', nav))
+        if n != want:
+            problems.append(('SELECTOR', f'{n} <{tag}> in the menu, expected {want}'))
+    n = len(re.findall(r'<li[\s>]', nav))
+    if n != len(LANGUAGES):
+        problems.append(('SELECTOR', f'{n} languages listed, expected {len(LANGUAGES)}'))
+
+    if f'aria-label="{me["label"]}"' not in nav:
+        problems.append(('SELECTOR', f'accessible label is not {me["label"]!r}'))
+    if f'<span class="lm-current">{me["name"]}</span>' not in nav:
+        problems.append(('SELECTOR', f'the summary does not name {me["name"]!r}'))
+
     n = len(re.findall(r'<[a-zA-Z][^>]*\baria-current=', doc))
     if n != 1:
         problems.append(('ARIA-CURRENT', f'aria-current appears {n} time(s), expected exactly 1'))
-
-    m = re.search(r'<(\w+)([^>]*)aria-current="page"([^>]*)>([^<]*)</\1>', nav)
+    m = re.search(r'<(\w+)[^>]*aria-current="page"[^>]*>(?:<[^>]*>[^<]*</[^>]*>)?([^<]*)<', nav)
     if not m:
-        problems.append(('ARIA-CURRENT', 'no element in the selector carries aria-current="page"'))
+        problems.append(('ARIA-CURRENT', 'no element in the menu carries aria-current="page"'))
     else:
-        tag, text = m.group(1), m.group(4).strip()
-        if tag == 'a':
+        if m.group(1) == 'a':
             problems.append(('SELECTOR', 'the active language must not be a link'))
-        if text != lang.upper():
-            problems.append(('SELECTOR', f'active language reads {text!r}, expected {lang.upper()!r}'))
+        if m.group(2).strip() != me['name']:
+            problems.append(('SELECTOR', f'active entry reads {m.group(2)!r}, expected {me["name"]!r}'))
 
-    links = re.findall(r'<a href="([^"]*)" hreflang="([^"]*)" lang="([^"]*)">([^<]*)</a>', nav)
-    if len(links) != 1:
-        problems.append(('SELECTOR', f'expected exactly 1 link in the selector, found {len(links)}'))
-    else:
-        href, hl, lg, txt = links[0]
-        if href != LANG_HREF[other]:
-            problems.append(('SELECTOR', f'other-language link points to {href!r}, '
-                                         f'expected {LANG_HREF[other]!r}'))
-        if hl != other or lg != other:
-            problems.append(('SELECTOR', f'link declares hreflang={hl!r} lang={lg!r}, expected {other!r}'))
-        if txt.strip() != other.upper():
-            problems.append(('SELECTOR', f'link reads {txt!r}, expected {other.upper()!r}'))
+    links = re.findall(r'<a class="lm-item" href="([^"]*)" lang="([^"]*)" hreflang="([^"]*)">', nav)
+    expected = [(L['path'], L['code'], L['code']) for L in LANGUAGES if L['code'] != lang]
+    if links != expected:
+        problems.append(('SELECTOR', f'language links are {links}, expected {expected}'))
+
+    # a leading space, otherwise hreflang="…" matches too
+    listed = re.findall(r'\slang="([^"]*)"', nav)
+    declared = [L['code'] for L in LANGUAGES]
+    if sorted(listed) != sorted(declared):
+        problems.append(('SELECTOR', f'menu lists {sorted(listed)}, declared {sorted(declared)}'))
 
     if re.search(r'<a\b[^>]*>(?:(?!</a>).)*<(?:a|button|select|input)\b', nav, flags=re.S):
-        problems.append(('SELECTOR', 'nested interactive element inside the selector'))
+        problems.append(('SELECTOR', 'nested interactive element inside the menu'))
+    if re.search(r'<script\b', doc):
+        problems.append(('SELECTOR', 'the page contains a <script> element'))
 
     if 'class="topbar"' not in doc:
         problems.append(('SELECTOR', 'no top bar container found'))
     hero = re.search(r'<div class="hero">', doc)
     if hero and doc.index(nav) > hero.start():
-        problems.append(('SELECTOR', 'the selector sits inside or after the hero; '
-                                     'it belongs to the top bar above it'))
+        problems.append(('SELECTOR', 'the menu sits inside or after the hero'))
 
 
 def verify(lang, verbose=True):
@@ -619,7 +728,6 @@ def verify(lang, verbose=True):
         return [('MISSING-PAGE', f'{path} does not exist')]
     with open(path, encoding='utf-8') as fh:
         doc = fh.read()
-    conf = LANG_CONF[lang]
 
     def one(pattern, what):
         found = re.findall(pattern, doc, flags=re.S)
@@ -628,19 +736,20 @@ def verify(lang, verbose=True):
             return None
         return found[0]
 
-    got = one(r'<html lang="([^"]*)"', 'html lang')
-    if got is not None and got != conf['lang']:
-        problems.append(('LANG', f'html lang is {got!r}, expected {conf["lang"]!r}'))
+    url = canonical(lang)
+    got = one(r'(<html[^>]*>)', 'html open tag')
+    if got is not None and got != html_open_tag(lang):
+        problems.append(('LANG', f'html tag is {got!r}, expected {html_open_tag(lang)!r}'))
     got = one(r'<link rel="canonical" href="([^"]*)">', 'canonical link')
-    if got is not None and got != conf['canonical']:
-        problems.append(('CANONICAL', f'canonical is {got!r}, expected {conf["canonical"]!r}'))
+    if got is not None and got != url:
+        problems.append(('CANONICAL', f'canonical is {got!r}, expected {url!r}'))
     got = one(r'<meta property="og:url" content="([^"]*)">', 'og:url')
-    if got is not None and got != conf['canonical']:
-        problems.append(('OG-URL', f'og:url is {got!r}, expected {conf["canonical"]!r}'))
+    if got is not None and got != url:
+        problems.append(('OG-URL', f'og:url is {got!r}, expected {url!r}'))
     _check_selector(doc, lang, problems)
-    alts = dict(re.findall(r'<link rel="alternate" hreflang="([^"]*)" href="([^"]*)">', doc))
-    want = {'en': LANG_CONF['en']['canonical'], 'fr': LANG_CONF['fr']['canonical'],
-            'x-default': LANG_CONF['en']['canonical']}
+    alts = re.findall(r'<link rel="alternate" hreflang="([^"]*)" href="([^"]*)">', doc)
+    want = [(L['code'], canonical(L['code'])) for L in LANGUAGES]
+    want.append(('x-default', canonical(SOURCE_LANG)))
     if alts != want:
         problems.append(('HREFLANG', f'hreflang set is {alts}, expected {want}'))
     skel = parse_skeleton(path)
@@ -655,28 +764,37 @@ def verify(lang, verbose=True):
 
 
 def compare(verbose=True):
-    """EN and FR must have the SAME tag skeleton, bar the intended differences."""
-    a = parse_skeleton(served_path('en'))
-    b = parse_skeleton(served_path('fr'))
+    """Every generated page must share the source page's tag skeleton.
+
+    Exactly three differences are legitimate, and no others:
+      1. the canonical <link>
+      2. and 3. two menu entries swapping <span> and <a> — this page's language
+         becomes the active <span>, English becomes a link.
+    An exact count, not a ceiling, so a new per-language divergence fails here
+    instead of slipping through under the limit.
+    """
     problems = []
-    if len(a.tags) != len(b.tags):
-        problems.append(('SHAPE', f'EN has {len(a.tags)} tags, FR has {len(b.tags)}'))
-    else:
+    a = parse_skeleton(served_path(SOURCE_LANG))
+    for code in GENERATED_LANGS:
+        path = served_path(code)
+        if not os.path.exists(path):
+            problems.append(('MISSING-PAGE', path)); continue
+        b = parse_skeleton(path)
+        if len(a.tags) != len(b.tags):
+            problems.append(('SHAPE', f'{code}: EN has {len(a.tags)} tags, {code} has {len(b.tags)}'))
+            continue
         diffs = [(i, x, y) for i, (x, y) in enumerate(zip(a.tags, b.tags)) if x != y]
-        # EXACTLY three differences are legitimate, and no others:
-        #   1. the canonical <link>
-        #   2. and 3. the two selector items swapping <span> and <a>
-        # Requiring an exact count, not a ceiling, means a new per-language
-        # divergence fails here instead of slipping through under the limit.
         allowed_tags = {'link', 'a', 'span'}
         if len(diffs) != 3:
-            problems.append(('SHAPE', f'{len(diffs)} structural differences, exactly 3 expected'))
+            problems.append(('SHAPE', f'{code}: {len(diffs)} structural differences, exactly 3 expected'))
         for i, x, y in diffs:
             if x[0] not in allowed_tags or y[0] not in allowed_tags:
-                problems.append(('SHAPE', f'#{i} unexpected difference {x} vs {y}'))
+                problems.append(('SHAPE', f'{code}: #{i} unexpected difference {x} vs {y}'))
+        if verbose:
+            print(f'  {code:8} {len(b.tags)} tags, {len(diffs)} intended difference(s)')
     if verbose:
-        print(f'  EN {len(a.tags)} tags | FR {len(b.tags)} tags | problems {len(problems)}')
-        for kind, s in problems: print(f'    {kind:14} {s[:88]}')
+        print(f'  EN {len(a.tags)} tags | problems {len(problems)}')
+        for kind, t in problems: print(f'    {kind:14} {t[:88]}')
     return problems
 
 
@@ -694,7 +812,7 @@ def static_overflow_check(verbose=True):
     correctly". Browser measurement stays a local editorial step (see README).
     """
     problems = []
-    for lang in ('en', 'fr'):
+    for lang in [L['code'] for L in LANGUAGES]:
         path = served_path(lang)
         if not os.path.exists(path):
             problems.append(('MISSING-PAGE', f'{path}')); continue
@@ -724,8 +842,8 @@ def static_overflow_check(verbose=True):
 
 # --------------------------------------------------------------------------
 
-USAGE = ('usage: i18n.py {extract | check <lang> | build <lang> | verify <lang>'
-         ' | compare | static-overflow-check}')
+USAGE = ('usage: i18n.py {extract | check <lang|all> | build <lang|all>'
+         ' | verify <lang|all> | compare | static-overflow-check | languages}')
 
 
 def main(argv):
@@ -739,16 +857,35 @@ def main(argv):
             print(f'  {len(keys)} strings -> i18n/homepage.pot')
             return 0
         if cmd == 'check':
-            if arg is None: raise LangError('check requires a language')
-            return 1 if check(arg) else 0
+            if arg is None: raise LangError('check requires a language, or "all"')
+            langs = GENERATED_LANGS if arg == 'all' else [arg]
+            bad = 0
+            for c in langs:
+                print(f'  --- {c} ---')
+                if check(c): bad = 1
+            return bad
         if cmd == 'build':
-            if arg is None: raise LangError('build requires a language')
-            return build(arg)
+            if arg is None: raise LangError('build requires a language, or "all"')
+            langs = GENERATED_LANGS if arg == 'all' else [arg]
+            rc = 0
+            for c in langs:
+                r = build(c)
+                if r: rc = r
+            return rc
         if cmd == 'verify':
-            if arg is None: raise LangError('verify requires a language')
-            return 1 if verify(arg) else 0
+            if arg is None: raise LangError('verify requires a language, or "all"')
+            langs = [L['code'] for L in LANGUAGES] if arg == 'all' else [arg]
+            bad = 0
+            for c in langs:
+                if verify(c): bad = 1
+            return bad
         if cmd == 'compare':
             return 1 if compare() else 0
+        if cmd == 'languages':
+            for L in LANGUAGES:
+                out = L['out'] or '(source)'
+                print(f'  {L["code"]:8} {L["name"]:14} {L["path"]:11} dir={L["dir"]:3} -> {out}')
+            return 0
         if cmd == 'static-overflow-check':
             return 1 if static_overflow_check() else 0
     except I18nError as e:
