@@ -242,8 +242,8 @@ msgstr "श्रृंखला को स्वयं, अपनी मशी�
 msgid "Public explorer"
 msgstr "सार्वजनिक एक्सप्लोरर"
 
-msgid "Watch the network produce and finalize blocks, live."
-msgstr "नेटवर्क को ब्लॉक बनाते और अंतिम रूप देते हुए लाइव देखें।"
+msgid "The public explorer is temporarily unavailable."
+msgstr "सार्वजनिक एक्सप्लोरर अस्थायी रूप से उपलब्ध नहीं है।"
 
 msgid "Source code"
 msgstr "स्रोत कोड"

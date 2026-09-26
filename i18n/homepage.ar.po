@@ -242,8 +242,8 @@ msgstr "تحقق من السلسلة بنفسك، من جهازك الخاص."
 msgid "Public explorer"
 msgstr "مستكشف عام"
 
-msgid "Watch the network produce and finalize blocks, live."
-msgstr "شاهد الشبكة تنتج الكتل وتحسمها، مباشرةً."
+msgid "The public explorer is temporarily unavailable."
+msgstr "المستكشف العام غير متاح مؤقتًا."
 
 msgid "Source code"
 msgstr "الشيفرة المصدرية"
