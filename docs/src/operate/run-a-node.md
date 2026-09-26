@@ -6,9 +6,9 @@ consensus, and it needs no permission from anyone to join. A market builder, a p
 plain user who runs a node verifies every settlement themselves — nobody has to be asked, and
 nobody can be asked to look away.
 
-> The **public testnet is live**. A published seed node and a fixed genesis are available, and a
-> fresh node can join with only the seed address — no RPC access and no operator address are
-> needed. There is no mainnet. This is experimental software with a disposable-genesis testnet.
+> The public testnet is **temporarily unavailable**: the seed node and the explorer are not responding.
+> You can still build a node and run it locally. There is no mainnet; this is experimental software, and the testnet
+> uses a disposable genesis.
 
 ## Join the public testnet
 

@@ -242,8 +242,8 @@ msgstr "在你自己的机器上亲自验证这条链。"
 msgid "Public explorer"
 msgstr "公共浏览器"
 
-msgid "Watch the network produce and finalize blocks, live."
-msgstr "实时观看网络产出区块并将其最终确定。"
+msgid "The public explorer is temporarily unavailable."
+msgstr "公共浏览器暂时不可用。"
 
 msgid "Source code"
 msgstr "源代码"
