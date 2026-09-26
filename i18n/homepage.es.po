@@ -242,8 +242,8 @@ msgstr "Verificar la cadena tú mismo, desde tu propia máquina."
 msgid "Public explorer"
 msgstr "Explorador público"
 
-msgid "Watch the network produce and finalize blocks, live."
-msgstr "Ver la red producir y finalizar bloques, en directo."
+msgid "The public explorer is temporarily unavailable."
+msgstr "El explorador público no está disponible temporalmente."
 
 msgid "Source code"
 msgstr "Código fuente"
