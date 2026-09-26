@@ -69,7 +69,7 @@ under A5. That creation path is not a reward or discretionary issuance
 
 The design choices behind these mechanisms (signature scheme, why there is no slashing) and
 what a threshold coalition can and cannot do are on the [security model](security-model.md);
-the work of opening the Operator set is on [Open-network hardening](open-network-hardening.md);
+the work of opening the Operator set is ongoing;
 the current status of the network is on [Status & claims](status-and-claims.md).
 
 **Primitives:** deterministic producer draw · ECVRF finality committee · `⌈2/3 · min(E, N)⌉` · `block_reward = 0`
