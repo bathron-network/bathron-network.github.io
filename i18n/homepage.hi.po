@@ -1,16 +1,9 @@
-# BATHRON homepage — हिन्दी catalogue.
-# Hand-maintained and versioned. Regenerate the template with:
-#   python3 i18n/i18n.py extract
-# Verify before building with:
-#   python3 i18n/i18n.py check hi
-# A missing, empty, fuzzy, duplicated or malformed entry blocks the
-# build for this language — see i18n/README.md.
+# BATHRON homepage — hi
 msgid ""
 msgstr ""
-"Project-Id-Version: bathron-homepage\n"
-"Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: hi\n"
 
 msgid "BATHRON: Programmable settlement anchored in Bitcoin"
 msgstr "BATHRON: Bitcoin पर टिका प्रोग्राम योग्य निपटान"
@@ -50,8 +43,11 @@ msgstr "देखें क्या बनाया जा सकता है"
 msgid "Run a node"
 msgstr "नोड चलाएँ"
 
-msgid "View network status"
-msgstr "नेटवर्क की स्थिति देखें"
+msgid "BATHRON provides settlement. Providers connect external assets. Independent builders create the applications."
+msgstr "BATHRON निपटान प्रदान करता है। सेवा प्रदाता बाहरी परिसंपत्तियों को जोड़ते हैं। स्वतंत्र डेवलपर अनुप्रयोग बनाते हैं।"
+
+msgid "Documentation in English."
+msgstr "दस्तावेज़ अंग्रेज़ी में हैं।"
 
 msgid "Facts, not opinions"
 msgstr "तथ्य, राय नहीं"
@@ -59,50 +55,50 @@ msgstr "तथ्य, राय नहीं"
 msgid "Bitcoin already proves things. Now a contract can use them."
 msgstr "Bitcoin पहले से सत्यापन योग्य तथ्य स्थापित करता है। अब अनुबंध उन पर आधारित हो सकते हैं।"
 
-msgid "Bitcoin records facts that contracts can verify. BATHRON carries the relevant Bitcoin headers in consensus, so every node evaluates the same evidence."
-msgstr "Bitcoin ऐसे तथ्य दर्ज करता है जिन्हें कोई अनुबंध सत्यापित कर सकता है। BATHRON संबंधित Bitcoin हेडर अपनी सहमति में शामिल करता है, इसलिए हर नोड एक ही प्रमाण का मूल्यांकन करता है।"
+msgid "Operators relay Bitcoin headers without a designated relay. Every node checks the proof of work and transaction evidence: contracts use verified Bitcoin facts without an oracle reporting them."
+msgstr "Operators किसी नामित रिले के बिना Bitcoin हेडर पहुँचाते हैं। हर नोड कार्य का प्रमाण और लेनदेन के साक्ष्य जाँचता है: अनुबंध सत्यापित Bitcoin तथ्यों का उपयोग करते हैं, उन्हें बताने के लिए किसी ओरेकल की ज़रूरत नहीं होती।"
 
 msgid "Mining difficulty"
 msgstr "माइनिंग कठिनाई"
 
-msgid "The mining difficulty recorded at a given Bitcoin height."
-msgstr "किसी दी गई Bitcoin ऊँचाई पर दर्ज माइनिंग कठिनाई।"
+msgid "A threshold at an agreed Bitcoin height."
+msgstr "सहमत Bitcoin ऊँचाई पर एक सीमा।"
 
 msgid "Block height"
 msgstr "ब्लॉक ऊँचाई"
 
-msgid "How far the chain has advanced."
-msgstr "श्रृंखला कितनी आगे बढ़ चुकी है।"
+msgid "An agreed height reached by the verified chain."
+msgstr "सत्यापित श्रृंखला का सहमत ऊँचाई तक पहुँचना।"
 
 msgid "Median time"
 msgstr "माध्यिका समय"
 
-msgid "Bitcoin's own clock, resistant to a single miner's timestamp."
-msgstr "Bitcoin की अपनी घड़ी, जिसे किसी एक माइनर की टाइमस्टैम्प बिगाड़ नहीं सकती।"
+msgid "A threshold on Bitcoin median time."
+msgstr "Bitcoin के माध्यिका समय पर एक सीमा।"
 
 msgid "Confirmed payments"
 msgstr "पुष्ट भुगतान"
 
-msgid "A payment to a given script, included and buried in Bitcoin’s chain."
-msgstr "किसी दी गई स्क्रिप्ट को किया गया भुगतान, जो Bitcoin श्रृंखला में शामिल और गहराई में दबा हो।"
+msgid "A specified destination, minimum amount and confirmation depth."
+msgstr "एक निर्धारित गंतव्य, न्यूनतम राशि और पुष्टिकरण की गहराई।"
 
-msgid "How Bitcoin facts are verified →"
-msgstr "Bitcoin के तथ्य कैसे सत्यापित होते हैं →"
+msgid "Explore Bitcoin facts →"
+msgstr "Bitcoin तथ्य जानें →"
 
-msgid "Programmable settlement"
-msgstr "प्रोग्राम योग्य निपटान"
+msgid "Compose the conditions"
+msgstr "शर्तों को जोड़ें"
 
 msgid "Write the conditions. The network enforces them."
 msgstr "शर्तें लिखिए। नेटवर्क उन्हें लागू करता है।"
 
-msgid "Settlement on BATHRON is described in script and carried out by consensus. The same primitives compose, so a single agreement can depend on a Bitcoin fact, a secret and a deadline at once."
-msgstr "BATHRON पर निपटान की शर्तें स्क्रिप्ट में तय होती हैं और सहमति द्वारा निष्पादित होती हैं। ये प्रिमिटिव आपस में जुड़ सकते हैं: एक ही समझौता एक साथ किसी Bitcoin तथ्य, किसी रहस्य और किसी समय-सीमा पर निर्भर हो सकता है।"
+msgid "Release a payment to a fixed recipient after a Bitcoin payment is proven; provide a separate recovery path after a deadline. The builder defines the branches and who submits each transaction."
+msgstr "Bitcoin भुगतान का प्रमाण मिलने पर तय प्राप्तकर्ता को भुगतान जारी करें; समय-सीमा के बाद धन वापस लेने का अलग रास्ता रखें। डेवलपर शाखाएँ और हर लेनदेन जमा करने वाले को तय करता है।"
 
 msgid "Covenants"
 msgstr "Covenants"
 
-msgid "Constrain what a spend is allowed to become."
-msgstr "यह सीमित करना कि कोई व्यय क्या बन सकता है।"
+msgid "Constrain destinations and successor outputs, including policies carried forward by recursive covenants."
+msgstr "गंतव्यों और अगले आउटपुट पर शर्तें लगाएँ, जिनमें पुनरावर्ती covenants द्वारा आगे जारी नियम भी शामिल हैं।"
 
 msgid "Hashlocks"
 msgstr "Hashlocks"
@@ -116,26 +112,44 @@ msgstr "Timelocks"
 msgid "Make an outcome depend on time, absolute or relative."
 msgstr "किसी परिणाम को समय पर निर्भर बनाना, निरपेक्ष या सापेक्ष।"
 
-msgid "Signatures and attestations"
-msgstr "हस्ताक्षर और प्रमाणन"
+msgid "Signatures, attestations and DLCs"
+msgstr "हस्ताक्षर, सत्यापन कथन और DLC"
 
-msgid "Verify a signature over any message, including one from an outside source."
-msgstr "किसी भी संदेश पर हस्ताक्षर सत्यापित करना, बाहरी स्रोत से आए संदेश पर भी।"
+msgid "Authorize a spend or authenticate an external statement. DLCs combine attested outcomes with payment and recovery branches."
+msgstr "खर्च की अनुमति दें या बाहरी कथन का स्रोत प्रमाणित करें। DLC सत्यापित कथनों वाले परिणामों को भुगतान और धन-वापसी की शाखाओं से जोड़ते हैं।"
 
-msgid "Confidential transfers"
-msgstr "गोपनीय हस्तांतरण"
+msgid "Explore the primitives →"
+msgstr "मूल साधनों को जानें →"
 
-msgid "Move value without publishing the amount."
-msgstr "राशि प्रकाशित किए बिना मूल्य स्थानांतरित करना।"
+msgid "One settlement pivot"
+msgstr "निपटान की एक साझा इकाई"
 
-msgid "Covenants, attestations and confidentiality →"
-msgstr "Covenants, प्रमाणन और गोपनीयता →"
+msgid "Users keep their assets. Providers use M1."
+msgstr "उपयोगकर्ता अपनी परिसंपत्तियाँ रखते हैं। सेवा प्रदाता M1 का उपयोग करते हैं।"
 
-msgid "One protocol, many applications"
-msgstr "एक प्रोटोकॉल, अनेक ऐप्लिकेशन"
+msgid "Pairing each of N assets with M1 needs N connections instead of a full mesh of direct pairs. One M1 inventory connects a provider to all quoted pairs and LPs, subject to their available liquidity and terms."
+msgstr "N परिसंपत्तियों को M1 से जोड़ने के लिए सीधे जोड़ों के पूरे जाल के बजाय N कनेक्शन चाहिए। एक M1 भंडार प्रदाता को सभी भाव देने वाले जोड़ों और LP से जोड़ता है, उनकी उपलब्ध तरलता और शर्तों के अधीन।"
 
-msgid "What becomes possible."
-msgstr "क्या संभव हो जाता है।"
+msgid "Why burn BTC?"
+msgstr "BTC क्यों बर्न करें?"
+
+msgid "Verified BTC destruction creates M0, with no premine. Locking M0 one for one creates M1: working capital for settlement. Providers can also buy existing M0 or M1 from holders."
+msgstr "BTC का सत्यापित विनाश M0 बनाता है, बिना प्रीमाइन के। M0 को एक के बदले एक लॉक करने से M1 बनता है: निपटान के लिए कार्यशील पूँजी। प्रदाता धारकों से मौजूदा M0 या M1 भी खरीद सकते हैं।"
+
+msgid "Unlocking M1 returns M0, not BTC. The burn is irreversible, creates no redeemable BTC reserve and guarantees no market peg or price floor."
+msgstr "M1 अनलॉक करने से M0 मिलता है, BTC नहीं। बर्न अपरिवर्तनीय है, BTC में भुनाया जा सकने वाला भंडार नहीं बनाता और बाज़ार में तय विनिमय दर या न्यूनतम कीमत की गारंटी नहीं देता।"
+
+msgid "Understand M1 →"
+msgstr "M1 को समझें →"
+
+msgid "Independent applications"
+msgstr "स्वतंत्र अनुप्रयोग"
+
+msgid "Build an agreement from shared primitives."
+msgstr "साझा मूल साधनों से समझौता बनाएँ।"
+
+msgid "Applications using existing primitives need no consensus change. A new primitive requires specification and review."
+msgstr "मौजूदा मूल साधनों का उपयोग करने वाले अनुप्रयोगों के लिए सर्वसम्मति में बदलाव ज़रूरी नहीं। नए मूल साधन के लिए विनिर्देश और समीक्षा आवश्यक हैं।"
 
 msgid "Mining difficulty instruments"
 msgstr "माइनिंग कठिनाई पर आधारित साधन"
@@ -149,119 +163,125 @@ msgstr "भुगतान से चलने वाले एस्क्र�
 msgid "Value that releases when a Bitcoin payment is confirmed and settled deeply enough."
 msgstr "ऐसा मूल्य जो तब जारी होता है जब कोई Bitcoin भुगतान पुष्ट हो जाए और श्रृंखला में पर्याप्त गहराई तक दब चुका हो।"
 
-msgid "Programmable financial agreements"
-msgstr "प्रोग्राम योग्य वित्तीय समझौते"
+msgid "Provider inventory controls"
+msgstr "प्रदाताओं के भंडार पर नियंत्रण"
 
-msgid "Terms, deadlines and outcomes written once and enforced by the network."
-msgstr "शर्तें, समय-सीमाएँ और परिणाम एक बार लिखे जाते हैं और नेटवर्क उन्हें लागू करता है।"
+msgid "Delayed withdrawals, approved destinations and recovery paths, composed with recursive covenants."
+msgstr "पुनरावर्ती covenants के साथ निकासी में देरी, अनुमत गंतव्य और धन-वापसी के रास्ते जोड़ें।"
 
-msgid "Open markets and cross-chain flows"
-msgstr "खुले बाज़ार और क्रॉस-चेन प्रवाह"
+msgid "USDBTC: a third-party idea"
+msgstr "USDBTC: तीसरे पक्ष का एक विचार"
 
-msgid "Pairs quoted by whoever holds inventory, settled against linked conditions."
-msgstr "उपलब्ध तरलता के आधार पर उद्धृत जोड़े, आपस में जुड़ी शर्तों के अनुसार निपटाए जाते हैं।"
+msgid "A possible exchange of risk between a stable-value-and-yield objective and leveraged BTC exposure, using an external price oracle and providers. An application idea, not a BATHRON product or a promise of stability or yield."
+msgstr "बाहरी मूल्य ओरेकल और प्रदाताओं के ज़रिए स्थिर मूल्य व प्रतिफल के उद्देश्य और लीवरेज वाले BTC जोखिम के बीच जोखिम के विनिमय की एक संभावना। यह अनुप्रयोग का विचार है, BATHRON उत्पाद या स्थिरता अथवा प्रतिफल का वादा नहीं।"
 
-msgid "The full application map →"
-msgstr "पूरा ऐप्लिकेशन मानचित्र →"
+msgid "Explore applications →"
+msgstr "अनुप्रयोग जानें →"
 
-msgid "A network of distinct roles"
-msgstr "अलग-अलग भूमिकाओं वाला नेटवर्क"
+msgid "Private inventory transfers"
+msgstr "भंडार के निजी हस्तांतरण"
 
-msgid "Three roles, kept apart on purpose."
-msgstr "तीन भूमिकाएँ, जानबूझकर अलग रखी गईं।"
+msgid "Shielded M0 transfers protect amounts before or after settlement. M1 receipts, conditional exchanges and burn or lock/unlock operations remain public."
+msgstr "M0 के शील्डेड हस्तांतरण निपटान से पहले या बाद में राशियाँ गोपनीय रखते हैं। M1 रसीदें, सशर्त विनिमय और बर्न या लॉक/अनलॉक क्रियाएँ सार्वजनिक रहती हैं।"
 
-msgid "Consensus Operators"
-msgstr "सहमति संचालक"
-
-msgid "Secure the network, order transactions and finalize them. One operator, one vote."
-msgstr "नेटवर्क को सुरक्षित करते हैं, लेन-देन क्रमबद्ध करते हैं और उन्हें अंतिम रूप देते हैं। एक संचालक, एक वोट।"
-
-msgid "Settlement Providers"
-msgstr "निपटान प्रदाता"
-
-msgid "Create the services and settlement flows that people actually use. They compete, and they come and go."
-msgstr "वे सेवाएँ और निपटान प्रवाह बनाते हैं जिनका लोग वास्तव में उपयोग करते हैं। वे आपस में प्रतिस्पर्धा करते हैं, आते और जाते रहते हैं।"
-
-msgid "Builders"
-msgstr "डेवलपर"
-
-msgid "Compose applications and instruments on top, choosing their own interfaces and their own terms."
-msgstr "वे इस परत पर ऐप्लिकेशन और वित्तीय साधन बनाते हैं, अपने इंटरफ़ेस और अपनी शर्तें चुनते हुए।"
-
-msgid "No consensus operator chooses which application may be built."
-msgstr "कोई भी सहमति संचालक यह तय नहीं करता कि कौन-सा ऐप्लिकेशन बनाया जा सकता है।"
-
-msgid "Bitcoin remains the anchor"
-msgstr "आधार Bitcoin ही रहता है"
-
-msgid "The anchor is Bitcoin, and it stays where it is."
-msgstr "प्रोग्राम योग्य निपटान Bitcoin पर टिका है।"
-
-msgid "M0 originates from Bitcoin destruction verified by consensus. Protocol conversion moves value from M0 into M1, the unit used for settlement."
-msgstr "M0 सहमति द्वारा सत्यापित Bitcoin के विनाश से उत्पन्न होता है। प्रोटोकॉल रूपांतरण मूल्य को M0 से M1 में ले जाता है, जो निपटान की इकाई है।"
-
-msgid "Bitcoin remains the monetary anchor. BATHRON verifies its history directly and provides the programmable settlement layer built around it."
-msgstr "BATHRON सीधे Bitcoin के इतिहास को सत्यापित करता है और उसके इर्द-गिर्द बनी प्रोग्राम योग्य निपटान परत उपलब्ध कराता है।"
-
-msgid "Why Bitcoin is the final asset →"
-msgstr "Bitcoin अंतिम परिसंपत्ति क्यों है →"
-
-msgid "Markets, as one application"
-msgstr "बाज़ार, अनेक ऐप्लिकेशनों में से एक"
+msgid "Open markets"
+msgstr "खुले बाज़ार"
 
 msgid "A pair exists because someone quotes it."
 msgstr "जोड़ा तभी अस्तित्व में आता है जब कोई उसका दाम बताता है।"
 
-msgid "A provider with inventory can publish offers for a pair. Other providers can quote the same pair independently. Markets emerge from available inventory and executable settlement conditions, not from a listing decision."
-msgstr "परिसंपत्ति रखने वाला कोई प्रदाता किसी जोड़े के लिए प्रस्ताव प्रकाशित कर सकता है। दूसरे प्रदाता उसी जोड़े पर स्वतंत्र रूप से अपने दाम दे सकते हैं। बाज़ार उपलब्ध तरलता और निष्पादन योग्य निपटान शर्तों से बनते हैं, किसी सूचीबद्ध करने के निर्णय से नहीं।"
+msgid "Providers publish offers from their inventory. A second provider can quote the same pair without an invitation or listing permission. Announcements, relays and indexers help discovery outside consensus; published service facts inform reputation, without a protocol ranking."
+msgstr "प्रदाता अपने भंडार से प्रस्ताव प्रकाशित करते हैं। दूसरा प्रदाता बिना आमंत्रण या सूचीबद्ध करने की अनुमति के उसी जोड़े का भाव दे सकता है। घोषणाएँ, रिले और इंडेक्सर सर्वसम्मति के बाहर प्रस्ताव खोजने में मदद करते हैं; प्रकाशित सेवा तथ्य प्रतिष्ठा आँकने का आधार हैं, प्रोटोकॉल कोई रैंकिंग नहीं देता।"
 
-msgid "See how a market is built →"
-msgstr "बाज़ार कैसे बनता है →"
+msgid "Example: stablecoin → BTC"
+msgstr "उदाहरण: स्टेबलकॉइन → BTC"
 
-msgid "Start here"
-msgstr "यहाँ से शुरू करें"
+msgid "Alice sends stablecoin X and receives BTC. The LP quotes X/M1 and supplies M1 to the SP, which quotes BTC/M1 and supplies BTC. Alice keeps her keys and never needs to hold M1."
+msgstr "ऐलिस स्टेबलकॉइन X भेजती है और BTC प्राप्त करती है। LP, X/M1 का भाव देता है और SP को M1 देता है; SP, BTC/M1 का भाव देता है और BTC उपलब्ध कराता है। ऐलिस अपनी कुंजियाँ रखती है और उसे कभी M1 रखने की ज़रूरत नहीं पड़ती।"
 
-msgid "Build on the settlement layer."
-msgstr "निपटान परत पर निर्माण करें।"
+msgid "This route requires compatible hashlocks and timed refunds on X's chain, funded quotes, ordered deadlines and active monitoring. Each external leg follows its own chain's rules; recovery requires a transaction."
+msgstr "इस मार्ग के लिए X की श्रृंखला पर संगत हैशलॉक और समयबद्ध धन-वापसी, धन उपलब्ध वाले प्रस्ताव, क्रमबद्ध समय-सीमाएँ और सक्रिय निगरानी चाहिए। हर बाहरी चरण अपनी श्रृंखला के नियम मानता है; धन वापस लेने के लिए लेनदेन करना पड़ता है।"
 
-msgid "Read the documentation"
-msgstr "दस्तावेज़ पढ़ें"
+msgid "Follow the cross-chain example →"
+msgstr "क्रॉस-चेन उदाहरण देखें →"
 
-msgid "The protocol, the primitives and the reference."
-msgstr "प्रोटोकॉल, प्रिमिटिव और संदर्भ। अंग्रेज़ी में।"
+msgid "Understand markets →"
+msgstr "बाज़ारों को समझें →"
 
-msgid "Explore applications"
-msgstr "ऐप्लिकेशन देखें"
+msgid "Distinct roles, shared rules"
+msgstr "अलग भूमिकाएँ, साझा नियम"
 
-msgid "What the layer makes buildable, and what each one needs."
-msgstr "यह परत क्या संभव बनाती है, और हर ऐप्लिकेशन की क्या आवश्यकताएँ हैं।"
+msgid "Know whom you rely on, and for what."
+msgstr "जानें कि आप किस पर और किस काम के लिए निर्भर हैं।"
+
+msgid "Operators"
+msgstr "Operators"
+
+msgid "A registered identity requires a burned ticket and maturity. This visible, irreversible entry cost is separate from settlement inventory. Operators can produce blocks and participate in finality."
+msgstr "पंजीकृत पहचान के लिए बर्न किया गया टिकट और परिपक्वता अवधि आवश्यक हैं। प्रवेश की यह प्रत्यक्ष, अपरिवर्तनीय लागत निपटान भंडार से अलग है। Operators ब्लॉक बना सकते हैं और अंतिमता में भाग ले सकते हैं।"
+
+msgid "Settlement Providers · BTC/M1"
+msgstr "निपटान प्रदाता · BTC/M1"
+
+msgid "The SP quotes and orchestrates BTC/M1, including the Bitcoin leg. An Operator identity is required; block production is optional."
+msgstr "SP, Bitcoin चरण सहित BTC/M1 के भाव और समन्वय संभालता है। Operator पहचान आवश्यक है; ब्लॉक उत्पादन वैकल्पिक है।"
+
+msgid "Liquidity Providers · X/M1"
+msgstr "तरलता प्रदाता · X/M1"
+
+msgid "The LP quotes X/M1, supplies liquidity and manages the external asset leg. An Operator identity is optional."
+msgstr "LP, X/M1 का भाव देता है, तरलता उपलब्ध कराता है और बाहरी परिसंपत्ति का चरण संभालता है। Operator पहचान वैकल्पिक है।"
+
+msgid "Builders define applications, users choose terms, and observers verify independently. An Operator can also provide a service; the identity-to-service link is public and the same transaction rules apply."
+msgstr "डेवलपर अनुप्रयोग तय करते हैं, उपयोगकर्ता शर्तें चुनते हैं और पर्यवेक्षक स्वतंत्र रूप से सत्यापन करते हैं। Operator सेवा भी दे सकता है; पहचान और सेवा का संबंध सार्वजनिक होता है और वही लेनदेन नियम लागू होते हैं।"
+
+msgid "Objectively proven double signing permanently bans the Operator identity, with no slashing. The burned ticket remains spent."
+msgstr "वस्तुनिष्ठ प्रमाण से सिद्ध दोहरे हस्ताक्षर पर Operator पहचान स्थायी रूप से प्रतिबंधित होती है, बिना स्लैशिंग के। बर्न किया गया टिकट खर्च ही रहता है।"
+
+msgid "Find your role →"
+msgstr "अपनी भूमिका जानें →"
+
+msgid "BATHRON consensus and M1 remain shared dependencies across applications. Providers are responsible for inventory and execution; external attestations depend on their named source."
+msgstr "BATHRON की सर्वसम्मति और M1 सभी अनुप्रयोगों की साझा निर्भरताएँ हैं। प्रदाता भंडार और क्रियान्वयन के ज़िम्मेदार हैं; बाहरी सत्यापन कथन अपने नामित स्रोत पर निर्भर हैं।"
+
+msgid "Where trust lives →"
+msgstr "भरोसा कहाँ आवश्यक है →"
+
+msgid "Build and verify"
+msgstr "बनाएँ और सत्यापित करें"
+
+msgid "From an agreement to verifiable transactions."
+msgstr "समझौते से सत्यापन योग्य लेनदेन तक।"
+
+msgid "Build an application"
+msgstr "अनुप्रयोग बनाएँ"
+
+msgid "Define funding, payment and recovery before writing the transactions."
+msgstr "लेनदेन लिखने से पहले धन देना, भुगतान और धन-वापसी तय करें।"
+
+msgid "Operate a provider"
+msgstr "प्रदाता सेवा चलाएँ"
+
+msgid "Manage inventory, quotes, keys, deadlines and monitoring."
+msgstr "भंडार, भाव, कुंजियाँ, समय-सीमाएँ और निगरानी संभालें।"
 
 msgid "Verify the chain yourself, from your own machine."
 msgstr "श्रृंखला को स्वयं, अपनी मशीन से सत्यापित करें।"
 
-msgid "Public explorer"
-msgstr "सार्वजनिक एक्सप्लोरर"
+msgid "Protocol reference"
+msgstr "प्रोटोकॉल संदर्भ"
 
-msgid "The public explorer is temporarily unavailable."
-msgstr "सार्वजनिक एक्सप्लोरर अस्थायी रूप से उपलब्ध नहीं है।"
-
-msgid "Source code"
-msgstr "स्रोत कोड"
-
-msgid "The node implementation, on GitHub."
-msgstr "नोड का कार्यान्वयन, GitHub पर।"
-
-msgid "Network status"
-msgstr "नेटवर्क की स्थिति"
-
-msgid "What runs today, and what the protocol does not claim."
-msgstr "आज क्या चल रहा है, और प्रोटोकॉल क्या करने का दावा नहीं करता।"
+msgid "Inspect the RPC, transactions and validation rules."
+msgstr "RPC, लेनदेन और सत्यापन नियम देखें।"
 
 msgid "contact@bathron.org"
 msgstr "contact@bathron.org"
 
-msgid "Releases"
-msgstr "रिलीज़"
+msgid "Source code"
+msgstr "स्रोत कोड"
+
+msgid "Documentation"
+msgstr "दस्तावेज़"
 
 msgid "Security policy"
 msgstr "सुरक्षा नीति"
