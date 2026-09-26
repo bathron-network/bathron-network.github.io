@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="440" viewBox="0 0 720 440" role="img" aria-labelledby="title desc">
+<title id="title">Direct pairs versus the M1 pivot</title>
+<desc id="desc">Five assets need ten direct pairs, or five pairs through M1. For N assets the counts are N times N minus one divided by two, versus N.</desc>
+<defs>
+<marker id="tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0 0 L8 4 L0 8" fill="#D9A441"/>
+</marker>
+</defs>
+<style>text{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#E8EBF0}.strong{font-weight:600}.small{font-size:15px;fill:#AAB1BC}.gold{fill:#D9A441}.eyebrow{font-size:13px;letter-spacing:1.6px;fill:#D9A441}.box{fill:#12161D;stroke:#3A414D}.accent{fill:#12161D;stroke:#D9A441}.arrow{fill:none;stroke:#D9A441;stroke-width:1.8;marker-end:url(#tip)}.edge{fill:none;stroke:#68717F;stroke-width:1.3}.icon{fill:none;stroke:#D9A441;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}</style>
+<rect width="720" height="440" rx="12" fill="#0C0F14"/>
+<text x="28" y="34" class="eyebrow" text-anchor="start">M1 AS A COMMON PIVOT</text>
+<text x="190" y="75" class="strong" text-anchor="middle">Direct pairs</text>
+<text x="530" y="75" class="strong" text-anchor="middle">Through M1</text>
+<path d="M190 110 L285 177" class="edge"/>
+<path d="M190 110 L249 284" class="edge"/>
+<path d="M190 110 L131 284" class="edge"/>
+<path d="M190 110 L95 177" class="edge"/>
+<path d="M285 177 L249 284" class="edge"/>
+<path d="M285 177 L131 284" class="edge"/>
+<path d="M285 177 L95 177" class="edge"/>
+<path d="M249 284 L131 284" class="edge"/>
+<path d="M249 284 L95 177" class="edge"/>
+<path d="M131 284 L95 177" class="edge"/>
+<circle cx="190" cy="110" r="22" fill="#12161D" stroke="#68717F"/>
+<text x="190" y="116" text-anchor="middle">A</text>
+<circle cx="285" cy="177" r="22" fill="#12161D" stroke="#68717F"/>
+<text x="285" y="183" text-anchor="middle">B</text>
+<circle cx="249" cy="284" r="22" fill="#12161D" stroke="#68717F"/>
+<text x="249" y="290" text-anchor="middle">C</text>
+<circle cx="131" cy="284" r="22" fill="#12161D" stroke="#68717F"/>
+<text x="131" y="290" text-anchor="middle">D</text>
+<circle cx="95" cy="177" r="22" fill="#12161D" stroke="#68717F"/>
+<text x="95" y="183" text-anchor="middle">E</text>
+<path d="M530 110 L530 205" class="edge"/>
+<path d="M625 177 L530 205" class="edge"/>
+<path d="M589 284 L530 205" class="edge"/>
+<path d="M471 284 L530 205" class="edge"/>
+<path d="M435 177 L530 205" class="edge"/>
+<circle cx="530" cy="110" r="22" fill="#12161D" stroke="#68717F"/>
+<text x="530" y="116" text-anchor="middle">A</text>
+<circle cx="625" cy="177" r="22" fill="#12161D" stroke="#68717F"/>
+<text x="625" y="183" text-anchor="middle">B</text>
+<circle cx="589" cy="284" r="22" fill="#12161D" stroke="#68717F"/>
+<text x="589" y="290" text-anchor="middle">C</text>
+<circle cx="471" cy="284" r="22" fill="#12161D" stroke="#68717F"/>
+<text x="471" y="290" text-anchor="middle">D</text>
+<circle cx="435" cy="177" r="22" fill="#12161D" stroke="#68717F"/>
+<text x="435" y="183" text-anchor="middle">E</text>
+<circle cx="530" cy="205" r="31" fill="#12161D" stroke="#D9A441"/>
+<text x="530" y="211" class="gold" text-anchor="middle">M1</text>
+<text x="190" y="344" class="strong" text-anchor="middle">N(N − 1) / 2 pairs</text>
+<text x="530" y="344" class="strong" text-anchor="middle">N pairs</text>
+<text x="190" y="373" class="small" text-anchor="middle">Quadratic growth: O(N²)</text>
+<text x="530" y="373" class="small" text-anchor="middle">One shared settlement unit</text>
+<text x="28" y="417" class="small" text-anchor="start">A–E stand for any assets. Each line needs a provider and inventory.</text>
+</svg>

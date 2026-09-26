@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="458" viewBox="0 0 720 458" role="img" aria-labelledby="title desc">
+<title id="title">Conditions compose into an agreement</title>
+<desc id="desc">Lock controls authorization, seal constrains outputs, eye checks evidence, and clock sets timing. A funded agreement has separate payment and recovery branches.</desc>
+<defs>
+<marker id="tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0 0 L8 4 L0 8" fill="#D9A441"/>
+</marker>
+</defs>
+<style>text{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#E8EBF0}.strong{font-weight:600}.small{font-size:15px;fill:#AAB1BC}.gold{fill:#D9A441}.eyebrow{font-size:13px;letter-spacing:1.6px;fill:#D9A441}.box{fill:#12161D;stroke:#3A414D}.accent{fill:#12161D;stroke:#D9A441}.arrow{fill:none;stroke:#D9A441;stroke-width:1.8;marker-end:url(#tip)}.edge{fill:none;stroke:#68717F;stroke-width:1.3}.icon{fill:none;stroke:#D9A441;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}</style>
+<rect width="720" height="458" rx="12" fill="#0C0F14"/>
+<text x="28" y="34" class="eyebrow" text-anchor="start">CONDITIONS GRAMMAR</text>
+<rect x="28" y="56" width="154" height="121" rx="10" class="box"/>
+<g class="icon" transform="translate(105 85)">
+<rect x="-11" y="-1" width="22" height="18" rx="3"/>
+<path d="M-7 -1 V-8 A7 7 0 0 1 7 -8 V-1"/>
+</g>
+<text x="105" y="129" class="strong" text-anchor="middle">Lock</text>
+<text x="105" y="153" class="small" text-anchor="middle">Authorization</text>
+<rect x="198" y="56" width="154" height="121" rx="10" class="box"/>
+<g class="icon" transform="translate(275 85)">
+<path d="M0 -16 L13 -10 V3 Q13 12 0 18 Q-13 12 -13 3 V-10 Z M-6 0 L-1 5 L7 -5"/>
+</g>
+<text x="275" y="129" class="strong" text-anchor="middle">Seal</text>
+<text x="275" y="153" class="small" text-anchor="middle">Destination</text>
+<rect x="368" y="56" width="154" height="121" rx="10" class="box"/>
+<g class="icon" transform="translate(445 85)">
+<path d="M-18 0 Q0 -22 18 0 Q0 22 -18 0 Z"/>
+<circle r="6"/>
+</g>
+<text x="445" y="129" class="strong" text-anchor="middle">Eye</text>
+<text x="445" y="153" class="small" text-anchor="middle">Evidence</text>
+<rect x="538" y="56" width="154" height="121" rx="10" class="box"/>
+<g class="icon" transform="translate(615 85)">
+<circle r="16"/>
+<path d="M0 -10 V0 L7 5"/>
+</g>
+<text x="615" y="129" class="strong" text-anchor="middle">Clock</text>
+<text x="615" y="153" class="small" text-anchor="middle">Deadline</text>
+<text x="28" y="217" class="eyebrow" text-anchor="start">ONE FUNDED AGREEMENT</text>
+<path d="M46 235 L46 349" class="arrow"/>
+<path d="M46 255 L90 255" class="arrow"/>
+<path d="M46 348 L90 348" class="arrow"/>
+<rect x="96" y="226" width="596" height="78" rx="10" class="box"/>
+<text x="112" y="256" class="strong" text-anchor="start">Payment: lock + eye + seal</text>
+<text x="112" y="282" class="small" text-anchor="start">Required authorization + proven fact → fixed recipient</text>
+<rect x="96" y="319" width="596" height="78" rx="10" class="box"/>
+<text x="112" y="349" class="strong" text-anchor="start">Recovery: clock + lock + seal</text>
+<text x="112" y="375" class="small" text-anchor="start">Deadline + required authorization → recovery destination</text>
+<text x="28" y="434" class="small" text-anchor="start">Each branch needs its own complete spending conditions.</text>
+</svg>
