@@ -50,7 +50,6 @@
 - [Why the consensus is frozen](consensus/why-frozen.md)
 - [Production and finality](consensus/production-and-finality.md)
 - [Security model](consensus/security-model.md)
-- [Open-network hardening](consensus/open-network-hardening.md)
 - [Status & claims](consensus/status-and-claims.md)
 
 # VIII. Build & operate
@@ -78,5 +77,3 @@
 ---
 
 [FAQ](faq.md)
-[Long read: the essay (archived, 2026-07)](essay.md)
-[Lecture longue : l'essai (archivé, 2026-07)](essai-fr.md)

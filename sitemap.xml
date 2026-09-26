@@ -32,7 +32,6 @@
   <url><loc>https://bathron.org/docs/consensus/why-frozen.html</loc></url>
   <url><loc>https://bathron.org/docs/consensus/production-and-finality.html</loc></url>
   <url><loc>https://bathron.org/docs/consensus/security-model.html</loc></url>
-  <url><loc>https://bathron.org/docs/consensus/open-network-hardening.html</loc></url>
   <url><loc>https://bathron.org/docs/consensus/status-and-claims.html</loc></url>
   <url><loc>https://bathron.org/docs/operate/run-a-node.html</loc></url>
   <url><loc>https://bathron.org/docs/operate/run-a-wallet.html</loc></url>
@@ -50,8 +49,6 @@
   <url><loc>https://bathron.org/docs/reference/glossary.html</loc></url>
   <url><loc>https://bathron.org/docs/reference/documentation-policy.html</loc></url>
   <url><loc>https://bathron.org/docs/faq.html</loc></url>
-  <url><loc>https://bathron.org/docs/essay.html</loc></url>
-  <url><loc>https://bathron.org/docs/essai-fr.html</loc></url>
   <url><loc>https://bathron.org/docs/protocol/what-bathron-is.html</loc></url>
   <url><loc>https://bathron.org/docs/protocol/bitcoin-verifiable-contracts.html</loc></url>
   <url><loc>https://bathron.org/docs/protocol/programmable-settlement.html</loc></url>

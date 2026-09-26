@@ -17,7 +17,6 @@ their limits. This page separates three kinds of statement:
 3. **A malicious finality threshold cannot create M0 without a verified Bitcoin destruction.**
    It can, however, censor operations, stall finality or create divergent finalized views.
    *(fact)*
-4. **Open-set Sybil resistance is not demonstrated.** *(fact + hypothesis)*
 
 ## What consensus enforces
 
@@ -89,14 +88,13 @@ collateral lock      → operator registration
 - The external acquisition cost therefore depends on future M0 liquidity. It is not a fixed
   protocol price.
 
-The current floor is a launch parameter expressed as 0.01 BTC-equivalent. It is not a
-demonstrated Sybil price.
+The current floor is a launch parameter expressed as 0.01 BTC-equivalent.
 
 The finality threshold counts **distinct eligible identities**, not an aggregate amount of
 collateral. An attacker needs enough M0 to register enough separate identities: about a third
 of the eligible set to stall finality or — combined with a network split — to sign conflicting
 certificates (with `q = ⌈2/3·min(E,N)⌉` and everyone signing while `N ≤ E`, two certificates
-always share at least `2q − N` signers), and the full quorum to control ordering outright. See [Open-network hardening](open-network-hardening.md).
+always share at least `2q − N` signers), and the full quorum to control ordering outright.
 
 ## Design choices
 
@@ -106,8 +104,7 @@ always share at least `2q − N` signers), and the full quorum to control orderi
 - **No slashing.** Deterrence is the up-front cost of acquiring and locking M0 collateral,
   plus a proof-of-service ban that removes an identity from the active set without confiscating
   its M0. Any loss of future fees or service revenue is only a possible commercial opportunity
-  cost; those revenues are not proven. The reasoning is restated on
-  [Open-network hardening](open-network-hardening.md#no-slashing--a-deliberate-choice-restated).
+  cost; those revenues are not proven.
 - **Finality above validation, never instead of it.** This is what makes the table above hold:
   the signers decide ordering; the money is checked by every node.
 
@@ -129,8 +126,7 @@ that an Operator and a Clearing or Liquidity Provider are the same legal or econ
 Bitcoin and BATHRON close different attack surfaces with different assumptions. Both require
 full nodes to reject invalid blocks. Bitcoin orders history through proof of work and
 probabilistic depth; BATHRON uses a registered Operator set and BFT finality. BATHRON's residual
-finality failure is split and social recovery, while its open-set economic resistance remains
-unproven.
+finality failure is split and social recovery.
 
 For implementation details, continue with [Production and finality](production-and-finality.md),
 [Bitcoin facts inside consensus](../bitcoin/facts-in-consensus.md) and

@@ -43,7 +43,7 @@ ones that *must* differ — the Bitcoin network it reads (**testnet4** vs mainne
 message and the address identity bytes. The goal of this phase is one thing: the first builders
 shipping on the substrate. Disposable-genesis resets remain possible while the network
 stabilizes. This is also where the Operator set begins to open — from a project-run set toward
-independent Operators; the [open-network hardening](open-network-hardening.md) track exists to
+independent Operators; the open-network hardening track exists to
 make that safe. **Gate to mainnet:** the hardening items resolved or explicitly bounded, and the
 external audits returned.
 
@@ -117,22 +117,11 @@ is **not** the one live today, and nothing here should be read as describing cur
 - No mainnet.
 - No external audit yet — in particular, no external audit of the VRF finality path.
 - No proven market: no sustained client demand, provider revenue or competitive liquidity.
-- The Operator set is project-run. Sybil resistance under open Operator admission is not
-  demonstrated; the current set does not demonstrate Byzantine resistance under open
-  admission, and does not remove software bugs, key compromise or correlated infrastructure
-  failure.
-- No value-at-risk bound per finality window.
+- The Operator set is project-run.
 - No protocol-enforced or independently verified Operator↔provider identity link.
 - No productised, externally reviewed cross-chain conditional-settlement flow: paired HTLC
   components have been tested, but general atomicity is not claimed before the full state
   machine is specified and reviewed.
-
-## Open design points (not defects, not features)
-
-- **Sampling regime of finality (`N > E`).** The quorum is `⌈2/3·min(E,N)⌉` and stays fixed
-  when more than `E` Operators are eligible, while the VRF-drawn committee size varies around
-  `E`. Whether the quorum should track the realised draw, and the fallback when a draw is too
-  small, are undecided; no network has reached this regime. → [Open-network hardening](open-network-hardening.md)
 
 ## Claims we do not make
 
@@ -154,4 +143,4 @@ If a page anywhere on bathron.org contradicts this list, the list wins and the p
 
 Every other page — and every README in the `bathron-network` repositories — links here instead of repeating these caveats; where any other public text claims more, this page prevails ([documentation policy](../reference/documentation-policy.md)).
 
-**See also:** [Open-network hardening](open-network-hardening.md) · [Security model](security-model.md) · [Why the consensus is frozen](why-frozen.md)
+**See also:** [Security model](security-model.md) · [Why the consensus is frozen](why-frozen.md)

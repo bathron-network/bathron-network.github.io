@@ -52,5 +52,3 @@ Related open points, none of them defects:
 - how the value at risk within a finality window should be bounded;
 - what economic sizing makes a one-third share prohibitively expensive.
 
-See [Open-network hardening](../consensus/open-network-hardening.md) for the arithmetic that
-constrains any answer.
