@@ -41,8 +41,7 @@ above, where they can evolve, compete and be replaced without touching the rules
 - **Fast liveness signals** — "is this Operator up *right now*?" is answered by indexers and
   applications, not by consensus. Consensus keeps only the slow, chain-evident signal (block
   production), because a fast gossip signal fed into consensus would let a network adversary
-  change who counts toward finality. That decision was studied and settled
-  ([Open-network hardening](open-network-hardening.md)).
+  change who counts toward finality. That decision was studied and settled.
 
 The same discipline already rejected proposals that sounded reasonable — for instance a
 consensus-level link between an Operator and a service identity, which turned out to be an

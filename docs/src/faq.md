@@ -58,7 +58,7 @@ price. → [Roles](markets/roles.md)
 
 Anyone can build, quote, pair and settle on BATHRON without asking permission. Operator admission
 is **not yet open**: the current operator set is project-run while the open-admission threat model
-is worked. → [Open-network hardening](consensus/open-network-hardening.md)
+is worked.
 
 ## Is settlement atomic and risk-free today?
 

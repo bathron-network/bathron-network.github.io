@@ -38,7 +38,7 @@ defect, not redundancy.
 Documents written for an earlier framing or an earlier network are **archived, not deleted**:
 they carry an explicit "archived" banner with the date, state what has since changed, and are
 removed from the main navigation. They are not a current reference. Examples on this site: the
-[essay](../essay.md) and its [French version](../essai-fr.md); in `bathron-core`, the
+earlier long-form essay (retired); in `bathron-core`, the
 signet-era provider prototypes and burn tool under `contrib/`.
 
 ## Public claims must be traceable
