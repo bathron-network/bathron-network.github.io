@@ -143,102 +143,110 @@
     <p class="memorable" data-i18n-context="hero">Programmable settlement<br><b>anchored in Bitcoin.</b></p>
     <p style="max-width:56ch;margin:1.4rem auto 0">Build contracts, instruments, markets and applications around facts every BATHRON node can verify.</p>
     <div class="cta">
-      <a class="btn" href="/docs/protocol/what-bathron-is.html">Explore the protocol</a>
-      <a class="btn" href="/docs/build/application-map.html">See what can be built</a>
-      <a class="btn" href="/docs/operate/run-a-node.html">Run a node</a>
+      <a class="btn" href="/docs/overview.html">Explore the protocol</a>
+      <a class="btn" href="/docs/applications.html">See what can be built</a>
+      <a class="btn" href="/docs/node.html">Run a node</a>
     </div>
-    <p class="fine" style="margin-top:18px"><a href="/docs/consensus/status-and-claims.html">View network status</a></p>
+    <p class="fine">BATHRON provides settlement. Providers connect external assets. Independent builders create the applications.</p>
+    <p class="fine">Documentation in English.</p>
   </div>
 
-  <!-- ================= 1. BITCOIN AS A SOURCE OF VERIFIABLE FACTS ================= -->
-  <section>
+  <section id="bitcoin-facts">
     <p class="eyebrow">Facts, not opinions</p>
     <h2>Bitcoin already proves things. Now a contract can use them.</h2>
-    <p style="max-width:64ch">Bitcoin records facts that contracts can verify. BATHRON carries the relevant Bitcoin headers in consensus, so every node evaluates the same evidence.</p>
-    <div class="three" style="margin-top:1.6rem">
-      <div><h3>Mining difficulty</h3><p>The mining difficulty recorded at a given Bitcoin height.</p></div>
-      <div><h3>Block height</h3><p>How far the chain has advanced.</p></div>
-      <div><h3>Median time</h3><p>Bitcoin's own clock, resistant to a single miner's timestamp.</p></div>
-      <div><h3>Confirmed payments</h3><p>A payment to a given script, included and buried in Bitcoin&rsquo;s chain.</p></div>
+    <p class="lead">Operators relay Bitcoin headers without a designated relay. Every node checks the proof of work and transaction evidence: contracts use verified Bitcoin facts without an oracle reporting them.</p>
+    <div class="three">
+      <div><h3>Mining difficulty</h3><p>A threshold at an agreed Bitcoin height.</p></div>
+      <div><h3>Block height</h3><p>An agreed height reached by the verified chain.</p></div>
+      <div><h3>Median time</h3><p>A threshold on Bitcoin median time.</p></div>
+      <div><h3>Confirmed payments</h3><p>A specified destination, minimum amount and confirmation depth.</p></div>
     </div>
-    <p class="fine"><a href="/docs/protocol/bitcoin-verifiable-contracts.html">How Bitcoin facts are verified &rarr;</a></p>
+    <p class="fine"><a href="/docs/bitcoin-facts.html">Explore Bitcoin facts →</a></p>
   </section>
 
-  <!-- ================= 2. PROGRAMMABLE SETTLEMENT ================= -->
-  <section>
-    <p class="eyebrow">Programmable settlement</p>
+  <section id="composition">
+    <p class="eyebrow">Compose the conditions</p>
     <h2>Write the conditions. The network enforces them.</h2>
-    <p style="max-width:64ch">Settlement on BATHRON is described in script and carried out by consensus. The same primitives compose, so a single agreement can depend on a Bitcoin fact, a secret and a deadline at once.</p>
-    <div class="three" style="margin-top:1.6rem">
-      <div><h3>Covenants</h3><p>Constrain what a spend is allowed to become.</p></div>
+    <p class="lead">Release a payment to a fixed recipient after a Bitcoin payment is proven; provide a separate recovery path after a deadline. The builder defines the branches and who submits each transaction.</p>
+    <div class="three">
+      <div><h3>Covenants</h3><p>Constrain destinations and successor outputs, including policies carried forward by recursive covenants.</p></div>
       <div><h3>Hashlocks</h3><p>Release value against the reveal of a secret.</p></div>
       <div><h3>Timelocks</h3><p>Make an outcome depend on time, absolute or relative.</p></div>
-      <div><h3>Signatures and attestations</h3><p>Verify a signature over any message, including one from an outside source.</p></div>
-      <div><h3>Confidential transfers</h3><p>Move value without publishing the amount.</p></div>
+      <div><h3>Signatures, attestations and DLCs</h3><p>Authorize a spend or authenticate an external statement. DLCs combine attested outcomes with payment and recovery branches.</p></div>
     </div>
-    <p class="fine"><a href="/docs/protocol/programmable-settlement.html">Covenants, attestations and confidentiality &rarr;</a></p>
+    <p class="fine"><a href="/docs/composition.html">Explore the primitives →</a></p>
   </section>
 
-  <!-- ================= 3. ONE PROTOCOL, MANY APPLICATIONS ================= -->
-  <section>
-    <p class="eyebrow">One protocol, many applications</p>
-    <h2>What becomes possible.</h2>
-    <div class="three" style="margin-top:1.6rem">
-      <div><h3>Mining difficulty instruments</h3><p>Agreements that settle on Bitcoin's own difficulty, with no outside reporter involved.</p></div>
+  <section id="m1">
+    <p class="eyebrow">One settlement pivot</p>
+    <h2>Users keep their assets. Providers use M1.</h2>
+    <p class="lead">Pairing each of N assets with M1 needs N connections instead of a full mesh of direct pairs. One M1 inventory connects a provider to all quoted pairs and LPs, subject to their available liquidity and terms.</p>
+    <div class="three">
+      <div><h3>Why burn BTC?</h3><p>Verified BTC destruction creates M0, with no premine. Locking M0 one for one creates M1: working capital for settlement. Providers can also buy existing M0 or M1 from holders.</p></div>
+    </div>
+    <p class="fine">Unlocking M1 returns M0, not BTC. The burn is irreversible, creates no redeemable BTC reserve and guarantees no market peg or price floor.</p>
+    <p class="fine"><a href="/docs/m1.html">Understand M1 →</a></p>
+  </section>
+
+  <section id="applications">
+    <p class="eyebrow">Independent applications</p>
+    <h2>Build an agreement from shared primitives.</h2>
+    <p class="lead">Applications using existing primitives need no consensus change. A new primitive requires specification and review.</p>
+    <div class="three">
+      <div><h3>Mining difficulty instruments</h3><p>Agreements that settle on Bitcoin&#x27;s own difficulty, with no outside reporter involved.</p></div>
       <div><h3>Payment-driven escrows</h3><p>Value that releases when a Bitcoin payment is confirmed and settled deeply enough.</p></div>
-      <div><h3>Programmable financial agreements</h3><p>Terms, deadlines and outcomes written once and enforced by the network.</p></div>
-      <div><h3>Open markets and cross-chain flows</h3><p>Pairs quoted by whoever holds inventory, settled against linked conditions.</p></div>
+      <div><h3>Provider inventory controls</h3><p>Delayed withdrawals, approved destinations and recovery paths, composed with recursive covenants.</p></div>
+      <div><h3>USDBTC: a third-party idea</h3><p>A possible exchange of risk between a stable-value-and-yield objective and leveraged BTC exposure, using an external price oracle and providers. An application idea, not a BATHRON product or a promise of stability or yield.</p></div>
     </div>
-    <p class="fine"><a href="/docs/build/application-map.html">The full application map &rarr;</a></p>
-  </section>
-
-  <!-- ================= 4. A NETWORK OF DISTINCT ROLES ================= -->
-  <section>
-    <p class="eyebrow">A network of distinct roles</p>
-    <h2>Three roles, kept apart on purpose.</h2>
-    <div class="roles">
-      <div><h3>Consensus Operators</h3><p>Secure the network, order transactions and finalize them. One operator, one vote.</p></div>
-      <div><h3>Settlement Providers</h3><p>Create the services and settlement flows that people actually use. They compete, and they come and go.</p></div>
-      <div><h3>Builders</h3><p>Compose applications and instruments on top, choosing their own interfaces and their own terms.</p></div>
+    <p class="fine"><a href="/docs/applications.html">Explore applications →</a></p>
+    <div class="three">
+      <div><h3>Private inventory transfers</h3><p>Shielded M0 transfers protect amounts before or after settlement. M1 receipts, conditional exchanges and burn or lock/unlock operations remain public.</p></div>
     </div>
-    <p class="fine">No consensus operator chooses which application may be built.</p>
+    <p class="fine"><a href="/docs/confidentiality.html">Private inventory transfers</a></p>
   </section>
 
-  <!-- ================= 5. BITCOIN REMAINS THE ANCHOR ================= -->
-  <section>
-    <p class="eyebrow">Bitcoin remains the anchor</p>
-    <h2>The anchor is Bitcoin, and it stays where it is.</h2>
-    <p style="max-width:64ch">M0 originates from Bitcoin destruction verified by consensus. Protocol conversion moves value from M0 into M1, the unit used for settlement.</p>
-    <p style="max-width:64ch">Bitcoin remains the monetary anchor. BATHRON verifies its history directly and provides the programmable settlement layer built around it.</p>
-    <p class="fine"><a href="/docs/bitcoin/final-asset.html">Why Bitcoin is the final asset &rarr;</a></p>
-  </section>
-
-  <!-- ================= 6. MARKETS AS AN APPLICATION ================= -->
-  <section>
-    <p class="eyebrow">Markets, as one application</p>
+  <section id="markets">
+    <p class="eyebrow">Open markets</p>
     <h2>A pair exists because someone quotes it.</h2>
-    <p style="max-width:64ch">A provider with inventory can publish offers for a pair. Other providers can quote the same pair independently. Markets emerge from available inventory and executable settlement conditions, not from a listing decision.</p>
-    <p class="fine"><a href="/docs/markets/how-a-market-appears.html">See how a market is built &rarr;</a></p>
+    <p class="lead">Providers publish offers from their inventory. A second provider can quote the same pair without an invitation or listing permission. Announcements, relays and indexers help discovery outside consensus; published service facts inform reputation, without a protocol ranking.</p>
+    <div class="three">
+      <div><h3>Example: stablecoin → BTC</h3><p>Alice sends stablecoin X and receives BTC. The LP quotes X/M1 and supplies M1 to the SP, which quotes BTC/M1 and supplies BTC. Alice keeps her keys and never needs to hold M1.</p></div>
+    </div>
+    <p class="fine">This route requires compatible hashlocks and timed refunds on X&#x27;s chain, funded quotes, ordered deadlines and active monitoring. Each external leg follows its own chain&#x27;s rules; recovery requires a transaction.</p>
+    <p class="fine"><a href="/docs/cross-chain.html">Follow the cross-chain example →</a></p>
+    <p class="fine"><a href="/docs/markets.html">Understand markets →</a></p>
   </section>
 
-  <!-- ================= 7. FINAL CALL TO ACTION ================= -->
-  <section>
-    <p class="eyebrow">Start here</p>
-    <h2>Build on the settlement layer.</h2>
-    <div class="three" style="margin-top:1.6rem">
-      <a class="card" href="/docs/"><h3>Read the documentation</h3><p>The protocol, the primitives and the reference.</p></a>
-      <a class="card" href="/docs/build/application-map.html"><h3>Explore applications</h3><p>What the layer makes buildable, and what each one needs.</p></a>
-      <a class="card" href="/docs/operate/run-a-node.html"><h3>Run a node</h3><p>Verify the chain yourself, from your own machine.</p></a>
-      <a class="card" href="https://explorer.bathron.org/"><h3>Public explorer</h3><p>The public explorer is temporarily unavailable.</p></a>
-      <a class="card" href="https://github.com/bathron-network/bathron-core" target="_blank" rel="noopener"><h3>Source code</h3><p>The node implementation, on GitHub.</p></a>
-      <a class="card" href="/docs/consensus/status-and-claims.html"><h3>Network status</h3><p>What runs today, and what the protocol does not claim.</p></a>
+  <section id="roles">
+    <p class="eyebrow">Distinct roles, shared rules</p>
+    <h2>Know whom you rely on, and for what.</h2>
+    <div class="roles">
+      <div><h3>Operators</h3><p>A registered identity requires a burned ticket and maturity. This visible, irreversible entry cost is separate from settlement inventory. Operators can produce blocks and participate in finality.</p></div>
+      <div><h3>Settlement Providers · BTC/M1</h3><p>The SP quotes and orchestrates BTC/M1, including the Bitcoin leg. An Operator identity is required; block production is optional.</p></div>
+      <div><h3>Liquidity Providers · X/M1</h3><p>The LP quotes X/M1, supplies liquidity and manages the external asset leg. An Operator identity is optional.</p></div>
+    </div>
+    <p class="fine">Builders define applications, users choose terms, and observers verify independently. An Operator can also provide a service; the identity-to-service link is public and the same transaction rules apply.</p>
+    <p class="fine">Objectively proven double signing permanently bans the Operator identity, with no slashing. The burned ticket remains spent.</p>
+    <p class="fine"><a href="/docs/roles.html">Find your role →</a></p>
+    <p class="fine">BATHRON consensus and M1 remain shared dependencies across applications. Providers are responsible for inventory and execution; external attestations depend on their named source.</p>
+    <p class="fine"><a href="/docs/trust.html">Where trust lives →</a></p>
+  </section>
+
+  <section id="build">
+    <p class="eyebrow">Build and verify</p>
+    <h2>From an agreement to verifiable transactions.</h2>
+    <div class="three">
+      <a class="card" href="/docs/build.html"><h3>Build an application</h3><p>Define funding, payment and recovery before writing the transactions.</p></a>
+      <a class="card" href="/docs/providers.html"><h3>Operate a provider</h3><p>Manage inventory, quotes, keys, deadlines and monitoring.</p></a>
+      <a class="card" href="/docs/node.html"><h3>Run a node</h3><p>Verify the chain yourself, from your own machine.</p></a>
+      <a class="card" href="/docs/rpc-transactions.html"><h3>Protocol reference</h3><p>Inspect the RPC, transactions and validation rules.</p></a>
     </div>
   </section>
 
   <footer>
     <span>BATHRON<br>
     <a href="mailto:contact@bathron.org">contact@bathron.org</a><br>
-    <span class="footlinks"><a href="https://github.com/bathron-network/bathron-core" target="_blank" rel="noopener">Source code</a><a href="https://github.com/bathron-network/bathron-core/releases" target="_blank" rel="noopener">Releases</a><a href="https://github.com/bathron-network/bathron-core/blob/main/SECURITY.md" target="_blank" rel="noopener">Security policy</a></span><br>
+    <span class="footlinks"><a href="https://github.com/bathron-network/bathron-core" target="_blank" rel="noopener">Source code</a><a href="/docs/overview.html">Documentation</a><a href="https://github.com/bathron-network/bathron-core/blob/main/SECURITY.md" target="_blank" rel="noopener">Security policy</a></span><br>
     Report a vulnerability to <a href="mailto:security@bathron.org">security@bathron.org</a></span>
   </footer>
 
