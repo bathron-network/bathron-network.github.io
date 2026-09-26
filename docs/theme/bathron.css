@@ -100,3 +100,23 @@
 
 /* inline SVG diagrams */
 .content svg { max-width: 100%; height: auto; }
+
+/* Keep diagram labels legible; narrow screens can scroll the figure. */
+.content .protocol-diagram {
+  margin: 1.5em 0;
+  overflow-x: auto;
+  border: 1px solid #1C222C;
+  border-radius: 12px;
+  background: #0C0F14;
+}
+.content .protocol-diagram img {
+  display: block;
+  width: 100%;
+  min-width: 600px;
+  max-width: none;
+  height: auto;
+}
+.content .protocol-diagram:focus-visible {
+  outline: 2px solid #D9A441;
+  outline-offset: 3px;
+}

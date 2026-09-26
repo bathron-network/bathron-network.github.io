@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="330" viewBox="0 0 720 330" role="img" aria-labelledby="title desc">
+<title id="title">Bitcoin facts become a contract condition</title>
+<desc id="desc">Bitcoin headers and any required transaction proof are verified by every node. A true predicate enables a branch only when its other conditions also pass.</desc>
+<defs>
+<marker id="tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0 0 L8 4 L0 8" fill="#D9A441"/>
+</marker>
+</defs>
+<style>text{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#E8EBF0}.strong{font-weight:600}.small{font-size:15px;fill:#AAB1BC}.gold{fill:#D9A441}.eyebrow{font-size:13px;letter-spacing:1.6px;fill:#D9A441}.box{fill:#12161D;stroke:#3A414D}.accent{fill:#12161D;stroke:#D9A441}.arrow{fill:none;stroke:#D9A441;stroke-width:1.8;marker-end:url(#tip)}.edge{fill:none;stroke:#68717F;stroke-width:1.3}.icon{fill:none;stroke:#D9A441;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}</style>
+<rect width="720" height="330" rx="12" fill="#0C0F14"/>
+<text x="28" y="34" class="eyebrow" text-anchor="start">BITCOIN FACTS → CONTRACT</text>
+<rect x="28" y="58" width="295" height="78" rx="10" class="box"/>
+<text x="44" y="88" class="strong" text-anchor="start">Bitcoin headers</text>
+<text x="44" y="114" class="small" text-anchor="start">+ transaction proof when required</text>
+<path d="M323 97 L393 97" class="arrow"/>
+<rect x="397" y="58" width="295" height="78" rx="10" class="box"/>
+<text x="413" y="88" class="strong" text-anchor="start">Verified by every node</text>
+<text x="413" y="114" class="small" text-anchor="start">Proof of work · inclusion · depth</text>
+<path d="M545 136 L545 183" class="arrow"/>
+<rect x="397" y="188" width="295" height="78" rx="10" class="box"/>
+<text x="413" y="218" class="strong" text-anchor="start">Predicate true</text>
+<text x="413" y="244" class="small" text-anchor="start">The agreed Bitcoin fact is proven</text>
+<path d="M397 227 L327 227" class="arrow"/>
+<rect x="28" y="188" width="295" height="78" rx="10" class="box"/>
+<text x="44" y="218" class="strong" text-anchor="start">Branch spendable</text>
+<text x="44" y="244" class="small" text-anchor="start">All other conditions must also pass</text>
+<text x="28" y="306" class="small" text-anchor="start">Someone still constructs, signs and submits the spend.</text>
+</svg>

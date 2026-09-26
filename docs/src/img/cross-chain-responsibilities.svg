@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="546" viewBox="0 0 720 546" role="img" aria-labelledby="title desc">
+<title id="title">Two legs, two responsibilities</title>
+<desc id="desc">In the X to BTC example, the SP funds BTC for Alice, the LP funds M1 for the SP, and Alice funds X for the LP. Refund deadlines open on Bitcoin first, BATHRON next and X last. Each provider monitors and claims its incoming leg.</desc>
+<defs>
+<marker id="tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0 0 L8 4 L0 8" fill="#D9A441"/>
+</marker>
+</defs>
+<style>text{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#E8EBF0}.strong{font-weight:600}.small{font-size:15px;fill:#AAB1BC}.gold{fill:#D9A441}.eyebrow{font-size:13px;letter-spacing:1.6px;fill:#D9A441}.box{fill:#12161D;stroke:#3A414D}.accent{fill:#12161D;stroke:#D9A441}.arrow{fill:none;stroke:#D9A441;stroke-width:1.8;marker-end:url(#tip)}.edge{fill:none;stroke:#68717F;stroke-width:1.3}.icon{fill:none;stroke:#D9A441;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}</style>
+<rect width="720" height="546" rx="12" fill="#0C0F14"/>
+<text x="28" y="34" class="eyebrow" text-anchor="start">TWO LEGS, TWO RESPONSIBILITIES</text>
+<text x="28" y="66" class="small" text-anchor="start">Each provider connects an external leg to M1.</text>
+<rect x="28" y="90" width="664" height="90" rx="10" class="box"/>
+<text x="46" y="119" class="gold" text-anchor="start">Bitcoin</text>
+<text x="190" y="120" class="strong" text-anchor="start">SP locks BTC → Alice claims</text>
+<text x="190" y="152" class="small" text-anchor="start">SP refund · earliest</text>
+<rect x="28" y="200" width="664" height="90" rx="10" class="box"/>
+<text x="46" y="229" class="gold" text-anchor="start">BATHRON</text>
+<text x="190" y="230" class="strong" text-anchor="start">LP locks M1 → SP claims</text>
+<text x="190" y="262" class="small" text-anchor="start">LP refund · middle</text>
+<rect x="28" y="310" width="664" height="90" rx="10" class="box"/>
+<text x="46" y="339" class="gold" text-anchor="start">Asset X</text>
+<text x="190" y="340" class="strong" text-anchor="start">Alice locks X → LP claims</text>
+<text x="190" y="372" class="small" text-anchor="start">Alice refund · latest</text>
+<path d="M106 180 L106 197" class="arrow"/>
+<text x="123" y="194" class="small" text-anchor="start">SP · BTC/M1</text>
+<path d="M106 290 L106 307" class="arrow"/>
+<text x="123" y="304" class="small" text-anchor="start">LP · X/M1</text>
+<text x="28" y="440" class="strong" text-anchor="start">Refund order: BTC first → M1 next → X last</text>
+<text x="28" y="470" class="small" text-anchor="start">Common secret; each recipient also signs its claim.</text>
+<text x="28" y="495" class="small" text-anchor="start">Allow time for observation, confirmations and inclusion on each chain.</text>
+<text x="28" y="520" class="small" text-anchor="start">Refunds require action. Chain heights are not directly comparable.</text>
+</svg>
