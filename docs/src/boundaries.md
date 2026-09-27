@@ -26,7 +26,7 @@ An application distinguishes a submitted transaction, inclusion in a block and f
 
 ## Why these boundaries matter
 
-BATHRON has no listing committee, protocol register of buy and sell instructions or preferred market maker. A provider quotes a price; a user accepts terms; a transaction expresses the resulting settlement conditions. Consensus checks those conditions without adopting the quote as an official price.
+BATHRON has no listing committee or preferred market maker. A provider quotes a price; a user accepts terms; a transaction expresses the resulting settlement conditions. Consensus checks those conditions without adopting the quote as an official price.
 
 Similarly, verifying an oracle signature authenticates a statement from the agreed source. It does not make consensus an arbitrator of the underlying event. [Where trust lives](trust.md) explains how to identify that dependency.
 
