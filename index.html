@@ -20,41 +20,23 @@
 <meta property="og:url" content="https://bathron.org/">
 <meta name="twitter:card" content="summary_large_image">
 <style>
-  :root{
-    --bg:#050608; --panel:#0C0F14; --line:#1C222C;
-    --ink:#E8EBF0; --muted:#8A919C; --gold:#D9A441; --dim:#3A414D;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0}
-  body{background:var(--bg);color:var(--ink);
-       font:16px/1.7 ui-sans-serif,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
-       -webkit-font-smoothing:antialiased}
-  a{color:inherit}
 
-  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
-  section{margin:96px 0 0}
-  .eyebrow{font:600 12px/1 ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.22em;
-           color:var(--gold);text-transform:uppercase;text-align:center;margin:0 0 26px}
-  h2{margin:0 0 14px;font-size:clamp(20px,3vw,26px);letter-spacing:-.01em;text-align:center;text-wrap:balance}
-  p.lead{margin:0 auto;max-width:58ch;text-align:center;color:var(--muted)}
-  p.lead b{color:var(--ink);font-weight:600}
-
-  /* ---- hero ---- */
-  .hero{min-height:auto;display:flex;flex-direction:column;align-items:center;
-        justify-content:center;text-align:center;padding:72px 0 56px}
-  @media (min-width:900px){.hero{padding:96px 0 72px}}
-  @media (max-width:560px){.hero{padding:56px 0 40px}}
-  .hero img.emblem{width:min(200px,48vw);height:auto}
-  .hero img.word{width:min(270px,64vw);height:auto;margin-top:4px}
-  .memorable{margin:34px auto 0;max-width:22ch;font-size:clamp(28px,5.4vw,44px);
-             line-height:1.2;font-weight:700;letter-spacing:-.015em;text-wrap:balance}
-  .memorable b{color:var(--gold)}
-  /* Language bar. A thin rule at the top of the content column — no
-     navigation chrome, no repeated wordmark. The menu is a native <details>:
-     it opens on click and on Enter/Space, and works with JavaScript disabled,
-     because a language switcher that needs a script is a language switcher
-     that can fail. */
-  .topbar{display:flex;justify-content:flex-end;align-items:center;padding-top:14px}
+:root{--bg:#111413;--panel:#191d1a;--ink:#f2f0e8;--muted:#a5aaa2;--gold:#dab777;--line:#343b33}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}a:hover{color:var(--gold)}a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:6px}img{display:block;max-width:100%;height:auto}p,h1,h2,h3,figure{margin:0}h1,h2,h3{line-height:1.1;font-weight:500;text-wrap:balance}p{ text-wrap:pretty}.wrap{width:min(1184px,calc(100% - 96px));margin:auto}.topbar{min-height:100px;display:flex;align-items:center;justify-content:space-between;gap:30px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:10px}.brand .emblem{width:62px}.brand .word{width:137px}.topnav{display:flex;align-items:center;gap:32px;font-size:13px}.eyebrow{font:11px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.17em;color:var(--gold)}.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:36px;align-items:center;padding:80px 0 70px}.hero h1{font-size:clamp(44px,4.65vw,67px);letter-spacing:-.05em;margin:22px 0}.hero h1 b{font-weight:500;color:var(--gold)}.intro{max-width:43ch;color:var(--muted);font-size:17px}.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:49px;padding:11px 21px;border:1px solid #566051;font-size:14px;font-weight:600}.btn.primary{background:var(--gold);border-color:var(--gold);color:var(--bg)}.btn:hover{background:var(--ink);border-color:var(--ink);color:var(--bg)}.hero-art{position:relative}.hero-art img{width:100%}.flow-labels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;text-align:center;color:var(--muted);font:11px/1.5 ui-monospace,monospace}.flow-labels span:nth-child(2){color:var(--gold)}.story{background:#eae7dd;color:#242a23;padding:45px 0}.story .wrap{display:grid;grid-template-columns:minmax(0,.6fr) minmax(0,1.5fr) minmax(0,.9fr);gap:45px;align-items:center}.story .eyebrow{color:#64674c}.story h2{font-size:29px;letter-spacing:-.025em;margin-top:12px}.story p{font-size:15px;color:#565d52}.story .textlink{color:#303c29}.textlink{display:inline-block;font-size:13px;font-weight:600;margin-top:18px;border-bottom:1px solid #646d58;padding-bottom:4px}.textlink:after{content:' ↗';padding-inline-start:8px}.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:62px 0;gap:45px}.pillar{min-width:0}.pillar img{width:100%;height:110px;object-fit:contain;object-position:left center;margin-bottom:22px}.pillar h2{font-size:25px;max-width:19ch;letter-spacing:-.025em}.pillar p{font-size:14px;color:var(--muted);margin-top:14px;max-width:32ch}.pivot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:65px;align-items:center;padding:48px 0;border-top:1px solid var(--line)}.pivot h2{font-size:36px;letter-spacing:-.035em;margin:13px 0 20px}.pivot p:not(.eyebrow){color:var(--muted);font-size:14px;max-width:48ch}.pivot .risk{margin-top:12px;font-size:12px!important}.pivot-diagram{background:var(--panel);padding:22px 26px}.diagram-labels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));text-align:center;gap:20px;font:12px/1.4 ui-monospace,monospace;color:var(--muted)}.diagram-labels span:last-child{color:var(--gold)}.pivot-diagram img{width:100%;margin:10px 0}.roles{border-block:1px solid var(--line);padding:25px 0;display:grid;grid-template-columns:minmax(0,.65fr) repeat(4,minmax(0,1fr));gap:24px;align-items:start}.roles .eyebrow{padding-top:5px}.roles a{display:block;font-size:14px;font-weight:600}.roles small{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:7px;line-height:1.5}.status{font-size:11px;color:var(--muted);padding:26px 0 0;text-align:center}.status:before{content:'';display:inline-block;width:6px;height:6px;background:var(--gold);border-radius:50%;margin-inline-end:9px}footer{display:flex;align-items:center;justify-content:space-between;gap:25px;padding:30px 0 35px;font-size:12px;color:var(--muted)}.footlinks{display:flex;gap:25px;flex-wrap:wrap}.footbrand{letter-spacing:.13em;color:var(--ink)}.doc-note{font-size:11px;color:var(--muted);margin-top:12px}
+@media(min-width:1500px){.hero{padding-block:100px}.pillars{padding-block:75px}}
+@media(max-width:950px){.wrap{width:calc(100% - 56px)}.topnav{gap:18px}.hero{gap:16px}.hero h1{font-size:48px}.story .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1.8fr);gap:30px}.story .wrap>p{grid-column:2}.pillars{gap:25px}.pivot{gap:30px}.roles{grid-template-columns:repeat(4,minmax(0,1fr))}.roles>.eyebrow{grid-column:1/-1}}
+@media(max-width:650px){.wrap{width:calc(100% - 40px)}.topbar{min-height:80px;gap:12px}.brand{gap:4px}.brand .emblem{width:43px}.brand .word{width:104px}.topnav>a{display:none}.topnav{gap:0}.hero{grid-template-columns:minmax(0,1fr);padding:43px 0 33px;gap:25px}.hero h1{font-size:46px;max-width:12ch;margin:18px 0}.intro{font-size:15px}.cta{gap:9px;margin-top:24px}.btn{padding:10px 16px;font-size:13px}.hero-art{max-width:390px;width:100%;margin:auto}.hero-art img{max-height:260px}.flow-labels{font-size:10px}.story{padding:30px 0}.story .wrap{display:block}.story h2{font-size:27px;margin-bottom:16px}.story .wrap>p{margin-top:14px}.story p{font-size:14px}.pillars{grid-template-columns:minmax(0,1fr);padding:14px 0;gap:0}.pillar{display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:22px;padding:28px 0}.pillar+.pillar{border-top:1px solid var(--line)}.pillar img{grid-row:1/4;height:88px;margin:0;align-self:center}.pillar h2{font-size:23px}.pillar p{font-size:13px;margin-top:10px}.pillar .textlink{justify-self:start;margin-top:12px}.pivot{grid-template-columns:minmax(0,1fr);gap:25px;padding:34px 0}.pivot h2{font-size:31px}.pivot-diagram{padding:18px 12px}.roles{grid-template-columns:minmax(0,1fr);gap:22px}.roles>.eyebrow{grid-column:1/-1}.roles a{font-size:13px}.roles small{font-size:11px}.status{font-size:10px;line-height:1.8;text-wrap:balance}footer{align-items:flex-start;flex-direction:column;gap:15px;padding:25px 0}.footlinks{gap:18px}.doc-note{font-size:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}[dir="rtl"] .pillar img{object-position:right center}
+[dir="rtl"] .hero-art img{transform:scaleX(-1)}
+.pivot-diagram{direction:ltr}.diagram-labels span{unicode-bidi:plaintext}
+/* Allow grid/flex children and translated text to shrink inside the viewport. */
+.hero>*,.story .wrap>*,.pillar>*,.pivot>*,.roles>*,footer>*,.topbar>*{min-width:0}
+.wrap{overflow-wrap:anywhere}
+.brand{flex-shrink:0}
+.brand img{mix-blend-mode:screen}
+.hero-art img,.pivot-diagram img{display:block;max-width:100%;height:auto;object-fit:contain}
+@media(max-width:950px){.hero h1{font-size:clamp(36px,5vw,48px)}}
+@media(max-width:650px){.hero h1{font-size:clamp(36px,11.8vw,46px)}.hero-art{max-width:338px}.hero-art img{max-height:none}.footlinks{min-width:0}.eyebrow{letter-spacing:.13em}}
   .langmenu{position:relative}
   .langmenu > summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;
          border:1px solid var(--line);border-radius:8px;cursor:pointer;list-style:none;
@@ -85,172 +67,40 @@
          font-size:11px;letter-spacing:.03em}
   .lm-on .lm-badge{border-color:rgba(5,6,8,.25);background:rgba(5,6,8,.10)}
   @media (max-width:360px){.langmenu > summary{padding:0 11px}.lm-list{min-width:180px}}
-  .cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;justify-content:center}
-  .btn{display:inline-block;padding:13px 26px;border:1px solid var(--line);border-radius:8px;
-       text-decoration:none;font-weight:600;font-size:15px;transition:border-color .15s,color .15s}
-  .btn:hover{border-color:var(--gold);color:var(--gold)}
-  .btn.primary{border-color:#2A3441;background:var(--panel)}
 
-  /* ---- provides / does not ---- */
-  .three{display:grid;gap:14px;margin-top:30px}
-  @media (min-width:760px){.three{grid-template-columns:1fr 1fr}}
-  .three div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
-  .three h3{margin:0 0 6px;font-size:17px}
-  .three p{margin:0;color:var(--muted);font-size:15px}
-  .three a.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:10px;
-                padding:18px 20px;text-decoration:none;transition:border-color .15s,background .15s}
-  .three a.card:hover{border-color:var(--gold);background:#10141B}
-  .three a.card h3{color:var(--gold)}
-  .three a.card h3::after{content:" \2192";opacity:.7}
-
-  .fine{margin:12px auto 0;max-width:60ch;text-align:center;color:var(--muted);font-size:13.5px}
-
-  /* ---- bitcoin ---- */
-
-  /* ---- roles ---- */
-  .roles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
-  .roles div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 16px}
-  .roles h3{margin:0 0 6px;font-size:15.5px}
-  .roles p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55}
-  @media (max-width:640px){.roles{grid-template-columns:1fr}}
-
-  footer{margin:96px 0 0;padding:28px 0 40px;border-top:1px solid var(--line);
-         display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-         color:var(--muted);font-size:13.5px}
-  footer a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--dim)}
-  footer a:hover{color:var(--gold);text-decoration-color:var(--gold)}
-  /* Separators are drawn by CSS, never by text nodes: a lone "," or "and"
-     between links is untranslatable in isolation and drifts between
-     languages. */
-  .footlinks a + a::before{content:"·";margin:0 .55em;color:var(--muted);
-         display:inline-block;text-decoration:none}
 </style>
 </head>
+
 <body>
-
-<div class="wrap">
-
-  <!-- ================= 0. LANGUAGE BAR ================= -->
-  <div class="topbar">
-    <nav class="langsel" aria-label="Language selection"><details class="langmenu"><summary><svg class="lm-globe" aria-hidden="true" viewBox="0 0 16 16" width="15" height="15"><circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M1.4 8h13.2M8 1.4c1.9 2 2.9 4.2 2.9 6.6S9.9 12.6 8 14.6C6.1 12.6 5.1 10.4 5.1 8S6.1 3.4 8 1.4z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span class="lm-current">English</span><svg class="lm-chev" aria-hidden="true" viewBox="0 0 12 12" width="11" height="11"><path d="M2 4.3 6 8.3l4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><ul class="lm-list"><li><span class="lm-item lm-on" aria-current="page" lang="en"><span class="lm-badge" aria-hidden="true">EN</span>English</span></li><li><a class="lm-item" href="/fr/" lang="fr" hreflang="fr"><span class="lm-badge" aria-hidden="true">FR</span>Français</a></li><li><a class="lm-item" href="/es/" lang="es" hreflang="es"><span class="lm-badge" aria-hidden="true">ES</span>Español</a></li><li><a class="lm-item" href="/zh-hans/" lang="zh-Hans" hreflang="zh-Hans"><span class="lm-badge" aria-hidden="true">简</span>中文（简体）</a></li><li><a class="lm-item" href="/hi/" lang="hi" hreflang="hi"><span class="lm-badge" aria-hidden="true">हि</span>हिन्दी</a></li><li><a class="lm-item" href="/ar/" lang="ar" hreflang="ar"><span class="lm-badge" aria-hidden="true">ع</span>العربية</a></li></ul></details></nav>
-  </div>
-
-  <!-- ================= 1. HERO ================= -->
-  <div class="hero">
-    <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">BATHRON: programmable settlement anchored in Bitcoin</h1>
-    <img class="emblem" src="/img/emblem.png" alt="BATHRON emblem" width="560" height="360">
-    <img class="word" src="/img/wordmark.png" alt="BATHRON" width="540" height="89">
-    <p class="memorable" data-i18n-context="hero">Programmable settlement<br><b>anchored in Bitcoin.</b></p>
-    <p style="max-width:56ch;margin:1.4rem auto 0">Build contracts, instruments, markets and applications around facts every BATHRON node can verify.</p>
-    <div class="cta">
-      <a class="btn" href="/docs/overview.html">Explore the protocol</a>
-      <a class="btn" href="/docs/applications.html">See what can be built</a>
-      <a class="btn" href="/docs/node.html">Run a node</a>
-    </div>
-    <p class="fine">BATHRON provides settlement. Providers connect external assets. Independent builders create the applications.</p>
-    <p class="fine">Documentation in English.</p>
-  </div>
-
-  <section id="bitcoin-facts">
-    <p class="eyebrow">Facts, not opinions</p>
-    <h2>Bitcoin already proves things. Now a contract can use them.</h2>
-    <p class="lead">Operators relay Bitcoin headers without a designated relay. Every node checks the proof of work and transaction evidence: contracts use verified Bitcoin facts without an oracle reporting them.</p>
-    <div class="three">
-      <div><h3>Mining difficulty</h3><p>A threshold at an agreed Bitcoin height.</p></div>
-      <div><h3>Block height</h3><p>An agreed height reached by the verified chain.</p></div>
-      <div><h3>Median time</h3><p>A threshold on Bitcoin median time.</p></div>
-      <div><h3>Confirmed payments</h3><p>A specified destination, minimum amount and confirmation depth.</p></div>
-    </div>
-    <p class="fine"><a href="/docs/bitcoin-facts.html">Explore Bitcoin facts →</a></p>
-  </section>
-
-  <section id="composition">
-    <p class="eyebrow">Compose the conditions</p>
-    <h2>Write the conditions. The network enforces them.</h2>
-    <p class="lead">Release a payment to a fixed recipient after a Bitcoin payment is proven; provide a separate recovery path after a deadline. The builder defines the branches and who submits each transaction.</p>
-    <div class="three">
-      <div><h3>Covenants</h3><p>Constrain destinations and successor outputs, including policies carried forward by recursive covenants.</p></div>
-      <div><h3>Hashlocks</h3><p>Release value against the reveal of a secret.</p></div>
-      <div><h3>Timelocks</h3><p>Make an outcome depend on time, absolute or relative.</p></div>
-      <div><h3>Signatures, attestations and DLCs</h3><p>Authorize a spend or authenticate an external statement. DLCs combine attested outcomes with payment and recovery branches.</p></div>
-    </div>
-    <p class="fine"><a href="/docs/composition.html">Explore the primitives →</a></p>
-  </section>
-
-  <section id="m1">
-    <p class="eyebrow">One settlement pivot</p>
-    <h2>Users keep their assets. Providers use M1.</h2>
-    <p class="lead">Pairing each of N assets with M1 needs N connections instead of a full mesh of direct pairs. One M1 inventory connects a provider to all quoted pairs and LPs, subject to their available liquidity and terms.</p>
-    <div class="three">
-      <div><h3>Why burn BTC?</h3><p>Verified BTC destruction creates M0, with no premine. Locking M0 one for one creates M1: working capital for settlement. Providers can also buy existing M0 or M1 from holders.</p></div>
-    </div>
-    <p class="fine">Unlocking M1 returns M0, not BTC. The burn is irreversible, creates no redeemable BTC reserve and guarantees no market peg or price floor.</p>
-    <p class="fine"><a href="/docs/m1.html">Understand M1 →</a></p>
-  </section>
-
-  <section id="applications">
-    <p class="eyebrow">Independent applications</p>
-    <h2>Build an agreement from shared primitives.</h2>
-    <p class="lead">Applications using existing primitives need no consensus change. A new primitive requires specification and review.</p>
-    <div class="three">
-      <div><h3>Mining difficulty instruments</h3><p>Agreements that settle on Bitcoin&#x27;s own difficulty, with no outside reporter involved.</p></div>
-      <div><h3>Payment-driven escrows</h3><p>Value that releases when a Bitcoin payment is confirmed and settled deeply enough.</p></div>
-      <div><h3>Provider inventory controls</h3><p>Delayed withdrawals, approved destinations and recovery paths, composed with recursive covenants.</p></div>
-      <div><h3>USDBTC: a third-party idea</h3><p>A possible exchange of risk between a stable-value-and-yield objective and leveraged BTC exposure, using an external price oracle and providers. An application idea, not a BATHRON product or a promise of stability or yield.</p></div>
-    </div>
-    <p class="fine"><a href="/docs/applications.html">Explore applications →</a></p>
-    <div class="three">
-      <div><h3>Private inventory transfers</h3><p>Shielded M0 transfers protect amounts before or after settlement. M1 receipts, conditional exchanges and burn or lock/unlock operations remain public.</p></div>
-    </div>
-    <p class="fine"><a href="/docs/confidentiality.html">Private inventory transfers</a></p>
-  </section>
-
-  <section id="markets">
-    <p class="eyebrow">Open markets</p>
-    <h2>A pair exists because someone quotes it.</h2>
-    <p class="lead">Providers publish offers from their inventory. A second provider can quote the same pair without an invitation or listing permission. Announcements, relays and indexers help discovery outside consensus; published service facts inform reputation, without a protocol ranking.</p>
-    <div class="three">
-      <div><h3>Example: stablecoin → BTC</h3><p>Alice sends stablecoin X and receives BTC. The LP quotes X/M1 and supplies M1 to the SP, which quotes BTC/M1 and supplies BTC. Alice keeps her keys and never needs to hold M1.</p></div>
-    </div>
-    <p class="fine">This route requires compatible hashlocks and timed refunds on X&#x27;s chain, funded quotes, ordered deadlines and active monitoring. Each external leg follows its own chain&#x27;s rules; recovery requires a transaction.</p>
-    <p class="fine"><a href="/docs/cross-chain.html">Follow the cross-chain example →</a></p>
-    <p class="fine"><a href="/docs/markets.html">Understand markets →</a></p>
-  </section>
-
-  <section id="roles">
-    <p class="eyebrow">Distinct roles, shared rules</p>
-    <h2>Know whom you rely on, and for what.</h2>
-    <div class="roles">
-      <div><h3>Operators</h3><p>A registered identity requires a burned ticket and maturity. This visible, irreversible entry cost is separate from settlement inventory. Operators can produce blocks and participate in finality.</p></div>
-      <div><h3>Settlement Providers · BTC/M1</h3><p>The SP quotes and orchestrates BTC/M1, including the Bitcoin leg. An Operator identity is required; block production is optional.</p></div>
-      <div><h3>Liquidity Providers · X/M1</h3><p>The LP quotes X/M1, supplies liquidity and manages the external asset leg. An Operator identity is optional.</p></div>
-    </div>
-    <p class="fine">Builders define applications, users choose terms, and observers verify independently. An Operator can also provide a service; the identity-to-service link is public and the same transaction rules apply.</p>
-    <p class="fine">Objectively proven double signing permanently bans the Operator identity, with no slashing. The burned ticket remains spent.</p>
-    <p class="fine"><a href="/docs/roles.html">Find your role →</a></p>
-    <p class="fine">BATHRON consensus and M1 remain shared dependencies across applications. Providers are responsible for inventory and execution; external attestations depend on their named source.</p>
-    <p class="fine"><a href="/docs/trust.html">Where trust lives →</a></p>
-  </section>
-
-  <section id="build">
-    <p class="eyebrow">Build and verify</p>
-    <h2>From an agreement to verifiable transactions.</h2>
-    <div class="three">
-      <a class="card" href="/docs/build.html"><h3>Build an application</h3><p>Define funding, payment and recovery before writing the transactions.</p></a>
-      <a class="card" href="/docs/providers.html"><h3>Operate a provider</h3><p>Manage inventory, quotes, keys, deadlines and monitoring.</p></a>
-      <a class="card" href="/docs/node.html"><h3>Run a node</h3><p>Verify the chain yourself, from your own machine.</p></a>
-      <a class="card" href="/docs/rpc-transactions.html"><h3>Protocol reference</h3><p>Inspect the RPC, transactions and validation rules.</p></a>
-    </div>
-  </section>
-
-  <footer>
-    <span>BATHRON<br>
-    <a href="mailto:contact@bathron.org">contact@bathron.org</a><br>
-    <span class="footlinks"><a href="https://github.com/bathron-network/bathron-core" target="_blank" rel="noopener">Source code</a><a href="/docs/overview.html">Documentation</a><a href="https://github.com/bathron-network/bathron-core/blob/main/SECURITY.md" target="_blank" rel="noopener">Security policy</a></span><br>
-    Report a vulnerability to <a href="mailto:security@bathron.org">security@bathron.org</a></span>
-  </footer>
-
-</div>
-
-</body>
-</html>
+<div class="wrap"><header class="topbar" id="language">
+<a class="brand" href="/" title="BATHRON home"><img class="emblem" src="/img/emblem.png" alt="" width="560" height="360"><img class="word" src="/img/wordmark.png" alt="BATHRON" width="540" height="89"></a>
+<div class="topnav"><a href="#capabilities">Capabilities</a><a href="/docs/build.html">Build</a><nav class="langsel" aria-label="Language selection"><details class="langmenu"><summary><svg class="lm-globe" aria-hidden="true" viewBox="0 0 16 16" width="15" height="15"><circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M1.4 8h13.2M8 1.4c1.9 2 2.9 4.2 2.9 6.6S9.9 12.6 8 14.6C6.1 12.6 5.1 10.4 5.1 8S6.1 3.4 8 1.4z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span class="lm-current">English</span><svg class="lm-chev" aria-hidden="true" viewBox="0 0 12 12" width="11" height="11"><path d="M2 4.3 6 8.3l4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><ul class="lm-list"><li><span class="lm-item lm-on" aria-current="page" lang="en"><span class="lm-badge" aria-hidden="true">EN</span>English</span></li><li><a class="lm-item" href="/fr/" lang="fr" hreflang="fr"><span class="lm-badge" aria-hidden="true">FR</span>Français</a></li><li><a class="lm-item" href="/es/" lang="es" hreflang="es"><span class="lm-badge" aria-hidden="true">ES</span>Español</a></li><li><a class="lm-item" href="/zh-hans/" lang="zh-Hans" hreflang="zh-Hans"><span class="lm-badge" aria-hidden="true">简</span>中文（简体）</a></li><li><a class="lm-item" href="/hi/" lang="hi" hreflang="hi"><span class="lm-badge" aria-hidden="true">हि</span>हिन्दी</a></li><li><a class="lm-item" href="/ar/" lang="ar" hreflang="ar"><span class="lm-badge" aria-hidden="true">ع</span>العربية</a></li></ul></details></nav></div>
+</header></div>
+<main>
+<section class="hero wrap">
+<div><p class="eyebrow">Bitcoin facts. Shared rules.</p>
+<h1 data-i18n-context="hero">Programmable settlement<br><b>anchored in Bitcoin.</b></h1>
+<p class="intro">Build contracts, instruments, markets and applications around facts every BATHRON node can verify.</p>
+<div class="cta"><a class="btn primary" href="/docs/overview.html">Explore the protocol</a><a class="btn" href="/docs/node.html" title="Verify the chain yourself, from your own machine.">Run a node</a></div>
+<p class="doc-note">Documentation in English.</p></div>
+<figure class="hero-art"><img src="/img/settlement-flow.svg" alt="Bitcoin evidence passes through a network of verifying nodes to conditional settlement." width="560" height="430"><figcaption class="flow-labels"><span>Bitcoin facts</span><span>Verification</span><span>Settlement</span></figcaption></figure>
+</section>
+<section class="story" id="agreement"><div class="wrap">
+<div><p class="eyebrow">An agreement, in practice</p><h2>Only if.</h2></div>
+<div><h2>Alice wants to pay Bob in BTC. Only if a Bitcoin condition is met.</h2><a class="textlink" href="/docs/composition.html#assemble-a-payment">See how an agreement works</a></div>
+<p>Bitcoin alone cannot run the whole agreement. BATHRON verifies the Bitcoin fact and settles the intermediate leg; a provider handles the BTC leg.</p>
+</div></section>
+<section class="pillars wrap" id="capabilities">
+<article class="pillar"><img src="/img/facts.svg" alt="" width="280" height="110" loading="lazy"><h2>Bitcoin facts without an oracle.</h2><p>Proof of work and transaction evidence, checked by every node.</p><a class="textlink" href="/docs/bitcoin-facts.html">Explore Bitcoin facts</a></article>
+<article class="pillar"><img src="/img/conditions.svg" alt="" width="280" height="110" loading="lazy"><h2>Programmable settlement.</h2><p>Compose covenants, hashlocks and timelocks into an agreement.</p><a class="textlink" href="/docs/composition.html">Explore the primitives</a></article>
+<article class="pillar"><img src="/img/markets.svg" alt="" width="280" height="110" loading="lazy"><h2>Open markets.</h2><p>A pair exists because someone quotes it.</p><a class="textlink" href="/docs/markets.html">Understand markets</a></article>
+</section>
+<section class="pivot wrap" id="m1">
+<figure class="pivot-diagram"><div class="diagram-labels"><span>Direct pairs</span><span>Through M1</span></div><img src="/img/m1-pivot.svg" alt="Five assets need ten direct pairs, or five connections through M1." width="720" height="250" loading="lazy"><figcaption class="diagram-labels"><span>N × (N − 1) / 2</span><span>N</span></figcaption></figure>
+<div><p class="eyebrow">One settlement pivot</p><h2>Users keep their assets.<br>Providers use M1.</h2><p>Burning BTC creates M0. Locking M0 creates M1: working capital for providers, connecting quoted pairs through one inventory.</p><p class="risk">The burn is irreversible. Unlocking M1 returns M0, not BTC. No redeemable BTC reserve, no guaranteed peg or liquidity.</p><a class="textlink" href="/docs/m1.html">Understand M1</a></div>
+</section>
+<nav class="roles wrap"><p class="eyebrow">Find your role</p><a href="/docs/roles.html">Operators<small>Verify the network</small></a><a href="/docs/providers.html">Settlement Providers<small>BTC/M1 · Operator identity required</small></a><a href="/docs/providers.html">Liquidity Providers<small>X/M1 · Operator identity optional</small></a><a href="/docs/build.html">Builders<small>Compose applications</small></a></nav>
+</main>
+<div class="wrap"><p class="status">Public testnet on Bitcoin testnet4 · no mainnet · operator admission run by the project · no external audit yet</p>
+<footer><span class="footbrand">BATHRON</span><div class="footlinks"><a href="/docs/overview.html">Documentation</a><a href="https://github.com/bathron-network/bathron-core">GitHub</a><a href="mailto:security@bathron.org">Security</a><a href="#language">Language</a></div></footer></div>
+</body></html>

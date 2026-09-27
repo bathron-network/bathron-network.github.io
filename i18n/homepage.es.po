@@ -1,9 +1,9 @@
-# BATHRON homepage — es
+# BATHRON homepage — translated from index.html.
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"MIME-Version: 1.0\n"
 
 msgid "BATHRON: Programmable settlement anchored in Bitcoin"
 msgstr "BATHRON: Liquidación programable anclada en Bitcoin"
@@ -14,14 +14,20 @@ msgstr "Un protocolo de liquidación programable anclado en Bitcoin. Construye c
 msgid "Build contracts, instruments, markets and applications around facts every BATHRON node can verify. Covenants, hashlocks, timelocks and confidential transfers."
 msgstr "Construye contratos, instrumentos, mercados y aplicaciones sobre hechos que cualquier nodo BATHRON puede verificar. Covenants, hashlocks, timelocks y transferencias confidenciales."
 
-msgid "BATHRON: programmable settlement anchored in Bitcoin"
-msgstr "BATHRON: liquidación programable anclada en Bitcoin"
-
-msgid "BATHRON emblem"
-msgstr "Emblema de BATHRON"
+msgid "BATHRON home"
+msgstr "Inicio de BATHRON"
 
 msgid "BATHRON"
 msgstr "BATHRON"
+
+msgid "Capabilities"
+msgstr "Capacidades"
+
+msgid "Build"
+msgstr "Construir"
+
+msgid "Bitcoin facts. Shared rules."
+msgstr "Hechos de Bitcoin. Reglas compartidas."
 
 msgctxt "hero"
 msgid "Programmable settlement"
@@ -37,258 +43,140 @@ msgstr "Construye contratos, instrumentos, mercados y aplicaciones sobre hechos 
 msgid "Explore the protocol"
 msgstr "Descubrir el protocolo"
 
-msgid "See what can be built"
-msgstr "Ver qué se puede construir"
+msgid "Verify the chain yourself, from your own machine."
+msgstr "Verificar la cadena tú mismo, desde tu propia máquina."
 
 msgid "Run a node"
 msgstr "Ejecutar un nodo"
 
-msgid "BATHRON provides settlement. Providers connect external assets. Independent builders create the applications."
-msgstr "BATHRON proporciona la liquidación. Los proveedores conectan los activos externos. Los desarrolladores independientes crean las aplicaciones."
-
 msgid "Documentation in English."
 msgstr "Documentación en inglés."
 
-msgid "Facts, not opinions"
-msgstr "Hechos, no opiniones"
+msgid "Bitcoin evidence passes through a network of verifying nodes to conditional settlement."
+msgstr "Las pruebas de Bitcoin pasan por una red de nodos verificadores hasta la liquidación condicional."
 
-msgid "Bitcoin already proves things. Now a contract can use them."
-msgstr "Bitcoin ya establece hechos verificables. Los contratos ya pueden apoyarse en ellos."
+msgid "Bitcoin facts"
+msgstr "Hechos de Bitcoin"
 
-msgid "Operators relay Bitcoin headers without a designated relay. Every node checks the proof of work and transaction evidence: contracts use verified Bitcoin facts without an oracle reporting them."
-msgstr "Los Operators transmiten las cabeceras de Bitcoin sin un relé designado. Cada nodo comprueba la prueba de trabajo y las pruebas de transacción: los contratos utilizan hechos de Bitcoin verificados, sin un oráculo que los comunique."
+msgid "Verification"
+msgstr "Verificación"
 
-msgid "Mining difficulty"
-msgstr "Dificultad de minado"
+msgid "Settlement"
+msgstr "Liquidación"
 
-msgid "A threshold at an agreed Bitcoin height."
-msgstr "Un umbral en una altura de Bitcoin acordada."
+msgid "An agreement, in practice"
+msgstr "Un acuerdo en la práctica"
 
-msgid "Block height"
-msgstr "Altura de bloque"
+msgid "Only if."
+msgstr "Solo si."
 
-msgid "An agreed height reached by the verified chain."
-msgstr "Una altura acordada alcanzada por la cadena verificada."
+msgid "Alice wants to pay Bob in BTC. Only if a Bitcoin condition is met."
+msgstr "Alice quiere pagar a Bob en BTC. Solo si se cumple una condición de Bitcoin."
 
-msgid "Median time"
-msgstr "Tiempo mediano"
+msgid "See how an agreement works"
+msgstr "Ver cómo funciona un acuerdo"
 
-msgid "A threshold on Bitcoin median time."
-msgstr "Un umbral del tiempo mediano de Bitcoin."
+msgid "Bitcoin alone cannot run the whole agreement. BATHRON verifies the Bitcoin fact and settles the intermediate leg; a provider handles the BTC leg."
+msgstr "Bitcoin por sí solo no puede ejecutar todo el acuerdo. BATHRON verifica el hecho de Bitcoin y liquida el tramo intermedio; un proveedor gestiona el tramo en BTC."
 
-msgid "Confirmed payments"
-msgstr "Pagos confirmados"
+msgid "Bitcoin facts without an oracle."
+msgstr "Hechos de Bitcoin sin oráculo."
 
-msgid "A specified destination, minimum amount and confirmation depth."
-msgstr "Un destino, un importe mínimo y una profundidad de confirmación definidos."
+msgid "Proof of work and transaction evidence, checked by every node."
+msgstr "Prueba de trabajo y pruebas de transacciones, verificadas por cada nodo."
 
-msgid "Explore Bitcoin facts →"
-msgstr "Explorar los hechos de Bitcoin →"
+msgid "Explore Bitcoin facts"
+msgstr "Explorar los hechos de Bitcoin"
 
-msgid "Compose the conditions"
-msgstr "Combinar las condiciones"
+msgid "Programmable settlement."
+msgstr "Liquidación programable."
 
-msgid "Write the conditions. The network enforces them."
-msgstr "Escribe las condiciones. La red las hace cumplir."
+msgid "Compose covenants, hashlocks and timelocks into an agreement."
+msgstr "Combinar covenants, hashlocks y timelocks en un acuerdo."
 
-msgid "Release a payment to a fixed recipient after a Bitcoin payment is proven; provide a separate recovery path after a deadline. The builder defines the branches and who submits each transaction."
-msgstr "Liberar un pago a un destinatario fijo tras probar un pago en Bitcoin; prever una vía de recuperación separada tras un plazo. El desarrollador define las ramas y quién presenta cada transacción."
+msgid "Explore the primitives"
+msgstr "Explorar las primitivas"
 
-msgid "Covenants"
-msgstr "Covenants"
-
-msgid "Constrain destinations and successor outputs, including policies carried forward by recursive covenants."
-msgstr "Restringir destinos y salidas sucesoras, incluidas las reglas que conservan los covenants recursivos."
-
-msgid "Hashlocks"
-msgstr "Hashlocks"
-
-msgid "Release value against the reveal of a secret."
-msgstr "Liberar valor a cambio de revelar un secreto."
-
-msgid "Timelocks"
-msgstr "Timelocks"
-
-msgid "Make an outcome depend on time, absolute or relative."
-msgstr "Hacer que un resultado dependa del tiempo, absoluto o relativo."
-
-msgid "Signatures, attestations and DLCs"
-msgstr "Firmas, atestaciones y DLC"
-
-msgid "Authorize a spend or authenticate an external statement. DLCs combine attested outcomes with payment and recovery branches."
-msgstr "Autorizar un gasto o autenticar una declaración externa. Los DLC combinan resultados atestados con ramas de pago y recuperación."
-
-msgid "Explore the primitives →"
-msgstr "Explorar las primitivas →"
-
-msgid "One settlement pivot"
-msgstr "Una unidad común de liquidación"
-
-msgid "Users keep their assets. Providers use M1."
-msgstr "Los usuarios mantienen sus activos. Los proveedores utilizan M1."
-
-msgid "Pairing each of N assets with M1 needs N connections instead of a full mesh of direct pairs. One M1 inventory connects a provider to all quoted pairs and LPs, subject to their available liquidity and terms."
-msgstr "Conectar cada uno de N activos con M1 requiere N conexiones en lugar de una red completa de pares directos. Un mismo inventario de M1 conecta a un proveedor con todos los pares cotizados y LP, según su liquidez disponible y sus condiciones."
-
-msgid "Why burn BTC?"
-msgstr "¿Por qué quemar BTC?"
-
-msgid "Verified BTC destruction creates M0, with no premine. Locking M0 one for one creates M1: working capital for settlement. Providers can also buy existing M0 or M1 from holders."
-msgstr "La destrucción verificada de BTC crea M0, sin preminado. Bloquear M0 en proporción uno a uno crea M1: capital de trabajo para la liquidación. Los proveedores también pueden comprar M0 o M1 existentes a sus titulares."
-
-msgid "Unlocking M1 returns M0, not BTC. The burn is irreversible, creates no redeemable BTC reserve and guarantees no market peg or price floor."
-msgstr "Desbloquear M1 devuelve M0, no BTC. La quema es irreversible, no crea una reserva canjeable por BTC ni garantiza paridad de mercado o precio mínimo."
-
-msgid "Understand M1 →"
-msgstr "Entender M1 →"
-
-msgid "Independent applications"
-msgstr "Aplicaciones independientes"
-
-msgid "Build an agreement from shared primitives."
-msgstr "Construir un acuerdo con primitivas compartidas."
-
-msgid "Applications using existing primitives need no consensus change. A new primitive requires specification and review."
-msgstr "Las aplicaciones que usan primitivas existentes no necesitan cambiar el consenso. Una nueva primitiva requiere especificación y revisión."
-
-msgid "Mining difficulty instruments"
-msgstr "Instrumentos sobre la dificultad de minado"
-
-msgid "Agreements that settle on Bitcoin's own difficulty, with no outside reporter involved."
-msgstr "Acuerdos que se liquidan según la propia dificultad de Bitcoin, sin que intervenga ninguna fuente de datos externa."
-
-msgid "Payment-driven escrows"
-msgstr "Depósitos en garantía activados por un pago"
-
-msgid "Value that releases when a Bitcoin payment is confirmed and settled deeply enough."
-msgstr "Valor que se libera cuando un pago en Bitcoin queda confirmado y suficientemente enterrado en la cadena."
-
-msgid "Provider inventory controls"
-msgstr "Controles de inventario de los proveedores"
-
-msgid "Delayed withdrawals, approved destinations and recovery paths, composed with recursive covenants."
-msgstr "Retiros diferidos, destinos autorizados y vías de recuperación, combinados con covenants recursivos."
-
-msgid "USDBTC: a third-party idea"
-msgstr "USDBTC: una idea para terceros"
-
-msgid "A possible exchange of risk between a stable-value-and-yield objective and leveraged BTC exposure, using an external price oracle and providers. An application idea, not a BATHRON product or a promise of stability or yield."
-msgstr "Un posible intercambio de riesgo entre un objetivo de valor estable con rendimiento y una exposición apalancada a BTC, mediante un oráculo de precios y proveedores externos. Una idea de aplicación, no un producto BATHRON ni una promesa de estabilidad o rendimiento."
-
-msgid "Explore applications →"
-msgstr "Explorar las aplicaciones →"
-
-msgid "Private inventory transfers"
-msgstr "Transferencias privadas de inventario"
-
-msgid "Shielded M0 transfers protect amounts before or after settlement. M1 receipts, conditional exchanges and burn or lock/unlock operations remain public."
-msgstr "Las transferencias protegidas de M0 ocultan los importes antes o después de la liquidación. Los recibos M1, los intercambios condicionales y las operaciones de quema o bloqueo/desbloqueo siguen siendo públicos."
-
-msgid "Open markets"
-msgstr "Mercados abiertos"
+msgid "Open markets."
+msgstr "Mercados abiertos."
 
 msgid "A pair exists because someone quotes it."
 msgstr "Un par existe en cuanto alguien le pone precio."
 
-msgid "Providers publish offers from their inventory. A second provider can quote the same pair without an invitation or listing permission. Announcements, relays and indexers help discovery outside consensus; published service facts inform reputation, without a protocol ranking."
-msgstr "Los proveedores publican ofertas con su inventario. Un segundo proveedor puede cotizar el mismo par sin invitación ni permiso de listado. Anuncios, relés e indexadores facilitan el descubrimiento fuera del consenso; los hechos publicados sobre el servicio informan la reputación, sin clasificación del protocolo."
+msgid "Understand markets"
+msgstr "Entender los mercados"
 
-msgid "Example: stablecoin → BTC"
-msgstr "Ejemplo: stablecoin → BTC"
+msgid "Direct pairs"
+msgstr "Pares directos"
 
-msgid "Alice sends stablecoin X and receives BTC. The LP quotes X/M1 and supplies M1 to the SP, which quotes BTC/M1 and supplies BTC. Alice keeps her keys and never needs to hold M1."
-msgstr "Alice envía la stablecoin X y recibe BTC. El LP cotiza X/M1 y aporta M1 al SP, que cotiza BTC/M1 y aporta BTC. Alice conserva sus claves y nunca necesita tener M1."
+msgid "Through M1"
+msgstr "A través de M1"
 
-msgid "This route requires compatible hashlocks and timed refunds on X's chain, funded quotes, ordered deadlines and active monitoring. Each external leg follows its own chain's rules; recovery requires a transaction."
-msgstr "Esta ruta requiere hashlocks y reembolsos temporizados compatibles en la cadena de X, ofertas financiadas, plazos ordenados y vigilancia activa. Cada tramo externo sigue las reglas de su cadena; recuperar fondos requiere una transacción."
+msgid "Five assets need ten direct pairs, or five connections through M1."
+msgstr "Cinco activos necesitan diez pares directos o cinco conexiones a través de M1."
 
-msgid "Follow the cross-chain example →"
-msgstr "Seguir el ejemplo entre cadenas →"
+msgid "N × (N − 1) / 2"
+msgstr "N × (N − 1) / 2"
 
-msgid "Understand markets →"
-msgstr "Entender los mercados →"
+msgid "N"
+msgstr "N"
 
-msgid "Distinct roles, shared rules"
-msgstr "Funciones distintas, reglas compartidas"
+msgid "One settlement pivot"
+msgstr "Una unidad común de liquidación"
 
-msgid "Know whom you rely on, and for what."
-msgstr "Saber en quién se confía y para qué."
+msgid "Users keep their assets."
+msgstr "Los usuarios conservan sus activos."
+
+msgid "Providers use M1."
+msgstr "Los proveedores usan M1."
+
+msgid "Burning BTC creates M0. Locking M0 creates M1: working capital for providers, connecting quoted pairs through one inventory."
+msgstr "Quemar BTC crea M0. Bloquear M0 crea M1: capital de trabajo para los proveedores que conecta los pares cotizados mediante un único inventario."
+
+msgid "The burn is irreversible. Unlocking M1 returns M0, not BTC. No redeemable BTC reserve, no guaranteed peg or liquidity."
+msgstr "La quema es irreversible. Desbloquear M1 devuelve M0, no BTC. Sin reserva canjeable por BTC ni paridad o liquidez garantizadas."
+
+msgid "Understand M1"
+msgstr "Entender M1"
+
+msgid "Find your role"
+msgstr "Encuentra tu función"
 
 msgid "Operators"
 msgstr "Operators"
 
-msgid "A registered identity requires a burned ticket and maturity. This visible, irreversible entry cost is separate from settlement inventory. Operators can produce blocks and participate in finality."
-msgstr "La identidad registrada requiere un ticket quemado y madurez. Este coste de entrada visible e irreversible es independiente del inventario de liquidación. Los Operators pueden producir bloques y participar en la finalidad."
+msgid "Verify the network"
+msgstr "Verificar la red"
 
-msgid "Settlement Providers · BTC/M1"
-msgstr "Settlement Providers · BTC/M1"
+msgid "Settlement Providers"
+msgstr "Proveedores de liquidación"
 
-msgid "The SP quotes and orchestrates BTC/M1, including the Bitcoin leg. An Operator identity is required; block production is optional."
-msgstr "El SP cotiza y coordina BTC/M1, incluido el tramo Bitcoin. La identidad Operator es obligatoria; producir bloques es opcional."
+msgid "BTC/M1 · Operator identity required"
+msgstr "BTC/M1 · Identidad Operator obligatoria"
 
-msgid "Liquidity Providers · X/M1"
-msgstr "Liquidity Providers · X/M1"
+msgid "Liquidity Providers"
+msgstr "Proveedores de liquidez"
 
-msgid "The LP quotes X/M1, supplies liquidity and manages the external asset leg. An Operator identity is optional."
-msgstr "El LP cotiza X/M1, aporta liquidez y gestiona el tramo del activo externo. La identidad Operator es opcional."
+msgid "X/M1 · Operator identity optional"
+msgstr "X/M1 · Identidad Operator opcional"
 
-msgid "Builders define applications, users choose terms, and observers verify independently. An Operator can also provide a service; the identity-to-service link is public and the same transaction rules apply."
-msgstr "Los desarrolladores definen las aplicaciones, los usuarios eligen las condiciones y los observadores verifican de forma independiente. Un Operator también puede prestar un servicio; el vínculo entre identidad y servicio es público y se aplican las mismas reglas de transacción."
+msgid "Builders"
+msgstr "Desarrolladores"
 
-msgid "Objectively proven double signing permanently bans the Operator identity, with no slashing. The burned ticket remains spent."
-msgstr "La doble firma demostrada objetivamente provoca la prohibición permanente de la identidad Operator, sin slashing. El ticket quemado sigue gastado."
+msgid "Compose applications"
+msgstr "Componer aplicaciones"
 
-msgid "Find your role →"
-msgstr "Encontrar su función →"
-
-msgid "BATHRON consensus and M1 remain shared dependencies across applications. Providers are responsible for inventory and execution; external attestations depend on their named source."
-msgstr "El consenso de BATHRON y M1 siguen siendo dependencias compartidas entre aplicaciones. Los proveedores responden del inventario y la ejecución; las atestaciones externas dependen de su fuente identificada."
-
-msgid "Where trust lives →"
-msgstr "Dónde reside la confianza →"
-
-msgid "Build and verify"
-msgstr "Construir y verificar"
-
-msgid "From an agreement to verifiable transactions."
-msgstr "De un acuerdo a transacciones verificables."
-
-msgid "Build an application"
-msgstr "Crear una aplicación"
-
-msgid "Define funding, payment and recovery before writing the transactions."
-msgstr "Definir financiación, pago y recuperación antes de escribir las transacciones."
-
-msgid "Operate a provider"
-msgstr "Operar un servicio de liquidez o liquidación"
-
-msgid "Manage inventory, quotes, keys, deadlines and monitoring."
-msgstr "Gestionar inventario, cotizaciones, claves, plazos y vigilancia."
-
-msgid "Verify the chain yourself, from your own machine."
-msgstr "Verificar la cadena tú mismo, desde tu propia máquina."
-
-msgid "Protocol reference"
-msgstr "Referencia del protocolo"
-
-msgid "Inspect the RPC, transactions and validation rules."
-msgstr "Examinar RPC, transacciones y reglas de validación."
-
-msgid "contact@bathron.org"
-msgstr "contact@bathron.org"
-
-msgid "Source code"
-msgstr "Código fuente"
+msgid "Public testnet on Bitcoin testnet4 · no mainnet · operator admission run by the project · no external audit yet"
+msgstr "Testnet pública sobre Bitcoin testnet4 · sin mainnet · admisión de operadores gestionada por el proyecto · sin auditoría externa todavía"
 
 msgid "Documentation"
 msgstr "Documentación"
 
-msgid "Security policy"
-msgstr "Política de seguridad"
+msgid "GitHub"
+msgstr "GitHub"
 
-msgid "Report a vulnerability to"
-msgstr "Informar de una vulnerabilidad a"
+msgid "Security"
+msgstr "Seguridad"
 
-msgid "security@bathron.org"
-msgstr "security@bathron.org"
-
+msgid "Language"
+msgstr "Idioma"
