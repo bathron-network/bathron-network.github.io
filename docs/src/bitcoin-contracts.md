@@ -16,9 +16,9 @@ Difficulty predicates return pass or fail. A stepped payoff can combine several 
 
 Alice and Bob can require proof of a Bitcoin payment before a BATHRON output is released. The agreement specifies the Bitcoin destination script, minimum amount and required depth. Evidence ties the relevant transaction to the accepted header view.
 
-A covenant fixes where the released value goes. Additional authorization or a recovery path can complete the agreement. The Bitcoin predicate supplies the evidence for one condition; it does not arrange the entire trade.
+A covenant fixes where the released value goes. Additional authorization or a recovery path can complete the agreement. The Bitcoin predicate supplies the evidence for one condition; it does not arrange the entire operation.
 
-This pattern supports delivery against payment when the delivery is the specified Bitcoin payment. Physical goods need a different evidence source.
+This pattern links a BATHRON payment to evidence of the specified Bitcoin payment. Physical goods need a different evidence source.
 
 ## Height and time conditions
 
@@ -28,6 +28,6 @@ Readable history follows the protocol's accepted Bitcoin view and depth rules. A
 
 ## Keep the evidence boundary visible
 
-Comparisons at separate heights can test predefined threshold combinations. They do not calculate an arbitrary difference or percentage change between the two difficulties; such a payoff needs an explicit construction. Cumulative chainwork, although used to verify headers, is not a script predicate. An exchange rate or an event on another chain needs an external attestation or a separate application mechanism.
+Comparisons at separate heights can test predefined threshold combinations. They do not calculate an arbitrary difference or percentage change between the two difficulties; such a payoff needs an explicit construction. Cumulative chainwork, although used to verify headers, is not a script predicate. A conversion rate or an event on another chain needs an external attestation or a separate application mechanism.
 
 See [Bitcoin facts in contracts](bitcoin-facts.md) for the predicate families, [Bitcoin verification](bitcoin-verification.md) for proofs, and [Script reference](script.md) for names. Show the human agreement beside those exact conditions before asking participants to fund it.

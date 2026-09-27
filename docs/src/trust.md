@@ -51,9 +51,9 @@ Choosing BATHRON also means relying on its own consensus and holding or using it
 
 ## Privacy and economic boundaries
 
-Shielding protects M0 transfer details. It does not hide M1 receipts, conditional exchanges, burn or lock/unlock operations, or erase information exposed through entry and exit points, counterparties and application records.
+Shielding protects M0 transfer details. It does not hide M1 receipts, conditional settlements, burn or lock/unlock operations, or erase information exposed through entry and exit points, counterparties and application records.
 
-A BTC burn is irreversible and creates no redeemable Bitcoin reserve. Unlocking M1 returns M0, not BTC. The one-for-one M0/M1 relationship sets no external price floor or fixed exchange rate. A possible pair is not available liquidity: it needs providers, executable quotes and funded inventory on each leg. Demand, spreads and returns depend on participants and their economic arrangements.
+A BTC burn is irreversible and creates no redeemable Bitcoin reserve. Unlocking M1 returns M0, not BTC. The one-for-one M0/M1 relationship sets no external price floor or fixed conversion rate. A possible pair is not available liquidity: it needs providers, executable quotes and funded inventory on each leg. Demand, spreads and returns depend on participants and their economic arrangements.
 
 BATHRON consensus and M1 are shared dependencies across applications; using several providers does not remove those common risks. Cross-chain recovery depends on each chain's rules and progress, correctly ordered deadlines, retained keys and data, and timely transaction inclusion. Compatible hashlocks alone do not establish universal atomicity.
 
@@ -61,7 +61,7 @@ BATHRON consensus and M1 are shared dependencies across applications; using seve
 
 A custodian controls funds under its keys. A contract constrains spends through rules visible to participants. A relay helps find offers. An indexer organizes observations. A human arbitrator judges facts that a script cannot interpret. Each can be useful when its authority matches the agreement.
 
-BATHRON reads Bitcoin; it never commands it. Finality on BATHRON does not move an external asset. For a trade across chains, the external leg follows its own rules and the provider's execution process. [Settlement across chains](cross-chain.md) makes that division explicit.
+BATHRON reads Bitcoin; it never commands it. Finality on BATHRON does not move an external asset. For an asset conversion across chains, the external leg follows its own rules and the provider's execution process. [Settlement across chains](cross-chain.md) makes that division explicit.
 
 ## Make recovery an action
 

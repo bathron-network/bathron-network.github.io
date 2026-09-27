@@ -8,7 +8,7 @@ The ticket burn is a real, publicly visible and irreversible entry cost. Maturit
 
 ## Consensus responsibilities
 
-- **One Operator, one vote.** Consensus participation follows Operator identity, not a provider's trading volume or a customer's balance.
+- **One Operator, one vote.** Consensus participation follows Operator identity, not a provider's volume of asset conversions or a customer's balance.
 - **Permanent ban for objectively proven double signing; no slashing.** The ban removes the offending identity's eligibility. The admission cost has already been spent through the ticket burn.
 - **Finality above validation.** Agreement on history applies to validated blocks. Signatures do not override monetary or script rules.
 
