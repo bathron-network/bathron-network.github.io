@@ -1,9 +1,9 @@
-# BATHRON homepage — zh-Hans
+# BATHRON homepage — translated from index.html.
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Language: zh-Hans\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"MIME-Version: 1.0\n"
 
 msgid "BATHRON: Programmable settlement anchored in Bitcoin"
 msgstr "BATHRON：锚定于 Bitcoin 的可编程结算"
@@ -14,14 +14,20 @@ msgstr "一个锚定于 Bitcoin 的可编程结算协议。围绕每个 BATHRON 
 msgid "Build contracts, instruments, markets and applications around facts every BATHRON node can verify. Covenants, hashlocks, timelocks and confidential transfers."
 msgstr "围绕每个 BATHRON 节点都能验证的事实，构建合约、金融工具、市场与应用。Covenants、Hashlocks、Timelocks 与机密转账。"
 
-msgid "BATHRON: programmable settlement anchored in Bitcoin"
-msgstr "BATHRON：锚定于 Bitcoin 的可编程结算"
-
-msgid "BATHRON emblem"
-msgstr "BATHRON 徽标"
+msgid "BATHRON home"
+msgstr "BATHRON 首页"
 
 msgid "BATHRON"
 msgstr "BATHRON"
+
+msgid "Capabilities"
+msgstr "能力"
+
+msgid "Build"
+msgstr "构建"
+
+msgid "Bitcoin facts. Shared rules."
+msgstr "Bitcoin 事实。共同规则。"
 
 msgctxt "hero"
 msgid "Programmable settlement"
@@ -37,258 +43,140 @@ msgstr "围绕每个 BATHRON 节点都能验证的事实，构建合约、金融
 msgid "Explore the protocol"
 msgstr "了解协议"
 
-msgid "See what can be built"
-msgstr "看看能构建什么"
+msgid "Verify the chain yourself, from your own machine."
+msgstr "在你自己的机器上亲自验证这条链。"
 
 msgid "Run a node"
 msgstr "运行节点"
 
-msgid "BATHRON provides settlement. Providers connect external assets. Independent builders create the applications."
-msgstr "BATHRON 提供结算，服务商连接外部资产，独立开发者构建应用。"
-
 msgid "Documentation in English."
 msgstr "文档为英文。"
 
-msgid "Facts, not opinions"
-msgstr "事实，而非观点"
+msgid "Bitcoin evidence passes through a network of verifying nodes to conditional settlement."
+msgstr "Bitcoin 证据经过验证节点网络，最终用于条件结算。"
 
-msgid "Bitcoin already proves things. Now a contract can use them."
-msgstr "Bitcoin 早已确立可验证的事实。合约现在可以依据这些事实。"
+msgid "Bitcoin facts"
+msgstr "Bitcoin 事实"
 
-msgid "Operators relay Bitcoin headers without a designated relay. Every node checks the proof of work and transaction evidence: contracts use verified Bitcoin facts without an oracle reporting them."
-msgstr "Operators 转发 Bitcoin 区块头，无需指定中继者。每个节点检查工作量证明和交易证据：合约使用经验证的 Bitcoin 事实，无需预言机报告。"
+msgid "Verification"
+msgstr "验证"
 
-msgid "Mining difficulty"
-msgstr "挖矿难度"
+msgid "Settlement"
+msgstr "结算"
 
-msgid "A threshold at an agreed Bitcoin height."
-msgstr "约定 Bitcoin 高度上的难度阈值。"
+msgid "An agreement, in practice"
+msgstr "实际协议示例"
 
-msgid "Block height"
-msgstr "区块高度"
+msgid "Only if."
+msgstr "仅当条件满足。"
 
-msgid "An agreed height reached by the verified chain."
-msgstr "已验证链达到约定高度。"
+msgid "Alice wants to pay Bob in BTC. Only if a Bitcoin condition is met."
+msgstr "Alice 想用 BTC 向 Bob 付款，但前提是满足一项 Bitcoin 条件。"
 
-msgid "Median time"
-msgstr "中位时间"
+msgid "See how an agreement works"
+msgstr "了解协议如何运作"
 
-msgid "A threshold on Bitcoin median time."
-msgstr "Bitcoin 中位时间达到指定阈值。"
+msgid "Bitcoin alone cannot run the whole agreement. BATHRON verifies the Bitcoin fact and settles the intermediate leg; a provider handles the BTC leg."
+msgstr "仅靠 Bitcoin 无法执行整个协议。BATHRON 验证 Bitcoin 事实并结算中间环节；服务商负责 BTC 环节。"
 
-msgid "Confirmed payments"
-msgstr "已确认的支付"
+msgid "Bitcoin facts without an oracle."
+msgstr "无需预言机的 Bitcoin 事实。"
 
-msgid "A specified destination, minimum amount and confirmation depth."
-msgstr "指定收款目标、最低金额及确认深度。"
+msgid "Proof of work and transaction evidence, checked by every node."
+msgstr "每个节点都验证工作量证明和交易证据。"
 
-msgid "Explore Bitcoin facts →"
-msgstr "探索 Bitcoin 事实 →"
+msgid "Explore Bitcoin facts"
+msgstr "探索 Bitcoin 事实"
 
-msgid "Compose the conditions"
-msgstr "组合条件"
+msgid "Programmable settlement."
+msgstr "可编程结算。"
 
-msgid "Write the conditions. The network enforces them."
-msgstr "写下条件，由网络强制执行。"
+msgid "Compose covenants, hashlocks and timelocks into an agreement."
+msgstr "将 covenants、hashlocks 和 timelocks 组合成协议。"
 
-msgid "Release a payment to a fixed recipient after a Bitcoin payment is proven; provide a separate recovery path after a deadline. The builder defines the branches and who submits each transaction."
-msgstr "在 Bitcoin 付款得到证明后，向固定收款人支付；截止时间后另设取回路径。开发者定义各分支，以及由谁提交每笔交易。"
+msgid "Explore the primitives"
+msgstr "探索基础原语"
 
-msgid "Covenants"
-msgstr "Covenants"
-
-msgid "Constrain destinations and successor outputs, including policies carried forward by recursive covenants."
-msgstr "约束收款目标和后续输出，包括通过递归契约延续的规则。"
-
-msgid "Hashlocks"
-msgstr "Hashlocks"
-
-msgid "Release value against the reveal of a secret."
-msgstr "以揭示秘密来释放价值。"
-
-msgid "Timelocks"
-msgstr "Timelocks"
-
-msgid "Make an outcome depend on time, absolute or relative."
-msgstr "让结果取决于时间，绝对或相对。"
-
-msgid "Signatures, attestations and DLCs"
-msgstr "签名、证明声明与 DLC"
-
-msgid "Authorize a spend or authenticate an external statement. DLCs combine attested outcomes with payment and recovery branches."
-msgstr "授权支出或认证外部声明。DLC 将经证明的结果与付款及取回分支结合。"
-
-msgid "Explore the primitives →"
-msgstr "探索基础构件 →"
-
-msgid "One settlement pivot"
-msgstr "统一的结算枢纽"
-
-msgid "Users keep their assets. Providers use M1."
-msgstr "用户使用自己的资产，服务商使用 M1。"
-
-msgid "Pairing each of N assets with M1 needs N connections instead of a full mesh of direct pairs. One M1 inventory connects a provider to all quoted pairs and LPs, subject to their available liquidity and terms."
-msgstr "将 N 种资产各自与 M1 配对只需 N 条连接，无需构建完整的直接交易对网络。同一份 M1 库存可连接所有有报价的交易对和 LP，具体取决于其可用流动性及条款。"
-
-msgid "Why burn BTC?"
-msgstr "为什么销毁 BTC？"
-
-msgid "Verified BTC destruction creates M0, with no premine. Locking M0 one for one creates M1: working capital for settlement. Providers can also buy existing M0 or M1 from holders."
-msgstr "经验证的 BTC 销毁产生 M0，没有预挖。将 M0 按一比一锁定可生成 M1，作为结算的营运资金。服务商也可向持有人购买已有的 M0 或 M1。"
-
-msgid "Unlocking M1 returns M0, not BTC. The burn is irreversible, creates no redeemable BTC reserve and guarantees no market peg or price floor."
-msgstr "解锁 M1 返还的是 M0，而非 BTC。销毁不可逆，不产生可兑付的 BTC 储备，也不保证市场挂钩汇率或价格下限。"
-
-msgid "Understand M1 →"
-msgstr "了解 M1 →"
-
-msgid "Independent applications"
-msgstr "独立应用"
-
-msgid "Build an agreement from shared primitives."
-msgstr "用共享基础构件构建协议。"
-
-msgid "Applications using existing primitives need no consensus change. A new primitive requires specification and review."
-msgstr "使用现有基础构件的应用无需修改共识。新的基础构件需要规范和审查。"
-
-msgid "Mining difficulty instruments"
-msgstr "挖矿难度金融工具"
-
-msgid "Agreements that settle on Bitcoin's own difficulty, with no outside reporter involved."
-msgstr "依据 Bitcoin 自身难度结算的协议，无需任何外部数据源介入。"
-
-msgid "Payment-driven escrows"
-msgstr "由支付触发的托管"
-
-msgid "Value that releases when a Bitcoin payment is confirmed and settled deeply enough."
-msgstr "当一笔 Bitcoin 支付被确认、并在链上深埋到足够深度时释放的价值。"
-
-msgid "Provider inventory controls"
-msgstr "服务商库存控制"
-
-msgid "Delayed withdrawals, approved destinations and recovery paths, composed with recursive covenants."
-msgstr "通过递归契约组合延迟提款、许可目标及取回路径。"
-
-msgid "USDBTC: a third-party idea"
-msgstr "USDBTC：第三方应用构想"
-
-msgid "A possible exchange of risk between a stable-value-and-yield objective and leveraged BTC exposure, using an external price oracle and providers. An application idea, not a BATHRON product or a promise of stability or yield."
-msgstr "通过外部价格预言机和服务商，在稳定价值及收益目标与杠杆 BTC 敞口之间交换风险的一种可能方案。这是应用构想，并非 BATHRON 产品，也不承诺稳定性或收益。"
-
-msgid "Explore applications →"
-msgstr "探索应用 →"
-
-msgid "Private inventory transfers"
-msgstr "库存隐私转账"
-
-msgid "Shielded M0 transfers protect amounts before or after settlement. M1 receipts, conditional exchanges and burn or lock/unlock operations remain public."
-msgstr "M0 屏蔽转账可在结算前后保护金额隐私。M1 凭证、条件交换以及销毁或锁定／解锁操作仍然公开。"
-
-msgid "Open markets"
-msgstr "开放市场"
+msgid "Open markets."
+msgstr "开放市场。"
 
 msgid "A pair exists because someone quotes it."
 msgstr "只要有人报价，交易对就存在。"
 
-msgid "Providers publish offers from their inventory. A second provider can quote the same pair without an invitation or listing permission. Announcements, relays and indexers help discovery outside consensus; published service facts inform reputation, without a protocol ranking."
-msgstr "服务商以自身库存发布报价。第二家服务商无需邀请或上币许可即可为同一交易对报价。公告、中继和索引服务在共识之外帮助发现报价；公开的服务事实为信誉判断提供依据，协议不进行排名。"
+msgid "Understand markets"
+msgstr "了解市场"
 
-msgid "Example: stablecoin → BTC"
-msgstr "示例：稳定币 → BTC"
+msgid "Direct pairs"
+msgstr "直接交易对"
 
-msgid "Alice sends stablecoin X and receives BTC. The LP quotes X/M1 and supplies M1 to the SP, which quotes BTC/M1 and supplies BTC. Alice keeps her keys and never needs to hold M1."
-msgstr "Alice 发送稳定币 X 并收到 BTC。LP 为 X/M1 报价并向 SP 提供 M1，SP 为 BTC/M1 报价并提供 BTC。Alice 保留自己的密钥，无需持有 M1。"
+msgid "Through M1"
+msgstr "通过 M1"
 
-msgid "This route requires compatible hashlocks and timed refunds on X's chain, funded quotes, ordered deadlines and active monitoring. Each external leg follows its own chain's rules; recovery requires a transaction."
-msgstr "这一路径要求 X 链支持兼容的哈希锁和限时退款，并具备资金支持的报价、合理排序的截止时间及主动监控。每条外部交易腿遵循其自身链的规则；取回资金需要提交交易。"
+msgid "Five assets need ten direct pairs, or five connections through M1."
+msgstr "五种资产需要十个直接交易对，或通过 M1 建立五条连接。"
 
-msgid "Follow the cross-chain example →"
-msgstr "查看跨链示例 →"
+msgid "N × (N − 1) / 2"
+msgstr "N × (N − 1) / 2"
 
-msgid "Understand markets →"
-msgstr "了解市场 →"
+msgid "N"
+msgstr "N"
 
-msgid "Distinct roles, shared rules"
-msgstr "角色各异，规则共享"
+msgid "One settlement pivot"
+msgstr "统一的结算枢纽"
 
-msgid "Know whom you rely on, and for what."
-msgstr "明确依赖谁，以及依赖什么。"
+msgid "Users keep their assets."
+msgstr "用户保留自己的资产。"
+
+msgid "Providers use M1."
+msgstr "服务商使用 M1。"
+
+msgid "Burning BTC creates M0. Locking M0 creates M1: working capital for providers, connecting quoted pairs through one inventory."
+msgstr "销毁 BTC 生成 M0。锁定 M0 生成 M1：作为服务商的营运资金，通过统一库存连接已报价的交易对。"
+
+msgid "The burn is irreversible. Unlocking M1 returns M0, not BTC. No redeemable BTC reserve, no guaranteed peg or liquidity."
+msgstr "销毁不可逆。解锁 M1 返还的是 M0，而非 BTC。没有可赎回的 BTC 储备，也不保证价格锚定或流动性。"
+
+msgid "Understand M1"
+msgstr "了解 M1"
+
+msgid "Find your role"
+msgstr "找到你的角色"
 
 msgid "Operators"
 msgstr "Operators"
 
-msgid "A registered identity requires a burned ticket and maturity. This visible, irreversible entry cost is separate from settlement inventory. Operators can produce blocks and participate in finality."
-msgstr "注册身份要求销毁准入凭证并满足成熟期。这笔可见且不可逆的准入成本与结算库存分开。Operators 可生产区块并参与最终性确认。"
+msgid "Verify the network"
+msgstr "验证网络"
 
-msgid "Settlement Providers · BTC/M1"
-msgstr "结算服务商 · BTC/M1"
+msgid "Settlement Providers"
+msgstr "结算服务商"
 
-msgid "The SP quotes and orchestrates BTC/M1, including the Bitcoin leg. An Operator identity is required; block production is optional."
-msgstr "SP 为 BTC/M1 报价并协调结算，包括 Bitcoin 交易腿。必须具备 Operator 身份，但无需生产区块。"
+msgid "BTC/M1 · Operator identity required"
+msgstr "BTC/M1 · 必须具有 Operator 身份"
 
-msgid "Liquidity Providers · X/M1"
-msgstr "流动性服务商 · X/M1"
+msgid "Liquidity Providers"
+msgstr "流动性提供商"
 
-msgid "The LP quotes X/M1, supplies liquidity and manages the external asset leg. An Operator identity is optional."
-msgstr "LP 为 X/M1 报价、提供流动性并管理外部资产交易腿。Operator 身份可选。"
+msgid "X/M1 · Operator identity optional"
+msgstr "X/M1 · Operator 身份可选"
 
-msgid "Builders define applications, users choose terms, and observers verify independently. An Operator can also provide a service; the identity-to-service link is public and the same transaction rules apply."
-msgstr "开发者定义应用，用户选择条款，观察者独立验证。Operator 也可以提供服务；身份与服务的关联公开，并适用相同的交易规则。"
+msgid "Builders"
+msgstr "开发者"
 
-msgid "Objectively proven double signing permanently bans the Operator identity, with no slashing. The burned ticket remains spent."
-msgstr "经客观证据确认的双重签名将导致 Operator 身份被永久禁用，不实行罚没。已销毁的准入凭证不会返还。"
+msgid "Compose applications"
+msgstr "组合构建应用"
 
-msgid "Find your role →"
-msgstr "找到你的角色 →"
-
-msgid "BATHRON consensus and M1 remain shared dependencies across applications. Providers are responsible for inventory and execution; external attestations depend on their named source."
-msgstr "BATHRON 共识和 M1 仍是各应用的共同依赖。服务商负责库存和执行；外部证明声明依赖其指定来源。"
-
-msgid "Where trust lives →"
-msgstr "信任的边界 →"
-
-msgid "Build and verify"
-msgstr "构建与验证"
-
-msgid "From an agreement to verifiable transactions."
-msgstr "从协议到可验证的交易。"
-
-msgid "Build an application"
-msgstr "构建应用"
-
-msgid "Define funding, payment and recovery before writing the transactions."
-msgstr "编写交易前，先定义注资、付款及取回流程。"
-
-msgid "Operate a provider"
-msgstr "运营服务商"
-
-msgid "Manage inventory, quotes, keys, deadlines and monitoring."
-msgstr "管理库存、报价、密钥、截止时间及监控。"
-
-msgid "Verify the chain yourself, from your own machine."
-msgstr "在你自己的机器上亲自验证这条链。"
-
-msgid "Protocol reference"
-msgstr "协议参考"
-
-msgid "Inspect the RPC, transactions and validation rules."
-msgstr "查阅 RPC、交易及验证规则。"
-
-msgid "contact@bathron.org"
-msgstr "contact@bathron.org"
-
-msgid "Source code"
-msgstr "源代码"
+msgid "Public testnet on Bitcoin testnet4 · no mainnet · operator admission run by the project · no external audit yet"
+msgstr "基于 Bitcoin testnet4 的公共测试网 · 无主网 · 运营者准入由项目方管理 · 尚未进行外部审计"
 
 msgid "Documentation"
 msgstr "文档"
 
-msgid "Security policy"
-msgstr "安全策略"
+msgid "GitHub"
+msgstr "GitHub"
 
-msgid "Report a vulnerability to"
-msgstr "报告漏洞请联系"
+msgid "Security"
+msgstr "安全"
 
-msgid "security@bathron.org"
-msgstr "security@bathron.org"
-
+msgid "Language"
+msgstr "语言"
