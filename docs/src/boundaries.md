@@ -11,7 +11,7 @@ A transaction must satisfy those rules regardless of who submits it or which pro
 | Consensus knows | Consensus does not know |
 |---|---|
 | Whether conservation rules hold | The market value of a balance |
-| Whether a Bitcoin predicate is satisfied | An exchange rate reported by a business |
+| Whether a Bitcoin predicate is satisfied | A conversion rate reported by a business |
 | Whether spending conditions hold | Whether the agreement is commercially attractive |
 | Which identities sign consensus messages | Which provider a customer should prefer |
 | Whether a transaction follows fee rules | Which pairs deserve liquidity |
@@ -26,7 +26,7 @@ An application distinguishes a submitted transaction, inclusion in a block and f
 
 ## Why these boundaries matter
 
-BATHRON has no listing committee, protocol order book or preferred market maker. A provider quotes a price; a user accepts terms; a transaction expresses the resulting settlement conditions. Consensus checks those conditions without adopting the quote as an official price.
+BATHRON has no listing committee or preferred market maker. A provider quotes a price; a user accepts terms; a transaction expresses the resulting settlement conditions. Consensus checks those conditions without adopting the quote as an official price.
 
 Similarly, verifying an oracle signature authenticates a statement from the agreed source. It does not make consensus an arbitrator of the underlying event. [Where trust lives](trust.md) explains how to identify that dependency.
 

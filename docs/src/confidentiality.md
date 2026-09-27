@@ -22,7 +22,7 @@ Shielded M0 transfers can move inventory before or after settlement. See [Where 
 | External asset leg | Visibility follows the external chain and transaction format |
 | Application records | Access follows the application's storage and disclosure policy |
 
-A relay can see the quotes it carries. A counterparty knows the trade it accepts. A monitoring service sees the data it receives. These are separate disclosure choices from the transaction's cryptographic privacy.
+A relay can see the quotes it carries. A counterparty knows the agreement it accepts. A monitoring service sees the data it receives. These are separate disclosure choices from the transaction's cryptographic privacy.
 
 ## Keep accounting and reporting distinct
 

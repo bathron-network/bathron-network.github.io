@@ -101,19 +101,19 @@ msgid "Open markets."
 msgstr "开放市场。"
 
 msgid "A pair exists because someone quotes it."
-msgstr "只要有人报价，交易对就存在。"
+msgstr "只要有人报价，资产对就存在。"
 
 msgid "Understand markets"
 msgstr "了解市场"
 
 msgid "Direct pairs"
-msgstr "直接交易对"
+msgstr "直接资产对"
 
 msgid "Through M1"
 msgstr "通过 M1"
 
 msgid "Five assets need ten direct pairs, or five connections through M1."
-msgstr "五种资产需要十个直接交易对，或通过 M1 建立五条连接。"
+msgstr "五种资产需要十个直接资产对，或通过 M1 建立五条连接。"
 
 msgid "N × (N − 1) / 2"
 msgstr "N × (N − 1) / 2"
@@ -131,7 +131,7 @@ msgid "Providers use M1."
 msgstr "服务商使用 M1。"
 
 msgid "Burning BTC creates M0. Locking M0 creates M1: working capital for providers, connecting quoted pairs through one inventory."
-msgstr "销毁 BTC 生成 M0。锁定 M0 生成 M1：作为服务商的营运资金，通过统一库存连接已报价的交易对。"
+msgstr "销毁 BTC 生成 M0。锁定 M0 生成 M1：作为服务商的营运资金，通过统一库存连接已报价的资产对。"
 
 msgid "The burn is irreversible. Unlocking M1 returns M0, not BTC. No redeemable BTC reserve, no guaranteed peg or liquidity."
 msgstr "销毁不可逆。解锁 M1 返还的是 M0，而非 BTC。没有可赎回的 BTC 储备，也不保证价格锚定或流动性。"

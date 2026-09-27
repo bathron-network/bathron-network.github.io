@@ -62,4 +62,4 @@ These terms distinguish protocol rules from commercial services. A single organi
 
 **Confidential transfer:** A shielded M0 transfer whose protected details are verified without being published. It can move inventory before or after settlement. See [Private inventory transfers](confidentiality.md) for its scope.
 
-**USDBTC:** A possible third-party risk-exchange application; see [What you can build](applications.md#usdbtc).
+**USDBTC:** A possible third-party risk-transfer application; see [What you can build](applications.md#usdbtc).
