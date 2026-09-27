@@ -31,6 +31,6 @@ For a payment, a Merkle branch ties the transaction to a header. The verifier al
 
 A covenant can bind a proven payment to a fixed destination. A timelock can provide a recovery branch. A difficulty threshold can select between two agreed distributions. Comparisons at two observation heights can test predefined threshold combinations. They do not return the two difficulty values or calculate an arbitrary change between them; a change-based payoff needs an explicit construction.
 
-These facts do not contain an exchange rate, another chain's state or a physical event. Applications using those observations identify an external attestation source. Nor is cumulative chainwork a script query: chainwork serves header verification, a separate responsibility.
+These facts do not contain a conversion rate, another chain's state or a physical event. Applications using those observations identify an external attestation source. Nor is cumulative chainwork a script query: chainwork serves header verification, a separate responsibility.
 
 See [Contracts on Bitcoin facts](bitcoin-contracts.md) for application examples, [Bitcoin verification](bitcoin-verification.md) for the evidence path, and [Script reference](script.md) for the predicate names. Keep the commercial meaning and the exact machine condition side by side when presenting an agreement.

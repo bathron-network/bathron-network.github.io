@@ -1,6 +1,6 @@
 # Monetary invariants
 
-BATHRON's monetary rules establish provenance and conservation. They answer where internal units originate and how their representations remain balanced. Market exchange is a separate operation.
+BATHRON's monetary rules establish provenance and conservation. They answer where internal units originate and how their representations remain balanced. Asset conversion at a market price is a separate operation.
 
 The distinction matters whenever an application presents M0 or M1 to a participant. An internal accounting equality and an executable market quote are different facts, supported by different evidence.
 

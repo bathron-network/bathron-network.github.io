@@ -8,7 +8,7 @@ The following examples describe constructions, not a catalogue of products suppl
 
 | Application | Settlement building blocks | Responsibilities outside consensus |
 |---|---|---|
-| Cross-chain exchange | Hashlocks, timelocks and constrained outputs | Quotes, inventory, external chain execution and monitoring |
+| Cross-chain settlement | Hashlocks, timelocks and constrained outputs | Quotes, inventory, external chain execution and monitoring |
 | Conditional payment | Authorization, covenant and evidence predicate | Agreement terms and transaction submission |
 | Escrow | Release branches and timed recovery | Evidence collection and any human arbitration |
 | Difficulty contract | Bitcoin difficulty predicates and fixed outcome branches | Pricing, funding and selection of observation points |
@@ -21,7 +21,7 @@ A builder chooses primitives from the agreement's requirements. The presence of 
 
 For a difficulty contract, Bitcoin supplies the relevant fact. Every node checks the predicate at the agreed observation height. A dollar price requires an external source because it is not contained in Bitcoin history.
 
-For a trade involving asset X, the application also needs a valid execution process on X's chain. BATHRON settles its own leg. The external leg remains a provider and application responsibility, even when the two use a shared secret.
+For an asset conversion involving X, the application also needs a valid execution process on X's chain. BATHRON settles its own leg. The external leg remains a provider and application responsibility, even when the two use a shared secret.
 
 This distinction helps users compare agreements. They can see which conditions are independently verified and which rely on a named service or attestation.
 
