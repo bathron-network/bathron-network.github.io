@@ -9,6 +9,7 @@ site-url = "/docs/"
 default-theme = "navy"
 preferred-dark-theme = "navy"
 additional-css = ["theme/bathron.css"]
+additional-js = ["theme/bathron.js"]
 git-repository-url = "https://github.com/bathron-network/bathron-network.github.io"
 no-section-label = true
 
