@@ -43,14 +43,17 @@ Audience sentence, reuse verbatim when the M1 question comes up:
 > admission is **not yet open**: the current operator set is project-run while the
 > open-admission threat model is worked.
 
-## Status facts (2026-08)
+## Network status
 
-- Public testnet live (measurement network). Genesis block 0 = `691b0a7e8cb0e7ee159ef7a4fa10d9c6ddb2d5282e5bac7447846459ff54c730`. Public seed `57.131.33.151:27171`.
+Network status is stated only on `status.md` (<https://bathron.org/docs/status.html>); link to it, do not restate it.
+
+## Historical facts of the DMM public testnet (as of 2026-08)
+
 - Bitcoin source read by consensus: **Bitcoin testnet4** (mainnet at mainnet). Say "testnet4", not "signet".
 - No mainnet. No external audit yet. No proven market. Operator set closed.
 - Demonstrated on testnet: covenants (accept & reject paths), Bitcoin headers + Merkle proofs in consensus, burn → M0 → M1, shielded transfers, `TX_CONFIRMED` releasing a covenant, **paired HTLCs** (M1 HTLC + Bitcoin P2WSH HTLC, same preimage), CP/LP prototypes (`pna-lp`, `pna-swap`) exposing quotes over HTTP.
 
-## Forbidden claims (unchanged from the 2026-07 canon; put them ONLY on "Status & claims" as a public list)
+## Forbidden claims (unchanged from the 2026-07 canon; put them ONLY on "What consensus enforces" (`boundaries.html`) as a public list)
 
 client funds guaranteed · general atomicity · "no counterparty risk" · external par / peg for M1 ·
 "backed by Bitcoin" · "CLS for crypto" · yield or expected appreciation of M0/M1 · "supports DOGE/PIVX/…"
@@ -58,8 +61,9 @@ client funds guaranteed · general atomicity · "no counterparty risk" · extern
 
 ## Hedges: one page only
 
-The honest caveats (not atomic yet, project-run operators, no mainnet, no audit) live on **Status &
-claims** and nowhere else in full. Other pages link there in one line: *see [Status & claims](...)*.
+The honest caveats (not atomic yet, project-run operators, no mainnet, no audit) live on **What consensus
+enforces** (`boundaries.html`) and nowhere else in full; network state lives only on **Network status**
+(`status.html`). Other pages link there in one line: *see [Network status](status.md)*.
 Do not repeat the caveat paragraph on every page — it drowns the message.
 
 ## Tone

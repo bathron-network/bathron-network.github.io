@@ -166,8 +166,9 @@ msgstr "开发者"
 msgid "Compose applications"
 msgstr "组合构建应用"
 
-msgid "Public testnet on Bitcoin testnet4 · no mainnet · operator admission run by the project · no external audit yet"
-msgstr "基于 Bitcoin testnet4 的公共测试网 · 无主网 · 运营者准入由项目方管理 · 尚未进行外部审计"
+# TODO(translate): temporary English fallback (see i18n/README.md, "Temporary English fallback").
+msgid "Network status"
+msgstr "Network status"
 
 msgid "Documentation"
 msgstr "文档"

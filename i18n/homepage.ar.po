@@ -166,8 +166,9 @@ msgstr "المطوّرون"
 msgid "Compose applications"
 msgstr "ركّب التطبيقات"
 
-msgid "Public testnet on Bitcoin testnet4 · no mainnet · operator admission run by the project · no external audit yet"
-msgstr "شبكة اختبار عامة على Bitcoin testnet4 · لا توجد شبكة رئيسية · يدير المشروع قبول المشغّلين · لم يُجرَ تدقيق خارجي بعد"
+# TODO(translate): temporary English fallback (see i18n/README.md, "Temporary English fallback").
+msgid "Network status"
+msgstr "Network status"
 
 msgid "Documentation"
 msgstr "الوثائق"

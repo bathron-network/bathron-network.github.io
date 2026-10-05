@@ -1,5 +1,7 @@
 # Summary
 
+[Network status](status.md)
+
 # Vision
 
 - [01 · BATHRON in five minutes](overview.md)

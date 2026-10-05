@@ -230,6 +230,18 @@ never quietly wrong. If you cannot translate a change immediately, the honest
 options are to hold the English change or to remove a language from the table;
 there is no "publish it stale" path, by design.
 
+### Temporary English fallback (exception)
+
+One exception is allowed for an urgent public status change that cannot wait for
+reviewed translations: the affected entry may carry the **English text as its
+`msgstr`**, without a `#, fuzzy` flag, preceded by the comment
+`# TODO(translate): temporary English fallback`. The gates then pass and the
+translated page shows that one string in English (on the Arabic page it is
+rendered inside the RTL layout). This is a stopgap, not a translation: every
+such entry must be replaced by a reviewed translation in a later change, and
+`grep -n "TODO(translate)" i18n/*.po` lists those still pending.
+Current use: the homepage "Network status" link (es, zh-Hans, hi, ar), 2026-10-05.
+
 ## Disambiguation
 
 When one English string needs two different renderings, wrap the element:
