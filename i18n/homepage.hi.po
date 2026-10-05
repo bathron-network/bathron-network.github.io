@@ -166,8 +166,9 @@ msgstr "डेवलपर"
 msgid "Compose applications"
 msgstr "एप्लिकेशन बनाएँ"
 
-msgid "Public testnet on Bitcoin testnet4 · no mainnet · operator admission run by the project · no external audit yet"
-msgstr "Bitcoin testnet4 पर सार्वजनिक टेस्टनेट · कोई मेननेट नहीं · ऑपरेटर प्रवेश परियोजना द्वारा संचालित · अभी तक कोई बाहरी ऑडिट नहीं"
+# TODO(translate): temporary English fallback (see i18n/README.md, "Temporary English fallback").
+msgid "Network status"
+msgstr "Network status"
 
 msgid "Documentation"
 msgstr "दस्तावेज़"

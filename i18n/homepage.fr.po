@@ -166,8 +166,8 @@ msgstr "Développeurs"
 msgid "Compose applications"
 msgstr "Composer des applications"
 
-msgid "Public testnet on Bitcoin testnet4 · no mainnet · operator admission run by the project · no external audit yet"
-msgstr "Testnet public sur Bitcoin testnet4 · pas de mainnet · admission des opérateurs gérée par le projet · aucun audit externe à ce jour"
+msgid "Network status"
+msgstr "État du réseau"
 
 msgid "Documentation"
 msgstr "Documentation"

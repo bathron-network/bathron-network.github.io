@@ -46,6 +46,7 @@ a:focus-visible, button:focus-visible, label:focus-visible, [tabindex="0"]:focus
 .content { max-width: calc(72ch + 10px); margin: 0 auto; padding: 38px 5px 24px; font-size: 17px; line-height: 1.8; overflow: visible; }
 .content main { max-width: 100%; min-width: 0; }
 .docs-status { padding: 14px 18px; border: 1px solid var(--line); border-left: 2px solid var(--gold); background: var(--panel); color: var(--muted); font-size: 11px; line-height: 1.8; margin-bottom: 44px; text-wrap: pretty; }
+.docs-status a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 .content h1, .content h2, .content h3, .content h4 { color: var(--ink); font-weight: 500; text-wrap: balance; }
 .content h1 { margin: 0 0 30px; font-size: clamp(36px, 3.6vw, 50px); line-height: 1.12; letter-spacing: -.045em; }
 .content h1::after { content: ""; display: block; width: 48px; height: 2px; background: var(--gold); margin-top: 28px; }

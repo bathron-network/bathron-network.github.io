@@ -14,8 +14,5 @@ Notes specific to this site:
 - https://bathron.org is served by GitHub Pages with HTTPS enforced
   (HTTP requests are redirected). GitHub Pages does not allow setting a
   Strict-Transport-Security header on custom domains — a known limitation.
-- The public testnet explorer (https://explorer.bathron.org/) is an
-  experimental demonstrator served over HTTPS (publicly issued, auto-renewed
-  certificate). It is a read-only display distinct from the Seed P2P
-  endpoint; treat it as a view, never as an endpoint for secrets, and note
-  that no availability is guaranteed.
+- The explorer software targets the former DMM public testnet. Network
+  status: <https://bathron.org/docs/status.html>.

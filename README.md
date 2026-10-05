@@ -3,6 +3,8 @@
 This repository is the **canonical source for the public BATHRON documentation**.
 <https://bathron.org/docs/> is its generated mdBook rendering.
 
+**Network status:** <https://bathron.org/docs/status.html>
+
 - Documentation source: [`docs/src/`](docs/src/) (edit here; nothing is hand-copied from other repos)
 - Landing page: [`index.html`](index.html)
 - Rendered docs: <https://bathron.org/docs/>
