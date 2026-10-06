@@ -1,6 +1,6 @@
 # 03 · The N engine
 
-> **Normative source:** [N-SPEC v0.7 §1.1][n11], [§1.4][n14], [§5.3][n53], [§5.4][n54], [§7.1][n71], [§9.3][n93], [§9.5][n95], [§12.1][n121], [§12.15][n1215], [§18][n18] (in French); [WHY-N §2][w2], [§3][w3], [§4][w4].
+> **Normative source:** [N-SPEC v0.7 §1.1][n11], [§1.4][n14], [§5.3][n53], [§5.4][n54], [§7.1][n71], [§9.3][n93], [§9.5][n95], [§12.1][n121], [§12.15][n1215], [§18][n18]; [WHY-N §2][w2], [§3][w3], [§4][w4].
 > This page explains; it does not restate rules or parameter values.
 
 Valid operations can belong to incompatible histories. N answers which history to follow. It does not make an invalid operation valid or replace the application's conservation obligations. This distinction separates validation from chain selection. [N-SPEC v0.7 §1.1][n11], [§9.5][n95]; [WHY-N §3][w3]

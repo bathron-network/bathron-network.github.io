@@ -1,6 +1,6 @@
 # 06 · Burns: M0, tickets, reactivation
 
-> **Normative source:** [N-SPEC v0.7, preamble][np], [§1.4][n14], [§4.4][n44], [§4.6][n46], [§4.9][n49], [§6.7][n67], [§12.1][n121], [§12.2][n122] (in French); [WHY-N §3][w3]; [APP-SPEC v1 draft §0.4][p04] (in French).
+> **Normative source:** [N-SPEC v0.7, preamble][np], [§1.4][n14], [§4.4][n44], [§4.6][n46], [§4.9][n49], [§6.7][n67], [§12.1][n121], [§12.2][n122]; [WHY-N §3][w3]; [APP-SPEC v1 draft §0.4][p04].
 > This page explains; it does not restate rules or parameter values.
 
 Burns have different purposes. Creating settlement inventory, obtaining production weight and restoring suspended rights are distinct effects. Distinguishing them avoids treating a ticket as spendable M0 or a burn as a deposit that can be withdrawn. [N-SPEC v0.7 §1.4, invariants 1–4][n14], [§4.6][n46], [§4.9][n49], [§6.7][n67]

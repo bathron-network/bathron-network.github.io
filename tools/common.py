@@ -2,7 +2,6 @@
 from pathlib import Path
 from html.parser import HTMLParser
 import html
-import importlib.util
 import json
 import re
 import subprocess
@@ -10,8 +9,9 @@ import sys
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.dont_write_bytecode = True
-sys.path.insert(0, str(ROOT / 'i18n'))
-import i18n
+SITE = 'https://bathron.org'
+LEGACY_PATHS = ('fr', 'es', 'zh-hans', 'hi', 'ar')
+META_PROSE = {'description', 'og:title', 'og:description', 'twitter:description', 'twitter:title'}
 
 
 def tracked(root=ROOT):
@@ -81,7 +81,7 @@ class HTML(HTMLParser):
             for key in ('alt', 'title', 'aria-label'):
                 if d.get(key):
                     self.parts.extend(['\n', d[key], '\n'])
-            if tag == 'meta' and (d.get('name') or d.get('property')) in i18n.META_PROSE:
+            if tag == 'meta' and (d.get('name') or d.get('property')) in META_PROSE:
                 self.parts.extend(['\n', d.get('content', ''), '\n'])
 
     def handle_endtag(self, tag):

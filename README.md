@@ -6,11 +6,12 @@ The specification defines rules; these pages explain them through section refere
 - [Network status](https://bathron.org/docs/status.html)
 - [Documentation](https://bathron.org/docs/overview.html)
 - [Normative specification](https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/README.md)
-- [Application specification](https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#04-vocabulaire-et-identifiants-gelés) (in French)
+- [Application specification](https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#04-vocabulaire-et-identifiants-gelés)
 
 Edit the book in [docs/src](docs/src/), following [STYLE v3](docs/STYLE.md).
-The homepage source is [index.html](index.html); its complete translations are in
-[i18n](i18n/README.md). The book is in English.
+The homepage source is [index.html](index.html). The site is maintained in English
+only; visitors can use their browser’s automatic translation. Legacy translated
+homepage URLs redirect to the homepage.
 
 Build and check locally with the pinned mdBook executable available:
 
@@ -23,5 +24,6 @@ See [the checks guide](tools/README.md) for source verification and publication 
 The single normative revision is recorded in [docs/NSPEC_REF](docs/NSPEC_REF);
 every normative URL uses that revision. The checks reject an unresolved reference.
 
-The deployment workflow runs the same documentation and translation gates as
-pull-request validation, before assembling the site. Generated pages are not committed.
+The deployment workflow runs the same documentation and English-only gates as
+pull-request validation, before assembling the site. The generated book is not
+committed; legacy homepage redirects are versioned.

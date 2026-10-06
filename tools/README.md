@@ -1,12 +1,14 @@
 # Documentation checks
 
 Run `bash tools/docs-check.sh --offline` with the pinned mdBook executable on
-PATH. The script installs nothing and makes no network request. It builds all
-homepages and the book, then checks the resulting internal links and fragments,
+PATH. The script installs nothing and makes no network request. It checks the
+English-only site and builds the book, then checks internal links and fragments,
 direct redirects, referenced images, sitemap, confidentiality and vocabulary.
 Every gate has a sandbox mutation test in `mutation-test.py`; a nominal fixture
 must pass before a deliberately broken fixture is accepted as a successful test.
-`bash i18n/ci-check.sh` remains the separate translation gate.
+`bash i18n/ci-check.sh` checks the English-only homepage, browser translation availability,
+absence of maintained catalogues and exact direct legacy redirects. Its stable
+CI job name remains `i18n gates` and it runs on every pull request.
 
 ## Normative revision
 
@@ -23,28 +25,26 @@ exceptions. It never fetches. CI obtains the pinned checkout in a separate step.
 External websites other than those normative sources are not probed.
 
 `nspec-oldname-exceptions.txt` scopes each historical wording exception to a
-public source section and the page citing it. The homepage entries also apply
-to its generated translations. The historical explanation is confined to Who
-does what and the editorial guide. The engine settlement chapter is never citable.
+public source section and the page citing it. The historical explanation is
+confined to Who does what and the editorial guide. The engine settlement chapter is never citable.
 
 ## Contextual vocabulary
 
 `vocab-check.py` checks sentences, ignoring code and URL destinations. It checks
-English catalogue keys, visible HTML, metadata, alternative text, SVG text,
-documentation and both entry-point READMEs. The editorial guide is excluded
+visible HTML, metadata, alternative text, SVG text, documentation, the
+repository README and legacy redirects. The editorial guide is excluded
 because it records prohibited terms as examples. Exceptions in `vocab-allow.txt`
 require an exact page, rule, sentence and reason. Citation identifiers that look
 like quantities have individually scoped exceptions.
 
 The quantity rule cannot recognize all numbers written in words or parameter
 values without units. Human review must inspect every quantity, including these
-cases. Translation meaning also requires human review. Automated negation checks
-do not establish whether a sentence is true or properly sourced.
+cases. Automated negation checks do not establish whether a sentence is true or properly sourced.
 
 ## Public confidentiality and metadata
 
 `confidentiality-check.py` scans all tracked files still present, including
-catalogues and source code. It also scans untracked, non-ignored files so new
+redirects and source code. It also scans untracked, non-ignored files so new
 files are checked before staging. Generic patterns detect addresses, personal
 paths, unapproved email addresses, numbered host labels, model/tool names and
 internal document markers. They cannot identify arbitrary private names or

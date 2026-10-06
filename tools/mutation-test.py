@@ -21,6 +21,7 @@ V = load('vocab-check')
 L = load('link-check')
 C = load('confidentiality-check')
 S = load('gen-sitemap')
+E = load('site-check')
 
 
 def git(root, *args):
@@ -69,11 +70,6 @@ class Gates(unittest.TestCase):
             path = cls.root / 'docs/book' / key.lstrip('/')
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(f'<meta http-equiv="refresh" content="0; URL={target}"><a href="{target}">Page</a>')
-        for lang in L.i18n.LANGUAGES:
-            if lang['out']:
-                path = cls.root / lang['out'] / 'index.html'
-                path.parent.mkdir(parents=True, exist_ok=True)
-                path.write_text('<a href="/docs/overview.html">Page</a>')
         # Local source fixture: exact anchors cited by the pages, no fetched data.
         cls.spec = Path(cls.temp.name) / 'spec'
         cls.spec.mkdir()
@@ -135,9 +131,9 @@ class Gates(unittest.TestCase):
     def test_negation_only_in_designated_pages(self):
         self.reject(V.check, 'docs/src/mutation.md', 'There is no vote.', 'V3:')
 
-    def test_homepage_exception_is_exact(self):
+    def test_homepage_vote_negation_requires_exception(self):
         path = self.root / 'index.html'
-        self.reject(V.check, 'index.html', path.read_text().replace('without a vote.', 'without voting.'), 'V3:')
+        self.reject(V.check, 'index.html', path.read_text() + '<p>N selects one producer per slot from burned tickets, without a vote.</p>', 'V3:')
 
     def test_html_inline_tags_cannot_hide_word(self):
         path = self.root / 'index.html'
@@ -153,9 +149,20 @@ class Gates(unittest.TestCase):
             path = self.root / 'index.html'
             self.reject(V.check, 'index.html', path.read_text() + injected, 'V6:')
 
-    def test_catalogue_english_key(self):
-        path = self.root / 'i18n/homepage.fr.po'
-        self.reject(V.check, 'i18n/homepage.fr.po', path.read_text() + '\nmsgid "M0 is money."\nmsgstr "M0."\n', 'V6:')
+    def test_english_only_policy(self):
+        self.reject(E.check, 'i18n/homepage.fr.po', 'msgid "Example"', 'translation catalogue')
+        self.reject(E.check, 'fr/index.html', E.redirect_html().replace('url=/', 'url=/es/'), 'direct homepage redirect')
+        home = (self.root / 'index.html').read_text()
+        for injected in ('<nav class="langsel"></nav>', '<link hreflang="fr" href="/fr/">',
+                         '<p translate="no">Text</p>', '<p class="notranslate">Text</p>',
+                         '<meta name="google" content="notranslate">'):
+            self.reject(E.check, 'index.html', home + injected, 'index.html:')
+        for text in ('Documentation in English.', 'N-SPEC §1'):
+            self.reject(E.check, 'index.html', home + '<p>' + text + '</p>', 'language mention')
+        self.reject(E.check, 'index.html', home.replace('lang="en"', 'lang="fr"'), 'English document')
+
+    def test_redirect_vocabulary(self):
+        self.reject(V.check, 'fr/index.html', E.redirect_html() + '<p>M0 is money.</p>', 'V6:')
 
     def test_contextual_negations_still_pass(self):
         path = self.root / 'docs/src/engine.md'
@@ -176,11 +183,11 @@ class Gates(unittest.TestCase):
                 with self.subTest(rule=rule, value=value):
                     self.reject(C.check, 'docs/src/mutation.md', '# Mutation\n' + value, 'confidentiality/' + rule)
 
-    def test_confidentiality_reads_translation_and_svg(self):
+    def test_confidentiality_reads_redirect_and_svg(self):
         value = '.'.join(map(str, [192, 0, 2, 44]))
         self.reject(C.check, 'img/mutation.svg', '<svg><text>' + value + '</text></svg>', 'confidentiality/ip')
-        path = self.root / 'i18n/homepage.fr.po'
-        self.reject(C.check, 'i18n/homepage.fr.po', path.read_text() + '\n# ' + value, 'confidentiality/ip')
+        path = self.root / 'fr/index.html'
+        self.reject(C.check, 'fr/index.html', path.read_text() + '\n# ' + value, 'confidentiality/ip')
 
     def test_confidentiality_deleted_file_is_ignored(self):
         path = self.root / 'deleted.txt'
@@ -231,10 +238,9 @@ class Gates(unittest.TestCase):
             self.reject(check, 'docs/NSPEC_REF', 'REF\n', 'TODO-REF')
             path = self.root / 'index.html'
             original = path.read_text()
-            for replacement, message in (
-                ('/blob/' + '0' * 40 + '/', 'does not use NSPEC_REF'),
-            ):
-                self.reject(check, 'index.html', original.replace('/blob/' + self.ref + '/', replacement), message)
+            wrong_ref = L.PREFIX + '0' * 40 + '/README.md'
+            self.reject(check, 'index.html', original + '<a href="' + wrong_ref + '">Source</a>',
+                        'does not use NSPEC_REF')
             base = L.PREFIX + self.ref + '/'
             for target, message in [
                 ('spec/N-SPEC-v0.7.md#absent', 'missing normative anchor'),

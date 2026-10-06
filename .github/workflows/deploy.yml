@@ -47,27 +47,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
 
-      # ---------------------------------------------------------------
-      # Portes i18n de la page d'accueil.
-      #
-      # Un SEUL script — i18n/ci-check.sh — définit les contrôles, et il est
-      # appelé à l'identique par .github/workflows/i18n-check.yml (validation
-      # de PR, non déployante). Les contrôles qui gardent une PR et ceux qui
-      # gardent une publication ne peuvent donc pas diverger.
-      #
-      # Ce chemin n'installe RIEN : ni apt-get update, ni gettext, ni paquet
-      # Python. Le générateur n'utilise que la bibliothèque standard, et le cas
-      # « fuzzy » du test de mutation injecte le drapeau de façon déterministe.
-      # Publier le site ne dépend donc pas de la disponibilité des dépôts
-      # Ubuntu. La compatibilité avec le vrai msgmerge est vérifiée à part, par
-      # i18n/msgmerge-compat.sh, dans un job non bloquant hors déploiement.
-      #
-      # Épinglage : actions/setup-python est fixé au SHA de commit de la v5.6.0
-      # (source : GET /repos/actions/setup-python/tags, commit a26af69…, daté
-      # 2025-04-24), et Python à une version patch exacte présente dans
-      # actions/python-versions pour linux-x64. Un tag mobile comme @v5 ou une
-      # version « 3.12 » ne sont pas des épinglages.
-      # ---------------------------------------------------------------
       - name: Set up Python 3.12.14 (pinned action, pinned interpreter)
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5.6.0
         with:
@@ -78,7 +57,7 @@ jobs:
           python3 -VV
           python3 -c "import sys; assert sys.version_info[:3] == (3, 12, 14), sys.version"
 
-      - name: i18n gates (same script as the pull-request workflow)
+      - name: English-only site (same script as the pull-request workflow)
         run: bash i18n/ci-check.sh
 
       - name: Install mdBook
@@ -130,13 +109,17 @@ jobs:
         run: |
           mkdir -p _site/docs
           cp index.html CNAME robots.txt sitemap.xml 404.html _site/
-          # Every generated language, taken from the language table rather than
-          # a hand-kept list, so adding a language needs no workflow edit.
-          python3 i18n/i18n.py languages | awk '$NF != "(source)" {print $NF}' |
-          while read -r out; do
-            mkdir -p "_site/$out"
-            cp "$out/index.html" "_site/$out/"
-          done
+          # Publish the checked legacy redirects with the English site.
+          python3 - <<'PYREDIRECTS'
+          import shutil, sys
+          from pathlib import Path
+          sys.path.insert(0, 'tools')
+          from common import LEGACY_PATHS
+          for name in LEGACY_PATHS:
+              target = Path('_site') / name
+              target.mkdir(parents=True, exist_ok=True)
+              shutil.copyfile(Path(name) / 'index.html', target / 'index.html')
+          PYREDIRECTS
           cp -r img _site/
           cp -r docs/book/. _site/docs/
 

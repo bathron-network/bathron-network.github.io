@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://bathron.org/</loc></url>
-  <url><loc>https://bathron.org/fr/</loc></url>
-  <url><loc>https://bathron.org/es/</loc></url>
-  <url><loc>https://bathron.org/zh-hans/</loc></url>
-  <url><loc>https://bathron.org/hi/</loc></url>
-  <url><loc>https://bathron.org/ar/</loc></url>
   <url><loc>https://bathron.org/docs/status.html</loc></url>
   <url><loc>https://bathron.org/docs/overview.html</loc></url>
   <url><loc>https://bathron.org/docs/trust.html</loc></url>

@@ -12,7 +12,7 @@ from pathlib import Path
 import re
 import subprocess
 from urllib.parse import unquote, urlsplit
-from common import ROOT, entries, i18n, parse_html, redirects, report, summary, tracked
+from common import ROOT, SITE, LEGACY_PATHS, entries, parse_html, redirects, report, summary, tracked
 
 PREFIX = 'https://github.com/bathron-network/n-spec/blob/'
 APP = 'app/APP-SPEC-v1-draft.md'
@@ -48,9 +48,8 @@ def redirect_check(root=ROOT):
 
 def site_files(root):
     result = {'/index.html': root / 'index.html'}
-    for lang in i18n.LANGUAGES:
-        if lang['out']:
-            result[lang['path'] + 'index.html'] = root / lang['out'] / 'index.html'
+    for path in LEGACY_PATHS:
+        result['/' + path + '/index.html'] = root / path / 'index.html'
     for path in (root / 'docs/book').rglob('*'):
         if path.is_file():
             result['/docs/' + path.relative_to(root / 'docs/book').as_posix()] = path
@@ -76,7 +75,7 @@ def links(root=ROOT):
         for link in doc.links:
             parsed = urlsplit(link)
             if parsed.scheme or parsed.netloc:
-                if parsed.netloc != urlsplit(i18n.SITE).netloc:
+                if parsed.netloc != urlsplit(SITE).netloc:
                     continue
             dest = unquote(parsed.path)
             if not dest:
@@ -113,7 +112,7 @@ def images(root=ROOT):
 def source_paths(root):
     paths = [root / 'index.html', root / 'README.md', root / 'docs/STYLE.md']
     paths += list((root / 'docs/src').glob('*.md'))
-    paths += [root / lang['out'] / 'index.html' for lang in i18n.LANGUAGES if lang['out']]
+    paths += [root / path / 'index.html' for path in LEGACY_PATHS]
     return [path for path in paths if path.is_file()]
 
 
@@ -222,8 +221,7 @@ def sources(root=ROOT, checkout=None):
             if text is None:
                 errors.append(f'{page}: missing normative anchor {name}#{anchor}')
                 continue
-        canonical = 'index.html' if page.endswith('/index.html') else page
-        if re.search(r'\bM1\b', text) and not any(a['page'] == canonical and a['section'] == name + ('#' + anchor if anchor else '') for a in allow):
+        if re.search(r'\bM1\b', text) and not any(a['page'] == page and a['section'] == name + ('#' + anchor if anchor else '') for a in allow):
             errors.append(f'{page}: historical wording needs a scoped exception for {name}#{anchor}')
     return errors
 

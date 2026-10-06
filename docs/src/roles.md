@@ -1,6 +1,6 @@
 # 07 · Who does what
 
-> **Normative source:** [N-SPEC v0.7 §4.1][n41], [§7.1][n71], [§10.3][n103] (in French); [WHY-N §2][w2], [§7][w7]; [APP-SPEC v1 draft §0.4][p04], [§ID, ID-1][pID], [§13, principle and rules 13-1–13-2][p13], [§R2P, R2P-1][pR2P] (in French).
+> **Normative source:** [N-SPEC v0.7 §4.1][n41], [§7.1][n71], [§10.3][n103]; [WHY-N §2][w2], [§7][w7]; [APP-SPEC v1 draft §0.4][p04], [§ID, ID-1][pID], [§13, principle and rules 13-1–13-2][p13], [§R2P, R2P-1][pR2P].
 > This page explains; it does not restate rules or parameter values.
 
 Producing a block and delivering an external asset carry different responsibilities. A registered identity participates in the production draw. A provider chooses when to deliver outside value under its own depth policy. Keeping those roles distinct helps a user understand what a service offer actually covers. [N-SPEC v0.7 §4.1][n41], [§7.1][n71]; [WHY-N §7][w7]
