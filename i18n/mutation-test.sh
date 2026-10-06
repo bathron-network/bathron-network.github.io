@@ -156,8 +156,8 @@ reset_sandbox() {
     run extract >/dev/null    || die "extract failed while resetting the sandbox"
 }
 
-ORIG='Verify the chain yourself, from your own machine.'
-MUT='Verify the chain yourself, from your own laptop.'
+ORIG='Read the rules and their published assumptions.'
+MUT='Read the rules and their stated assumptions.'
 grep -qF "$ORIG" "$SRC" || die "anchor sentence not found in index.html"
 
 expect_refusal() {

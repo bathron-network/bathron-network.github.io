@@ -1,82 +1,141 @@
-# bathron.org — editorial style guide (refonte 2026-08)
+# BATHRON editorial style — v3
 
-This file governs every page on bathron.org and /docs/. It is not published (not in `src/`).
+Not rendered on the site; public in this repository.
 
-## The one rule
+This guide applies to the documentation, homepage, metadata, translations and image text. Explain the reader's decision before introducing the mechanism. Use the same terms for the same responsibilities throughout.
 
-**Every page answers "what problem" before "how".** A page that only contains "how" belongs in
-part V (Consensus), VI (Build) or VII (Reference) — never earlier. Before publishing a page, ask:
-*does this describe the problem BATHRON solves, or only the way it solves it?*
+## Sources and scope
 
-## The message (must survive any single page)
+1. **Keep each source in its role.** N-SPEC defines engine rules. The application specification defines its application scope. Network status belongs to the canonical Status page. Documentation explains the sources through conceptual summaries with section references. Do not duplicate parameter values, depth tables, measurements, qualification results, dates or network conditions.
+2. **Identify the source at the top.** Each explanatory page starts with the source block below. Use a single pinned revision of n-spec for every normative link. That revision must contain all cited documents. An unresolved reference or an absent public source prevents publication.
+3. **Link to Network status.** The documentation theme, homepage and repository entry points link to the canonical page. Do not repeat its contents in prose, metadata, translations or images. Do not add another status paragraph to individual documentation pages.
+4. **Write in the present tense.** Describe the documented rules and their boundaries. Keep schedules, release plans and development announcements out of these pages.
+5. **Give each concept a home.** Explain production in Producers and tickets, chain selection in The N engine, delivery depth in Depth and statuses, burns in Burns, and service responsibilities in Who does what. Other pages summarize and link.
+6. **Stay within public source scope.** For this set of pages, cite N-SPEC v0.7, WHY-N §§1–8 and ATTACKS. Cite APP-SPEC v1 draft only for §0.4, §ID rule ID-1, §13's principle and rules 13-1–13-2, and §R2P rule R2P-1. Name settlement pairs without explaining settlement mechanics. Do not derive additional capabilities from a section's vocabulary.
+7. **State limits with evidence.** Refer readers to [N-SPEC v0.7 §18][n18] and [ATTACKS][attacks] for limitations. Explain consequences relevant to the reader without reproducing vulnerability details or research results. Keep a domain qualification beside any conditional claim. Never turn a halt mechanism into an assurance that every conflict is detected.
+8. **Use a predictable structure.** Title, source block, a paragraph explaining why the topic matters, body, then See also. Use sentence case. Explanatory pages contain 350–600 words; the glossary may extend to 900 and needs no opening rationale.
+9. **Use restrained language.** Write declarative sentences and short paragraphs. Prefer concrete responsibilities to slogans. Avoid superlatives, promotional adjectives, unsupported comparisons and universal promises. Distinguish a rule, a local observation and a model result.
+10. **Keep illustrations subordinate to the text.** Use small SVG illustrations and the existing theme palette. An image must not add a mechanism absent from the prose. Apply the same source and terminology rules to labels, captions and alternative text. Do not put parameter values or status statements in images. Remove an illustration that no longer explains a retained section.
 
-BATHRON is an **open settlement protocol**. It owns no market and no exchange, and never decides
-which assets may trade. It provides three things only: a common settlement unit (**M1**), a
-consensus that guarantees settlements, and an infrastructure any market can be built on.
-**Markets belong to whoever builds them. Bitcoin remains the final asset.**
+Use this source block, replacing the references with links to the sections that support the page:
 
-Five-minute test — a new reader must be able to say:
-> "BATHRON is an open settlement infrastructure where anyone can create a market without
-> permission, while Bitcoin remains the ultimate settlement asset."
+> **Normative source:** N-SPEC v0.7 §x.y (in French); WHY-N §n; APP-SPEC v1 draft §x (in French), where applicable.
+> This page explains; it does not restate rules or parameter values.
 
-## Vocabulary (fixed)
+Put a section citation immediately after the claim or paragraph it supports. The opening source block does not substitute for claim-level references. Keep public document locations in links, not in reader-facing explanations.
 
-| Term | Meaning | Never |
+## Vocabulary
+
+| Use | Avoid in prose | Meaning and boundary |
 |---|---|---|
-| **Operator** (Settlement Operator) | consensus role: produces blocks, signs finality, publishes facts | "masternode" in prose (RPC/source keep the lineage name — say so once, in the consensus page) |
-| **Settlement Provider (SP)** | umbrella for the commercial roles below; a participant, never an administrator | "member", "administrator", "validator" |
-| **Clearing Provider (CP)** | quotes, orchestrates legs, deadlines, SLA | — |
-| **Liquidity Provider (LP)** | holds inventory, prices a pair, earns the spread | "market maker chosen by the protocol" |
-| **M1** | the settlement unit / numéraire; created 1:1 from M0, which comes only from verified BTC destruction | "coin", "token", "buy M1", "invest" |
-| **M0** | the vaulted origin unit behind M1 | — |
-| **market / pair** | `X/M1` — exists when someone brings inventory and quotes; the protocol never validates it | "listed", "supported pair" |
-| **settle / settlement** | what consensus does; the only thing it does | "trade on BATHRON", "BATHRON exchange" |
-| **covenant** | a script constraining how value moves | "smart contract" (EVM sense) |
-| **Bitcoin facts** | headers/proofs verified inside consensus (SPV) | "oracle" |
+| **M0, the settlement asset** | M1, pivot, settlement pivot, currency, money, coin, token, backed by Bitcoin, peg, par, buy/invest in M0, numéraire, yield, APY | Describe its Bitcoin origin without implying backing, a price floor or a financial return. [APP-SPEC v1 draft §0.4][p04]; [N-SPEC v0.7 §4.9][n49] |
+| **BTC/M0, X/M0** | Historical asset pairs; apply the M0 vocabulary above | The asset-pair notation of the application reference. [APP-SPEC v1 draft §0.4][p04] |
+| **Registered identity** | Operator except for the single glossary mention; masternode, validator as a role, stake, staking | The identity associated with registered keys and ticket rights. [N-SPEC v0.7 §4.1][n41], [§4.6][n46] |
+| **Producer** | Committee, quorum, vote, voting except in sourced negations; apply the identity vocabulary above | The registered identity drawn for a production slot. [N-SPEC v0.7 §7.1][n71] |
+| **Ticket** | Stake, staking, refundable deposit; slashing except in the required negation | An entry right, neither refundable nor transferable. [N-SPEC v0.7 §1.4, invariants 3–4][n14] |
+| **Settlement Provider (SP), Liquidity Provider (LP)** | Clearing Provider, member, administrator, identity required, market maker chosen by the protocol | Service responsibilities, distinct from block production; identify the party choosing delivery depth. [APP-SPEC v1 draft §0.4][p04], [§R2P, R2P-1][pR2P]; [WHY-N §7][w7] |
+| **Settlement, settles, asset conversion, conversion rate, asset pair, settlement inventory, inventory movement** | Swap, exchange, trade, trading, exchange rate, trading pair, DEX, DLP, liquidity pool; message exchange and key exchange remain ordinary technical expressions | Use these terms consistently for services and asset movements. |
+| **Inclusion, depth, status, stable under your policy** | Final, finality, finalized except in negation; confirmed as an absolute, safe, guaranteed except in negation, instant, real-time | Keep the policy and domain visible. Do not turn these into unconditional assurance labels. [N-SPEC v0.7 §14.5][n145], [§17.3][n173] |
+| **Burn** | Reserve, redeem, redeemable or a claim on Bitcoin except in negation; mint, issuance | Irreversible destruction, with no reserve and no claim on Bitcoin. [N-SPEC v0.7 §4.9][n49]; [WHY-N §3][w3] |
+| **Bitcoin facts, reference block** | Oracle except in “without an oracle”; feed, latest Bitcoin tip | Evidence checked in the block's designated Bitcoin context. [N-SPEC v0.7 §8.4][n84] |
+| **STOP, RECOVERY** | Never be wrong without the published-domain qualification; unstoppable, 100% uptime | Preserve technical spelling and distinguish a halt from explicit acceptance of a new origin. [N-SPEC v0.7 §12.1][n121], [§12.14][n1214] |
 
-Audience sentence, reuse verbatim when the M1 question comes up:
-> End users settle in the assets they already hold; market builders and providers settle in M1.
+Use only the current role names. The glossary keeps one historical mention: *formerly called Operator*. This is the only permitted use of the former role name in reader-facing copy. Do not call a producer's ticket a recoverable deposit. Do not apply financial promotion language to M0 or promise universal protection to participants.
 
-## The permissionless sentence (reuse verbatim; never one half without the other)
+Keep fixed technical identifiers unchanged when explaining an identifier is in scope. Introduce no settlement-lock identifiers in this set of pages. Link to the application status definitions without translating or reproducing their list.
 
-> Anyone can build, quote, pair and settle on BATHRON without asking permission. Operator
-> admission is **not yet open**: the current operator set is project-run while the
-> open-admission threat model is worked.
+## Required wording
 
-## Network status
+These formulations are fixed for this set of pages. Preserve their adjoining source references and qualifications.
 
-Network status is stated only on `status.md` (<https://bathron.org/docs/status.html>); link to it, do not restate it.
+**Producers and tickets**
 
-## Historical facts of the DMM public testnet (as of 2026-08)
+> A ticket is an entry right, never a guarantee.
 
-- Bitcoin source read by consensus: **Bitcoin testnet4** (mainnet at mainnet). Say "testnet4", not "signet".
-- No mainnet. No external audit yet. No proven market. Operator set closed.
-- Demonstrated on testnet: covenants (accept & reject paths), Bitcoin headers + Merkle proofs in consensus, burn → M0 → M1, shielded transfers, `TX_CONFIRMED` releasing a covenant, **paired HTLCs** (M1 HTLC + Bitcoin P2WSH HTLC, same preimage), CP/LP prototypes (`pna-lp`, `pna-swap`) exposing quotes over HTTP.
+[WHY-N §2][w2]; [N-SPEC v0.7 §1.4, invariants 3–4][n14]
 
-## Forbidden claims (unchanged from the 2026-07 canon; put them ONLY on "What consensus enforces" (`boundaries.html`) as a public list)
+> Proven equivocation bans the identity permanently. There is no slashing: the ticket was spent at entry, not seized.
 
-client funds guaranteed · general atomicity · "no counterparty risk" · external par / peg for M1 ·
-"backed by Bitcoin" · "CLS for crypto" · yield or expected appreciation of M0/M1 · "supports DOGE/PIVX/…"
-(say: *any chain with hashlocks and timelocks can be paired the same way — capability, not a shipped product*).
+[N-SPEC v0.7 §10.1][n101], [§10.3][n103]. Explain proof admissibility and maturity immediately before this statement.
 
-## Hedges: one page only
+**The N engine**
 
-The honest caveats (not atomic yet, project-run operators, no mainnet, no audit) live on **What consensus
-enforces** (`boundaries.html`) and nowhere else in full; network state lives only on **Network status**
-(`status.html`). Other pages link there in one line: *see [Network status](status.md)*.
-Do not repeat the caveat paragraph on every page — it drowns the message.
+> One producer per slot, drawn from burned tickets with a Bitcoin-derived seed. No committee, no quorum, no vote, no finality gadget.
 
-## Tone
+[WHY-N §2][w2]; [N-SPEC v0.7 §5.3][n53], [§5.4][n54], [§7.1][n71]
 
-Plain, declarative, short paragraphs. No marketing adjectives (revolutionary, unique, seamless).
-Analogies allowed: Internet/HTTP/apps · "Bitcoin doesn't decide who may hold BTC; BATHRON doesn't
-decide which markets may exist" · a market today is a lease from a landlord, here it is land with no
-owner · numéraire = pivot language (N pairs, not N²) · PvP/DvP principle (never "CLS").
-Diagrams: inline SVG or `text` blocks, same palette as the site (`#D9A441` gold, `#0C0F14` panel,
-`#1C222C` line, `#E8EBF0` ink, `#8A919C` muted). Keep them small.
+**Depth and statuses**
 
-## Structure
+> There is no native finality. N offers inclusion and depth. Each participant chooses a depth from the published table, within the published domain. Outside it, N makes no quantitative claim.
 
-Every page: `# Title` → one-paragraph "why this matters" → body → optional `**Primitives:**` /
-`**See also:**` line. Headings in sentence case. Reference pages (part VII) are exempt from the
-"why" paragraph.
+[N-SPEC v0.7 §1.4, invariant 18][n14], [§17.3][n173], [§17.6][n176]
+
+**BATHRON in five minutes; Where trust lives**
+
+> There is no native finality.
+
+[N-SPEC v0.7 §1.4, invariant 18][n14], [§18][n18]. Include this sentence once on each page and link to Depth and statuses.
+
+**Depth and statuses; Where trust lives**
+
+> Wait or stop rather than be wrong. A settlement may wait hours; the network may pause to resolve a conflict.
+
+[N-SPEC v0.7 §14.4][n144], [§18][n18]; [WHY-N §7][w7], [§8][w8]. Follow it with the domain qualification and the absence of a universal conflict-detection claim.
+
+**Burns**
+
+> Every M0 unit comes from burned bitcoin. A burn creates no reserve and no claim on Bitcoin.
+
+[N-SPEC v0.7 §4.9][n49]; [WHY-N §3][w3]
+
+**Where trust lives**
+
+> BATHRON reads Bitcoin; it never commands it.
+
+[N-SPEC v0.7, preamble, point 3][np]
+
+**Who does what**
+
+> N-SPEC v0.7 keeps a historical application wording that was never adopted for any network. APP-SPEC v1 makes M0 the only settlement asset; its §13 differs from N-SPEC v0.7 §13 only in the asset.
+
+[APP-SPEC v1 draft §13, principle][p13], [§ID, ID-1][pID]. Keep the reader-facing explanation on this page only, at the first mention of BTC/M0. Do not spell out the historical asset identifier or link to the engine's settlement chapter. The historical wording does not describe an earlier name for M0.
+
+> Independent liquidity providers settle with each other on M0, without trusting one another. The specifications define no order book and no pool.
+
+[APP-SPEC v1 draft §R2P, R2P-1][pR2P] supports settlement without mutual trust; the absence of an order book or pool summarizes the specifications, not an explicit rule in R2P-1. Keep this statement within the service-role explanation and retain the delivery-depth dependency.
+
+## Editorial checks
+
+Check entire sentences and their context. Negative statements about consensus mechanisms and the entry-right qualification must remain readable. Do not remove them merely because a term appears in a search result. Treat technical identifiers separately from prose. Check rendered text separately from link destinations: a word in a source URL is not an editorial use. This guide may name prohibited terms to explain the restrictions. On the homepage, retain the exact sourced sentence “N selects one producer per slot from burned tickets, without a vote.” as the sole exception to the page restriction on consensus negations.
+
+Read every quantity, including quantities written in words and values without units. Section numbers, versions and page numbering identify references; they are not parameters. The singular producer per slot and the qualitative possibility of waiting hours explain the model. They do not authorize copying slot durations, burn amounts, maturities, depths or performance claims.
+
+Check all visible text, metadata, source links, internal links, captions and alternative text. Apply the same review to translations. Match the page title and social title exactly to the homepage hero. Use the same approved description in page and social metadata. Keep the Network status link as navigation, without an accompanying network-state claim.
+
+[n18]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#18-limites
+[attacks]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/docs/ATTACKS.md
+[p04]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#04-vocabulaire-et-identifiants-gelés
+[n49]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#49-burn-m0-v3
+[n41]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#41-identité
+[n46]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#46-new-et-add
+[n71]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#71-tirage
+[n14]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#14-invariants
+[pR2P]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#r2p-r2-pivot--durée-de-vie-minimale-réelle-des-contrats-enfants
+[w7]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/docs/WHY-N.md#7-why-sps-and-lps-choose-their-own-depth
+[n145]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#145-statuts-applicatifs
+[n173]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#173-table-kε-du-domaine
+[w3]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/docs/WHY-N.md#3-the-property-split
+[n84]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#84-repère-bitcoin
+[n121]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#121-nature-de-h1
+[n1214]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#1214-récupération-exceptionnelle
+[w2]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/docs/WHY-N.md#2-why-n-exists
+[n101]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#101-preuve-déquivoque
+[n103]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#103-ban
+[n53]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#53-registre-actif
+[n54]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#54-graine
+[n176]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#176-comportement-hors-domaine
+[n144]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#144-suspensions-sans-attaque
+[w8]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/docs/WHY-N.md#8-what-n-guarantees-under-h_n-and-what-it-does-not
+[np]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#préambule
+[p13]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#13-règlement-btcm0-à-un-saut
+[pID]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#id-identifiant-applicatif-application_spec_id

@@ -1,0 +1,16 @@
+# JSON Lines: exact page, rule, sentence and editorial reason. Homepage entries also cover identical English PO msgids.
+{"page":"index.html","rule":"V3","sentence":"N selects one producer per slot from burned tickets, without a vote.","reason":"Negation sourced by the n-spec README; answers the blind reader's first question."}
+{"page": "docs/src/engine.md", "rule": "V10", "sentence": "N-SPEC v0.7 §9.3, §1.4, invariant 17", "reason": "Source citation identifies invariant or rule numbers, not parameter values."}
+{"page": "docs/src/depth.md", "rule": "V10", "sentence": "N-SPEC v0.7 §1.4, invariant 18, §17.3, §17.6", "reason": "Source citation identifies invariant or rule numbers, not parameter values."}
+{"page": "docs/src/producers.md", "rule": "V10", "sentence": "N-SPEC v0.7 §1.4, invariant 12, §9.3, §9.5", "reason": "Source citation identifies invariant or rule numbers, not parameter values."}
+{"page": "docs/src/roles.md", "rule": "V10", "sentence": "Normative source: N-SPEC v0.7 §4.1, §7.1, §10.3 (in French); WHY-N §2, §7; APP-SPEC v1 draft §0.4, §ID, ID-1, §13, principle and rules 13-1–13-2, §R2P, R2P-1 (in French).", "reason": "Source citation identifies invariant or rule numbers, not parameter values."}
+{"page": "docs/src/roles.md", "rule": "V10", "sentence": "APP-SPEC v1 draft §0.4, §13, principle and rules 13-1–13-2, §ID, ID-1", "reason": "Source citation identifies invariant or rule numbers, not parameter values."}
+{"page": "docs/src/roles.md", "rule": "V10", "sentence": "N-SPEC v0.7 §4.1, §7.1; APP-SPEC v1 draft §13, 13-1; WHY-N §7", "reason": "Source citation identifies invariant or rule numbers, not parameter values."}
+{"page": "docs/src/burns.md", "rule": "V10", "sentence": "N-SPEC v0.7, preamble, §1.4, invariants 2 and 12; WHY-N §3", "reason": "Source citation identifies invariant or rule numbers, not parameter values."}
+{"page": "docs/src/overview.md", "rule": "V10", "sentence": "N-SPEC v0.7 §5.3, §5.4, §7.1, §9.3, §1.4, invariant 17; WHY-N §2", "reason": "Source citation identifies invariant or rule numbers, not parameter values."}
+{"page": "docs/src/overview.md", "rule": "V10", "sentence": "APP-SPEC v1 draft §0.4; N-SPEC v0.7 §1.4, invariants 1–4 and 12, §4.9, §6.7; WHY-N §3", "reason": "Source citation identifies invariant or rule numbers, not parameter values."}
+{"page": "docs/src/overview.md", "rule": "V10", "sentence": "WHY-N §7, §8; N-SPEC v0.7 §1.4, invariant 18, §17.1, §17.2, §17.6, §18", "reason": "Source citation identifies invariant or rule numbers, not parameter values."}
+{"page": "index.html", "rule": "V10", "sentence": "APP-SPEC v1 draft §0.4; N-SPEC v0.7 §1.4, invariants 2 and 12; §4.9; WHY-N §3.", "reason": "Source citation identifies invariant or rule numbers, not parameter values."}
+{"page": "index.html", "rule": "V10", "sentence": "N-SPEC v0.7 §1.4, invariants 2 and 12", "reason": "Source citation identifies invariant or rule numbers, not parameter values."}
+{"page": "docs/src/status.md", "rule": "V10", "sentence": "Last updated: 5 October 2026.", "reason": "Existing dated fact on the sole canonical Status page, preserved unchanged."}
+{"page": "docs/src/status.md", "rule": "V10", "sentence": "The DMM public testnet was shut down on 5 October 2026.", "reason": "Existing dated fact on the sole canonical Status page, preserved unchanged."}
