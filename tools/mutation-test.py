@@ -264,6 +264,54 @@ class Gates(unittest.TestCase):
         path = self.root / 'docs/src/burns.md'
         self.reject(L.citation_check, 'docs/src/burns.md', path.read_text().replace('[§4.9][n49]', '[§4.8][n49]'), 'section label')
 
+    def test_capability_citation_labels_match_anchors(self):
+        for page, before, after in (
+                ('covenants', '[§SCR.3][pSCR3]', '[§SCR.2][pSCR3]'),
+                ('burns', '[§IMP.4][pIMP4]', '[§IMP.1][pIMP4]'),
+                ('between-providers', '[§OBJ.3, OBJ-10][pOBJ]', '[§OBJ.2, OBJ-10][pOBJ]')):
+            path = self.root / f'docs/src/{page}.md'
+            self.assertIn(before, path.read_text())
+            self.reject(L.citation_check, f'docs/src/{page}.md',
+                        path.read_text().replace(before, after), 'section label')
+
+    def test_capability_boundaries_are_required(self):
+        for page in ('bitcoin-facts', 'covenants', 'settlement',
+                     'between-providers', 'what-you-can-build'):
+            path = self.root / f'docs/src/{page}.md'
+            phrase = V.REQUIRED[page][0]
+            self.assertIn(phrase, path.read_text())
+            self.reject(V.check, f'docs/src/{page}.md',
+                        path.read_text().replace(phrase, ''), 'V11:')
+
+    def test_oracle_exception_is_exact_and_local(self):
+        path = self.root / 'docs/src/what-you-can-build.md'
+        text = path.read_text()
+        self.reject(V.check, 'docs/src/what-you-can-build.md',
+                    text.replace('oracle external to the protocol', 'oracle supplied by the protocol'), 'V8:')
+        self.reject(V.check, 'docs/src/what-you-can-build.md',
+                    text + '\nAn oracle supplies Bitcoin facts.\n', 'V8:')
+        sentence = next(a['sentence'] for a in V.entries('vocab-allow.txt', self.root)
+                        if a['rule'] == 'V8')
+        self.reject(V.check, 'docs/src/mutation.md', sentence, 'V8:')
+
+    def test_rule_identifiers_do_not_allow_parameter_values(self):
+        with changed(self.root / 'docs/src/mutation.md', 'APP-SPEC §OBJ.3, OBJ-10.\n'):
+            self.assertEqual(V.check(self.root), [])
+        self.reject(V.check, 'docs/src/mutation.md', 'OBJ-10 requires 100 blocks.', 'V10:')
+
+    def test_homepage_source_comments_remain_checked(self):
+        text = (self.root / 'index.html').read_text()
+        with changed(self.root / 'index.html', text + '<!-- APP-SPEC source annotation -->'):
+            self.assertEqual(E.check(self.root), [])
+        self.reject(E.check, 'index.html', text + '<p>APP-SPEC source annotation</p>', 'source citation')
+        self.reject(E.check, 'index.html', text + '<p>APP-<strong>SPEC</strong> source</p>', 'source citation')
+        self.reject(E.check, 'index.html', text + '<meta name="description" content="APP-SPEC source">', 'source citation')
+        with self.pinned_context():
+            text = (self.root / 'index.html').read_text()
+            url = L.PREFIX + self.ref + '/' + L.APP + '#sap1-forme'
+            self.reject(lambda root: L.sources(root, self.spec), 'index.html',
+                        text + '<!-- Source: ' + url + ' -->', 'application section')
+
     def test_sources_require_curated_app(self):
         with self.pinned_context():
             self.assertEqual(L.sources(self.root, self.spec), [])

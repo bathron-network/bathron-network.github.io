@@ -96,7 +96,6 @@ limit-results = 15
 "/node.html" = "status.html"
 "/rpc-transactions.html" = "status.html"
 "/bitcoin-verification.html" = "engine.html"
-"/bitcoin-facts.html" = "engine.html"
 "/boundaries.html" = "engine.html"
 "/invariants.html" = "burns.html"
 "/script.html" = "overview.html"

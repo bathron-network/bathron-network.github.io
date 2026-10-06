@@ -34,3 +34,6 @@
 {"section": "docs/WHY-N.md#8-what-n-guarantees-under-h_n-and-what-it-does-not", "page": "docs/src/overview.md", "reason": "Published-domain limits only; roles explains the historical application wording."}
 {"section": "spec/N-SPEC-v0.7.md#14-invariants", "page": "docs/src/glossary.md", "reason": "Invariant references concern production, provenance, ticket rights and absence of native finality; roles explains the historical application wording."}
 {"section": "docs/WHY-N.md#3-the-property-split", "page": "docs/src/glossary.md", "reason": "Provenance and conservation only; roles explains the historical application wording."}
+{"section": "app/APP-SPEC-v1-draft.md#obj3-anciens-types-refusés-et-numéros-réservés", "page": "docs/src/between-providers.md", "reason": "Only OBJ-10 generic scripts on M0 are cited; the adjacent rejected historical transaction types are not adopted."}
+{"section": "app/APP-SPEC-v1-draft.md#obj3-anciens-types-refusés-et-numéros-réservés", "page": "docs/src/what-you-can-build.md", "reason": "Only OBJ-10 generic scripts on M0 are cited; the adjacent rejected historical transaction types are not adopted."}
+{"section": "spec/N-SPEC-v0.7.md#préambule", "page": "docs/src/settlement.md", "reason": "Preamble point 3 supports reading Bitcoin without commanding it; no historical settlement wording is adopted."}

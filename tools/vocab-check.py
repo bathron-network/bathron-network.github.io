@@ -26,7 +26,16 @@ REQUIRED = {
     'overview': ['There is no native finality.'],
     'trust': ['There is no native finality.', 'BATHRON reads Bitcoin; it never commands it.',
               'Wait or stop rather than be wrong. A settlement may wait hours; the network may pause to resolve a conflict.'],
-    'burns': ['Every M0 unit comes from burned bitcoin. A burn creates no reserve and no claim on Bitcoin.'],
+    'burns': ['New M0 comes only from eligible burns imported under the rules.',
+              'Using M0 does not require burning BTC.', 'Every M0 unit comes from burned bitcoin. A burn creates no reserve and no claim on Bitcoin.'],
+    'bitcoin-facts': ['BTCSTATE is a generic, non-consuming presence predicate.'],
+    'covenants': ['recursive covenants and discreet log contracts (DLCs) are not capabilities offered by this documented baseline today.'],
+    'settlement': ['A Bitcoin payment never resolves two §13 locks.',
+                   'Without the scan, resolution waits for data instead of refunding by default.'],
+    'between-providers': ['It does not establish an equal interval after the beneficiary discovers the child.'],
+    'what-you-can-build': ['These are examples of third-party constructions, not services supplied by BATHRON.',
+                           'Difficulty markets are therefore compatible by design, without an oracle.',
+                           'BTC/USD price is not a Bitcoin fact.'],
     'roles': [HISTORICAL, 'Independent liquidity providers settle with each other on M0, without trusting one another. The specifications define no order book and no pool.'],
 }
 
@@ -72,6 +81,7 @@ def check(root=ROOT):
             # References/versions identify sources, not quantities. Citation labels
             # with invariant numbers remain explicit, reviewed exceptions.
             numeric = re.sub(r'§+\s*\d+(?:\.\d+)*(?:[–-]\d+(?:\.\d+)*)?|\bv\d+(?:\.\d+)*\b', '', sentence)
+            numeric = re.sub(r'\b(?:GEN|OBJ|BTCSTATE|BTC|SCR|CTV|CLTV|CSV|R2P|PUB|IMP)-\d+\b', '', numeric)
             if re.search(r'\b\d+(?:\.\d+)?\s*(?:sats?|BTC|blocks?|slots?|s|ms|h|min|GB|%|confirmations?)(?!\w)|(?<![\w.])\d{2,}(?!\w|\.\d)', numeric, re.I):
                 if not any(a['rule'] == 'V10' and a['page'] == path and a['sentence'] == sentence for a in allow):
                     errors.append(f'{path}: V10: {sentence}')

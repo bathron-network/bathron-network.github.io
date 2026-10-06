@@ -1,4 +1,4 @@
-# BATHRON editorial style — v3
+# BATHRON editorial style — v4
 
 Not rendered on the site; public in this repository.
 
@@ -11,7 +11,7 @@ This guide applies to the documentation, homepage, metadata and image text. Expl
 3. **Link to Network status.** The documentation theme, homepage and repository entry points link to the canonical page. Do not repeat its contents in prose, metadata or images. Do not add another status paragraph to individual documentation pages.
 4. **Write in the present tense.** Describe the documented rules and their boundaries. Keep schedules, release plans and development announcements out of these pages.
 5. **Give each concept a home.** Explain production in Producers and tickets, chain selection in The N engine, delivery depth in Depth and statuses, burns in Burns, and service responsibilities in Who does what. Other pages summarize and link.
-6. **Stay within public source scope.** For this set of pages, cite N-SPEC v0.7, WHY-N §§1–8 and ATTACKS. Cite APP-SPEC v1 draft only for §0.4, §ID rule ID-1, §13's principle and rules 13-1–13-2, and §R2P rule R2P-1. Name settlement pairs without explaining settlement mechanics. Do not derive additional capabilities from a section's vocabulary.
+6. **Stay within public source scope.** Cite N-SPEC v0.7, WHY-N §§1–8 and ATTACKS for the engine and its boundaries. For Capabilities, cite the adopted parts of APP-SPEC v1 draft §BTC, §SCR, §13, §R2P, §OBJ.3 rule OBJ-10 and §PUB, as well as §0.3 rule GEN-5; retain §0.4 and §ID rule ID-1. Burns may also cite §IMP.1, §IMP.4 and §OBJ.2 for eligible import and existing M0 transfers. Cite the precise subsection where one exists. Explain reserved details as reserved, never as available functionality; difficulty markets are compatible by design (header facts verified by each node, plus covenants), without an oracle, and the exact difficulty query format is not yet published (BTCSTATE-3). Present recursive covenants and DLCs as outside the documented baseline, with the SCR-2/CTV-1 basis explicit. Every construction is a third-party example that distinguishes protocol primitives from builder responsibilities. The word “oracle” is permitted only to explain a dependency external to the protocol, chosen by a builder; it must never describe Bitcoin evidence verification. The homepage keeps its presentation: source comments cite the corrected agreement, and its links lead to the explanatory pages.
 7. **State limits with evidence.** Refer readers to [N-SPEC v0.7 §18][n18] and [ATTACKS][attacks] for limitations. Explain consequences relevant to the reader without reproducing vulnerability details or research results. Keep a domain qualification beside any conditional claim. Never turn a halt mechanism into an assurance that every conflict is detected.
 8. **Use a predictable structure.** Title, source block, a paragraph explaining why the topic matters, body, then See also. Use sentence case. Explanatory pages contain 350–600 words; the glossary may extend to 900 and needs no opening rationale.
 9. **Use restrained language.** Write declarative sentences and short paragraphs. Prefer concrete responsibilities to slogans. Avoid superlatives, promotional adjectives, unsupported comparisons and universal promises. Distinguish a rule, a local observation and a model result.
@@ -37,12 +37,12 @@ Put a section citation immediately after the claim or paragraph it supports. The
 | **Settlement, settles, asset conversion, conversion rate, asset pair, settlement inventory, inventory movement** | Swap, exchange, trade, trading, exchange rate, trading pair, DEX, DLP, liquidity pool; message exchange and key exchange remain ordinary technical expressions | Use these terms consistently for services and asset movements. |
 | **Inclusion, depth, status, stable under your policy** | Final, finality, finalized except in negation; confirmed as an absolute, safe, guaranteed except in negation, instant, real-time | Keep the policy and domain visible. Do not turn these into unconditional assurance labels. [N-SPEC v0.7 §14.5][n145], [§17.3][n173] |
 | **Burn** | Reserve, redeem, redeemable or a claim on Bitcoin except in negation; mint, issuance | Irreversible destruction, with no reserve and no claim on Bitcoin. [N-SPEC v0.7 §4.9][n49]; [WHY-N §3][w3] |
-| **Bitcoin facts, reference block** | Oracle except in “without an oracle”; feed, latest Bitcoin tip | Evidence checked in the block's designated Bitcoin context. [N-SPEC v0.7 §8.4][n84] |
+| **Bitcoin facts, reference block** | Oracle as a protocol service; feed, latest Bitcoin tip | Evidence checked in the block's designated Bitcoin context. [N-SPEC v0.7 §8.4][n84] |
 | **STOP, RECOVERY** | Never be wrong without the published-domain qualification; unstoppable, 100% uptime | Preserve technical spelling and distinguish a halt from explicit acceptance of a new origin. [N-SPEC v0.7 §12.1][n121], [§12.14][n1214] |
 
 Use only the current role names. The glossary keeps one historical mention: *formerly called Operator*. This is the only permitted use of the former role name in reader-facing copy. Do not call a producer's ticket a recoverable deposit. Do not apply financial promotion language to M0 or promise universal protection to participants.
 
-Keep fixed technical identifiers unchanged when explaining an identifier is in scope. Introduce no settlement-lock identifiers in this set of pages. Link to the application status definitions without translating or reproducing their list.
+Keep fixed technical identifiers unchanged when explaining an identifier is in scope. Explain settlement-lock identifiers only when needed; do not reproduce payloads or parameter values. “Covenant-linked parent contract” describes the construction; never describe M0 as a pivot. Link to the application status definitions without translating or reproducing their list.
 
 ## Required wording
 
@@ -84,9 +84,11 @@ These formulations are fixed for this set of pages. Preserve their adjoining sou
 
 **Burns**
 
+> New M0 comes only from eligible burns imported under the rules.
+> Using M0 does not require burning BTC.
 > Every M0 unit comes from burned bitcoin. A burn creates no reserve and no claim on Bitcoin.
 
-[N-SPEC v0.7 §4.9][n49]; [WHY-N §3][w3]
+[APP-SPEC v1 draft §IMP.1][pIMP1], [§IMP.4][pIMP4], [§OBJ.2][pOBJ2]; [N-SPEC v0.7 §4.9][n49]; [WHY-N §3][w3]. Put use of existing M0 before its origin; distinguish M0, TICKET and REACT burns.
 
 **Where trust lives**
 
@@ -108,7 +110,7 @@ These formulations are fixed for this set of pages. Preserve their adjoining sou
 
 Check entire sentences and their context. Negative statements about consensus mechanisms and the entry-right qualification must remain readable. Do not remove them merely because a term appears in a search result. Treat technical identifiers separately from prose. Check rendered text separately from link destinations: a word in a source URL is not an editorial use. This guide may name prohibited terms to explain the restrictions. On the homepage, retain the exact sourced sentence “N selects one producer per slot from burned tickets, without a vote.” as the sole exception to the page restriction on consensus negations.
 
-Read every quantity, including quantities written in words and values without units. Section numbers, versions and page numbering identify references; they are not parameters. The singular producer per slot and the qualitative possibility of waiting hours explain the model. They do not authorize copying slot durations, burn amounts, maturities, depths or performance claims.
+Read every quantity, including quantities written in words and values without units. Section numbers, versions and page numbering identify references; they are not parameters. The singular producer per slot and the qualitative possibility of waiting hours explain the model. They do not authorize copying slot durations, burn amounts, maturities, depths or performance claims. The sole additional exception is PUB-2’s approximate two-to-four-hour scale on the settlement page, explicitly sourced and never presented as a deadline.
 
 Check all visible text, metadata, source links, internal links, captions and alternative text. Match the page title and social title exactly to the homepage hero. Use the same approved description in page and social metadata. Keep the Network status link as navigation, without an accompanying network-state claim.
 
@@ -139,3 +141,6 @@ Check all visible text, metadata, source links, internal links, captions and alt
 [np]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#préambule
 [p13]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#13-règlement-btcm0-à-un-saut
 [pID]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#id-identifiant-applicatif-application_spec_id
+[pIMP1]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#imp1-source-unique
+[pIMP4]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#imp4-matérialisation
+[pOBJ2]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#obj2-transaction-applicative-application_transaction

@@ -17,5 +17,12 @@
 # Roles
 - [07 · Who does what](roles.md)
 
+# Capabilities
+- [Contracts on Bitcoin facts](bitcoin-facts.md)
+- [Covenants and timelocks](covenants.md)
+- [BTC/M0 settlement in one hop](settlement.md)
+- [Settlement between providers on M0](between-providers.md)
+- [What others can build](what-you-can-build.md)
+
 # Reference
 - [08 · Glossary](glossary.md)
