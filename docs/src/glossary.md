@@ -1,65 +1,114 @@
-# Glossary
+# 08 · Glossary
 
-These terms distinguish protocol rules from commercial services. A single organization can hold several roles, but the responsibilities remain separate. Follow the linked pages for the full workflows and evidence requirements.
+> **Normative source:** [N-SPEC v0.7 §4.1][n41], [§5.1][n51], [§7.1][n71], [§9.3][n93], [§10.1][n101], [§12.1][n121], [§12.15][n1215], [§14.5][n145], [§17.3][n173] (in French); [WHY-N §7][w7]; [APP-SPEC v1 draft §0.4][p04], [§13, principle][p13], [§R2P, R2P-1][pR2P] (in French).
+> This page explains; it does not restate rules or parameter values.
 
-## Units and settlement
+## Production
 
-**BATHRON:** An open programmable settlement protocol. It provides common validation rules, Bitcoin fact verification and programmable conditions for independent applications.
+**Slot** — A position in N's production schedule, assigned to a producer by the draw. [N-SPEC v0.7 §5.1][n51], [§7.1][n71]
 
-**M0:** The base accounting unit originating from verified, irreversible Bitcoin destruction. Ownership can change without changing that provenance.
+**Epoch** — A mechanical interval for the registry and production schedule, with keys and weight fixed within it. [N-SPEC v0.7 §5.1][n51], [§1.4, invariant 8][n14]
 
-**M1:** The settlement receipt created one for one by vaulting M0. Consuming it through unlock releases M0, not BTC. See [M1](m1.md).
+**Registry** — The ordered set of active registered identities, their production keys and their ticket weight for an epoch. [N-SPEC v0.7 §5.3][n53]
 
-**Burn:** Provable destruction of BTC used to establish monetary origin. It creates no recoverable Bitcoin reserve.
+**Ticket** — An entry right obtained by burning BTC, neither refundable nor transferable; exclusion suspends its active use and a ban destroys its right. [N-SPEC v0.7 §1.4, invariants 3–5][n14]
 
-**Settlement pivot:** A common intermediate unit connecting asset pairs. The arrangement simplifies connections without supplying their inventory or prices.
+**Registered identity** — An identity with registered keys and participation rights obtained through Bitcoin ticket burns (formerly called Operator). [N-SPEC v0.7 §4.1][n41], [§4.6][n46]
 
-**Settlement:** Completion of an agreed transfer through valid transactions. External legs require their own execution and observation. See [Settlement across chains](cross-chain.md).
+**Producer** — The registered identity drawn to produce for a slot. [N-SPEC v0.7 §7.1][n71]
 
-**Validation:** Checking that a transaction or block satisfies the protocol rules, including authorization, evidence and conservation. See [What consensus enforces](boundaries.md).
+**TICKET (NEW/ADD)** — Bitcoin burn forms that add ticket rights; they create no M0 and do not reactivate an excluded identity. [N-SPEC v0.7 §4.4][n44], [§4.6][n46], [§1.4, invariant 1][n14]
 
-**Finality:** Agreement on validated history. It sits above transaction validation and does not replace it.
+**REACT** — Reactivation through an admissible Bitcoin burn tied to an exclusion record; it creates no M0. [N-SPEC v0.7 §6.7][n67], [§1.4, invariant 1][n14]
 
-## People and services
+**KEYREG** — The key registration object used to establish an identity's control and production keys. [N-SPEC v0.7 §4.2][n42]
 
-**Operator:** A registered identity admitted through a burned ticket and maturity. The entry cost is real, visible and permanently spent; one Operator, one vote; may produce blocks and sign finality.
+**ROTATE** — An authorized change of production key that preserves the identity and responsibility for earlier generations. [N-SPEC v0.7 §6.9][n69]
 
-**Settlement Provider (SP):** A BTC/M1 provider with an Operator identity. It handles inventory, quotes and external execution; it can produce blocks or operate without producing them.
+**Seed** — The input derived from Bitcoin and the registry that determines the production draw for an epoch. [N-SPEC v0.7 §5.4][n54]
 
-**Liquidity Provider (LP):** An X/M1 provider managing liquidity and the external asset leg. Its Operator identity is optional.
+**Score** — A chain's count of valid production blocks since genesis, used before the public tie-break. [N-SPEC v0.7 §9.3][n93]
 
-**Builder:** Someone creating an application, agreement, interface or service using the infrastructure.
+**Equivocation** — Different signed headers for the same chain, identity and slot, with each signing key verified in its historical context. [N-SPEC v0.7 §10.1][n101]
 
-**User:** A participant choosing terms and authorizing an application's operations.
+**Ban** — Permanent removal of an identity's participation rights after an admissible proof matures; it does not remove past score. [N-SPEC v0.7 §10.3][n103]
 
-**Observer:** A participant independently verifying history or publishing evidence about network and service activity. See [Who does what](roles.md).
+**Exclusion** — Suspension of participation rights under the activity rules, distinct from a permanent ban. [N-SPEC v0.7 §6.6][n66], [§6.7][n67]
 
-**Ban:** Permanent ban for objectively proven double signing; no slashing. The burned identity ticket remains spent. See [Network operators](operators.md).
+## Bitcoin and origins
 
-**Pause:** An interruption in progress or finality.
+**Reference block (`B.ref`)** — The Bitcoin block designated by an N block as the reference for its Bitcoin context. [N-SPEC v0.7 §8.4][n84]
 
-**Quote:** A provider's offer with defined terms and expiry. It is separate from a funded settlement transaction.
+**H1 detector** — A separate veto using Bitcoin fingerprints; it can delay or halt a decision but never promote a branch. [N-SPEC v0.7 §12.1][n121]
 
-## Conditions and evidence
+**STOP / deep halt** — A refusal to proceed under N's conflict protections; a deep halt can persist while the conflict remains. [N-SPEC v0.7 §9.5][n95], [§18][n18]
 
-**Covenant:** A script condition constraining the transaction that spends an output. A recursive covenant preserves a policy in successor outputs.
+**BOOTSTRAP** — An authenticated origin package for a node without a local origin; it cannot replace an existing local origin. [N-SPEC v0.7 §12.12][n1212]
 
-**Hashlock:** A condition requiring a secret whose hash matches the committed value.
+**RECOVERY** — Exceptional installation of a new origin through explicit acceptance of the exact recovery package and its consequences. [N-SPEC v0.7 §12.14][n1214]
 
-**Timelock:** A time or height condition making a spending path eligible.
+**Weak subjectivity** — Dependence on a recent authenticated origin for a new node, or a returning node that left the reception assumptions, to enter the registry agreement domain. [N-SPEC v0.7 §12.15][n1215]
 
-**HTLC:** A hashlocked, timelocked construction. Coordinating HTLCs across chains also requires chain-specific execution and monitoring.
+## Depth and settlement
 
-**Bitcoin predicate:** A pass-or-fail condition about accepted Bitcoin history, such as difficulty, height, median time or a proven payment.
+**Depth** — Progress since an operation's inclusion, assessed under a participant's policy and the published domain. [N-SPEC v0.7 §14.5][n145], [§17.3][n173]
 
-**SPV proof:** Transaction inclusion evidence checked against a verified header view, together with the applicable eligibility checks.
+**K(ε) table** — The published relation between depth and a conditional bound on common-prefix failure per cut. [N-SPEC v0.7 §17.3][n173]
 
-**Attestation:** A signed statement from an external source. Signature verification authenticates the source; it does not establish the truth of an outside event.
+**Published domain H_N** — The assumptions within which N makes quantitative claims. [N-SPEC v0.7 §17.1][n171], [§17.2][n172]
 
-**DLC:** Discreet log contract: a construction connecting agreed outcomes to an external attestation and defined settlement paths.
+**Application status** — A contextual description of an operation's position or condition, using the identifiers in the specification. [N-SPEC v0.7 §14.5][n145]
 
-**Recovery path:** An alternative spend with specified conditions, authorization and destination.
+**Burn** — Irreversible destruction of BTC for an M0, ticket or reactivation purpose; it creates no Bitcoin reserve. [N-SPEC v0.7 §4.4][n44], [§4.9][n49], [§6.7][n67]; [WHY-N §3][w3]
 
-**Confidential transfer:** A shielded M0 transfer whose protected details are verified without being published. It can move inventory before or after settlement. See [Private inventory transfers](confidentiality.md) for its scope.
+**M0** — The settlement asset, originating only in M0 burns. [APP-SPEC v1 draft §0.4][p04]; [N-SPEC v0.7 §4.9][n49]
 
-**USDBTC:** A possible third-party risk-transfer application; see [What you can build](applications.md#usdbtc).
+## Service labels
+
+**Settlement Provider (SP)** — A service role handling BTC/M0 settlement and choosing its external delivery depth. [APP-SPEC v1 draft §0.4][p04], [§13, principle][p13]; [WHY-N §7][w7]
+
+**Liquidity Provider (LP)** — A service role handling X/M0 and settling with other providers on M0. [APP-SPEC v1 draft §0.4][p04], [§R2P, R2P-1][pR2P]
+
+**Builder** — The descriptive label for whoever creates an application or interface; distinguish its presentation of facts, observations and model results. [N-SPEC v0.7 §16.1][n161]
+
+**User** — The descriptive label for whoever chooses terms and authorizes an operation; distinguish that choice from the external provider's depth policy. [WHY-N §7][w7]
+
+**Observer** — The descriptive label for whoever examines history or reports evidence; the report's category and context matter. [N-SPEC v0.7 §16.1][n161]
+
+## See also
+
+[The N engine](engine.md), [Producers and tickets](producers.md), [Depth and statuses](depth.md), [Burns](burns.md), and [Who does what](roles.md).
+
+[n41]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#41-identité
+[n51]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#51-créneaux
+[n71]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#71-tirage
+[n93]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#93-score-et-rang
+[n101]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#101-preuve-déquivoque
+[n121]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#121-nature-de-h1
+[n1215]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#1215-nœuds-nouveaux-ou-de-retour--subjectivité-faible
+[n145]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#145-statuts-applicatifs
+[n173]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#173-table-kε-du-domaine
+[w7]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/docs/WHY-N.md#7-why-sps-and-lps-choose-their-own-depth
+[p04]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#04-vocabulaire-et-identifiants-gelés
+[p13]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#13-règlement-btcm0-à-un-saut
+[pR2P]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#r2p-r2-pivot--durée-de-vie-minimale-réelle-des-contrats-enfants
+[n14]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#14-invariants
+[n53]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#53-registre-actif
+[n46]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#46-new-et-add
+[n44]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#44-sortie-ticket
+[n67]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#67-exclusion-et-react
+[n42]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#42-keyreg
+[n69]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#69-rotate
+[n54]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#54-graine
+[n103]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#103-ban
+[n66]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#66-exclusions--frein-de-densité-et-plafonds
+[n84]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#84-repère-bitcoin
+[n95]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#95-sélection-avec-veto-séparé
+[n18]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#18-limites
+[n1212]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#1212-initialisation-et-pouvoir-nul-du-bootstrap
+[n1214]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#1214-récupération-exceptionnelle
+[n171]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#171-domaine-h_n--principe
+[n172]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#172-hypothèses-du-domaine
+[n49]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#49-burn-m0-v3
+[w3]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/docs/WHY-N.md#3-the-property-split
+[n161]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#161-catégories

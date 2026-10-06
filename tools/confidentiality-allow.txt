@@ -1,0 +1,3 @@
+# JSON Lines: file, rule, matched text, complete exact line, reason. No private-name list belongs here.
+{"file": "docs/theme/index.hbs", "rule": "ip", "match": "127.0.0.1", "line": "            const localAddrs = [\"localhost\", \"127.0.0.1\", \"\"];", "reason": "Existing local-preview analytics exclusion in the documentation theme."}
+{"file": "docs/theme/index.hbs", "rule": "host", "match": "localhost", "line": "            const localAddrs = [\"localhost\", \"127.0.0.1\", \"\"];", "reason": "Existing local-preview analytics exclusion in the documentation theme."}

@@ -1,0 +1,83 @@
+# Every PR receives the same stable required check; no path filter can leave it pending.
+# Read-only validation: no deployment, secret, artifact upload or write permission.
+# Action pins and the mdBook archive digest match the deployment workflow.
+name: Documentation check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-check-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  docs:
+    name: docs gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      MDBOOK_VERSION: v0.4.52
+      MDBOOK_SHA256: c0b903f01dd8f4edc644372ad2b80b1fdddd12552d37b6a098657cbd8eddd768
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python 3.12.14
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5.6.0
+        with:
+          python-version: '3.12.14'
+
+      - name: Check interpreter
+        run: python3 -c "import sys; assert sys.version_info[:3] == (3, 12, 14), sys.version"
+
+      - name: Install mdBook
+        run: |
+          mkdir -p "$HOME/.local/bin"
+          tarball="$(mktemp -d)/mdbook.tar.gz"
+          # Téléchargement dans un fichier : plus de « curl | tar », qui extrait
+          # l'archive au fil de l'eau et ne peut donc rien vérifier avant.
+          # --fail : un HTTP 4xx/5xx devient une erreur au lieu d'une page HTML
+          # extraite comme si c'était l'outil.
+          curl --fail --show-error --location --silent \
+            -o "$tarball" \
+            "https://github.com/rust-lang/mdBook/releases/download/${MDBOOK_VERSION}/mdbook-${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+          echo "${MDBOOK_SHA256}  ${tarball}" | sha256sum --check --strict -
+          # Extraction SEULEMENT après validation.
+          tar xzf "$tarball" -C "$HOME/.local/bin"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Read pinned normative revision
+        id: nspec
+        run: |
+          python3 - <<'PYREF'
+          import os, re
+          from pathlib import Path
+          rows = [s.strip() for s in Path('docs/NSPEC_REF').read_text().splitlines() if s.strip() and not s.startswith('#')]
+          if len(rows) != 1 or not re.fullmatch(r'[0-9a-f]{40}', rows[0]):
+              raise SystemExit('TODO-REF: set the merged normative commit before publication')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('ref=' + rows[0] + '\n')
+          PYREF
+
+      - name: Read pinned specification checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+        with:
+          repository: bathron-network/n-spec
+          ref: ${{ steps.nspec.outputs.ref }}
+          path: .nspec-source
+          persist-credentials: false
+
+      - name: docs gates
+        env:
+          NSPEC_DIR: ${{ github.workspace }}/.nspec-source
+          DOCS_BASE: ${{ github.event.pull_request.base.sha }}
+          DOCS_HEAD: ${{ github.event.pull_request.head.sha }}
+          DOCS_BRANCH: ${{ github.head_ref }}
+        run: bash tools/docs-check.sh

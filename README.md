@@ -1,30 +1,27 @@
-# bathron.org
+# BATHRON documentation
 
-This repository is the **canonical source for the public BATHRON documentation**.
-<https://bathron.org/docs/> is its generated mdBook rendering.
+This repository contains the public explanation of BATHRON and its N engine.
+The specification defines rules; these pages explain them through section references.
 
-**Network status:** <https://bathron.org/docs/status.html>
+- [Network status](https://bathron.org/docs/status.html)
+- [Documentation](https://bathron.org/docs/overview.html)
+- [Normative specification](https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/README.md)
+- [Application specification](https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#04-vocabulaire-et-identifiants-gelés) (in French)
 
-- Documentation source: [`docs/src/`](docs/src/) (edit here; nothing is hand-copied from other repos)
-- Landing page: [`index.html`](index.html)
-- Rendered docs: <https://bathron.org/docs/>
+Edit the book in [docs/src](docs/src/), following [STYLE v3](docs/STYLE.md).
+The homepage source is [index.html](index.html); its complete translations are in
+[i18n](i18n/README.md). The book is in English.
 
-## Editing the docs
+Build and check locally with the pinned mdBook executable available:
 
-The docs are an [mdBook](https://rust-lang.github.io/mdBook/) (`mdbook v0.4.52`). The table of
-contents is [`docs/src/SUMMARY.md`](docs/src/SUMMARY.md). To preview locally:
-
-```bash
-cd docs
-mdbook serve   # or: mdbook build
+```sh
+bash i18n/ci-check.sh
+bash tools/docs-check.sh --offline
 ```
 
-GitHub Actions builds `docs/` and deploys it to GitHub Pages on every push to `main`
-([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)); there is no manual copy step.
+See [the checks guide](tools/README.md) for source verification and publication checks.
+The single normative revision is recorded in [docs/NSPEC_REF](docs/NSPEC_REF);
+every normative URL uses that revision. The checks reject an unresolved reference.
 
-## Related repositories
-
-- Public node source and implementation reference: [`bathron-network/bathron-core`](https://github.com/bathron-network/bathron-core) — public releases are produced through a controlled export process
-
-One notion has one canonical page here; other pages link to it rather than duplicating text.
-Do not maintain a second public documentation corpus elsewhere.
+The deployment workflow runs the same documentation and translation gates as
+pull-request validation, before assembling the site. Generated pages are not committed.

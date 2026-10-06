@@ -12,3 +12,6 @@ hi/index.html
 ar/index.html
 i18n/homepage.pot
 __pycache__/
+
+# Read-only pinned normative checkout prepared by CI.
+.nspec-source/

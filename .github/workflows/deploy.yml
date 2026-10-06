@@ -97,8 +97,34 @@ jobs:
           tar xzf "$tarball" -C "$HOME/.local/bin"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
-      - name: Build docs
-        run: mdbook build docs
+      - name: Read pinned normative revision
+        id: nspec
+        run: |
+          python3 - <<'PYREF'
+          import os, re
+          from pathlib import Path
+          rows = [s.strip() for s in Path('docs/NSPEC_REF').read_text().splitlines() if s.strip() and not s.startswith('#')]
+          if len(rows) != 1 or not re.fullmatch(r'[0-9a-f]{40}', rows[0]):
+              raise SystemExit('TODO-REF: set the merged normative commit before publication')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('ref=' + rows[0] + '\n')
+          PYREF
+
+      - name: Read pinned specification checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+        with:
+          repository: bathron-network/n-spec
+          ref: ${{ steps.nspec.outputs.ref }}
+          path: .nspec-source
+          persist-credentials: false
+
+      - name: docs gates
+        env:
+          NSPEC_DIR: ${{ github.workspace }}/.nspec-source
+          DOCS_BASE: ${{ github.event.pull_request.base.sha }}
+          DOCS_HEAD: ${{ github.event.pull_request.head.sha }}
+          DOCS_BRANCH: ${{ github.head_ref }}
+        run: bash tools/docs-check.sh
 
       - name: Assemble site
         run: |

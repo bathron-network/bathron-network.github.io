@@ -1,183 +1,165 @@
-# BATHRON homepage — translated from index.html.
+# BATHRON homepage — complete translation of the English source.
 msgid ""
 msgstr ""
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
 
-msgid "BATHRON: Programmable settlement anchored in Bitcoin"
-msgstr "BATHRON: Liquidación programable anclada en Bitcoin"
+msgid "Settlement rooted in Bitcoin."
+msgstr "Liquidación arraigada en Bitcoin."
 
-msgid "A programmable settlement protocol anchored in Bitcoin. Build contracts, instruments, markets and applications around facts every BATHRON node can verify."
-msgstr "Un protocolo de liquidación programable anclado en Bitcoin. Construye contratos, instrumentos, mercados y aplicaciones sobre hechos que cualquier nodo BATHRON puede verificar."
-
-msgid "Build contracts, instruments, markets and applications around facts every BATHRON node can verify. Covenants, hashlocks, timelocks and confidential transfers."
-msgstr "Construye contratos, instrumentos, mercados y aplicaciones sobre hechos que cualquier nodo BATHRON puede verificar. Covenants, hashlocks, timelocks y transferencias confidenciales."
-
-msgid "BATHRON home"
-msgstr "Inicio de BATHRON"
+msgid "BATHRON uses the N engine, verified Bitcoin facts and M0, a settlement asset created only by burning bitcoin."
+msgstr "BATHRON utiliza el motor N, hechos de Bitcoin verificados y M0, un activo de liquidación creado únicamente mediante la quema de bitcoin."
 
 msgid "BATHRON"
 msgstr "BATHRON"
 
 msgid "Capabilities"
-msgstr "Capacidades"
+msgstr "Funciones"
 
-msgid "Build"
-msgstr "Construir"
-
-msgid "Bitcoin facts. Shared rules."
-msgstr "Hechos de Bitcoin. Reglas compartidas."
-
-msgctxt "hero"
-msgid "Programmable settlement"
-msgstr "La liquidación programable,"
-
-msgctxt "hero"
-msgid "anchored in Bitcoin."
-msgstr "anclada en Bitcoin."
-
-msgid "Build contracts, instruments, markets and applications around facts every BATHRON node can verify."
-msgstr "Construye contratos, instrumentos, mercados y aplicaciones sobre hechos que cualquier nodo BATHRON puede verificar."
-
-msgid "Explore the protocol"
-msgstr "Descubrir el protocolo"
-
-msgid "Verify the chain yourself, from your own machine."
-msgstr "Verificar la cadena tú mismo, desde tu propia máquina."
-
-msgid "Run a node"
-msgstr "Ejecutar un nodo"
-
-msgid "Documentation in English."
-msgstr "Documentación en inglés."
-
-msgid "Bitcoin evidence passes through a network of verifying nodes to conditional settlement."
-msgstr "Las pruebas de Bitcoin pasan por una red de nodos verificadores hasta la liquidación condicional."
-
-msgid "Bitcoin facts"
-msgstr "Hechos de Bitcoin"
-
-msgid "Verification"
-msgstr "Verificación"
-
-msgid "Settlement"
-msgstr "Liquidación"
-
-msgid "An agreement, in practice"
-msgstr "Un acuerdo en la práctica"
-
-msgid "Only if."
-msgstr "Solo si."
-
-msgid "Alice wants to pay Bob in BTC. Only if a Bitcoin condition is met."
-msgstr "Alice quiere pagar a Bob en BTC. Solo si se cumple una condición de Bitcoin."
-
-msgid "See how an agreement works"
-msgstr "Ver cómo funciona un acuerdo"
-
-msgid "Bitcoin alone cannot run the whole agreement. BATHRON verifies the Bitcoin fact and settles the intermediate leg; a provider handles the BTC leg."
-msgstr "Bitcoin por sí solo no puede ejecutar todo el acuerdo. BATHRON verifica el hecho de Bitcoin y liquida el tramo intermedio; un proveedor gestiona el tramo en BTC."
-
-msgid "Bitcoin facts without an oracle."
-msgstr "Hechos de Bitcoin sin oráculo."
-
-msgid "Proof of work and transaction evidence, checked by every node."
-msgstr "Prueba de trabajo y pruebas de transacciones, verificadas por cada nodo."
-
-msgid "Explore Bitcoin facts"
-msgstr "Explorar los hechos de Bitcoin"
-
-msgid "Programmable settlement."
-msgstr "Liquidación programable."
-
-msgid "Compose covenants, hashlocks and timelocks into an agreement."
-msgstr "Combinar covenants, hashlocks y timelocks en un acuerdo."
-
-msgid "Explore the primitives"
-msgstr "Explorar las primitivas"
-
-msgid "Open markets."
-msgstr "Mercados abiertos."
-
-msgid "A pair exists because someone quotes it."
-msgstr "Un par existe en cuanto alguien le pone precio."
-
-msgid "Understand markets"
-msgstr "Entender los mercados"
-
-msgid "Direct pairs"
-msgstr "Pares directos"
-
-msgid "Through M1"
-msgstr "A través de M1"
-
-msgid "Five assets need ten direct pairs, or five connections through M1."
-msgstr "Cinco activos necesitan diez pares directos o cinco conexiones a través de M1."
-
-msgid "N × (N − 1) / 2"
-msgstr "N × (N − 1) / 2"
-
-msgid "N"
-msgstr "N"
-
-msgid "One settlement pivot"
-msgstr "Una unidad común de liquidación"
-
-msgid "Users keep their assets."
-msgstr "Los usuarios conservan sus activos."
-
-msgid "Providers use M1."
-msgstr "Los proveedores usan M1."
-
-msgid "Burning BTC creates M0. Locking M0 creates M1: working capital for providers, connecting quoted pairs through one inventory."
-msgstr "Quemar BTC crea M0. Bloquear M0 crea M1: capital de trabajo para los proveedores que conecta los pares cotizados mediante un único inventario."
-
-msgid "The burn is irreversible. Unlocking M1 returns M0, not BTC. No redeemable BTC reserve, no guaranteed peg or liquidity."
-msgstr "La quema es irreversible. Desbloquear M1 devuelve M0, no BTC. Sin reserva canjeable por BTC ni paridad o liquidez garantizadas."
-
-msgid "Understand M1"
-msgstr "Entender M1"
-
-msgid "Find your role"
-msgstr "Encuentra tu función"
-
-msgid "Operators"
-msgstr "Operators"
-
-msgid "Verify the network"
-msgstr "Verificar la red"
-
-msgid "Settlement Providers"
-msgstr "Proveedores de liquidación"
-
-msgid "BTC/M1 · Operator identity required"
-msgstr "BTC/M1 · Identidad Operator obligatoria"
-
-msgid "Liquidity Providers"
-msgstr "Proveedores de liquidez"
-
-msgid "X/M1 · Operator identity optional"
-msgstr "X/M1 · Identidad Operator opcional"
-
-msgid "Builders"
-msgstr "Desarrolladores"
-
-msgid "Compose applications"
-msgstr "Componer aplicaciones"
-
-# TODO(translate): temporary English fallback (see i18n/README.md, "Temporary English fallback").
-msgid "Network status"
-msgstr "Network status"
+msgid "Specification"
+msgstr "Especificación"
 
 msgid "Documentation"
 msgstr "Documentación"
 
+msgid "Bitcoin facts. Shared rules."
+msgstr "Hechos de Bitcoin. Reglas compartidas."
+
+msgid "Each node verifies Bitcoin facts. M0 is the settlement asset, created only by burning bitcoin. N selects one producer per slot from burned tickets, without a vote."
+msgstr "Cada nodo verifica hechos de Bitcoin. M0 es el activo de liquidación, creado únicamente mediante la quema de bitcoin. N selecciona un productor por intervalo a partir de los tickets quemados, sin votación."
+
+msgid "N-SPEC v0.7, preamble"
+msgstr "N-SPEC v0.7, preámbulo"
+
+msgid ";"
+msgstr ";"
+
+msgid "§8.4"
+msgstr "§8.4"
+
+msgid "§4.9"
+msgstr "§4.9"
+
+msgid "§7.1"
+msgstr "§7.1"
+
+msgid "APP-SPEC v1 draft §0.4"
+msgstr "APP-SPEC v1, borrador, §0.4"
+
+msgid "(in French)."
+msgstr "(en francés)."
+
+msgid "Explore the protocol"
+msgstr "Explorar el protocolo"
+
+msgid "Read the rules and their published assumptions."
+msgstr "Leer las reglas y sus supuestos publicados."
+
+msgid "Read the specification (in French)"
+msgstr "Leer la especificación (en francés)"
+
+msgid "Documentation in English."
+msgstr "Documentación en inglés."
+
+msgid "What BATHRON does"
+msgstr "Qué hace BATHRON"
+
+msgid "Bitcoin facts without an oracle."
+msgstr "Hechos de Bitcoin sin oráculo."
+
+msgid "Each node checks Bitcoin evidence against the reference designated by the N block. BATHRON reads Bitcoin without changing its rules."
+msgstr "Cada nodo comprueba las pruebas de Bitcoin respecto a la referencia designada por el bloque N. BATHRON lee Bitcoin sin modificar sus reglas."
+
+msgid "N-SPEC v0.7, preamble, point 3"
+msgstr "N-SPEC v0.7, preámbulo, punto 3"
+
+msgid "§11.1"
+msgstr "§11.1"
+
+msgid "."
+msgstr "."
+
+msgid "Explore the N engine"
+msgstr "Explorar el motor N"
+
+msgid "One settlement asset, no issuer."
+msgstr "Un activo de liquidación, sin emisor."
+
+msgid "M0 comes from burned bitcoin. Fees transfer existing M0; production creates no block reward. A burn creates no reserve and no claim on Bitcoin."
+msgstr "M0 procede de bitcoin quemado. Las comisiones transfieren M0 existente; la producción no crea recompensas de bloque. Una quema no crea reservas ni derechos de cobro sobre Bitcoin."
+
+msgid "N-SPEC v0.7 §1.4, invariants 2 and 12"
+msgstr "N-SPEC v0.7 §1.4, invariantes 2 y 12"
+
+msgid "WHY-N §3"
+msgstr "WHY-N §3"
+
+msgid "Understand burns"
+msgstr "Comprender las quemas"
+
+msgid "Wait or stop rather than be wrong."
+msgstr "Esperar o detenerse antes que equivocarse."
+
+msgid "Participants choose depth within the published domain. Settlement may wait hours, and conflicts may halt progress. Outside that domain, N makes no quantitative claim; STOP need not occur."
+msgstr "Los participantes eligen la profundidad dentro del dominio publicado. La liquidación puede esperar horas y los conflictos pueden detener el avance. Fuera de ese dominio, N no hace ninguna afirmación cuantitativa; STOP no tiene por qué activarse."
+
+msgid "WHY-N §7"
+msgstr "WHY-N §7"
+
+msgid "§8"
+msgstr "§8"
+
+msgid "N-SPEC v0.7 §14.4"
+msgstr "N-SPEC v0.7 §14.4"
+
+msgid "§17.6"
+msgstr "§17.6"
+
+msgid "§18"
+msgstr "§18"
+
+msgid "Understand depth and statuses"
+msgstr "Comprender la profundidad y los estados"
+
+msgid "Find your role"
+msgstr "Encontrar tu función"
+
+msgid "Producers"
+msgstr "Productores"
+
+msgid "Registered identities drawn to produce."
+msgstr "Identidades registradas seleccionadas por sorteo para producir."
+
+msgid "N-SPEC v0.7 §4.1"
+msgstr "N-SPEC v0.7 §4.1"
+
+msgid "Settlement Providers"
+msgstr "Proveedores de liquidación"
+
+msgid "BTC/M0 settlement."
+msgstr "Liquidación BTC/M0."
+
+msgid "§13, principle"
+msgstr "§13, principio"
+
+msgid "Liquidity Providers"
+msgstr "Proveedores de liquidez"
+
+msgid "X/M0 settlement, where X is another asset."
+msgstr "Liquidación X/M0, donde X es otro activo."
+
+msgid "Builders"
+msgstr "Desarrolladores"
+
+msgid "Build interfaces that distinguish facts, observations and model results."
+msgstr "Crear interfaces que distingan hechos, observaciones y resultados de modelos."
+
+msgid "N-SPEC v0.7 §16.1"
+msgstr "N-SPEC v0.7 §16.1"
+
+msgid "Network status"
+msgstr "Estado de la red"
+
 msgid "GitHub"
 msgstr "GitHub"
-
-msgid "Security"
-msgstr "Seguridad"
-
-msgid "Language"
-msgstr "Idioma"

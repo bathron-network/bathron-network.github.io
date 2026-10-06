@@ -1,183 +1,165 @@
-# BATHRON homepage — translated from index.html.
+# BATHRON homepage — complete translation of the English source.
 msgid ""
 msgstr ""
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
 
-msgid "BATHRON: Programmable settlement anchored in Bitcoin"
-msgstr "BATHRON: تسوية قابلة للبرمجة مرتكزة على Bitcoin"
+msgid "Settlement rooted in Bitcoin."
+msgstr "تسوية متجذّرة في Bitcoin."
 
-msgid "A programmable settlement protocol anchored in Bitcoin. Build contracts, instruments, markets and applications around facts every BATHRON node can verify."
-msgstr "بروتوكول تسوية قابلة للبرمجة مرتكز على Bitcoin. ابنِ العقود والأدوات المالية والأسواق والتطبيقات حول وقائع تستطيع كل عقدة BATHRON التحقق منها."
-
-msgid "Build contracts, instruments, markets and applications around facts every BATHRON node can verify. Covenants, hashlocks, timelocks and confidential transfers."
-msgstr "ابنِ العقود والأدوات المالية والأسواق والتطبيقات حول وقائع تستطيع كل عقدة BATHRON التحقق منها. Covenants وHashlocks وTimelocks والتحويلات السرّية."
-
-msgid "BATHRON home"
-msgstr "الصفحة الرئيسية لـ BATHRON"
+msgid "BATHRON uses the N engine, verified Bitcoin facts and M0, a settlement asset created only by burning bitcoin."
+msgstr "تستخدم BATHRON محرك N وحقائق Bitcoin المتحقق منها وM0، وهو أصل للتسوية لا يُنشأ إلا بحرق البيتكوين."
 
 msgid "BATHRON"
 msgstr "BATHRON"
 
 msgid "Capabilities"
-msgstr "الإمكانات"
+msgstr "القدرات"
 
-msgid "Build"
-msgstr "البناء"
-
-msgid "Bitcoin facts. Shared rules."
-msgstr "حقائق Bitcoin. قواعد مشتركة."
-
-msgctxt "hero"
-msgid "Programmable settlement"
-msgstr "التسوية القابلة للبرمجة،"
-
-msgctxt "hero"
-msgid "anchored in Bitcoin."
-msgstr "مرتكزة على Bitcoin."
-
-msgid "Build contracts, instruments, markets and applications around facts every BATHRON node can verify."
-msgstr "ابنِ العقود والأدوات المالية والأسواق والتطبيقات حول وقائع تستطيع كل عقدة BATHRON التحقق منها."
-
-msgid "Explore the protocol"
-msgstr "استكشاف البروتوكول"
-
-msgid "Verify the chain yourself, from your own machine."
-msgstr "تحقق من السلسلة بنفسك، من جهازك الخاص."
-
-msgid "Run a node"
-msgstr "تشغيل عقدة"
-
-msgid "Documentation in English."
-msgstr "الوثائق باللغة الإنجليزية."
-
-msgid "Bitcoin evidence passes through a network of verifying nodes to conditional settlement."
-msgstr "تمر أدلة Bitcoin عبر شبكة من عُقد التحقق وصولًا إلى التسوية المشروطة."
-
-msgid "Bitcoin facts"
-msgstr "حقائق Bitcoin"
-
-msgid "Verification"
-msgstr "التحقق"
-
-msgid "Settlement"
-msgstr "التسوية"
-
-msgid "An agreement, in practice"
-msgstr "اتفاق عملي"
-
-msgid "Only if."
-msgstr "فقط إذا."
-
-msgid "Alice wants to pay Bob in BTC. Only if a Bitcoin condition is met."
-msgstr "تريد أليس أن تدفع لبوب بعملة BTC، فقط إذا تحقق شرط متعلق بـ Bitcoin."
-
-msgid "See how an agreement works"
-msgstr "اكتشف كيف يعمل الاتفاق"
-
-msgid "Bitcoin alone cannot run the whole agreement. BATHRON verifies the Bitcoin fact and settles the intermediate leg; a provider handles the BTC leg."
-msgstr "لا يستطيع Bitcoin وحده تنفيذ الاتفاق كاملًا. يتحقق BATHRON من حقيقة Bitcoin ويسوّي الجزء الوسيط؛ ويتولى مزوّد الخدمة الجزء الخاص بـ BTC."
-
-msgid "Bitcoin facts without an oracle."
-msgstr "حقائق Bitcoin دون أوراكل."
-
-msgid "Proof of work and transaction evidence, checked by every node."
-msgstr "إثبات العمل وأدلة المعاملات، تتحقق منها كل عقدة."
-
-msgid "Explore Bitcoin facts"
-msgstr "استكشف حقائق Bitcoin"
-
-msgid "Programmable settlement."
-msgstr "تسوية قابلة للبرمجة."
-
-msgid "Compose covenants, hashlocks and timelocks into an agreement."
-msgstr "اجمع covenants وhashlocks وtimelocks في اتفاق واحد."
-
-msgid "Explore the primitives"
-msgstr "استكشف العناصر الأساسية"
-
-msgid "Open markets."
-msgstr "أسواق مفتوحة."
-
-msgid "A pair exists because someone quotes it."
-msgstr "يوجد الزوج ما إن يعرض أحدهم سعرًا له."
-
-msgid "Understand markets"
-msgstr "افهم الأسواق"
-
-msgid "Direct pairs"
-msgstr "أزواج مباشرة"
-
-msgid "Through M1"
-msgstr "عبر M1"
-
-msgid "Five assets need ten direct pairs, or five connections through M1."
-msgstr "تحتاج خمسة أصول إلى عشرة أزواج مباشرة، أو خمس وصلات عبر M1."
-
-msgid "N × (N − 1) / 2"
-msgstr "N × (N − 1) / 2"
-
-msgid "N"
-msgstr "N"
-
-msgid "One settlement pivot"
-msgstr "وحدة وسيطة واحدة للتسوية"
-
-msgid "Users keep their assets."
-msgstr "يحتفظ المستخدمون بأصولهم."
-
-msgid "Providers use M1."
-msgstr "يستخدم المزوّدون M1."
-
-msgid "Burning BTC creates M0. Locking M0 creates M1: working capital for providers, connecting quoted pairs through one inventory."
-msgstr "يُنشئ حرق BTC وحدات M0. ويُنشئ قفل M0 وحدات M1: رأس مال تشغيلي للمزوّدين يربط الأزواج ذات عروض الأسعار عبر مخزون واحد."
-
-msgid "The burn is irreversible. Unlocking M1 returns M0, not BTC. No redeemable BTC reserve, no guaranteed peg or liquidity."
-msgstr "الحرق نهائي لا رجعة فيه. يعيد فك قفل M1 وحدات M0، وليس BTC. لا يوجد احتياطي قابل للاسترداد بعملة BTC، ولا ضمان لربط السعر أو السيولة."
-
-msgid "Understand M1"
-msgstr "افهم M1"
-
-msgid "Find your role"
-msgstr "اختر دورك"
-
-msgid "Operators"
-msgstr "Operators"
-
-msgid "Verify the network"
-msgstr "تحقق من الشبكة"
-
-msgid "Settlement Providers"
-msgstr "مزوّدو التسوية"
-
-msgid "BTC/M1 · Operator identity required"
-msgstr "BTC/M1 · هوية Operator إلزامية"
-
-msgid "Liquidity Providers"
-msgstr "مزوّدو السيولة"
-
-msgid "X/M1 · Operator identity optional"
-msgstr "X/M1 · هوية Operator اختيارية"
-
-msgid "Builders"
-msgstr "المطوّرون"
-
-msgid "Compose applications"
-msgstr "ركّب التطبيقات"
-
-# TODO(translate): temporary English fallback (see i18n/README.md, "Temporary English fallback").
-msgid "Network status"
-msgstr "Network status"
+msgid "Specification"
+msgstr "المواصفة"
 
 msgid "Documentation"
 msgstr "الوثائق"
 
+msgid "Bitcoin facts. Shared rules."
+msgstr "حقائق Bitcoin. قواعد مشتركة."
+
+msgid "Each node verifies Bitcoin facts. M0 is the settlement asset, created only by burning bitcoin. N selects one producer per slot from burned tickets, without a vote."
+msgstr "تتحقق كل عقدة من حقائق Bitcoin. وM0 هو أصل التسوية، ولا يُنشأ إلا بحرق البيتكوين. يختار N منتجًا واحدًا لكل فترة إنتاج بالقرعة من التذاكر المحروقة، دون تصويت."
+
+msgid "N-SPEC v0.7, preamble"
+msgstr "N-SPEC v0.7، المقدمة"
+
+msgid ";"
+msgstr ";"
+
+msgid "§8.4"
+msgstr "§8.4"
+
+msgid "§4.9"
+msgstr "§4.9"
+
+msgid "§7.1"
+msgstr "§7.1"
+
+msgid "APP-SPEC v1 draft §0.4"
+msgstr "مسودة APP-SPEC v1، §0.4"
+
+msgid "(in French)."
+msgstr "(بالفرنسية)."
+
+msgid "Explore the protocol"
+msgstr "استكشف البروتوكول"
+
+msgid "Read the rules and their published assumptions."
+msgstr "اقرأ القواعد وافتراضاتها المنشورة."
+
+msgid "Read the specification (in French)"
+msgstr "اقرأ المواصفة (بالفرنسية)"
+
+msgid "Documentation in English."
+msgstr "الوثائق باللغة الإنجليزية."
+
+msgid "What BATHRON does"
+msgstr "ما الذي تفعله BATHRON"
+
+msgid "Bitcoin facts without an oracle."
+msgstr "حقائق Bitcoin دون أوراكل."
+
+msgid "Each node checks Bitcoin evidence against the reference designated by the N block. BATHRON reads Bitcoin without changing its rules."
+msgstr "تفحص كل عقدة أدلة Bitcoin وفق المرجع الذي تحدده كتلة N. تقرأ BATHRON بيانات Bitcoin دون تغيير قواعده."
+
+msgid "N-SPEC v0.7, preamble, point 3"
+msgstr "N-SPEC v0.7، المقدمة، النقطة 3"
+
+msgid "§11.1"
+msgstr "§11.1"
+
+msgid "."
+msgstr "."
+
+msgid "Explore the N engine"
+msgstr "استكشف محرك N"
+
+msgid "One settlement asset, no issuer."
+msgstr "أصل واحد للتسوية، دون جهة إصدار."
+
+msgid "M0 comes from burned bitcoin. Fees transfer existing M0; production creates no block reward. A burn creates no reserve and no claim on Bitcoin."
+msgstr "ينشأ M0 من البيتكوين المحروق. تنقل الرسوم وحدات M0 الموجودة؛ ولا ينشئ الإنتاج أي مكافأة كتلة. ولا ينشئ الحرق احتياطيًا أو حق مطالبة على Bitcoin."
+
+msgid "N-SPEC v0.7 §1.4, invariants 2 and 12"
+msgstr "N-SPEC v0.7، §1.4، الثابتان 2 و12"
+
+msgid "WHY-N §3"
+msgstr "WHY-N §3"
+
+msgid "Understand burns"
+msgstr "افهم الحرق"
+
+msgid "Wait or stop rather than be wrong."
+msgstr "الانتظار أو التوقف بدلًا من الخطأ."
+
+msgid "Participants choose depth within the published domain. Settlement may wait hours, and conflicts may halt progress. Outside that domain, N makes no quantitative claim; STOP need not occur."
+msgstr "يختار المشاركون العمق ضمن النطاق المنشور. قد تنتظر التسوية ساعات، وقد توقف التعارضات التقدم. خارج هذا النطاق، لا يقدم N أي ادعاء كمي؛ وليس من الضروري أن يتفعّل STOP."
+
+msgid "WHY-N §7"
+msgstr "WHY-N §7"
+
+msgid "§8"
+msgstr "§8"
+
+msgid "N-SPEC v0.7 §14.4"
+msgstr "N-SPEC v0.7 §14.4"
+
+msgid "§17.6"
+msgstr "§17.6"
+
+msgid "§18"
+msgstr "§18"
+
+msgid "Understand depth and statuses"
+msgstr "افهم العمق والحالات"
+
+msgid "Find your role"
+msgstr "اعثر على دورك"
+
+msgid "Producers"
+msgstr "المنتجون"
+
+msgid "Registered identities drawn to produce."
+msgstr "هويات مسجلة تُختار بالقرعة للإنتاج."
+
+msgid "N-SPEC v0.7 §4.1"
+msgstr "N-SPEC v0.7 §4.1"
+
+msgid "Settlement Providers"
+msgstr "مقدمو خدمات التسوية"
+
+msgid "BTC/M0 settlement."
+msgstr "تسوية BTC/M0."
+
+msgid "§13, principle"
+msgstr "§13، المبدأ"
+
+msgid "Liquidity Providers"
+msgstr "مزودو السيولة"
+
+msgid "X/M0 settlement, where X is another asset."
+msgstr "تسوية X/M0، حيث X أصل آخر."
+
+msgid "Builders"
+msgstr "المطوّرون"
+
+msgid "Build interfaces that distinguish facts, observations and model results."
+msgstr "أنشئ واجهات تميّز بين الحقائق والملاحظات ونتائج النماذج."
+
+msgid "N-SPEC v0.7 §16.1"
+msgstr "N-SPEC v0.7 §16.1"
+
+msgid "Network status"
+msgstr "حالة الشبكة"
+
 msgid "GitHub"
 msgstr "GitHub"
-
-msgid "Security"
-msgstr "الأمان"
-
-msgid "Language"
-msgstr "اللغة"

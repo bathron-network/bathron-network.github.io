@@ -1,40 +1,59 @@
-# Who does what
+# 07 · Who does what
 
-A user should be able to tell who validates the protocol, who supplies inventory and who builds the interface. These jobs can belong to the same organization, but they remain different responsibilities. BATHRON separates consensus participation from commercial services and application design.
+> **Normative source:** [N-SPEC v0.7 §4.1][n41], [§7.1][n71], [§10.3][n103] (in French); [WHY-N §2][w2], [§7][w7]; [APP-SPEC v1 draft §0.4][p04], [§ID, ID-1][pID], [§13, principle and rules 13-1–13-2][p13], [§R2P, R2P-1][pR2P] (in French).
+> This page explains; it does not restate rules or parameter values.
 
-The guiding division is simple: BATHRON provides settlement; providers operate the edges; third parties build the applications.
+Producing a block and delivering an external asset carry different responsibilities. A registered identity participates in the production draw. A provider chooses when to deliver outside value under its own depth policy. Keeping those roles distinct helps a user understand what a service offer actually covers. [N-SPEC v0.7 §4.1][n41], [§7.1][n71]; [WHY-N §7][w7]
 
-## Six roles
+## Production and services
 
-| Role | Responsibility | Operator identity |
-|---|---|---|
-| Operator | Participate in the network's consensus functions | Required for that role |
-| Settlement Provider, SP | Quote and arrange BTC/M1 settlement, including the Bitcoin leg | Required; block production is optional |
-| Liquidity Provider, LP | Supply X/M1 liquidity and manage the external asset leg | Optional |
-| Builder | Create agreements, wallets, interfaces and application services | Not required to build |
-| User | Choose terms, authorize operations and receive the service | Not required to use an application |
-| Observer | Independently verify history and publish observations | Not required to observe |
+A **producer** is a registered identity drawn to produce in a slot. Its active tickets determine its production weight. This role concerns the N engine, not approval of a commercial service. [N-SPEC v0.7 §5.3][n53], [§7.1][n71]
 
-An Operator is a registered identity based on a burned ticket and maturity; one Operator, one vote; it may produce blocks and sign finality. Its burned ticket is a real, visible and permanently spent entry cost. It gives service history an identifiable subject and carries protocol accountability. Holding that identity and producing blocks are separate matters: an SP can carry the identity without acting as a block producer.
+A **Settlement Provider (SP)** handles **BTC/M0** settlement. N-SPEC v0.7 keeps a historical application wording that was never adopted for any network. APP-SPEC v1 makes M0 the only settlement asset; its §13 differs from N-SPEC v0.7 §13 only in the asset. [APP-SPEC v1 draft §0.4][p04], [§13, principle and rules 13-1–13-2][p13], [§ID, ID-1][pID]
 
-## Providers operate the edges
+A **Liquidity Provider (LP)** handles **X/M0**, where X denotes the external asset. Independent liquidity providers settle with each other on M0, without trusting one another. The specifications define no order book and no pool. [APP-SPEC v1 draft §0.4][p04], [§R2P, R2P-1][pR2P]
 
-The SP specializes in BTC/M1. Its work includes inventory, quotes, orchestration, deadlines and Bitcoin execution. The LP specializes in X/M1 and handles the external asset and its chain-specific requirements. An application can combine their services into a route chosen for a customer.
+SP and LP are service roles outside consensus. Neither role requires a registered identity or participation in block production. No provider is vetted by the protocol. These roles describe responsibility for settlement services, not a separate form of production authority. [N-SPEC v0.7 §4.1][n41], [§7.1][n71]; [APP-SPEC v1 draft §13, 13-1][p13]; [WHY-N §7][w7]
 
-Neither role is a listing authority. A quote is an offer from a provider, not an official protocol price. Customers and applications decide which offers to use.
+## Other responsibilities
 
-## Multiple roles remain visible
+Use these labels to distinguish responsibilities around a service:
 
-An Operator can also run a provider business. The relationship between the registered identity and the advertised service is public. Transactions follow the same validity rules whoever submits them.
+| Role | Question it answers |
+|---|---|
+| Builder | Who creates the application or interface and explains its policy? |
+| User | Who chooses the terms and authorizes the operation? |
+| Observer | Who examines history or reports evidence? |
 
-A builder can run discovery services, or users can connect directly to providers. An observer can publish service history without quoting any market. Keeping these roles distinct lets users evaluate each service on its own evidence.
+These are descriptive labels, not extra consensus roles. For each report, distinguish explicit data, local observations and model results. For each delivery, identify the party carrying the external exposure. [N-SPEC v0.7 §1.1][n11], [§16.1][n161]; [WHY-N §7][w7]
 
-Protocol accountability means a permanent ban for objectively proven double signing; no slashing. The burned identity ticket remains spent.
+## Depth belongs to the exposed party
 
-## Reputation is an interpretation
+The provider delivering outside value chooses its depth within the published domain. Inclusion alone does not determine that decision. The depth table supplies a conditional risk bound; the provider supplies the policy for its exposure. [WHY-N §7][w7]; [N-SPEC v0.7 §17.3][n173]
 
-Published facts can include identities, signed offers and observable service history. Users, wallets and independent services interpret those facts. Consensus does not assign a commercial reputation score or select a preferred provider.
+## Read an offer as an offer
 
-An identity identifies a participant; it does not guarantee a price, inventory or service outcome. An observer's report is useful because its evidence can be examined, not because the observer gains authority over settlement.
+A quote is an offer from a provider, not an official protocol price. [WHY-N §2][w2], [§7][w7]
 
-Continue with [Network operators](operators.md), [Operate a provider](providers.md) or [Run and observe a node](node.md), depending on the responsibility you want to understand.
+Neither service role is a listing authority. Reputation is an interpretation of evidence, not a production right. A single organization may perform several roles; assess each responsibility separately. [N-SPEC v0.7 §4.1][n41]; [WHY-N §7][w7]
+
+Protocol accountability for proven equivocation is a permanent ban of the registered identity under the proof rules. It does not evaluate a provider's service quality. [N-SPEC v0.7 §10.1][n101], [§10.3][n103]
+
+## See also
+
+[Producers and tickets](producers.md), [Depth and statuses](depth.md), [The N engine](engine.md), and [Where trust lives](trust.md).
+
+[n41]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#41-identité
+[n71]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#71-tirage
+[n103]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#103-ban
+[w7]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/docs/WHY-N.md#7-why-sps-and-lps-choose-their-own-depth
+[p04]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#04-vocabulaire-et-identifiants-gelés
+[pID]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#id-identifiant-applicatif-application_spec_id
+[p13]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#13-règlement-btcm0-à-un-saut
+[pR2P]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#r2p-r2-pivot--durée-de-vie-minimale-réelle-des-contrats-enfants
+[n53]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#53-registre-actif
+[n11]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#11-catégories-normatives
+[n161]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#161-catégories
+[n173]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#173-table-kε-du-domaine
+[n101]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#101-preuve-déquivoque
+[w2]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/docs/WHY-N.md#2-why-n-exists
