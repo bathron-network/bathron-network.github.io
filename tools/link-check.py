@@ -16,7 +16,7 @@ from common import ROOT, SITE, LEGACY_PATHS, entries, parse_html, redirects, rep
 
 PREFIX = 'https://github.com/bathron-network/n-spec/blob/'
 APP = 'app/APP-SPEC-v1-draft.md'
-APP_SECTIONS = {'04-vocabulaire-et-identifiants-gelés', 'id-identifiant-applicatif-application_spec_id',
+APP_SECTIONS = {'statut-et-portée', '04-vocabulaire-et-identifiants-gelés', 'id-identifiant-applicatif-application_spec_id',
                 '13-règlement-btcm0-à-un-saut', 'r2p-r2-pivot--durée-de-vie-minimale-réelle-des-contrats-enfants',
                 '03-catégories-et-verdicts', 'btc-faits-bitcoin-applicatifs',
                 'scr1-socle-actif-au-genesis', 'scr2-échéances-absolues-en-créneaux-n-cltv',
@@ -40,11 +40,12 @@ def redirect_check(root=ROOT):
     expected = {'status.md', 'overview.md', 'trust.md', 'engine.md', 'producers.md',
                 'depth.md', 'burns.md', 'roles.md', 'glossary.md',
                 'bitcoin-facts.md', 'covenants.md', 'settlement.md',
-                'between-providers.md', 'what-you-can-build.md'}
+                'between-providers.md', 'what-you-can-build.md',
+                'limitations.md', 'how-this-project-is-built.md'}
     names = summary(root)
     actual = {p.name for p in (root / 'docs/src').glob('*.md')}
     if len(names) != len(expected) or set(names) != expected or actual != expected | {'SUMMARY.md'}:
-        errors.append('book scope: expected exactly thirteen pages, Status and SUMMARY')
+        errors.append('book scope: expected the declared documentation pages and SUMMARY')
     pages = {p.removesuffix('.md') + '.html' for p in names}
     table = redirects(root)
     for key, target in table.items():

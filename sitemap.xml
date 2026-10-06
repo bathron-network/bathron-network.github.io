@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://bathron.org/</loc></url>
   <url><loc>https://bathron.org/docs/status.html</loc></url>
+  <url><loc>https://bathron.org/docs/limitations.html</loc></url>
+  <url><loc>https://bathron.org/docs/how-this-project-is-built.html</loc></url>
   <url><loc>https://bathron.org/docs/overview.html</loc></url>
   <url><loc>https://bathron.org/docs/trust.html</loc></url>
   <url><loc>https://bathron.org/docs/engine.html</loc></url>

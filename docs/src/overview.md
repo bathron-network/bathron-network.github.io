@@ -29,6 +29,8 @@ Producers are registered identities selected to produce blocks. Settlement Provi
 
 ## See also
 
+See [Known limitations](limitations.md) and [How this project is built](how-this-project-is-built.md).
+
 [The N engine](engine.md), [Producers and tickets](producers.md), [Depth and statuses](depth.md), [Burns](burns.md), [Who does what](roles.md), and [Where trust lives](trust.md).
 
 [np]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#préambule
