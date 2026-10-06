@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="/img/favicon.png">
 <link rel="canonical" href="https://bathron.org/">
 <meta property="og:title" content="BATHRON: Programmable settlement anchored in Bitcoin">
-<meta property="og:description" content="Build contracts, instruments, markets and applications around facts every BATHRON node can verify. Covenants, hashlocks, timelocks and confidential transfers.">
+<meta property="og:description" content="A programmable settlement protocol anchored in Bitcoin. Build contracts, instruments, markets and applications around facts every BATHRON node can verify.">
 <meta property="og:image" content="https://bathron.org/img/og.png">
 <meta property="og:url" content="https://bathron.org/">
 <meta name="twitter:card" content="summary_large_image">
@@ -37,7 +37,7 @@
 <body>
 <div class="wrap"><header class="topbar">
 <a class="brand" href="/" title="BATHRON home"><img class="emblem" src="/img/emblem.png" alt="" width="560" height="360"><img class="word" src="/img/wordmark.png" alt="BATHRON" width="540" height="89"></a>
-<div class="topnav"><a href="#capabilities">Capabilities</a><a href="/docs/overview.html">Build</a></div>
+<div class="topnav"><a href="#capabilities">Capabilities</a><a href="/docs/what-you-can-build.html">Build</a></div>
 </header></div>
 <main>
 <section class="hero wrap">
@@ -48,22 +48,23 @@
 </div>
 <figure class="hero-art"><img src="/img/settlement-flow.svg" alt="Bitcoin evidence passes through a network of verifying nodes to conditional settlement." width="560" height="430"><figcaption class="flow-labels"><span>Bitcoin facts</span><span>Verification</span><span>Settlement</span></figcaption></figure>
 </section>
+<!-- Agreement sources: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#131-contrat https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#133-paiement https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/app/APP-SPEC-v1-draft.md#134-résolution -->
 <section class="story" id="agreement"><div class="wrap">
 <div><p class="eyebrow">An agreement, in practice</p><h2>Only if.</h2></div>
-<div><h2>Alice wants to pay Bob in BTC. Only if a Bitcoin condition is met.</h2><a class="textlink" href="/docs/roles.html">See how an agreement works</a></div>
-<p>Bitcoin alone cannot run the whole agreement. BATHRON verifies the Bitcoin fact and settles the intermediate leg; a provider handles the BTC leg.</p>
+<div><h2>Alice reserves M0 for Bob. Released only if the agreed Bitcoin payment is observed.</h2><a class="textlink" href="/docs/settlement.html">See how an agreement works</a></div>
+<p>The payer sends BTC on Bitcoin. BATHRON checks the payment under the lock’s rules and releases the reserved M0; otherwise, the refund rules apply.</p>
 </div></section>
 <section class="pillars wrap" id="capabilities">
-<article class="pillar"><img src="/img/facts.svg" alt="" width="280" height="110" loading="lazy"><h2>Bitcoin facts checked by nodes.</h2><p>Proof of work and transaction evidence, checked by every node.</p><a class="textlink" href="/docs/engine.html">Explore Bitcoin facts</a></article>
-<article class="pillar"><img src="/img/conditions.svg" alt="" width="280" height="110" loading="lazy"><h2>Programmable settlement.</h2><p>Compose covenants, hashlocks and timelocks into an agreement.</p><a class="textlink" href="/docs/overview.html">Explore the primitives</a></article>
-<article class="pillar"><img src="/img/markets.svg" alt="" width="280" height="110" loading="lazy"><h2>Open markets.</h2><p>A pair exists because someone quotes it.</p><a class="textlink" href="/docs/roles.html">Understand markets</a></article>
+<article class="pillar"><img src="/img/facts.svg" alt="" width="280" height="110" loading="lazy"><h2>Bitcoin facts checked by nodes.</h2><p>Proof of work and transaction evidence, checked by every node.</p><a class="textlink" href="/docs/bitcoin-facts.html">Explore Bitcoin facts</a></article>
+<article class="pillar"><img src="/img/conditions.svg" alt="" width="280" height="110" loading="lazy"><h2>Programmable settlement.</h2><p>Compose covenants, hashlocks and timelocks into an agreement.</p><a class="textlink" href="/docs/covenants.html">Explore the primitives</a></article>
+<article class="pillar"><img src="/img/markets.svg" alt="" width="280" height="110" loading="lazy"><h2>Open markets.</h2><p>A pair exists because someone quotes it.</p><a class="textlink" href="/docs/between-providers.html">Understand markets</a></article>
 </section>
 <section class="pivot wrap" id="m0">
 <figure class="pivot-diagram"><div class="diagram-labels"><span>Direct pairs</span><span>Through M0</span></div><img src="/img/m0-settlement.svg" alt="Five assets need ten direct pairs, or five connections through M0." width="720" height="250" loading="lazy"><figcaption class="diagram-labels"><span>N × (N − 1) / 2</span><span>N</span></figcaption></figure>
 <div><p class="eyebrow">One settlement asset</p><h2>Users keep their assets.<br>Providers use M0.</h2><p>Every M0 unit comes from burned bitcoin. Independent providers settle with each other on M0.</p><p class="risk">The burn is irreversible. It creates no claim on Bitcoin. No redeemable BTC reserve, no guaranteed peg or liquidity.</p><a class="textlink" href="/docs/burns.html">Understand M0</a></div>
 </section>
-<nav class="roles wrap"><p class="eyebrow">Find your role</p><a href="/docs/producers.html">Producers<small>Produce blocks</small></a><a href="/docs/roles.html">Settlement Providers<small>BTC/M0 · No registered identity required</small></a><a href="/docs/roles.html">Liquidity Providers<small>X/M0 · No registered identity required</small></a><a href="/docs/overview.html">Builders<small>Compose applications</small></a></nav>
+<nav class="roles wrap"><p class="eyebrow">Find your role</p><a href="/docs/producers.html">Producers<small>Produce blocks</small></a><a href="/docs/roles.html">Settlement Providers<small>BTC/M0 · No registered identity required</small></a><a href="/docs/roles.html">Liquidity Providers<small>X/M0 · No registered identity required</small></a><a href="/docs/what-you-can-build.html">Builders<small>Compose applications</small></a></nav>
 </main>
 <div class="wrap"><p class="status"><a href="/docs/status.html">Network status</a></p>
-<footer><span class="footbrand">BATHRON</span><div class="footlinks"><a href="/docs/overview.html">Documentation</a><a href="https://github.com/bathron-network/bathron-core">GitHub</a><a href="mailto:security@bathron.org">Security</a></div></footer></div>
+<footer><span class="footbrand">BATHRON</span><div class="footlinks"><a href="/docs/overview.html">Documentation</a><a href="https://github.com/bathron-network/n-spec">GitHub</a><a href="mailto:security@bathron.org">Security</a></div></footer></div>
 </body></html>

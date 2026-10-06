@@ -2,7 +2,7 @@
 """English-only publication policy and direct legacy homepage redirects."""
 from html.parser import HTMLParser
 import re
-from common import ROOT, SITE, LEGACY_PATHS, tracked, report
+from common import ROOT, SITE, LEGACY_PATHS, tracked, report, parse_html
 
 
 def redirect_html():
@@ -49,7 +49,7 @@ def check(root=ROOT):
         errors.append('index.html: expected English document')
     errors.extend('index.html: ' + error for error in policy.errors)
     if re.search(r'N-SPEC|WHY-N|APP-SPEC|\b(?:French|English|Français|language|langue)\b',
-                 re.sub(r'<style>.*?</style>', '', home, flags=re.S), re.I):
+                 parse_html(home).prose, re.I):
         errors.append('index.html: source citation or language mention')
     return errors
 

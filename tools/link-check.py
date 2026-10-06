@@ -17,7 +17,15 @@ from common import ROOT, SITE, LEGACY_PATHS, entries, parse_html, redirects, rep
 PREFIX = 'https://github.com/bathron-network/n-spec/blob/'
 APP = 'app/APP-SPEC-v1-draft.md'
 APP_SECTIONS = {'04-vocabulaire-et-identifiants-gelés', 'id-identifiant-applicatif-application_spec_id',
-                '13-règlement-btcm0-à-un-saut', 'r2p-r2-pivot--durée-de-vie-minimale-réelle-des-contrats-enfants'}
+                '13-règlement-btcm0-à-un-saut', 'r2p-r2-pivot--durée-de-vie-minimale-réelle-des-contrats-enfants',
+                '03-catégories-et-verdicts', 'btc-faits-bitcoin-applicatifs',
+                'scr1-socle-actif-au-genesis', 'scr2-échéances-absolues-en-créneaux-n-cltv',
+                'scr3-délais-relatifs-en-liens-n-csv', 'scr4-limites-publiées-des-délais',
+                'scr5-ctv', 'scr7-btcstate', 'obj3-anciens-types-refusés-et-numéros-réservés',
+                '131-contrat', '132-création-objet-0004', '133-paiement', '134-résolution',
+                '135-discipline-du-payeur-politique-client', '136-rollback',
+                'pub-publications-obligatoires', 'imp1-source-unique', 'imp4-matérialisation',
+                'obj2-transaction-applicative-application_transaction'}
 
 
 def revision(root=ROOT):
@@ -30,11 +38,13 @@ def revision(root=ROOT):
 def redirect_check(root=ROOT):
     errors = []
     expected = {'status.md', 'overview.md', 'trust.md', 'engine.md', 'producers.md',
-                'depth.md', 'burns.md', 'roles.md', 'glossary.md'}
+                'depth.md', 'burns.md', 'roles.md', 'glossary.md',
+                'bitcoin-facts.md', 'covenants.md', 'settlement.md',
+                'between-providers.md', 'what-you-can-build.md'}
     names = summary(root)
     actual = {p.name for p in (root / 'docs/src').glob('*.md')}
     if len(names) != len(expected) or set(names) != expected or actual != expected | {'SUMMARY.md'}:
-        errors.append('book scope: expected exactly eight pages, Status and SUMMARY')
+        errors.append('book scope: expected exactly thirteen pages, Status and SUMMARY')
     pages = {p.removesuffix('.md') + '.html' for p in names}
     table = redirects(root)
     for key, target in table.items():
@@ -143,7 +153,7 @@ def citation_check(root):
     errors = []
     for page, url, label in citation_labels(root):
         anchor = unquote(urlsplit(url).fragment)
-        for section in re.findall(r'§+\s*([0-9]+(?:\.[0-9]+)*|ID|R2P)', label):
+        for section in re.findall(r'§+\s*([0-9]+(?:\.[0-9]+)*|(?:ID|R2P|BTC|SCR|OBJ|PUB|IMP)(?:\.[0-9]+)*)', label):
             identifier = section.lower().replace('.', '')
             if not anchor.startswith(identifier + '-') and anchor != identifier:
                 errors.append(f'{page}: section label §{section} disagrees with normative anchor')

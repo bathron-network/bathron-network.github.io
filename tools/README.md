@@ -28,14 +28,27 @@ External websites other than those normative sources are not probed.
 public source section and the page citing it. The historical explanation is
 confined to Who does what and the editorial guide. The engine settlement chapter is never citable.
 
+Capabilities adds an explicit set of permitted application subsections for
+Bitcoin facts, scripts, settlement, provider contracts and published limits.
+Eligible-import and existing-transfer sections support Burns. Unlisted
+application anchors still fail. Numeric and named section labels must match
+their destination anchors. The book scope includes the five Capabilities pages;
+the former redirect at the Bitcoin facts address is removed to prevent a collision.
+Non-visible homepage source comments are verified by the same pinned-source
+check; visible source citations remain excluded from the homepage presentation.
+
 ## Contextual vocabulary
 
 `vocab-check.py` checks sentences, ignoring code and URL destinations. It checks
 visible HTML, metadata, alternative text, SVG text, documentation, the
 repository README and legacy redirects. The editorial guide is excluded
 because it records prohibited terms as examples. Exceptions in `vocab-allow.txt`
-require an exact page, rule, sentence and reason. Citation identifiers that look
-like quantities have individually scoped exceptions.
+require an exact page, rule, sentence and reason. The sole positive use of
+“oracle” is an exact sentence describing a builder's external price dependency.
+Required wording protects the main capability boundaries. Named technical rule
+identifiers are distinguished from quantities; other citation identifiers that
+look like quantities have individually scoped exceptions. Mutation tests check
+the new scope, boundaries, source comments and exception limits.
 
 The quantity rule cannot recognize all numbers written in words or parameter
 values without units. Human review must inspect every quantity, including these

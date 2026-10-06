@@ -11,3 +11,4 @@
 {"page": "docs/src/overview.md", "rule": "V10", "sentence": "WHY-N §7, §8; N-SPEC v0.7 §1.4, invariant 18, §17.1, §17.2, §17.6, §18", "reason": "Source citation identifies invariant or rule numbers, not parameter values."}
 {"page": "docs/src/status.md", "rule": "V10", "sentence": "Last updated: 5 October 2026.", "reason": "Existing dated fact on the sole canonical Status page, preserved unchanged."}
 {"page": "docs/src/status.md", "rule": "V10", "sentence": "The DMM public testnet was shut down on 5 October 2026.", "reason": "Existing dated fact on the sole canonical Status page, preserved unchanged."}
+{"page": "docs/src/what-you-can-build.md", "rule": "V8", "sentence": "Builder: define the instrument's terms and supply an oracle external to the protocol, chosen by the builder and adding its own trust dependency.", "reason": "Only describes a builder-chosen external price dependency, never a protocol service."}
