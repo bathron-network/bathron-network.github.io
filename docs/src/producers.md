@@ -1,6 +1,6 @@
 # 04 · Producers and tickets
 
-> **Normative source:** [N-SPEC v0.7 §1.4][n14], [§4.1][n41], [§4.7][n47], [§5.3][n53], [§6.6][n66], [§6.7][n67], [§6.9][n69], [§7.1][n71], [§7.4][n74], [§7.6][n76], [§10.1][n101], [§10.3][n103] (in French); [WHY-N §2][w2].
+> **Normative source:** [N-SPEC v0.7 §1.4][n14], [§4.1][n41], [§4.7][n47], [§5.3][n53], [§6.6][n66], [§6.7][n67], [§6.9][n69], [§7.1][n71], [§7.4][n74], [§7.6][n76], [§10.1][n101], [§10.3][n103]; [WHY-N §2][w2].
 > This page explains; it does not restate rules or parameter values.
 
 A production right carries an entry cost and an obligation to participate. It does not establish independence between participants. Understanding the difference between a registered identity, its tickets and its production role helps explain both the draw and the consequences of misconduct. [N-SPEC v0.7 §4.1][n41], [§5.3][n53], [§6.6][n66], [§7.1][n71]; [WHY-N §2][w2]

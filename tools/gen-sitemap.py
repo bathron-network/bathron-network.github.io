@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Derive the sitemap from the book and language table, without timestamps."""
+"""Derive the sitemap from the English homepage and book, without timestamps."""
 import argparse
-from common import ROOT, i18n, summary, report
+from common import ROOT, SITE, summary, report
 
 
 def render(root=ROOT):
-    paths = [lang['path'] for lang in i18n.LANGUAGES]
+    paths = ['/']
     paths += ['/docs/' + name.removesuffix('.md') + '.html' for name in summary(root)]
     return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(
-        f'  <url><loc>{i18n.SITE}{path}</loc></url>\n' for path in paths) + '</urlset>\n'
+        f'  <url><loc>{SITE}{path}</loc></url>\n' for path in paths) + '</urlset>\n'
 
 
 def check(root=ROOT):

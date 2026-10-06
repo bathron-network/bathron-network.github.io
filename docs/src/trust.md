@@ -1,6 +1,6 @@
 # 02 · Where trust lives
 
-> **Normative source:** [N-SPEC v0.7, preamble][np], [§4.9][n49], [§12.15][n1215], [§17.6][n176], [§18][n18] (in French); [WHY-N §3][w3], [§7][w7]; [ATTACKS §2][a2].
+> **Normative source:** [N-SPEC v0.7, preamble][np], [§4.9][n49], [§12.15][n1215], [§17.6][n176], [§18][n18]; [WHY-N §3][w3], [§7][w7]; [ATTACKS §2][a2].
 > This page explains; it does not restate rules or parameter values.
 
 Assessing a settlement means identifying its dependencies. Bitcoin evidence, selection of a BATHRON history and a provider's external delivery answer different questions. Inclusion in an N chain does not remove the responsibilities of the party delivering an external asset. [N-SPEC v0.7, preamble][np], [§18][n18]; [WHY-N §7][w7]

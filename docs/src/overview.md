@@ -1,6 +1,6 @@
 # 01 · BATHRON in five minutes
 
-> **Normative source:** [N-SPEC v0.7, preamble][np], [§1.4][n14], [§7.1][n71], [§8.4][n84] (in French); [WHY-N §3][w3], [§7][w7]; [APP-SPEC v1 draft §0.4][p04] (in French).
+> **Normative source:** [N-SPEC v0.7, preamble][np], [§1.4][n14], [§7.1][n71], [§8.4][n84]; [WHY-N §3][w3], [§7][w7]; [APP-SPEC v1 draft §0.4][p04].
 > This page explains; it does not restate rules or parameter values.
 
 BATHRON is a settlement network with its own chain, separate from Bitcoin and rooted in it. [N-SPEC v0.7, preamble][np]; [WHY-N §3][w3]

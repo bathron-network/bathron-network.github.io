@@ -29,7 +29,7 @@ build_book() {
 gate 'public confidentiality' python3 tools/confidentiality-check.py
 gate 'vocabulary V1–V12' python3 tools/vocab-check.py
 gate 'sandbox mutation tests' python3 tools/mutation-test.py
-gate 'homepage generation' python3 i18n/i18n.py build all
+gate 'English-only site' bash i18n/ci-check.sh
 gate 'book build' build_book
 gate 'links and anchors' python3 tools/link-check.py --only links
 gate 'direct redirects' python3 tools/link-check.py --only redirects

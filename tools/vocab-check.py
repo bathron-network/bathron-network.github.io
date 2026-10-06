@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Sentence-context vocabulary gates V1–V12; URLs and code are not prose."""
 import re
-from common import ROOT, entries, i18n, markdown_prose, parse_html, report, sentences, summary
+from common import ROOT, LEGACY_PATHS, entries, markdown_prose, parse_html, report, sentences, summary
 
 NEG = re.compile(r'\b(?:no|not|never|without|nor|neither|cannot)\b', re.I)
 PATTERNS = {
@@ -32,15 +32,13 @@ REQUIRED = {
 
 
 def corpus(root):
-    paths = list((root / 'docs/src').glob('*.md')) + [root / 'README.md', root / 'i18n/README.md', root / 'index.html']
+    paths = list((root / 'docs/src').glob('*.md')) + [root / 'README.md', root / 'index.html']
+    paths += [root / path / 'index.html' for path in LEGACY_PATHS]
     paths += list((root / 'img').glob('*.svg')) + list((root / 'docs/src/img').glob('*.svg'))
     for path in paths:
         raw = path.read_text()
         text = parse_html(raw).prose if path.suffix in ('.html', '.svg') else markdown_prose(raw)
         yield path.relative_to(root).as_posix(), text
-    for path in (root / 'i18n').glob('*.po'):
-        values, _ = i18n.read_po(str(path), expect_lang=path.stem.split('.')[-1])
-        yield path.relative_to(root).as_posix(), '\n'.join(key[1] for key in values)
 
 
 def check(root=ROOT):
@@ -49,7 +47,6 @@ def check(root=ROOT):
     texts = dict(corpus(root))
     for path, text in texts.items():
         stem = path.rsplit('/', 1)[-1].split('.')[0]
-        canonical = 'index.html' if path.endswith('.po') else path
         for sentence in sentences(text):
             neg = bool(NEG.search(sentence))
             for rule, pattern in PATTERNS.items():
@@ -70,13 +67,13 @@ def check(root=ROOT):
                     candidate = re.sub(r'\b(?:without an|no) oracle\b', '', candidate, flags=re.I)
                 if rule == 'V9' and path == 'docs/src/status.md':
                     continue
-                if re.search(pattern, candidate, re.I) and not any(a['rule'] == rule and a['page'] == canonical and a['sentence'] == sentence for a in allow):
+                if re.search(pattern, candidate, re.I) and not any(a['rule'] == rule and a['page'] == path and a['sentence'] == sentence for a in allow):
                     errors.append(f'{path}: {rule}: {sentence}')
             # References/versions identify sources, not quantities. Citation labels
             # with invariant numbers remain explicit, reviewed exceptions.
             numeric = re.sub(r'§+\s*\d+(?:\.\d+)*(?:[–-]\d+(?:\.\d+)*)?|\bv\d+(?:\.\d+)*\b', '', sentence)
             if re.search(r'\b\d+(?:\.\d+)?\s*(?:sats?|BTC|blocks?|slots?|s|ms|h|min|GB|%|confirmations?)(?!\w)|(?<![\w.])\d{2,}(?!\w|\.\d)', numeric, re.I):
-                if not any(a['rule'] == 'V10' and a['page'] == canonical and a['sentence'] == sentence for a in allow):
+                if not any(a['rule'] == 'V10' and a['page'] == path and a['sentence'] == sentence for a in allow):
                     errors.append(f'{path}: V10: {sentence}')
     glossary = texts.get('docs/src/glossary.md', '')
     if glossary.count('formerly called Operator') != 1:

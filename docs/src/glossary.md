@@ -1,6 +1,6 @@
 # 08 · Glossary
 
-> **Normative source:** [N-SPEC v0.7 §4.1][n41], [§5.1][n51], [§7.1][n71], [§9.3][n93], [§10.1][n101], [§12.1][n121], [§12.15][n1215], [§14.5][n145], [§17.3][n173] (in French); [WHY-N §7][w7]; [APP-SPEC v1 draft §0.4][p04], [§13, principle][p13], [§R2P, R2P-1][pR2P] (in French).
+> **Normative source:** [N-SPEC v0.7 §4.1][n41], [§5.1][n51], [§7.1][n71], [§9.3][n93], [§10.1][n101], [§12.1][n121], [§12.15][n1215], [§14.5][n145], [§17.3][n173]; [WHY-N §7][w7]; [APP-SPEC v1 draft §0.4][p04], [§13, principle][p13], [§R2P, R2P-1][pR2P].
 > This page explains; it does not restate rules or parameter values.
 
 ## Production

@@ -1,6 +1,6 @@
 # 05 · Depth and statuses
 
-> **Normative source:** [N-SPEC v0.7 §14.1][n141], [§14.2][n142], [§14.4][n144], [§14.5][n145], [§16.1][n161], [§17.1][n171], [§17.3][n173], [§17.6][n176], [§18][n18] (in French); [WHY-N §7][w7], [§8][w8].
+> **Normative source:** [N-SPEC v0.7 §14.1][n141], [§14.2][n142], [§14.4][n144], [§14.5][n145], [§16.1][n161], [§17.1][n171], [§17.3][n173], [§17.6][n176], [§18][n18]; [WHY-N §7][w7], [§8][w8].
 > This page explains; it does not restate rules or parameter values.
 
 An included operation and a decision to deliver value are different things. Inclusion records where the operation appears. Depth informs a participant's policy for acting on it. The party delivering value outside BATHRON carries the residual risk and chooses the required depth. [WHY-N §7][w7]

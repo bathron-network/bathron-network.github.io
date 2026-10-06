@@ -2,13 +2,13 @@
 
 Not rendered on the site; public in this repository.
 
-This guide applies to the documentation, homepage, metadata, translations and image text. Explain the reader's decision before introducing the mechanism. Use the same terms for the same responsibilities throughout.
+This guide applies to the documentation, homepage, metadata and image text. Explain the reader's decision before introducing the mechanism. Use the same terms for the same responsibilities throughout.
 
 ## Sources and scope
 
 1. **Keep each source in its role.** N-SPEC defines engine rules. The application specification defines its application scope. Network status belongs to the canonical Status page. Documentation explains the sources through conceptual summaries with section references. Do not duplicate parameter values, depth tables, measurements, qualification results, dates or network conditions.
 2. **Identify the source at the top.** Each explanatory page starts with the source block below. Use a single pinned revision of n-spec for every normative link. That revision must contain all cited documents. An unresolved reference or an absent public source prevents publication.
-3. **Link to Network status.** The documentation theme, homepage and repository entry points link to the canonical page. Do not repeat its contents in prose, metadata, translations or images. Do not add another status paragraph to individual documentation pages.
+3. **Link to Network status.** The documentation theme, homepage and repository entry points link to the canonical page. Do not repeat its contents in prose, metadata or images. Do not add another status paragraph to individual documentation pages.
 4. **Write in the present tense.** Describe the documented rules and their boundaries. Keep schedules, release plans and development announcements out of these pages.
 5. **Give each concept a home.** Explain production in Producers and tickets, chain selection in The N engine, delivery depth in Depth and statuses, burns in Burns, and service responsibilities in Who does what. Other pages summarize and link.
 6. **Stay within public source scope.** For this set of pages, cite N-SPEC v0.7, WHY-N §§1–8 and ATTACKS. Cite APP-SPEC v1 draft only for §0.4, §ID rule ID-1, §13's principle and rules 13-1–13-2, and §R2P rule R2P-1. Name settlement pairs without explaining settlement mechanics. Do not derive additional capabilities from a section's vocabulary.
@@ -19,7 +19,7 @@ This guide applies to the documentation, homepage, metadata, translations and im
 
 Use this source block, replacing the references with links to the sections that support the page:
 
-> **Normative source:** N-SPEC v0.7 §x.y (in French); WHY-N §n; APP-SPEC v1 draft §x (in French), where applicable.
+> **Normative source:** N-SPEC v0.7 §x.y; WHY-N §n; APP-SPEC v1 draft §x, where applicable.
 > This page explains; it does not restate rules or parameter values.
 
 Put a section citation immediately after the claim or paragraph it supports. The opening source block does not substitute for claim-level references. Keep public document locations in links, not in reader-facing explanations.
@@ -110,7 +110,7 @@ Check entire sentences and their context. Negative statements about consensus me
 
 Read every quantity, including quantities written in words and values without units. Section numbers, versions and page numbering identify references; they are not parameters. The singular producer per slot and the qualitative possibility of waiting hours explain the model. They do not authorize copying slot durations, burn amounts, maturities, depths or performance claims.
 
-Check all visible text, metadata, source links, internal links, captions and alternative text. Apply the same review to translations. Match the page title and social title exactly to the homepage hero. Use the same approved description in page and social metadata. Keep the Network status link as navigation, without an accompanying network-state claim.
+Check all visible text, metadata, source links, internal links, captions and alternative text. Match the page title and social title exactly to the homepage hero. Use the same approved description in page and social metadata. Keep the Network status link as navigation, without an accompanying network-state claim.
 
 [n18]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/spec/N-SPEC-v0.7.md#18-limites
 [attacks]: https://github.com/bathron-network/n-spec/blob/4cfcb8dfcc794a8b25e132a001104ed2a389e4f9/docs/ATTACKS.md
