@@ -2,6 +2,9 @@
 
 [Network status](status.md)
 
+- [Known limitations](limitations.md)
+- [How this project is built](how-this-project-is-built.md)
+
 # Vision
 - [01 · BATHRON in five minutes](overview.md)
 - [02 · Where trust lives](trust.md)

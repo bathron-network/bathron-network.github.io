@@ -6,6 +6,15 @@ This guide applies to the documentation, homepage, metadata and image text. Expl
 
 ## Sources and scope
 
+PUB-1 adds two factual transparency pages: Known limitations and How this project is built.
+They use a **Sources** block, separating public specification evidence from project-owner statements.
+Known limitations may summarise the canonical network status, the dated shutdown, open qualification
+in WHY-N §9, and the bootstrap signature threshold. How this project is built may identify the AI
+models used and the commitment to publish bootstrap key holders. The homepage adds only the requested
+network-status sentence and links beneath the hero buttons, using an existing CSS class.
+Exact-line and exact-sentence exceptions in the check lists document these narrow permissions;
+the general vocabulary and confidentiality rules still apply elsewhere.
+
 1. **Keep each source in its role.** N-SPEC defines engine rules. The application specification defines its application scope. Network status belongs to the canonical Status page. Documentation explains the sources through conceptual summaries with section references. Do not duplicate parameter values, depth tables, measurements, qualification results, dates or network conditions.
 2. **Identify the source at the top.** Each explanatory page starts with the source block below. Use a single pinned revision of n-spec for every normative link. That revision must contain all cited documents. An unresolved reference or an absent public source prevents publication.
 3. **Link to Network status.** The documentation theme, homepage and repository entry points link to the canonical page. Do not repeat its contents in prose, metadata or images. Do not add another status paragraph to individual documentation pages.

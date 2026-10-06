@@ -94,7 +94,11 @@ def check(root=ROOT):
             if phrase not in text:
                 errors.append(f'docs/src/{name}.md: V11: missing required wording: {phrase}')
     for name in summary(root):
-        if name not in {'status.md', 'glossary.md'}:
+        if name in {'limitations.md', 'how-this-project-is-built.md'}:
+            raw = (root / 'docs/src' / name).read_text()
+            if not re.match(r'^# [^\n]+\n\n> \*\*Sources:\*\*[^\n]+\n> ', raw):
+                errors.append(f'docs/src/{name}: V12: missing transparency source block')
+        elif name not in {'status.md', 'glossary.md'}:
             raw = (root / 'docs/src' / name).read_text()
             if not re.match(r'^# [^\n]+\n\n> \*\*Normative source:\*\*[^\n]+\n> This page explains; it does not restate rules or parameter values\.', raw):
                 errors.append(f'docs/src/{name}: V12: missing opening source block')
