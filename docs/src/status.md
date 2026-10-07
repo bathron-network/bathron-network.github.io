@@ -11,6 +11,7 @@ The DMM public testnet was shut down on 5 October 2026. A new network using cons
 Each entry records a step that has been completed and reviewed; it is not a schedule.
 
 - **7 October 2026** — The first qualification step for engine N was completed: the consensus core and its observer running in "shadow" mode (observing without making decisions) were qualified on one machine using independent reference implementations, followed by a six-hour rehearsal with no divergence. No N network is running yet.
+- **7 October 2026** — A mini-network step was completed and reviewed: post-quantum signatures ML-DSA-44 (FIPS 204) were integrated into the N codebase under development and qualified against official test vectors and a second implementation of independent origin (10,240 differential cases, zero disagreements). No N network is running yet.
 
 Release packages, seed addresses and genesis hashes published for the DMM public testnet refer to that network only and are kept as historical references.
 
